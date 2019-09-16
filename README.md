@@ -1,2 +1,3 @@
 # Nesteo-App
-Repository for the Nesteo-Mobile-App
+
+Flutter/Dart App frontend for Nesteo project.
