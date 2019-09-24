@@ -8,39 +8,60 @@ Frontend Mobile-App of the Nesteo nesting box management application for ringing
 ![GitHub issues](https://img.shields.io/github/issues-raw/Nesteo/Nesteo-App)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Nesteo/Nesteo-App)
 
+## Development
+
+Due to the dependency on the Google Maps API an API Key is needed. Get your API Key here: <https://console.developers.google.com>.
+
+* Click on credentials, create credentials, API Key
+  * Now you have an API Key
+* Click on library and search for "Maps SDK for Android" and enable it
+* Click on library and search for "Maps SDK for iOS" and enable it (if you develop for iOS)
+
+When you start the build-process, the API Key will be searched in the environment variable "ORG_GRADLE_PROJECT_MAPS_API_KEY". The build will fail if you don't set this variable.
+
+On Linux do 
+
+```bash
+export ORG_GRADLE_PROJECT_MAPS_API_KEY=REPLACEWITHYOURKEY"
+```
+
+before you start your development-environment (Visual Studio Code for example).
+
+Details for Windows will be added.
+
 ## Used packages
 
 Here you can find a list of used packages. This list is going to be expanded during development.
 
 ### google_maps_flutter
 
-https://pub.dev/packages/google_maps_flutter
+<https://pub.dev/packages/google_maps_flutter>
 
 ### bloc / flutter_bloc
 
-https://pub.dev/packages/bloc
-https://pub.dev/packages/flutter_bloc
+<https://pub.dev/packages/bloc>
+<https://pub.dev/packages/flutter_bloc>
 
 ### http
 
-https://pub.dev/http
+<https://pub.dev/http>
 
 ### camera
 
-https://pub.dev/camera
+<https://pub.dev/camera>
 
 ### path
 
-https://pub.dev/path
+<https://pub.dev/path>
 
 ### path_provider
 
-https://pub.dev/path_provider
+<https://pub.dev/path_provider>
 
 ### meta
 
-https://pub.dev/meta
+<https://pub.dev/meta>
 
 ### equatable
 
-https://pub.dev/equatable
+<https://pub.dev/equatable>
