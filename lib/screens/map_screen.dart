@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+
+class MapScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<OnlineModeBloc, OnlineModeState>(
+        builder: (context, state) {
+      if (state is OnlineState) {
+        return MapOnlineScreen();
+      }
+      if (state is OfflineState) {
+        return MapOfflineScreen();
+      }
+      return null;
+    });
+  }
+}
 
 class MapOnlineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: remove comment when PageControlBloc exists
-    //final PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
+    final PageControlBloc pageControlBloc =
+        BlocProvider.of<PageControlBloc>(context);
+    final OnlineModeBloc onlineModeBloc =
+        BlocProvider.of<OnlineModeBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -17,15 +37,16 @@ class MapOnlineScreen extends StatelessWidget {
           children: <Widget>[
             RaisedButton(
               child: Text('Go to List'),
-              onPressed: null,
-              // TODO: remove comment when PageControlBloc exists and maybe rename event
-              // onPressed: pageControlBloc.dispatch(GoToBoxListEvent()),
+              onPressed: () {
+                // TODO remove comment when events for the list are implemented
+                //pageControlBloc.dispatch(GoToBoxListEvent());
+              },
             ),
             RaisedButton(
               child: Text('Go offline!'),
-              onPressed: null,
-              // TODO: remove comment when PageControlBloc exists and maybe rename event
-              // onPressed: onlineModeBloc.dispatch(GoOfflineEvent()),
+              onPressed: () {
+                onlineModeBloc.dispatch(OfflineEvent());
+              },
             ),
           ],
         ),
@@ -37,9 +58,10 @@ class MapOnlineScreen extends StatelessWidget {
 class MapOfflineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: remove comment when PageControlBloc exists
-    //final PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
-    //final OnlineModeBloc onlineModeBloc = BlocProvider.of<OnlineModeBloc>(context);
+    final PageControlBloc pageControlBloc =
+        BlocProvider.of<PageControlBloc>(context);
+    final OnlineModeBloc onlineModeBloc =
+        BlocProvider.of<OnlineModeBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -57,9 +79,9 @@ class MapOfflineScreen extends StatelessWidget {
             ),
             RaisedButton(
               child: Text('Go online!'),
-              onPressed: null,
-              // TODO: remove comment when PageControlBloc exists and maybe rename event
-              // onPressed: onlineModeBloc.dispatch(GoOnlineEvent()),
+              onPressed: () {
+                onlineModeBloc.dispatch(OnlineEvent());
+              },
             ),
           ],
         ),
