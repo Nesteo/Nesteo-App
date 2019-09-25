@@ -3,23 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
-class MapScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnlineModeBloc, OnlineModeState>(
         builder: (context, state) {
       if (state is OnlineState) {
-        return MapOnlineScreen();
+        return HomeOnlineScreen();
       }
       if (state is OfflineState) {
-        return MapOfflineScreen();
+        return HomeOfflineScreen();
       }
       return null;
     });
   }
 }
 
-class MapOnlineScreen extends StatelessWidget {
+class HomeOnlineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -29,12 +29,18 @@ class MapOnlineScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Map Screen'),
+          title: Text('Home Screen'),
           backgroundColor: Colors.green,
         ),
         body: Center(
           child: Column(
             children: <Widget>[
+              RaisedButton(
+                child: Text('Go to Map'),
+                onPressed: () {
+                  pageControlBloc.dispatch(GoToMapEvent());
+                },
+              ),
               RaisedButton(
                 child: Text('Go to List'),
                 onPressed: () {
@@ -94,7 +100,7 @@ class MapOnlineScreen extends StatelessWidget {
   }
 }
 
-class MapOfflineScreen extends StatelessWidget {
+class HomeOfflineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -104,7 +110,7 @@ class MapOfflineScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map Screen (offline)'),
+        title: Text('Home Screen (offline)'),
         backgroundColor: Colors.red,
       ),
       body: Center(

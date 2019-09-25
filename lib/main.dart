@@ -28,6 +28,12 @@ class MyApp extends StatelessWidget {
             if (state is LoginScreenState) {
               return LoginScreen();
             }
+            // if (state is ToHomeScreenState) {
+            //   return TransitionScreen();
+            // }
+            // if (state is HomeScreenState) {
+            //   return HomeScreen();
+            // }
             if (state is ToMapScreenState) {
               return TransitionScreen();
             }
@@ -39,6 +45,24 @@ class MyApp extends StatelessWidget {
             }
             if (state is BoxListScreenState) {
               return BoxListScreen();
+            }
+            if (state is ToNewBoxScreenState) {
+              return TransitionScreen();
+            }
+            if (state is NewBoxScreenState) {
+              return NewBoxScreen();
+            }
+            if (state is ToInfoBoxScreenState) {
+              return TransitionScreen();
+            }
+            if (state is InfoBoxScreenState) {
+              return InfoBoxScreen();
+            }
+            if (state is ToInspectionScreenState) {
+              return TransitionScreen();
+            }
+            if (state is InspectionScreenState) {
+              return InspectionScreen();
             }
             return null;
           },

@@ -16,10 +16,18 @@ void main() {
     test('Login to Transition to Map States working', () {
       final List<PageControlState> expected = [
         LoginScreenState(),
+        // ToHomeScreenState(),
+        // HomeScreenState(),
         ToMapScreenState(),
         MapScreenState(),
         ToBoxListScreenState(),
         BoxListScreenState(),
+        ToNewBoxScreenState(),
+        NewBoxScreenState(),
+        ToInfoBoxScreenState(),
+        InfoBoxScreenState(),
+        ToInspectionScreenState(),
+        InspectionScreenState(),
       ];
 
       expectLater(
@@ -27,7 +35,12 @@ void main() {
         emitsInOrder(expected),
       );
 
+      // pageControlBloc.dispatch(GoToHomeEvent());
       pageControlBloc.dispatch(GoToMapEvent());
+      pageControlBloc.dispatch(GoToBoxListEvent());
+      pageControlBloc.dispatch(GoToNewBoxEvent());
+      pageControlBloc.dispatch(GoToInfoBoxEvent());
+      pageControlBloc.dispatch(GoToInspectionEvent());
     });
   });
 }
