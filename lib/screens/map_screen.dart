@@ -132,6 +132,46 @@ class MapOfflineScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: Stack(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(bottom: 128),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    pageControlBloc.dispatch(GoToNewBoxEvent());
+                  },
+                  child: Icon(Icons.add),
+                  backgroundColor: Colors.red,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 64),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    pageControlBloc.dispatch(GoToInfoBoxEvent());
+                  },
+                  child: Icon(Icons.help_outline),
+                  backgroundColor: Colors.red,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                onPressed: () {
+                  pageControlBloc.dispatch(GoToInspectionEvent());
+                },
+                child: Icon(Icons.healing),
+                backgroundColor: Colors.red,
+              ),
+            ),
+          ],
+        )
     );
   }
 }
