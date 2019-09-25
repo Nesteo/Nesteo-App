@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nesteo_app/blocs/counter_bloc/counter.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/screens/screens.dart';
 
 void main() => runApp(MyApp());
@@ -11,9 +11,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Nesteo',
-      home: BlocProvider<PageControlBloc>(
-        builder: (BuildContext context) => PageControlBloc(),
+      // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<PageControlBloc>(
+            builder: (BuildContext context) => PageControlBloc(),
+          ),
+          BlocProvider<OnlineModeBloc>(
+            builder: (BuildContext context) => OnlineModeBloc(),
+          ),
+        ],
         child: BlocBuilder<PageControlBloc, PageControlState>(
+          // This Builder basically controls which page is currently displayed, based on the PageControlState
+          // I think we don't have to worry about any routes here, because we can control that in the Bloc instead of here
           builder: (context, state) {
             if (state is LoginScreenState) {
               return LoginScreen();
@@ -22,56 +32,11 @@ class MyApp extends StatelessWidget {
               return TransitionScreen();
             }
             if (state is MapScreenState) {
-              return MapOnlineScreen();
+              return MapScreen();
             }
             return null;
           },
         ),
-      ),
-    );
-  }
-}
-
-class CounterPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
-
-    return Scaffold(
-      appBar: AppBar(title: Text('Counter')),
-      body: BlocBuilder<CounterBloc, CounterState>(
-        builder: (context, state) {
-          return Center(
-            child: Text(
-              state.value.toString(),
-              style: TextStyle(fontSize: 24.0),
-            ),
-          );
-        },
-      ),
-      floatingActionButton: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0),
-            child: FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () {
-                counterBloc.dispatch(CounterIncrease());
-              },
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0),
-            child: FloatingActionButton(
-              child: Icon(Icons.remove),
-              onPressed: () {
-                counterBloc.dispatch(CounterDecrease());
-              },
-            ),
-          ),
-        ],
       ),
     );
   }
