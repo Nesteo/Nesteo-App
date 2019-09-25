@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: remove comment when PageControlBloc exists
-    //final PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
+    final PageControlBloc pageControlBloc =
+        BlocProvider.of<PageControlBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -14,9 +15,9 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: RaisedButton(
           child: Text('Login'),
-          onPressed: null,
-          // TODO: remove comment when PageControlBloc exists
-          // onPressed: pageControlBloc.dispatch(GoToMapEvent()),
+          onPressed: () {
+            pageControlBloc.dispatch(GoToMapEvent());
+          },
         ),
       ),
     );

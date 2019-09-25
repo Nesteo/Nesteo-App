@@ -5,3 +5,7 @@ import 'package:meta/meta.dart';
 abstract class PageControlEvent extends Equatable {
   PageControlEvent([List props = const <dynamic>[]]) : super(props);
 }
+
+class GoToMapEvent extends PageControlEvent {}
+
+class MapEvent extends PageControlEvent {}

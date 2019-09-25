@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/counter_bloc/counter.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/screens.dart';
 
 void main() => runApp(MyApp());
@@ -9,10 +10,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BLoC-Counter',
-      home: BlocProvider(
-        builder: (context) => CounterBloc(),
-        child: CounterPage(),
+      title: 'Nesteo',
+      home: BlocProvider<PageControlBloc>(
+        builder: (BuildContext context) => PageControlBloc(),
+        child: BlocBuilder<PageControlBloc, PageControlState>(
+          builder: (context, state) {
+            if (state is LoginScreenState) {
+              return LoginScreen();
+            }
+            if (state is ToMapScreenState) {
+              return TransitionScreen();
+            }
+            if (state is MapScreenState) {
+              return MapOnlineScreen();
+            }
+            return null;
+          },
+        ),
       ),
     );
   }
