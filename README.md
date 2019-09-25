@@ -28,7 +28,7 @@ On Linux do
 export ORG_GRADLE_PROJECT_MAPS_API_KEY=REPLACEWITHYOURKEY"
 ```
 
-On Windows do
+On Windows navigate to the project home folder in the command line and enter:
 
 ```
 set ORG_GRADLE_PROJECT_MAPS_API_KEY "REPLACEWITHYOURKEY"
