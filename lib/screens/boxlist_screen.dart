@@ -29,7 +29,7 @@ class BoxListOnlineScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map Screen'),
+        title: Text('List Screen'),
         backgroundColor: Colors.green,
       ),
       body: Center(
@@ -64,7 +64,7 @@ class BoxListOfflineScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map Screen (offline)'),
+        title: Text('List Screen (offline)'),
         backgroundColor: Colors.red,
       ),
       body: Center(
@@ -73,8 +73,7 @@ class BoxListOfflineScreen extends StatelessWidget {
             RaisedButton(
               child: Text('Go to Map'),
               onPressed: () {
-                // TODO Remove comment when the Events for the List are implemented
-                //pageControlBloc.dispatch(GoToBoxListEvent());
+                pageControlBloc.dispatch(GoToMapEvent());
               },
             ),
             RaisedButton(

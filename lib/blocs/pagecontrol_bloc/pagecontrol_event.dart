@@ -9,3 +9,7 @@ abstract class PageControlEvent extends Equatable {
 class GoToMapEvent extends PageControlEvent {}
 
 class MapEvent extends PageControlEvent {}
+
+class GoToBoxListEvent extends PageControlEvent {}
+
+class BoxListEvent extends PageControlEvent {}

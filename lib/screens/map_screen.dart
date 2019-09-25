@@ -39,7 +39,7 @@ class MapOnlineScreen extends StatelessWidget {
               child: Text('Go to List'),
               onPressed: () {
                 // TODO remove comment when events for the list are implemented
-                //pageControlBloc.dispatch(GoToBoxListEvent());
+                pageControlBloc.dispatch(GoToBoxListEvent());
               },
             ),
             RaisedButton(

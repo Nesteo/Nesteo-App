@@ -18,6 +18,8 @@ void main() {
         LoginScreenState(),
         ToMapScreenState(),
         MapScreenState(),
+        ToBoxListScreenState(),
+        BoxListScreenState(),
       ];
 
       expectLater(

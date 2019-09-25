@@ -19,6 +19,15 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     }
     if (event is MapEvent) {
       yield MapScreenState();
+    } 
+    if (event is GoToBoxListEvent) {
+      yield ToBoxListScreenState();
+      // TODO: This is just a way to "simulate" a delay between login and map screen for now!
+      await Future.delayed(Duration(seconds: 1));
+      yield BoxListScreenState();
+    }
+    if (event is BoxListEvent) {
+      yield BoxListScreenState();
     }
 
     // TODO: Add the missing events / states here

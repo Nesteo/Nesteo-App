@@ -34,6 +34,12 @@ class MyApp extends StatelessWidget {
             if (state is MapScreenState) {
               return MapScreen();
             }
+            if (state is ToBoxListScreenState) {
+              return TransitionScreen();
+            }
+            if (state is BoxListScreenState) {
+              return BoxListScreen();
+            }
             return null;
           },
         ),

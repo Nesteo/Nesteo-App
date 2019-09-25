@@ -11,3 +11,8 @@ class LoginScreenState extends PageControlState {}
 class ToMapScreenState extends PageControlState {}
 
 class MapScreenState extends PageControlState {}
+
+class ToBoxListScreenState extends PageControlState {}
+
+class BoxListScreenState extends PageControlState {}
+
