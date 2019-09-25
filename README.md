@@ -34,7 +34,9 @@ On Windows navigate to the project home folder in the command line and enter:
 set ORG_GRADLE_PROJECT_MAPS_API_KEY "REPLACEWITHYOURKEY"
 ```
 
-Section on iOS coming soon
+On iOS in XCode, add your environment variable in the project scheme.
+Name: ORG_GRADLE_PROJECT_MAPS_API_KEY
+Value: REPLACEWITHYOURKEY
 
 
 ## Used packages
