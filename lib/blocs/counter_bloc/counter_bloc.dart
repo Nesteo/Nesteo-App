@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import './bloc.dart';
+import './counter.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   @override

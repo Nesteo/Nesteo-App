@@ -1,4 +1,4 @@
-import 'package:nesteo_app/bloc/bloc.dart';
+import 'package:nesteo_app/blocs/counter_bloc/counter.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
