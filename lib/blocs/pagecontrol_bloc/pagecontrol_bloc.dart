@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import './pagecontrol.dart';
 
-class PagecontrolBloc extends Bloc<PagecontrolEvent, PagecontrolState> {
+class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
   @override
-  PagecontrolState get initialState => InitialPagecontrolState();
+  PageControlState get initialState => InitialPagecontrolState();
 
   @override
-  Stream<PagecontrolState> mapEventToState(
-    PagecontrolEvent event,
+  Stream<PageControlState> mapEventToState(
+    PageControlEvent event,
   ) async* {
     // TODO: Add Logic
   }
