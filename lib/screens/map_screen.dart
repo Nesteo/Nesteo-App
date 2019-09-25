@@ -36,6 +36,13 @@ class MapOnlineScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               RaisedButton(
+                child: Text('Go to Home'),
+                onPressed: () {
+                  // TODO remove comment when events for the list are implemented
+                  pageControlBloc.dispatch(GoToHomeEvent());
+                },
+              ),
+              RaisedButton(
                 child: Text('Go to List'),
                 onPressed: () {
                   // TODO remove comment when events for the list are implemented

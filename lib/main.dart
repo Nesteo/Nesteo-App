@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
             if (state is LoginScreenState) {
               return LoginScreen();
             }
-            // if (state is ToHomeScreenState) {
-            //   return TransitionScreen();
-            // }
-            // if (state is HomeScreenState) {
-            //   return HomeScreen();
-            // }
+            if (state is ToHomeScreenState) {
+              return TransitionScreen();
+            }
+            if (state is HomeScreenState) {
+              return HomeScreen();
+            }
             if (state is ToMapScreenState) {
               return TransitionScreen();
             }

@@ -8,9 +8,9 @@ abstract class PageControlState extends Equatable {
 
 class LoginScreenState extends PageControlState {}
 
-//class ToHomeScreenState extends PageControlState {}
+class ToHomeScreenState extends PageControlState {}
 
-//class HomeScreenState extends PageControlState {}
+class HomeScreenState extends PageControlState {}
 
 class ToMapScreenState extends PageControlState {}
 

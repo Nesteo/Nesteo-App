@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
         child: RaisedButton(
           child: Text('Login'),
           onPressed: () {
-            pageControlBloc.dispatch(GoToMapEvent());
+            pageControlBloc.dispatch(GoToHomeEvent());
           },
         ),
       ),

@@ -5,4 +5,5 @@ export 'package:nesteo_app/screens/transition_screen.dart';
 export 'package:nesteo_app/screens/newbox_screen.dart';
 export 'package:nesteo_app/screens/infobox_screen.dart';
 export 'package:nesteo_app/screens/inspection_screen.dart';
+export 'package:nesteo_app/screens/home_screen.dart';
 

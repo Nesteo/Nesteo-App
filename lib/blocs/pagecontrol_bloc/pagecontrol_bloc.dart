@@ -10,16 +10,16 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
   Stream<PageControlState> mapEventToState(
     PageControlEvent event,
   ) async* {
-    // if (event is GoToHomeEvent) {
-    //   yield ToHomeScreenState();
+    if (event is GoToHomeEvent) {
+      yield ToHomeScreenState();
 
-    //   // TODO: This is just a way to "simulate" a delay for now!
-    //   await Future.delayed(Duration(seconds: 1));
-    //   yield HomeScreenState();
-    // }
-    // if (event is HomeEvent) {
-    //   yield HomeScreenState();
-    // }
+      // TODO: This is just a way to "simulate" a delay for now!
+      await Future.delayed(Duration(seconds: 1));
+      yield HomeScreenState();
+    }
+    if (event is HomeEvent) {
+      yield HomeScreenState();
+    }
     if (event is GoToMapEvent) {
       yield ToMapScreenState();
 

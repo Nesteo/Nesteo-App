@@ -6,9 +6,9 @@ abstract class PageControlEvent extends Equatable {
   PageControlEvent([List props = const <dynamic>[]]) : super(props);
 }
 
-//class GoToHomeEvent extends PageControlEvent {}
+class GoToHomeEvent extends PageControlEvent {}
 
-//class HomeEvent extends PageControlEvent {}
+class HomeEvent extends PageControlEvent {}
 
 class GoToMapEvent extends PageControlEvent {}
 
