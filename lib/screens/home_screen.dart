@@ -3,23 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
-class MapScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnlineModeBloc, OnlineModeState>(
         builder: (context, state) {
       if (state is OnlineState) {
-        return MapOnlineScreen();
+        return HomeOnlineScreen();
       }
       if (state is OfflineState) {
-        return MapOfflineScreen();
+        return HomeOfflineScreen();
       }
       return null;
     });
   }
 }
 
-class MapOnlineScreen extends StatelessWidget {
+class HomeOnlineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -29,17 +29,16 @@ class MapOnlineScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Map Screen'),
+          title: Text('Home Screen'),
           backgroundColor: Colors.green,
         ),
         body: Center(
           child: Column(
             children: <Widget>[
               RaisedButton(
-                child: Text('Go to Home'),
+                child: Text('Go to Map'),
                 onPressed: () {
-                  // TODO remove comment when events for the list are implemented
-                  pageControlBloc.dispatch(GoToHomeEvent());
+                  pageControlBloc.dispatch(GoToMapEvent());
                 },
               ),
               RaisedButton(
@@ -101,7 +100,7 @@ class MapOnlineScreen extends StatelessWidget {
   }
 }
 
-class MapOfflineScreen extends StatelessWidget {
+class HomeOfflineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -111,7 +110,7 @@ class MapOfflineScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map Screen (offline)'),
+        title: Text('Home Screen (offline)'),
         backgroundColor: Colors.red,
       ),
       body: Center(
@@ -132,46 +131,6 @@ class MapOfflineScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Stack(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(bottom: 128),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    pageControlBloc.dispatch(GoToNewBoxEvent());
-                  },
-                  child: Icon(Icons.add),
-                  backgroundColor: Colors.red,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 64),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    pageControlBloc.dispatch(GoToInfoBoxEvent());
-                  },
-                  child: Icon(Icons.help_outline),
-                  backgroundColor: Colors.red,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                onPressed: () {
-                  pageControlBloc.dispatch(GoToInspectionEvent());
-                },
-                child: Icon(Icons.healing),
-                backgroundColor: Colors.red,
-              ),
-            ),
-          ],
-        )
     );
   }
 }

@@ -3,23 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
-class BoxListScreen extends StatelessWidget {
+class NewBoxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OnlineModeBloc, OnlineModeState>(
         builder: (context, state) {
       if (state is OnlineState) {
-        return BoxListOnlineScreen();
+        return NewBoxOnlineScreen();
       }
       if (state is OfflineState) {
-        return BoxListOfflineScreen();
+        return NewBoxOfflineScreen();
       }
       return null;
     });
   }
 }
 
-class BoxListOnlineScreen extends StatelessWidget {
+class NewBoxOnlineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -29,16 +29,17 @@ class BoxListOnlineScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('List Screen'),
+        title: Text('New Box Screen'),
         backgroundColor: Colors.green,
       ),
       body: Center(
         child: Column(
           children: <Widget>[
             RaisedButton(
-              child: Text('Go to Map'),
+              child: Text('Go to List'),
               onPressed: () {
-                pageControlBloc.dispatch(GoToMapEvent());
+                // TODO remove comment when events for the list are implemented
+                pageControlBloc.dispatch(GoToBoxListEvent());
               },
             ),
             RaisedButton(
@@ -54,7 +55,7 @@ class BoxListOnlineScreen extends StatelessWidget {
   }
 }
 
-class BoxListOfflineScreen extends StatelessWidget {
+class NewBoxOfflineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -64,17 +65,17 @@ class BoxListOfflineScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('List Screen (offline)'),
+        title: Text('New Box Screen (offline)'),
         backgroundColor: Colors.red,
       ),
       body: Center(
         child: Column(
           children: <Widget>[
             RaisedButton(
-              child: Text('Go to Map'),
-              onPressed: () {
-                pageControlBloc.dispatch(GoToMapEvent());
-              },
+              child: Text('Go to List'),
+              onPressed: null,
+              // TODO: remove comment when PageControlBloc exists and maybe rename event
+              // onPressed: pageControlBloc.dispatch(GoToBoxListEvent()),
             ),
             RaisedButton(
               child: Text('Go online!'),
