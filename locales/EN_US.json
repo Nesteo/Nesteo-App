@@ -1,0 +1,12 @@
+{
+  "login": {
+    "domain": "Domain",
+    "username": "Username",
+    "password": "Password",
+    "logInButton": "Log In"
+  },
+  "main": {
+    "sample": "Example",
+    "save": "Save"
+  }
+}

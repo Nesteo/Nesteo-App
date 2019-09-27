@@ -1,0 +1,12 @@
+{
+  "login": {
+    "domain": "domain text box",
+    "username": "username text box",
+    "password": "password text box",
+    "logInButton": "login button text"
+  },
+  "main": {
+    "sample": "This is sample description",
+    "save": "Use to save document"
+  }
+}
