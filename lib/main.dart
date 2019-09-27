@@ -88,7 +88,7 @@ class LocDelegate extends LocalizationsDelegate<LocaleBase> {
   final idMap = const {'de': 'locales/DE_DE.json', 'en': 'locales/EN_US.json' };
 
   @override
-  bool isSupported(Locale locale) => ['de', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en','de'].contains(locale.languageCode);
 
   @override
   Future<LocaleBase> load(Locale locale) async {
@@ -96,7 +96,6 @@ class LocDelegate extends LocalizationsDelegate<LocaleBase> {
     if (isSupported(locale)) lang = locale.languageCode;
     final loc = LocaleBase();
     await loc.load(idMap[lang]);
-    print(loc.login.username);
     return loc;
   }
 
