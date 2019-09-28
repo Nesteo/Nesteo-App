@@ -33,3 +33,4 @@ flutter:
   assets:
     - locales/DE_DE.json
     - locales/EN_US.json
+    - images/testImage.jpg
