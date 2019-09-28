@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
-import 'package:nesteo_app/screens/nesteo_screen.dart';
-import 'package:nesteo_app/screens/placeholder_screen.dart';
 import 'package:nesteo_app/screens/screens.dart';
 
 class FullScreen extends StatelessWidget {
@@ -20,6 +18,12 @@ class FullScreen extends StatelessWidget {
         builder: (context, state) {
           if (state is LoginScreenState) {
             screen = LoginScreen(context);
+          } else if (state is BoxInfoScreenState) {
+            screen = BoxInfoScreen(context);
+          } else if (state is NewBoxScreenState) {
+            screen = NewBoxScreen(context);
+          } else {
+            screen = TransitionFullScreen(context);
           }
 
           return Scaffold(
@@ -31,6 +35,7 @@ class FullScreen extends StatelessWidget {
                             : Colors.red,
                     title: screen.appBarTitle,
                     actions: screen.appBarActions,
+                    leading: screen.appBarLeading,
                   )
                 : null,
             body: screen,
@@ -55,17 +60,13 @@ class FramedScreen extends StatelessWidget {
       child: BlocBuilder<PageControlBloc, PageControlState>(
         builder: (context, state) {
           if (state is MapScreenState) {
-            screen = PlaceholderMapScreen(context);
+            screen = MapScreen(context);
+          } else if (state is BoxListScreenState) {
+            screen = BoxListScreen(context);
+          } else {
+            screen = TransitionFramedScreen(context);
           }
-          if (state is BoxListScreenState) {
-            screen = PlaceholderListScreen(context);
-          }
-          if (state is ToMapScreenState) {
-            screen = TransitionScreen(context);
-          }
-          if (state is ToBoxListScreenState) {
-            screen = TransitionScreen(context);
-          }
+
           return Scaffold(
             appBar: AppBar(
               backgroundColor: (onlineModeBloc.currentState is OnlineState)
@@ -73,6 +74,7 @@ class FramedScreen extends StatelessWidget {
                   : Colors.red,
               title: screen.appBarTitle,
               actions: screen.appBarActions,
+              leading: screen.appBarLeading,
             ),
             body: screen,
             floatingActionButton: screen.floatingActionButton,

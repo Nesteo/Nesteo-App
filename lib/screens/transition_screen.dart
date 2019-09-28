@@ -1,14 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/screens/screens.dart';
 
-class TransitionScreen extends StatelessWidget {
+class TransitionFramedScreen extends NesteoFramedScreen {
+  TransitionFramedScreen(BuildContext context)
+      : super(
+          context,
+          appBarTitle: Text('Loading'),
+          appBarActions: <Widget>[],
+          floatingActionButton: null,
+          appBarLeading: null,
+        );
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Loading'),
+    return Container(
+      child: Center(
+        child: CircularProgressIndicator(),
       ),
-      body: Center(
+    );
+  }
+}
+
+class TransitionFullScreen extends NesteoFullScreen {
+  TransitionFullScreen(BuildContext context)
+      : super(
+          context,
+          appBarTitle: Text('Loading'),
+          appBarActions: <Widget>[],
+          hasAppBar: true,
+          floatingActionButton: null,
+          appBarLeading: null,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
         child: CircularProgressIndicator(),
       ),
     );

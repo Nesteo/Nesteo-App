@@ -22,9 +22,9 @@ class GoToNewBoxEvent extends PageControlEvent {}
 
 class NewBoxEvent extends PageControlEvent {}
 
-class GoToInfoBoxEvent extends PageControlEvent {}
+class GoToBoxInfoEvent extends PageControlEvent {}
 
-class InfoBoxEvent extends PageControlEvent {}
+class BoxInfoEvent extends PageControlEvent {}
 
 class GoToInspectionEvent extends PageControlEvent {}
 

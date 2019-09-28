@@ -24,12 +24,10 @@ class ToNewBoxScreenState extends PageControlState {}
 
 class NewBoxScreenState extends PageControlState {}
 
-class ToInfoBoxScreenState extends PageControlState {}
+class ToBoxInfoScreenState extends PageControlState {}
 
-class InfoBoxScreenState extends PageControlState {}
+class BoxInfoScreenState extends PageControlState {}
 
 class ToInspectionScreenState extends PageControlState {}
 
 class InspectionScreenState extends PageControlState {}
-
-

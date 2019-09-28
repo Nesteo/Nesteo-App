@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
+import 'package:nesteo_app/frames.dart';
 import 'package:nesteo_app/screens/screens.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 
@@ -19,8 +21,8 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-          const Locale('en', ''),
-          const Locale('de', ''),
+        const Locale('en', ''),
+        const Locale('de', ''),
       ],
       // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
       home: MultiBlocProvider(
@@ -31,52 +33,24 @@ class MyApp extends StatelessWidget {
           BlocProvider<OnlineModeBloc>(
             builder: (BuildContext context) => OnlineModeBloc(),
           ),
+          BlocProvider<FrameControlBloc>(
+            builder: (BuildContext context) => FrameControlBloc(),
+          )
         ],
-        child: BlocBuilder<PageControlBloc, PageControlState>(
-          // This Builder basically controls which page is currently displayed, based on the PageControlState
-          // I think we don't have to worry about any routes here, because we can control that in the Bloc instead of here
-          builder: (context, state) {
-            if (state is LoginScreenState) {
-              return LoginScreen();
-            }
-            if (state is ToHomeScreenState) {
-              return TransitionScreen();
-            }
-            if (state is HomeScreenState) {
-              return HomeScreen();
-            }
-            if (state is ToMapScreenState) {
-              return TransitionScreen();
-            }
-            if (state is MapScreenState) {
-              return MapScreen();
-            }
-            if (state is ToBoxListScreenState) {
-              return TransitionScreen();
-            }
-            if (state is BoxListScreenState) {
-              return BoxListScreen();
-            }
-            if (state is ToNewBoxScreenState) {
-              return TransitionScreen();
-            }
-            if (state is NewBoxScreenState) {
-              return NewBoxScreen();
-            }
-            if (state is ToInfoBoxScreenState) {
-              return TransitionScreen();
-            }
-            if (state is InfoBoxScreenState) {
-              return InfoBoxScreen();
-            }
-            if (state is ToInspectionScreenState) {
-              return TransitionScreen();
-            }
-            if (state is InspectionScreenState) {
-              return InspectionScreen();
-            }
-            return null;
-          },
+        child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
+          builder: (context, onlineState) =>
+              BlocBuilder<FrameControlBloc, FrameControlState>(
+            condition: (previousState, currentState) =>
+                currentState.runtimeType != previousState.runtimeType,
+            builder: (context, frameState) {
+              if (frameState is FrameEnabledState) {
+                return FramedScreen();
+              }
+              if (frameState is FrameDisabledState) {
+                return FullScreen();
+              }
+            },
+          ),
         ),
       ),
     );
@@ -85,10 +59,10 @@ class MyApp extends StatelessWidget {
 
 class LocDelegate extends LocalizationsDelegate<LocaleBase> {
   const LocDelegate();
-  final idMap = const {'de': 'locales/DE_DE.json', 'en': 'locales/EN_US.json' };
+  final idMap = const {'de': 'locales/DE_DE.json', 'en': 'locales/EN_US.json'};
 
   @override
-  bool isSupported(Locale locale) => ['en','de'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'de'].contains(locale.languageCode);
 
   @override
   Future<LocaleBase> load(Locale locale) async {
