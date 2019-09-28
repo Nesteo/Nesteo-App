@@ -36,6 +36,18 @@ class HomeOnlineScreen extends StatelessWidget {
           child: Column(
             children: <Widget>[
               RaisedButton(
+                child: Text('Go to Inspection Screen'),
+                onPressed: () {
+                  pageControlBloc.dispatch(GoToInspectionEvent());
+                },
+              ),
+              RaisedButton(
+                child: Text('Go to InfoBox Screen'),
+                onPressed: () {
+                  pageControlBloc.dispatch(GoToInfoBoxEvent());
+                },
+              ),
+              RaisedButton(
                 child: Text('Go to Map'),
                 onPressed: () {
                   pageControlBloc.dispatch(GoToMapEvent());
