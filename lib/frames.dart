@@ -55,17 +55,13 @@ class FramedScreen extends StatelessWidget {
       child: BlocBuilder<PageControlBloc, PageControlState>(
         builder: (context, state) {
           if (state is MapScreenState) {
-            screen = PlaceholderMapScreen(context);
-          }
-          if (state is BoxListScreenState) {
-            screen = PlaceholderListScreen(context);
-          }
-          if (state is ToMapScreenState) {
+            screen = MapScreen(context);
+          } else if (state is BoxListScreenState) {
+            screen = BoxListScreen(context);
+          } else {
             screen = TransitionScreen(context);
           }
-          if (state is ToBoxListScreenState) {
-            screen = TransitionScreen(context);
-          }
+
           return Scaffold(
             appBar: AppBar(
               backgroundColor: (onlineModeBloc.currentState is OnlineState)
