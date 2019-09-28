@@ -27,28 +27,53 @@ class BoxListOnlineScreen extends StatelessWidget {
     final OnlineModeBloc onlineModeBloc =
         BlocProvider.of<OnlineModeBloc>(context);
 
+    // set up the sorting options
+    Widget sortOptionName = SimpleDialogOption(
+      child: const Text('Name'),
+      onPressed: () {},
+    );
+    Widget sortOptionDistance = SimpleDialogOption(
+      child: const Text('Distance'),
+      onPressed: () {},
+    );
+    Widget sortOptionId = SimpleDialogOption(
+      child: const Text('ID'),
+      onPressed: () {},
+    );
+
+    //sorting dialog widget
+    SimpleDialog sortDialog = SimpleDialog(
+      title: const Text("Sort List"),
+      children: <Widget>[sortOptionDistance, sortOptionName, sortOptionId],
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('List Screen'),
+        title: Text('Boxes'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.sort),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return sortDialog;
+                },
+              );
+            },
+          ),
+        ],
         backgroundColor: Colors.green,
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Text('Go to Map'),
-              onPressed: () {
-                pageControlBloc.dispatch(GoToMapEvent());
-              },
-            ),
-            RaisedButton(
-              child: Text('Go offline!'),
-              onPressed: () {
-                onlineModeBloc.dispatch(OfflineEvent());
-              },
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: 100,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text('Title Box $index'), //create testdata for listview
+            isThreeLine: true,
+            subtitle: Text('subtitle last inspection $index'),
+          );
+        },
       ),
     );
   }
