@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/generated/locale_base.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -22,6 +23,7 @@ class LoginPage extends StatelessWidget {
 class LoginContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +39,7 @@ class LoginContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Domain',
+                  hintText: loc.login.domain,
                   border: InputBorder.none,
                   filled: true,
                   fillColor: Colors.white,
@@ -53,7 +55,7 @@ class LoginContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Username',
+                  hintText: loc.login.username,
                   filled: true,
                   fillColor: Colors.white,
                   prefixIcon: Icon(Icons.person, color: Colors.green),
@@ -68,7 +70,7 @@ class LoginContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Password',
+                  hintText: loc.login.password,
                   filled: true,
                   fillColor: Colors.white,
                   prefixIcon: Icon(Icons.lock, color: Colors.green),
@@ -89,7 +91,7 @@ class LoginContent extends StatelessWidget {
                       .dispatch(GoToHomeEvent());
                 },
                 child: Text(
-                  'Login',
+                  loc.login.logInButton,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,

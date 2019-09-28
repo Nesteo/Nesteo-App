@@ -1,0 +1,26 @@
+{
+  "boxInfo": {
+    "boxNumber": "nesting box number",
+    "date": "date",
+    "boxCondition": "box condition",
+    "boxNumberNew": "new box number",
+    "cleaned": "cleaned",
+    "occupied": "occupied",
+    "eggCount": "number of eggs",
+    "chickCount": "number of chicks",
+    "chickAge": "age of chicks",
+    "specie": "specie",
+    "ringed": "ringed",
+    "comments": "comments"
+  },
+  "login": {
+    "domain": "domain text box",
+    "username": "username text box",
+    "password": "password text box",
+    "logInButton": "login button text"
+  },
+  "main": {
+    "sample": "This is sample description",
+    "save": "Use to save document"
+  }
+}

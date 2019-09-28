@@ -1,0 +1,26 @@
+{
+  "boxInfo": {
+    "boxNumber": "Nistkasten Nummer",
+    "date": "Datum",
+    "boxCondition": "Zustand Kasten",
+    "boxNumberNew": "Nistkasten Nummer Neu",
+    "cleaned": "Gereinigt",
+    "occupied": "Desetzt",
+    "eggCount": "Anzahl Eier",
+    "chickCount": "Anzalh Jungvögel",
+    "chickAge": "Alter Jungvögel",
+    "specie": "Vogelart",
+    "ringed": "Berignt",
+    "comments": "Bemerkungen"
+  },
+  "login": {
+    "domain": "Domain",
+    "username": "Nutzername",
+    "password": "Passwort",
+    "logInButton": "Einloggen"
+  },
+  "main": {
+    "sample": "",
+    "save": ""
+  }
+}
