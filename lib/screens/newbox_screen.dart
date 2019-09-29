@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
-import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 
 class NewBoxScreen extends NesteoFullScreen {

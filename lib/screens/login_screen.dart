@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
-import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:nesteo_app/screens/screens.dart';
