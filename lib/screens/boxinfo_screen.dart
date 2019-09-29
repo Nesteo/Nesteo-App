@@ -43,9 +43,6 @@ class BoxInfoScreen extends NesteoFullScreen {
     final Widget descSection = Container(
       padding: const EdgeInsets.all(32),
       child: Text(
-        'Things about the Box or whateveeerr '
-        'Things about the Box or whateveeerr '
-        'Things about the Box or whateveeerr'
         'hlorem ipsum',
         softWrap: true,
       ),
