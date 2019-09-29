@@ -7,14 +7,14 @@ import 'package:nesteo_app/screens/screens.dart';
 class FullScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final PageControlBloc pageControlBloc =
-        BlocProvider.of<PageControlBloc>(context);
     final OnlineModeBloc onlineModeBloc =
         BlocProvider.of<OnlineModeBloc>(context);
     NesteoFullScreen screen;
 
     return Container(
       child: BlocBuilder<PageControlBloc, PageControlState>(
+        condition: (previousState, currentState) =>
+            currentState.runtimeType != previousState.runtimeType,
         builder: (context, state) {
           if (state is LoginScreenState) {
             screen = LoginScreen(context);
@@ -94,9 +94,12 @@ class FramedScreen extends StatelessWidget {
                   ? Colors.green
                   : Colors.red,
               onTap: (index) {
-                if (index == 0) {
+                if (!(pageControlBloc.currentState is MapScreenState) &&
+                    index == 0) {
                   pageControlBloc.dispatch(GoToMapEvent());
-                } else if (index == 1) {
+                } else if (!(pageControlBloc.currentState
+                        is BoxListScreenState) &&
+                    index == 1) {
                   pageControlBloc.dispatch(GoToBoxListEvent());
                 }
               },
