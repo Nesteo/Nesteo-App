@@ -34,3 +34,7 @@ flutter:
     - locales/DE_DE.json
     - locales/EN_US.json
     - images/testImage.jpg
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: fonts/Quicksand-Regular.ttf
