@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
 class BoxInfoScreen extends NesteoFullScreen {
   BoxInfoScreen(BuildContext context)
@@ -13,7 +16,7 @@ class BoxInfoScreen extends NesteoFullScreen {
   Widget build(BuildContext context) {
     Widget imageSection = Container(
       child: Image.asset('images/testImage.jpg',
-          width: 600, height: 240, fit: BoxFit.fill),
+          width: 600, height: 240, fit: BoxFit.fitWidth),
     );
 
     Widget titleSection = Container(
@@ -54,18 +57,42 @@ class BoxInfoScreen extends NesteoFullScreen {
           ListTile(
             leading: Icon(Icons.photo),
             title: Text('Inspection 1'),
+            isThreeLine: true,
+            subtitle: Text('inspection date'),
+            onTap: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToInspectionEvent());
+            },
           ),
           ListTile(
             leading: Icon(Icons.photo),
             title: Text('Inspection 2'),
+            isThreeLine: true,
+            subtitle: Text('inspection date'),
+            onTap: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToInspectionEvent());
+            },
           ),
           ListTile(
             leading: Icon(Icons.photo),
             title: Text('Inspection 3'),
+            isThreeLine: true,
+            subtitle: Text('inspection date'),
+            onTap: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToInspectionEvent());
+            },
           ),
           ListTile(
             leading: Icon(Icons.photo),
             title: Text('Inspection 5'),
+            isThreeLine: true,
+            subtitle: Text('inspection date'),
+            onTap: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToInspectionEvent());
+            },
           ),
         ],
       ),
