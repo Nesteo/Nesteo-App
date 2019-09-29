@@ -5,7 +5,6 @@ import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/frames.dart';
-import 'package:nesteo_app/screens/screens.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 
 void main() => runApp(MyApp());
@@ -49,6 +48,7 @@ class MyApp extends StatelessWidget {
               if (frameState is FrameDisabledState) {
                 return FullScreen();
               }
+              return null;
             },
           ),
         ),
