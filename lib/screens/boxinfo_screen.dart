@@ -102,7 +102,15 @@ class BoxInfoScreen extends NesteoFullScreen {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: color),
+          GestureDetector(
+            child: Icon(icon, color: color),
+            onTap: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToNewInspectionEvent());
+              BlocProvider.of<FrameControlBloc>(context)
+                  .dispatch(DisableFrameEvent());
+            },
+          ),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(

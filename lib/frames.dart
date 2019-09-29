@@ -24,6 +24,8 @@ class FullScreen extends StatelessWidget {
             screen = NewBoxScreen(context);
           } else if (state is InspectionScreenState) {
             screen = InspectionScreen(context);
+          } else if (state is NewInspectionScreenState) {
+            screen = NewInspectionScreen(context);
           } else {
             screen = TransitionFullScreen(context);
           }
