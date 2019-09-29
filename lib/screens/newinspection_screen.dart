@@ -17,8 +17,18 @@ class NewInspectionScreen extends NesteoFullScreen {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Text('New Inspection Dialogue'),
+      padding: EdgeInsets.all(10),
+      width: 300,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: TextField(
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            filled: true,
+            fillColor: Colors.white,
+            prefixIcon: Icon(Icons.text_fields, color: Colors.green),
+          ),
+        ),
       ),
     );
   }
