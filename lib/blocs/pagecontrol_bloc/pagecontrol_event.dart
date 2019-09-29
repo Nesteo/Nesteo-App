@@ -29,3 +29,7 @@ class BoxInfoEvent extends PageControlEvent {}
 class GoToInspectionEvent extends PageControlEvent {}
 
 class InspectionEvent extends PageControlEvent {}
+
+class GoToNewInspectionEvent extends PageControlEvent {}
+
+class NewInspectionEvent extends PageControlEvent {}

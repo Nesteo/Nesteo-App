@@ -64,6 +64,17 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     if (event is InspectionEvent) {
       yield InspectionScreenState();
     }
+
+    if (event is GoToNewInspectionEvent) {
+      yield ToNewInspectionScreenState();
+
+      await Future.delayed(Duration(seconds: 1));
+      yield NewInspectionScreenState();
+    }
+
+    if (event is NewInspectionEvent) {
+      yield NewInspectionScreenState();
+    }
     // TODO: Add the missing events / states here
   }
 }

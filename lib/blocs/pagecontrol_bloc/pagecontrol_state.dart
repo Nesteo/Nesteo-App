@@ -31,3 +31,7 @@ class BoxInfoScreenState extends PageControlState {}
 class ToInspectionScreenState extends PageControlState {}
 
 class InspectionScreenState extends PageControlState {}
+
+class ToNewInspectionScreenState extends PageControlState {}
+
+class NewInspectionScreenState extends PageControlState {}
