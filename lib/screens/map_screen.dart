@@ -31,10 +31,12 @@ class MapScreen extends NesteoFramedScreen {
 
   @override
   Widget build(BuildContext context) {
+    const LatLng hshPosition = LatLng(52.3537269, 9.724127);
+
     return Container(
       child: GoogleMap(
         initialCameraPosition: const CameraPosition(
-          target: LatLng(52.3537269, 9.724127),
+          target: hshPosition,
           zoom: 16,
           tilt: 20,
         ),
