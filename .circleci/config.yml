@@ -12,8 +12,14 @@ jobs:
       - image: cirrusci/flutter
     steps:
       - checkout
+      - run: touch sign
+      - run: ls
       - run: flutter doctor
-      - run: flutter -v build apk
+      - run: flutter build appbundle
+      - run: mkdir -p /tmp/artifacts
+      - run: mv build/app/outputs/bundle/release/app.aab /tmp/artifacts/
+      - store_artifacts:
+          path: /tmp/artifacts
 workflows:
   version: 2
   test_and_build:

@@ -25,6 +25,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+def signFile = rootProject.file('/home/cirrus/project/sign')
+
 android {
     compileSdkVersion 28
 
@@ -37,7 +39,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "io.github.nesteo"
         minSdkVersion 21
         targetSdkVersion 28
@@ -46,14 +47,32 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [mapsApiKey:"${MAPS_API_KEY}"]
     }
+    
+    signingConfigs {
+        release {
+            if (signFile.exists()) {
+                keyAlias "${KEY_ALIAS}"
+                keyPassword "${KEY_PASSWORD}"
+                storeFile file("${KEY_FILE}")
+                storePassword "${KEYSTORE_PASSWORD}"
+            }
+        }
+    }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
-        }
+            if (signFile.exists()) {
+                signingConfig signingConfigs.release
+                minifyEnabled true
+                useProguard false
+                println "Signing with release keys"
+            } else {
+                signingConfig signingConfigs.debug
+                println "Signing with debug keys"
+            }
     }
+}
+
 }
 
 flutter {
