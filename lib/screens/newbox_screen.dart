@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
+import 'package:nesteo_app/generated/locale_base.dart';
 
 class NewBoxScreen extends NesteoFullScreen {
   NewBoxScreen(BuildContext context)
       : super(
           context,
           hasAppBar: true,
-          appBarTitle: Text('Add a new Box'),
+          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.boxNew),
           appBarLeading: GoBackButton(),
           appBarActions: null,
         );
