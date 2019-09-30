@@ -22,9 +22,11 @@ dependencies:
   cupertino_icons: ^0.1.2
   meta: ^1.1.7
   equatable: ^0.5.1
+  font_awesome_flutter: ^8.5.0
 
 dev_dependencies:
   mockito: ^4.1.1
+  flutter_launcher_icons: ^0.7.3
   flutter_test:
     sdk: flutter
 
@@ -38,3 +40,10 @@ flutter:
     - family: Quicksand
       fonts:
         - asset: fonts/Quicksand-Regular.ttf
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "icons/nesteo-logo-app.png"
+  adaptive_icon_background: "#8BC34AFF"
+  adaptive_icon_foreground: "icons/nesteo-logo-app-green.png"

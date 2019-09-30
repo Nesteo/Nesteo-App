@@ -4,6 +4,7 @@ import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:nesteo_app/screens/screens.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends NesteoFullScreen {
   LoginScreen(BuildContext context)
@@ -107,15 +108,15 @@ class SplashScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Icon(
-            Icons.location_on,
+            FontAwesomeIcons.kiwiBird,
             size: 100,
-            color: Colors.green,
+            color: Colors.white,
           ),
           Text(
             'Nesteo',
             style: TextStyle(
               fontFamily: 'Quicksand',
-              fontSize: 48,
+              fontSize: 50,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
