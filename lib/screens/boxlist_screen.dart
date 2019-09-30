@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
+import 'package:nesteo_app/generated/locale_base.dart';
 
 class BoxListScreen extends NesteoFramedScreen {
   BoxListScreen(BuildContext context)
       : super(
           context,
-          appBarTitle: Text('Nesting Boxes'),
+          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.nestingBox),
           appBarLeading: null,
           appBarActions: <Widget>[
             IconButton(
