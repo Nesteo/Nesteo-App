@@ -51,10 +51,10 @@ android {
     signingConfigs {
         release {
             if (signFile.exists()) {
-                keyAlias ${KEY_ALIAS}
-                keyPassword ${KEY_PASSWORD}
-                storeFile file(${KEY_FILE})
-                storePassword ${KEYSTORE_PASSWORD}
+                keyAlias "${KEY_ALIAS}"
+                keyPassword "${KEY_PASSWORD}"
+                storeFile file("${KEY_FILE}")
+                storePassword "${KEYSTORE_PASSWORD}"
             }
         }
     }
@@ -65,7 +65,7 @@ android {
                 signingConfig signingConfigs.release
                 minifyEnabled true
                 useProguard false
-                println "Signing with key.properties"
+                println "Signing with release keys"
             } else {
                 signingConfig signingConfigs.debug
                 println "Signing with debug keys"
