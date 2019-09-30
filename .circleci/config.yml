@@ -15,7 +15,7 @@ jobs:
       - run: touch sign
       - run: ls
       - run: flutter doctor
-      - run: flutter -v build appbundle
+      - run: flutter build appbundle
       - run: mkdir tmp
       - run: mv build/app/outputs/bundle/release/app.aab tmp/
       - store_artifacts:
