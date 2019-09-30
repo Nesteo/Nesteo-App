@@ -6,7 +6,9 @@ class InspectionScreen extends NesteoFullScreen {
   InspectionScreen(BuildContext context)
       : super(
           context,
-          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.inspectionInfo),
+          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase)
+              .screenName
+              .inspectionInfo),
           appBarLeading: GoBackButton(),
           appBarActions: null,
           hasAppBar: true,
@@ -62,28 +64,32 @@ class InspectionScreen extends NesteoFullScreen {
         ));
   }
 
-  Widget dataSection = Container(
-      child: Table(
-    children: [
-      TableRow(children: [Text('Nesting Box ID'), Text('abc1234')]),
-      TableRow(children: [Text('Inspection Date'), Text('9/23/12')]),
-      TableRow(children: [Text('User'), Text('Musterman, Max')]),
-      TableRow(children: [Text('Cleaned'), Text('True/False')]),
-      TableRow(children: [Text('Condition'), Text('selectable options')]),
-      TableRow(children: [Text('Repaired'), Text('True/False')]),
-      TableRow(children: [Text('Occupied'), Text('True/False')]),
-      TableRow(children: [Text('Contais eggs'), Text('True/False')]),
-      TableRow(children: [Text('Number of eggs'), Text('5')]),
-      TableRow(children: [Text('Number of chicks'), Text('5')]),
-      TableRow(children: [Text('Number of ringed chicks'), Text('True/False')]),
-      TableRow(
-          children: [Text('Female parent bird in box'), Text('True/False')]),
-      TableRow(children: [Text('Male parent bird in box'), Text('True/False')]),
-      TableRow(children: [Text('Age (Days)'), Text('15')]),
-      TableRow(children: [Text('Species'), Text('selectable options')]),
-      TableRow(children: [Text('Comments'), Text('')]),
-    ],
-  ));
+  Widget dataSection(BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    return Container(
+        child: Table(
+      children: [
+        TableRow(children: [Text(loc.boxInfo.boxNumber), Text('abc1234')]),
+        TableRow(children: [Text(loc.boxInfo.date), Text('9/23/12')]),
+        TableRow(children: [Text(loc.boxInfo.user), Text('Musterman, Max')]),
+        TableRow(children: [Text(loc.boxInfo.cleaned), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.boxCondition), Text('selectable options')]),
+        TableRow(children: [Text(loc.boxInfo.repair), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.occupied), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.containsEggs), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.eggCount), Text('5')]),
+        TableRow(children: [Text(loc.boxInfo.chickCount), Text('5')]),
+        TableRow(children: [Text(loc.boxInfo.ringed), Text('True/False')]),
+        TableRow(
+            children: [Text(loc.boxInfo.femaleInBox), Text('True/False')]),
+        TableRow(
+            children: [Text(loc.boxInfo.maleInBox), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.chickCount), Text('15')]),
+        TableRow(children: [Text(loc.boxInfo.specie), Text('selectable options')]),
+        TableRow(children: [Text(loc.boxInfo.comments), Text('')]),
+      ],
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +97,7 @@ class InspectionScreen extends NesteoFullScreen {
       child: SingleChildScrollView(
         child: Column(children: <Widget>[
           titleSection(context),
-          dataSection,
+          dataSection(context),
         ]),
       ),
     );

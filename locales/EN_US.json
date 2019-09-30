@@ -1,7 +1,7 @@
 {
   "boxInfo": {
     "boxNumber": "Nesting Box Number",
-    "date": "Date",
+    "date": "Inspection Date",
     "boxCondition": "Box Condition",
     "boxNumberNew": "New Nesting Box Number",
     "cleaned": "Cleaned",
@@ -10,8 +10,13 @@
     "chickCount": "Number of Chicks",
     "chickAge": "Age of Chicks",
     "specie": "Specie",
-    "ringed": "Ringed",
-    "comments": "Comments"
+    "ringed": "Number of Ringed Chicks",
+    "comments": "Comments",
+    "user": "Username",
+    "repair": "Repaired",
+    "containsEggs": "Contains Eggs",
+    "femaleInBox": "Female Parent in Box",
+    "maleInBox": "Male Parent in Box"
   },
   "login": {
     "domain": "Domain",

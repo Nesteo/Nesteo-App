@@ -47,6 +47,11 @@ class LocaleboxInfo {
   String get specie => _data["specie"];
   String get ringed => _data["ringed"];
   String get comments => _data["comments"];
+  String get user => _data["user"];
+  String get repair => _data["repair"];
+  String get containsEggs => _data["containsEggs"];
+  String get femaleInBox => _data["femaleInBox"];
+  String get maleInBox => _data["maleInBox"];
 }
 class Localelogin {
   final Map<String, String> _data;

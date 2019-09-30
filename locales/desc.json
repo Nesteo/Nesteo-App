@@ -10,8 +10,13 @@
     "chickCount": "number of chicks",
     "chickAge": "age of chicks",
     "specie": "specie",
-    "ringed": "ringed",
-    "comments": "comments"
+    "ringed": "number of ringed chicks",
+    "comments": "comments",
+    "user": "Username",
+    "repair": "repaired",
+    "containsEggs": "contains eggs",
+    "femaleInBox": "female parent in box",
+    "maleInBox": "male parent in box"
   },
   "login": {
     "domain": "domain text box",

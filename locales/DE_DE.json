@@ -1,17 +1,22 @@
 {
   "boxInfo": {
     "boxNumber": "Nistkasten Nummer",
-    "date": "Datum",
+    "date": "Inspektionsdatum",
     "boxCondition": "Zustand Kasten",
     "boxNumberNew": "Nistkasten Nummer Neu",
     "cleaned": "Gereinigt",
     "occupied": "Desetzt",
     "eggCount": "Anzahl Eier",
-    "chickCount": "Anzalh Jungvögel",
+    "chickCount": "Anzahl Jungvögel",
     "chickAge": "Alter Jungvögel",
     "specie": "Vogelart",
-    "ringed": "Berignt",
-    "comments": "Bemerkungen"
+    "ringed": "Anzahl Beringter Bungvögel",
+    "comments": "Bemerkungen",
+    "user": "Nutzername",
+    "repair": "Repariert",
+    "containsEggs": "Enthält Eier",
+    "femaleInBox": "Weiblicher Elternteil im Nistkasten",
+    "maleInBox": "Männliche Eltern in Nistkasten"
   },
   "login": {
     "domain": "Domain",
