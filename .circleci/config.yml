@@ -16,10 +16,10 @@ jobs:
       - run: ls
       - run: flutter doctor
       - run: flutter build appbundle
-      - run: mkdir tmp
-      - run: mv build/app/outputs/bundle/release/app.aab tmp/
+      - run: mkdir -p /tmp/artifacts
+      - run: mv build/app/outputs/bundle/release/app.aab /tmp/artifacts/
       - store_artifacts:
-          path: tmp
+          path: /tmp/artifacts
 workflows:
   version: 2
   test_and_build:
