@@ -19,7 +19,7 @@ abstract class NesteoScreen extends Container {
     @required this.hasAppBar,
     this.appBarTitle,
     this.appBarLeading,
-    this.appBarActions,
+    this.appBarActions
   }) : super();
 }
 
@@ -28,14 +28,15 @@ abstract class NesteoFramedScreen extends NesteoScreen {
       {@required appBarTitle,
       appBarActions,
       appBarLeading,
-      floatingActionButton})
+      floatingActionButton
+      })
       : super(
           context,
           floatingActionButton: floatingActionButton,
           hasAppBar: true,
           appBarTitle: appBarTitle,
           appBarActions: appBarActions,
-          appBarLeading: appBarLeading,
+          appBarLeading: appBarLeading
         );
 }
 
@@ -45,14 +46,15 @@ abstract class NesteoFullScreen extends NesteoScreen {
       @required hasAppBar,
       appBarTitle,
       appBarLeading,
-      appBarActions})
+      appBarActions
+      })
       : super(
           context,
           floatingActionButton: floatingActionButton,
           hasAppBar: hasAppBar,
           appBarTitle: appBarTitle,
           appBarActions: appBarActions,
-          appBarLeading: appBarLeading,
+          appBarLeading: appBarLeading
         );
 }
 

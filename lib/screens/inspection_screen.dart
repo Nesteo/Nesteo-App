@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
+import 'package:nesteo_app/generated/locale_base.dart';
 
 class InspectionScreen extends NesteoFullScreen {
   InspectionScreen(BuildContext context)
       : super(
           context,
-          appBarTitle: Text('Inspection Info'),
+          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.inspectionInfo),
           appBarLeading: GoBackButton(),
           appBarActions: null,
           hasAppBar: true,

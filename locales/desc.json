@@ -19,8 +19,13 @@
     "password": "password text box",
     "logInButton": "login button text"
   },
-  "main": {
-    "sample": "This is sample description",
-    "save": "Use to save document"
+  "screenName": {
+    "map": "map",
+    "nestingBox": "Nesting Box title",
+    "boxInfo": "Box Info Title",
+    "inspectionInfo": "Inspection Info",
+    "inspectionNew": "New Inspection title",
+    "boxNew": "add a new box",
+    "load": "Loading"
   }
 }

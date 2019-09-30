@@ -21,13 +21,13 @@ class LocaleBase {
   LocaleboxInfo get boxInfo => _boxInfo;
   Localelogin _login;
   Localelogin get login => _login;
-  Localemain _main;
-  Localemain get main => _main;
+  LocalescreenName _screenName;
+  LocalescreenName get screenName => _screenName;
 
   void initAll() {
     _boxInfo = LocaleboxInfo(Map<String, String>.from(_data['boxInfo']));
     _login = Localelogin(Map<String, String>.from(_data['login']));
-    _main = Localemain(Map<String, String>.from(_data['main']));
+    _screenName = LocalescreenName(Map<String, String>.from(_data['screenName']));
   }
 }
 
@@ -57,10 +57,15 @@ class Localelogin {
   String get password => _data["password"];
   String get logInButton => _data["logInButton"];
 }
-class Localemain {
+class LocalescreenName {
   final Map<String, String> _data;
-  Localemain(this._data);
+  LocalescreenName(this._data);
 
-  String get sample => _data["sample"];
-  String get save => _data["save"];
+  String get map => _data["map"];
+  String get nestingBox => _data["nestingBox"];
+  String get boxInfo => _data["boxInfo"];
+  String get inspectionInfo => _data["inspectionInfo"];
+  String get inspectionNew => _data["inspectionNew"];
+  String get boxNew => _data["boxNew"];
+  String get load => _data["load"];
 }

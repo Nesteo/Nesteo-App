@@ -5,12 +5,15 @@ import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
+import 'package:nesteo_app/generated/locale_base.dart';
 
 class MapScreen extends NesteoFramedScreen {
+  
+
   MapScreen(BuildContext context)
       : super(
           context,
-          appBarTitle: Text('Map'),
+          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.map),
           appBarActions: <Widget>[
             OnlineModeButton(),
           ],

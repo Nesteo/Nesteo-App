@@ -19,8 +19,13 @@
     "password": "Passwort",
     "logInButton": "Einloggen"
   },
-  "main": {
-    "sample": "",
-    "save": ""
+  "screenName": {
+    "map": "Landkarte",
+    "nestingBox": "Nistkasten",
+    "boxInfo": "Kast Information",
+    "inspectionInfo": "Kontrolle Information",
+    "inspectionNew": "Kontrolle Neu",
+    "boxNew": "Kasten Neu",
+    "load": "Beladung"
   }
 }
