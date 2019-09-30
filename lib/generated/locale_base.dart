@@ -38,7 +38,7 @@ class LocaleboxInfo {
   String get boxNumber => _data["boxNumber"];
   String get date => _data["date"];
   String get boxCondition => _data["boxCondition"];
-  String get boxNumberNew => _data["boxNumberNew"];
+  String get boxNumNew => _data["boxNumNew"];
   String get cleaned => _data["cleaned"];
   String get occupied => _data["occupied"];
   String get eggCount => _data["eggCount"];

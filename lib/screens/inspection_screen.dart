@@ -73,19 +73,22 @@ class InspectionScreen extends NesteoFullScreen {
         TableRow(children: [Text(loc.boxInfo.date), Text('9/23/12')]),
         TableRow(children: [Text(loc.boxInfo.user), Text('Musterman, Max')]),
         TableRow(children: [Text(loc.boxInfo.cleaned), Text('True/False')]),
-        TableRow(children: [Text(loc.boxInfo.boxCondition), Text('selectable options')]),
+        TableRow(children: [
+          Text(loc.boxInfo.boxCondition),
+          Text('selectable options')
+        ]),
         TableRow(children: [Text(loc.boxInfo.repair), Text('True/False')]),
         TableRow(children: [Text(loc.boxInfo.occupied), Text('True/False')]),
-        TableRow(children: [Text(loc.boxInfo.containsEggs), Text('True/False')]),
+        TableRow(
+            children: [Text(loc.boxInfo.containsEggs), Text('True/False')]),
         TableRow(children: [Text(loc.boxInfo.eggCount), Text('5')]),
         TableRow(children: [Text(loc.boxInfo.chickCount), Text('5')]),
         TableRow(children: [Text(loc.boxInfo.ringed), Text('True/False')]),
-        TableRow(
-            children: [Text(loc.boxInfo.femaleInBox), Text('True/False')]),
-        TableRow(
-            children: [Text(loc.boxInfo.maleInBox), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.femaleInBox), Text('True/False')]),
+        TableRow(children: [Text(loc.boxInfo.maleInBox), Text('True/False')]),
         TableRow(children: [Text(loc.boxInfo.chickCount), Text('15')]),
-        TableRow(children: [Text(loc.boxInfo.specie), Text('selectable options')]),
+        TableRow(
+            children: [Text(loc.boxInfo.specie), Text('selectable options')]),
         TableRow(children: [Text(loc.boxInfo.comments), Text('')]),
       ],
     ));

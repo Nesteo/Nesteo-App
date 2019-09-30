@@ -3,14 +3,14 @@
     "boxNumber": "Nistkasten Nummer",
     "date": "Inspektionsdatum",
     "boxCondition": "Zustand Kasten",
-    "boxNumberNew": "Nistkasten Nummer Neu",
+    "boxNumNew": "Nistkasten Nummer Neu",
     "cleaned": "Gereinigt",
-    "occupied": "Desetzt",
+    "occupied": "Besetzt",
     "eggCount": "Anzahl Eier",
     "chickCount": "Anzahl Jungvögel",
     "chickAge": "Alter Jungvögel",
     "specie": "Vogelart",
-    "ringed": "Anzahl Beringter Bungvögel",
+    "ringed": "Anzahl beringter Jungvögel",
     "comments": "Bemerkungen",
     "user": "Nutzername",
     "repair": "Repariert",
@@ -27,10 +27,10 @@
   "screenName": {
     "map": "Landkarte",
     "nestingBox": "Nistkasten",
-    "boxInfo": "Kast Information",
-    "inspectionInfo": "Kontrolle Information",
-    "inspectionNew": "Kontrolle Neu",
-    "boxNew": "Kasten Neu",
+    "boxInfo": "Informationen zum Nistkasten",
+    "inspectionInfo": "Informationen zur Inspektion",
+    "inspectionNew": "Neue Inspektion",
+    "boxNew": "Neuer Niskasten",
     "load": "Beladung"
   }
 }

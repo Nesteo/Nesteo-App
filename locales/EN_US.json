@@ -3,7 +3,7 @@
     "boxNumber": "Nesting Box Number",
     "date": "Inspection Date",
     "boxCondition": "Box Condition",
-    "boxNumberNew": "New Nesting Box Number",
+    "boxNumNew": "New Nesting Box Number",
     "cleaned": "Cleaned",
     "occupied": "Occupied",
     "eggCount": "Number of Eggs",
