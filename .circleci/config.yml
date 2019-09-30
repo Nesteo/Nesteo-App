@@ -12,6 +12,7 @@ jobs:
       - image: cirrusci/flutter
     steps:
       - checkout
+      - run: touch sign
       - run: flutter doctor
       - run: flutter -v build appbundle
       - run: mkdir tmp
