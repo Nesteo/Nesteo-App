@@ -1,11 +1,11 @@
 {
   "boxInfo": {
-    "boxNumber": "Nistkasten Nummer",
+    "boxNumber": "Nistkasten-Nummer",
     "date": "Inspektionsdatum",
-    "boxCondition": "Zustand Kasten",
-    "boxNumNew": "Nistkasten Nummer Neu",
+    "boxCondition": "Zustand des Kastens",
+    "boxNumNew": "Neue Nistkasten-Nummer",
     "cleaned": "Gereinigt",
-    "occupied": "Besetzt",
+    "occupied": "Belegt",
     "eggCount": "Anzahl Eier",
     "chickCount": "Anzahl Jungvögel",
     "chickAge": "Alter Jungvögel",
@@ -16,7 +16,7 @@
     "repair": "Repariert",
     "containsEggs": "Enthält Eier",
     "femaleInBox": "Weiblicher Elternteil im Nistkasten",
-    "maleInBox": "Männliche Eltern in Nistkasten"
+    "maleInBox": "Männlicher Elternteil im Nistkasten"
   },
   "login": {
     "domain": "Domain",
@@ -25,12 +25,12 @@
     "logInButton": "Einloggen"
   },
   "screenName": {
-    "map": "Landkarte",
-    "nestingBox": "Nistkasten",
+    "map": "Karte",
+    "nestingBox": "Nistkästen",
     "boxInfo": "Informationen zum Nistkasten",
     "inspectionInfo": "Informationen zur Inspektion",
     "inspectionNew": "Neue Inspektion",
-    "boxNew": "Neuer Niskasten",
-    "load": "Beladung"
+    "boxNew": "Nistkasten hinzufügen",
+    "load": "Lade"
   }
 }
