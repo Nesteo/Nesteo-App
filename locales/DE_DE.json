@@ -18,6 +18,12 @@
     "femaleInBox": "Weiblicher Elternteil im Nistkasten",
     "maleInBox": "Männlicher Elternteil im Nistkasten"
   },
+  "boxNew": {
+    "id": "ID",
+    "oldid": "Alte ID",
+    "addBox": "Nistkasten erstellen",
+    "hangDate": "Aufhängedatum"
+  },
   "login": {
     "domain": "Domain",
     "username": "Nutzername",

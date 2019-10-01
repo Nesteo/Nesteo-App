@@ -4,13 +4,29 @@ import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 
 class BoxListScreen extends NesteoFramedScreen {
   BoxListScreen(BuildContext context)
       : super(
           context,
-          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.nestingBox),
+          appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase)
+              .screenName
+              .nestingBox),
           appBarLeading: null,
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToNewBoxEvent());
+              BlocProvider.of<FrameControlBloc>(context)
+                  .dispatch(DisableFrameEvent());
+            },
+            child: Icon(Icons.add),
+            backgroundColor: (BlocProvider.of<OnlineModeBloc>(context)
+                    .currentState is OnlineState)
+                ? Colors.lightGreen
+                : Colors.red,
+          ),
           appBarActions: <Widget>[
             IconButton(
               icon: Icon(Icons.sort),
