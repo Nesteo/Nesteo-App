@@ -18,6 +18,12 @@
     "femaleInBox": "Female Parent in Box",
     "maleInBox": "Male Parent in Box"
   },
+  "boxNew": {
+    "id": "ID",
+    "oldid": "Old ID",
+    "addBox": "create nestingbox",
+    "hangDate": "hang date"
+  },
   "login": {
     "domain": "Domain",
     "username": "Username",

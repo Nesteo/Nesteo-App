@@ -18,6 +18,12 @@
     "femaleInBox": "female parent in box",
     "maleInBox": "male parent in box"
   },
+  "boxNew": {
+    "id": "id",
+    "oldid": "old id",
+    "addBox": "add box button",
+    "hangDate": "Date of Box creation"
+  },
   "login": {
     "domain": "domain text box",
     "username": "username text box",
