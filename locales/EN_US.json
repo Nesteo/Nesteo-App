@@ -22,7 +22,15 @@
     "id": "ID",
     "oldid": "Old ID",
     "addBox": "create nestingbox",
-    "hangDate": "hang date"
+    "hangDate": "hang date",
+    "untreatedWood": "untreated wood",
+    "material": "material",
+    "treatedWood": "treated wood",
+    "holeSize": "hole size",
+    "big": "big",
+    "medium": "medium",
+    "small": "small",
+    "concrete": "concrete"
   },
   "login": {
     "domain": "Domain",

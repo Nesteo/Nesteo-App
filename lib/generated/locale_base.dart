@@ -64,6 +64,14 @@ class LocaleboxNew {
   String get oldid => _data["oldid"];
   String get addBox => _data["addBox"];
   String get hangDate => _data["hangDate"];
+  String get untreatedWood => _data["untreatedWood"];
+  String get material => _data["material"];
+  String get treatedWood => _data["treatedWood"];
+  String get holeSize => _data["holeSize"];
+  String get big => _data["big"];
+  String get medium => _data["medium"];
+  String get small => _data["small"];
+  String get concrete => _data["concrete"];
 }
 class Localelogin {
   final Map<String, String> _data;
