@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
+import 'package:nesteo_app/blocs/location_bloc/location_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/frames.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:nesteo_app/location/user_location.dart';
+import 'package:provider/provider.dart';
+import 'location/location_service.dart';
+import 'package:location_permissions/location_permissions.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Nesteo',
       localizationsDelegates: [
@@ -34,6 +41,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<FrameControlBloc>(
             builder: (BuildContext context) => FrameControlBloc(),
+          ),
+          BlocProvider<LocationBloc>(
+            builder: (BuildContext contect) => LocationBloc(),
           )
         ],
         child: BlocBuilder<OnlineModeBloc, OnlineModeState>(

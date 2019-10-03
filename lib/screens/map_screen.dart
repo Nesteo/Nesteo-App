@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as locationPackage;
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/location/location_service.dart';
+import 'package:nesteo_app/location/user_location.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:provider/provider.dart';
 
 class MapScreen extends NesteoFramedScreen {
   MapScreen(BuildContext context)
@@ -37,6 +40,11 @@ class MapScreen extends NesteoFramedScreen {
 
   @override
   Widget build(BuildContext context) {
+    // locationPackage.Location _locationService = new locationPackage.location();
+    // bool _permission = false;
+    // var userLocation = Provider.of<UserLocation>(context);
+    // print(userLocation.latitude);
+    // print(userLocation.longitude);
     // Location location = new Location();
     // var currentLocation = location.getLocation();
     // double latitude = 43.0;
