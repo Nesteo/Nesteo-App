@@ -66,9 +66,9 @@ class LocDelegate extends LocalizationsDelegate<LocaleBase> {
 
   @override
   Future<LocaleBase> load(Locale locale) async {
-    var lang = 'de';
+    var lang = 'en';
     // This condition changes language based on device
-    // if (isSupported(locale)) lang = locale.languageCode;
+    if (isSupported(locale)) lang = locale.languageCode;
     final loc = LocaleBase();
     await loc.load(idMap[lang]);
     return loc;

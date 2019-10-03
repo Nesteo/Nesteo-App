@@ -1,6 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
@@ -33,13 +37,26 @@ class MapScreen extends NesteoFramedScreen {
 
   @override
   Widget build(BuildContext context) {
-    const LatLng hshPosition = LatLng(52.3537269, 9.724127);
+    // Location location = new Location();
+    // var currentLocation = location.getLocation();
+    // double latitude = 43.0;
+    // double longitude = -86.0;
+    // print(currentLocation.toString());
+    // location.onLocationChanged().listen((LocationData currentLocation) {
+    //   const LatLng device = LatLng(currentLocation.latitude, longitude);
+    //   print(currentLocation.latitude);
+    //   print(currentLocation.longitude);
+    //   // latitude = currentLocation.latitude;
+    //   // longitude = currentLocation.longitude;
+    // });
+    const LatLng gvsuPosition = LatLng(42.9639, -85.8889);
+    // const LatLng hshPosition = LatLng(52.3537269, 9.724127);
 
     return Container(
       child: GoogleMap(
         initialCameraPosition: const CameraPosition(
-          target: hshPosition,
-          zoom: 16,
+          target: gvsuPosition,
+          zoom: 13,
           tilt: 20,
         ),
         mapType: MapType.normal,
