@@ -21,7 +21,7 @@ class MapScreen extends NesteoFramedScreen {
           appBarActions: <Widget>[
             OnlineModeButton(),
           ],
-          floatingActionButton: FloatingActionButton(
+          raisedButton: FloatingActionButton(
             onPressed: () {
               BlocProvider.of<PageControlBloc>(context)
                   .dispatch(GoToNewBoxEvent());
@@ -34,7 +34,7 @@ class MapScreen extends NesteoFramedScreen {
                 ? Colors.lightGreen
                 : Colors.red,
           ),
-          raisedButton:
+          floatingActionButton:
               // TODO: Can there be a second floating button?
               // TODO: Can position be accessed in the widget?
               // Tried adding raisedButton attribute to nesteo screen.
