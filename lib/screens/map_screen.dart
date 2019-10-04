@@ -14,39 +14,42 @@ import 'package:nesteo_app/generated/locale_base.dart';
 
 class MapScreen extends NesteoFramedScreen {
   MapScreen(BuildContext context)
-      : super(context,
-            appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase)
-                .screenName
-                .map),
-            appBarActions: <Widget>[
-              OnlineModeButton(),
-            ],
-            floatingActionButton: 
-              FloatingActionButton(
-                onPressed: () {
-                  BlocProvider.of<PageControlBloc>(context)
-                      .dispatch(GoToNewBoxEvent());
-                  BlocProvider.of<FrameControlBloc>(context)
-                      .dispatch(DisableFrameEvent());
-                },
-                child: Icon(Icons.add),
-                backgroundColor: (BlocProvider.of<OnlineModeBloc>(context)
-                        .currentState is OnlineState)
-                    ? Colors.lightGreen
-                    : Colors.red,
-              ),
-            raisedButton:
+      : super(
+          context,
+          appBarTitle: Text(
+              Localizations.of<LocaleBase>(context, LocaleBase).screenName.map),
+          appBarActions: <Widget>[
+            OnlineModeButton(),
+          ],
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              BlocProvider.of<PageControlBloc>(context)
+                  .dispatch(GoToNewBoxEvent());
+              BlocProvider.of<FrameControlBloc>(context)
+                  .dispatch(DisableFrameEvent());
+            },
+            child: Icon(Icons.add),
+            backgroundColor: (BlocProvider.of<OnlineModeBloc>(context)
+                    .currentState is OnlineState)
+                ? Colors.lightGreen
+                : Colors.red,
+          ),
+          raisedButton:
+              // TODO: Can there be a second floating button?
+              // TODO: Can position be accessed in the widget?
+              // Tried adding raisedButton attribute to nesteo screen.
 
+              // Get location coordinates. Prompts for permission if not granted yet
               RaisedButton(
-                onPressed: () async {
-                  Position position = await Geolocator().getCurrentPosition(
-                      desiredAccuracy: LocationAccuracy.high);
-                  print(position.latitude);
-                  print(position.longitude);
-                },
-                child: Icon(Icons.location_on),
-              ),
-            );
+            onPressed: () async {
+              Position position = await Geolocator()
+                  .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+              print(position.latitude);
+              print(position.longitude);
+            },
+            child: Icon(Icons.location_on),
+          ),
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,13 @@ class MapScreen extends NesteoFramedScreen {
     GeolocationStatus geolocationStatus = GeolocationStatus.denied;
     Position coordinates;
 
+    // TODO: .then() does not halt execution so the container 
+    // at the bottom returns first
+    // TODO: using the await function means that this
+    // returns Future<Widget> which does not match inheritance
     geolocator.checkGeolocationPermissionStatus().then((status) {
+      // Read permission status and get position if granted.
+      // Return a new container with the device position
       geolocationStatus = status;
       if (geolocationStatus == GeolocationStatus.granted) {
         geolocator
