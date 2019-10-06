@@ -72,6 +72,8 @@ class LocaleboxNew {
   String get medium => _data["medium"];
   String get small => _data["small"];
   String get concrete => _data["concrete"];
+  String get addImage => _data["addImage"];
+  String get getPosition => _data["getPosition"];
 }
 class Localelogin {
   final Map<String, String> _data;

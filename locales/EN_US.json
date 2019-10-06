@@ -30,7 +30,9 @@
     "big": "big",
     "medium": "medium",
     "small": "small",
-    "concrete": "concrete"
+    "concrete": "concrete",
+    "addImage": "add image",
+    "getPosition": "save position"
   },
   "login": {
     "domain": "Domain",

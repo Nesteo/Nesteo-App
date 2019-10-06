@@ -30,7 +30,9 @@
     "big": "Groß",
     "medium": "Mittel",
     "small": "Klein",
-    "concrete": "Beton"
+    "concrete": "Beton",
+    "addImage": "Bild hinzufügen",
+    "getPosition": "Position erfassen"
   },
   "login": {
     "domain": "Domain",

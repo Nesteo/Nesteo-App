@@ -30,7 +30,9 @@
     "big": "hole size big",
     "medium": "hole size medium",
     "small": "hole size small",
-    "concrete": "box material concrete"
+    "concrete": "box material concrete",
+    "addImage": "add image",
+    "getPosition": "get GPS for new Box"
   },
   "login": {
     "domain": "domain text box",

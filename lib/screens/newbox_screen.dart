@@ -47,6 +47,16 @@ class _NewBoxDataState extends State<NewBoxData> {
             _createTextinput(loc.boxNew.hangDate),
             _createHoleSizeSlider(),
             _createMaterialSelection(),
+            IconButton(
+              icon: Icon(Icons.camera_alt),
+              tooltip: loc.boxNew.addImage,
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Icon(Icons.gps_fixed),
+              tooltip: loc.boxNew.getPosition,
+              onPressed: () {},
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: RaisedButton(
