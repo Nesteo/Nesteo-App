@@ -32,7 +32,7 @@ class NewBoxData extends StatefulWidget {
 
 class _NewBoxDataState extends State<NewBoxData> {
   String _dropDownMaterial = 'Wood';
-  double _slideHoleSize = 0;
+  double _slideHoleSize = 1;
 
   Widget build(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
@@ -91,7 +91,7 @@ class _NewBoxDataState extends State<NewBoxData> {
             _dropDownMaterial = newValue;
           });
         },
-        items: <String>['treatedwpp', 'wood', 'Concrete']
+        items: <String>['treatedwpp', 'Wood', 'Concrete']
             .map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -124,9 +124,9 @@ class _NewBoxDataState extends State<NewBoxData> {
     if (value == 0) {
       return loc.boxNew.small;
     } else if (value == 1) {
-      return 'medium';
+      return loc.boxNew.medium;
     } else {
-      return 'big';
+      return loc.boxNew.big;
     }
   }
 }
