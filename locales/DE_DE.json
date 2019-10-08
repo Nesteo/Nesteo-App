@@ -18,6 +18,22 @@
     "femaleInBox": "Weiblicher Elternteil im Nistkasten",
     "maleInBox": "Männlicher Elternteil im Nistkasten"
   },
+  "boxNew": {
+    "id": "ID",
+    "oldid": "Alte ID",
+    "addBox": "Nistkasten erstellen",
+    "hangDate": "Aufhängedatum",
+    "untreatedWood": "Unbehandeltes Holz",
+    "material": "Material",
+    "treatedWood": "Behandeltes Holz",
+    "holeSize": "Lochgröße",
+    "big": "Groß",
+    "medium": "Mittel",
+    "small": "Klein",
+    "concrete": "Beton",
+    "addImage": "Bild hinzufügen",
+    "getPosition": "Position erfassen"
+  },
   "login": {
     "domain": "Domain",
     "username": "Nutzername",

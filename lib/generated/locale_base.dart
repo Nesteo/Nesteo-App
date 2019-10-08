@@ -19,6 +19,8 @@ class LocaleBase {
 
   LocaleboxInfo _boxInfo;
   LocaleboxInfo get boxInfo => _boxInfo;
+  LocaleboxNew _boxNew;
+  LocaleboxNew get boxNew => _boxNew;
   Localelogin _login;
   Localelogin get login => _login;
   LocalescreenName _screenName;
@@ -26,6 +28,7 @@ class LocaleBase {
 
   void initAll() {
     _boxInfo = LocaleboxInfo(Map<String, String>.from(_data['boxInfo']));
+    _boxNew = LocaleboxNew(Map<String, String>.from(_data['boxNew']));
     _login = Localelogin(Map<String, String>.from(_data['login']));
     _screenName = LocalescreenName(Map<String, String>.from(_data['screenName']));
   }
@@ -52,6 +55,25 @@ class LocaleboxInfo {
   String get containsEggs => _data["containsEggs"];
   String get femaleInBox => _data["femaleInBox"];
   String get maleInBox => _data["maleInBox"];
+}
+class LocaleboxNew {
+  final Map<String, String> _data;
+  LocaleboxNew(this._data);
+
+  String get id => _data["id"];
+  String get oldid => _data["oldid"];
+  String get addBox => _data["addBox"];
+  String get hangDate => _data["hangDate"];
+  String get untreatedWood => _data["untreatedWood"];
+  String get material => _data["material"];
+  String get treatedWood => _data["treatedWood"];
+  String get holeSize => _data["holeSize"];
+  String get big => _data["big"];
+  String get medium => _data["medium"];
+  String get small => _data["small"];
+  String get concrete => _data["concrete"];
+  String get addImage => _data["addImage"];
+  String get getPosition => _data["getPosition"];
 }
 class Localelogin {
   final Map<String, String> _data;

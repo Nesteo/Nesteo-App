@@ -35,7 +35,7 @@ class FullScreen extends StatelessWidget {
                 ? AppBar(
                     backgroundColor:
                         (onlineModeBloc.currentState is OnlineState)
-                            ? Colors.green
+                            ? Colors.lightGreen
                             : Colors.red,
                     title: screen.appBarTitle,
                     actions: screen.appBarActions,
@@ -74,7 +74,7 @@ class FramedScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: (onlineModeBloc.currentState is OnlineState)
-                  ? Colors.green
+                  ? Colors.lightGreen
                   : Colors.red,
               title: screen.appBarTitle,
               actions: screen.appBarActions,
@@ -93,7 +93,7 @@ class FramedScreen extends StatelessWidget {
               unselectedItemColor: Colors.white70,
               selectedItemColor: Colors.white,
               backgroundColor: (onlineModeBloc.currentState is OnlineState)
-                  ? Colors.green
+                  ? Colors.lightGreen
                   : Colors.red,
               onTap: (index) {
                 if (!(pageControlBloc.currentState is MapScreenState) &&
