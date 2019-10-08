@@ -17,6 +17,7 @@ class NewBoxScreen extends NesteoFullScreen {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 1920,
       color: Colors.lightGreen,
       child: NewBoxData(),
     );
@@ -39,32 +40,34 @@ class _NewBoxDataState extends State<NewBoxData> {
 
     return GestureDetector(
       child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _createTextinput(loc.boxNew.id),
-            _createTextinput(loc.boxNew.oldid),
-            _createTextinput(loc.boxNew.hangDate),
-            _createHoleSizeSlider(),
-            _createMaterialSelection(),
-            IconButton(
-              icon: Icon(Icons.camera_alt),
-              tooltip: loc.boxNew.addImage,
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.gps_fixed),
-              tooltip: loc.boxNew.getPosition,
-              onPressed: () {},
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: RaisedButton(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _createTextinput(loc.boxNew.id),
+              _createTextinput(loc.boxNew.oldid),
+              _createTextinput(loc.boxNew.hangDate),
+              _createHoleSizeSlider(),
+              _createMaterialSelection(),
+              IconButton(
+                icon: Icon(Icons.camera_alt),
+                tooltip: loc.boxNew.addImage,
                 onPressed: () {},
-                child: Text(loc.boxNew.addBox),
               ),
-            ),
-          ],
+              IconButton(
+                icon: Icon(Icons.gps_fixed),
+                tooltip: loc.boxNew.getPosition,
+                onPressed: () {},
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: RaisedButton(
+                  onPressed: () {},
+                  child: Text(loc.boxNew.addBox),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
