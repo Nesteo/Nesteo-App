@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol_bloc.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol_event.dart';
-import 'package:nesteo_app/blocs/location_bloc/location.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
@@ -14,14 +13,13 @@ abstract class NesteoScreen extends Container {
   final List<Widget> appBarActions;
   final Widget appBarLeading;
 
-  NesteoScreen(
-    BuildContext context, {
-    this.floatingActionButton,
-    @required this.hasAppBar,
-    this.appBarTitle,
-    this.appBarLeading,
-    this.appBarActions
-  }) : super();
+  NesteoScreen(BuildContext context,
+      {this.floatingActionButton,
+      @required this.hasAppBar,
+      this.appBarTitle,
+      this.appBarLeading,
+      this.appBarActions})
+      : super();
 }
 
 abstract class NesteoFramedScreen extends NesteoScreen {
@@ -29,16 +27,13 @@ abstract class NesteoFramedScreen extends NesteoScreen {
       {@required appBarTitle,
       appBarActions,
       appBarLeading,
-      floatingActionButton
-      })
-      : super(
-          context,
-          floatingActionButton: floatingActionButton,
-          hasAppBar: true,
-          appBarTitle: appBarTitle,
-          appBarActions: appBarActions,
-          appBarLeading: appBarLeading
-        );
+      floatingActionButton})
+      : super(context,
+            floatingActionButton: floatingActionButton,
+            hasAppBar: true,
+            appBarTitle: appBarTitle,
+            appBarActions: appBarActions,
+            appBarLeading: appBarLeading);
 }
 
 abstract class NesteoFullScreen extends NesteoScreen {
@@ -47,16 +42,13 @@ abstract class NesteoFullScreen extends NesteoScreen {
       @required hasAppBar,
       appBarTitle,
       appBarLeading,
-      appBarActions
-      })
-      : super(
-          context,
-          floatingActionButton: floatingActionButton,
-          hasAppBar: hasAppBar,
-          appBarTitle: appBarTitle,
-          appBarActions: appBarActions,
-          appBarLeading: appBarLeading
-        );
+      appBarActions})
+      : super(context,
+            floatingActionButton: floatingActionButton,
+            hasAppBar: hasAppBar,
+            appBarTitle: appBarTitle,
+            appBarActions: appBarActions,
+            appBarLeading: appBarLeading);
 }
 
 class OnlineModeButton extends StatelessWidget {
@@ -88,28 +80,6 @@ class GoBackButton extends StatelessWidget {
       onPressed: () {
         BlocProvider.of<PageControlBloc>(context).dispatch(GoToBoxListEvent());
         BlocProvider.of<FrameControlBloc>(context).dispatch(EnableFrameEvent());
-      },
-    );
-  }
-}
-
-class LocationButton extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon:
-          (BlocProvider.of<LocationBloc>(context).currentState is LocationDisabledState)
-              ? Icon(Icons.location_off)
-              : Icon(Icons.location_on),
-      onPressed: () {
-        LocationBloc mode = BlocProvider.of<LocationBloc>(context);
-        if (mode.currentState is LocationDisabledState) {
-          mode.dispatch(EnableLocationEvent());
-        }
-        if (mode.currentState is LocationEnabledState) {
-          mode.dispatch(DisableLocationEvent());
-        }
       },
     );
   }
