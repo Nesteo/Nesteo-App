@@ -2,21 +2,25 @@
   "boxInfo": {
     "boxNumber": "Nesting Box Number",
     "date": "Inspection Date",
-    "boxCondition": "Box Condition",
+    "boxCondition": "Condition",
     "boxNumNew": "New Nesting Box Number",
     "cleaned": "Cleaned",
     "occupied": "Occupied",
     "eggCount": "Number of Eggs",
     "chickCount": "Number of Chicks",
-    "chickAge": "Age of Chicks",
+    "chickAge": "Age in Days",
     "specie": "Specie",
-    "ringed": "Number of Ringed Chicks",
-    "comments": "Comments",
+    "ringed": "Banded Chicks",
+    "comment": "Comment",
     "user": "Username",
     "repair": "Repaired",
     "containsEggs": "Contains Eggs",
-    "femaleInBox": "Female Parent in Box",
-    "maleInBox": "Male Parent in Box"
+    "femaleInBox": "Female Parent",
+    "maleInBox": "Male Parent",
+    "addPhoto": "Add Photo",
+    "boxConditionReplace": "Needs Replacement",
+    "boxConditionRepair": "Needs Repair",
+    "boxConditionFixed": "Fixed"
   },
   "boxNew": {
     "id": "ID",
@@ -47,6 +51,7 @@
     "inspectionInfo": "Inspection Information",
     "inspectionNew": "Add a New Inspection",
     "boxNew": "Add a New Box",
-    "load": "Loading"
+    "load": "Loading",
+    "list": "List"
   }
 }

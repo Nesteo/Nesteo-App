@@ -5,6 +5,8 @@ import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/screens.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 
+import 'generated/locale_base.dart';
+
 class FullScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,6 @@ class FullScreen extends StatelessWidget {
 }
 
 class FramedScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -110,11 +111,15 @@ class FramedScreen extends StatelessWidget {
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(Icons.map),
-                  title: Text('Map'),
+                  title: Text(Localizations.of<LocaleBase>(context, LocaleBase)
+                      .screenName
+                      .map),
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.format_list_numbered),
-                  title: Text('List'),
+                  title: Text(Localizations.of<LocaleBase>(context, LocaleBase)
+                      .screenName
+                      .list),
                 ),
               ],
             ),

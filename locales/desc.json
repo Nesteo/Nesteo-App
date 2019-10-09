@@ -11,12 +11,16 @@
     "chickAge": "age of chicks",
     "specie": "specie",
     "ringed": "number of ringed chicks",
-    "comments": "comments",
+    "comment": "comment",
     "user": "Username",
     "repair": "repaired",
     "containsEggs": "contains eggs",
     "femaleInBox": "female parent in box",
-    "maleInBox": "male parent in box"
+    "maleInBox": "male parent in box",
+    "addPhoto": "add photo",
+    "boxConditionReplace": "replace box condition",
+    "boxConditionRepair": "repair",
+    "boxConditionFixed": "fixed"
   },
   "boxNew": {
     "id": "id",
@@ -47,6 +51,7 @@
     "inspectionInfo": "Inspection Info",
     "inspectionNew": "New Inspection title",
     "boxNew": "add a new box",
-    "load": "Loading"
+    "load": "Loading",
+    "list": "list"
   }
 }

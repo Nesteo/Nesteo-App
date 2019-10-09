@@ -89,7 +89,7 @@ class InspectionScreen extends NesteoFullScreen {
         TableRow(children: [Text(loc.boxInfo.chickCount), Text('15')]),
         TableRow(
             children: [Text(loc.boxInfo.specie), Text('selectable options')]),
-        TableRow(children: [Text(loc.boxInfo.comments), Text('')]),
+        TableRow(children: [Text(loc.boxInfo.comment), Text('')]),
       ],
     ));
   }
