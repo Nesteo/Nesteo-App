@@ -49,12 +49,16 @@ class LocaleboxInfo {
   String get chickAge => _data["chickAge"];
   String get specie => _data["specie"];
   String get ringed => _data["ringed"];
-  String get comments => _data["comments"];
+  String get comment => _data["comment"];
   String get user => _data["user"];
   String get repair => _data["repair"];
   String get containsEggs => _data["containsEggs"];
   String get femaleInBox => _data["femaleInBox"];
   String get maleInBox => _data["maleInBox"];
+  String get addPhoto => _data["addPhoto"];
+  String get boxConditionReplace => _data["boxConditionReplace"];
+  String get boxConditionRepair => _data["boxConditionRepair"];
+  String get boxConditionFixed => _data["boxConditionFixed"];
 }
 class LocaleboxNew {
   final Map<String, String> _data;

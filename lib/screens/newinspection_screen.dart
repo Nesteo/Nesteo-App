@@ -50,7 +50,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
     return ListView(
       children: <Widget>[
         CheckboxListTile(
-            title: Text('Gereinigt'),
+            title: Text(loc.boxInfo.cleaned),
             value: _hasBeenCleaned,
             onChanged: (bool newValue) {
               setState(() {
@@ -58,7 +58,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
               });
             }),
         ListTile(
-          title: Text('Zustand'),
+          title: Text(loc.boxInfo.boxCondition),
           subtitle: Slider(
             value: _sliderCondition,
             label: getSliderLabel(_sliderCondition),
@@ -74,7 +74,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           ),
         ),
         CheckboxListTile(
-            title: Text('Repariert'),
+            title: Text(loc.boxInfo.repair),
             value: _justRepaired,
             onChanged: (bool newValue) {
               setState(() {
@@ -82,7 +82,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
               });
             }),
         CheckboxListTile(
-            title: Text('Besetzt'),
+            title: Text(loc.boxInfo.occupied),
             value: _occupied,
             onChanged: (bool newValue) {
               setState(() {
@@ -93,7 +93,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Beringte Jungvögel'),
+              Text(loc.boxInfo.ringed),
               Row(
                 children: <Widget>[
                   IconButton(
@@ -115,7 +115,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Jungvögel'),
+              Text(loc.boxInfo.chickCount),
               Row(
                 children: <Widget>[
                   IconButton(
@@ -137,7 +137,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Alter in Tagen'),
+              Text(loc.boxInfo.chickAge),
               Row(
                 children: <Widget>[
                   IconButton(
@@ -156,7 +156,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           ),
         ),
         CheckboxListTile(
-            title: Text('Eier drin'),
+            title: Text(loc.boxInfo.containsEggs),
             value: _containsEggs,
             onChanged: (bool newValue) {
               setState(() {
@@ -167,7 +167,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text('Anzahl Eier'),
+              Text(loc.boxInfo.eggCount),
               Row(
                 children: <Widget>[
                   IconButton(
@@ -186,7 +186,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           ),
         ),
         CheckboxListTile(
-            title: Text('Weiblicher Elternvogel'),
+            title: Text(loc.boxInfo.femaleInBox),
             value: _femaleParent,
             onChanged: (bool newValue) {
               setState(() {
@@ -194,7 +194,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
               });
             }),
         CheckboxListTile(
-            title: Text('Männlicher Elternvogel'),
+            title: Text(loc.boxInfo.maleInBox),
             value: _maleParent,
             onChanged: (bool newValue) {
               setState(() {
@@ -205,12 +205,12 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           title: TextFormField(
             textAlign: TextAlign.right,
             decoration: InputDecoration(
-              labelText: 'Vogelart',
+              labelText: loc.boxInfo.specie,
             ),
           ),
         ),
         ListTile(
-          title: Text('Foto hinzufügen'),
+          title: Text(loc.boxInfo.addPhoto),
           subtitle: IconButton(
             icon: Icon(Icons.camera_alt),
             tooltip: loc.boxNew.addImage,
@@ -222,7 +222,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
             maxLines: 5,
             textAlign: TextAlign.left,
             decoration: InputDecoration(
-              labelText: 'Kommentar',
+              labelText: loc.boxInfo.comment,
             ),
           ),
         ),
@@ -234,13 +234,13 @@ class _NewInspectionDataState extends State<NewInspectionData> {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     if (value == 0) {
       sliderColor = Colors.red;
-      return 'Ersetzen';
+      return loc.boxInfo.boxConditionReplace;
     } else if (value == 1) {
       sliderColor = Colors.yellow;
-      return 'Reparieren';
+      return loc.boxInfo.boxConditionRepair;
     } else {
       sliderColor = Colors.green;
-      return 'Heile';
+      return loc.boxInfo.boxConditionFixed;
     }
   }
 }
