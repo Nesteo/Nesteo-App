@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol_bloc.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol_event.dart';
+import 'package:nesteo_app/blocs/location_bloc/location.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
@@ -93,6 +94,27 @@ class GoBackButton extends StatelessWidget {
       onPressed: () {
         BlocProvider.of<PageControlBloc>(context).dispatch(GoToBoxListEvent());
         BlocProvider.of<FrameControlBloc>(context).dispatch(EnableFrameEvent());
+      },
+    );
+  }
+}
+
+class LocationButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon:
+          (BlocProvider.of<LocationBloc>(context).currentState is LocationDisabledState)
+              ? Icon(Icons.location_off)
+              : Icon(Icons.location_on),
+      onPressed: () {
+        LocationBloc mode = BlocProvider.of<LocationBloc>(context);
+        if (mode.currentState is OnlineState) {
+          mode.dispatch(EnableLocationEvent());
+        }
+        if (mode.currentState is OfflineState) {
+          mode.dispatch(DisableLocationEvent());
+        }
       },
     );
   }
