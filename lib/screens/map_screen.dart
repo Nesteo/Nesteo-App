@@ -22,21 +22,22 @@ class MapScreen extends NesteoFramedScreen {
           appBarTitle: Text(
               Localizations.of<LocaleBase>(context, LocaleBase).screenName.map),
           appBarActions: <Widget>[
+            // Get location coordinates. Prompts for permission if not granted yet
+            // Reloads page.
+            IconButton(
+              onPressed: () async {
+                Position position = await Geolocator()
+                    .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+                print(position.latitude);
+                print(position.longitude);
+                locationModel.updateLocation(
+                    LatLng(position.latitude, position.longitude));
+                BlocProvider.of<PageControlBloc>(context)
+                    .dispatch(GoToMapEvent());
+              },
+              icon: Icon(Icons.location_on),
+            ),
             OnlineModeButton(),
-              // Get location coordinates. Prompts for permission if not granted yet
-              // Reloads page.
-              RaisedButton(
-            onPressed: () async {
-              Position position = await Geolocator()
-                  .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-              print(position.latitude);
-              print(position.longitude);
-              locationModel.updateLocation(
-                  LatLng(position.latitude, position.longitude));
-              BlocProvider.of<PageControlBloc>(context).dispatch(GoToMapEvent());
-            },
-            child: Icon(Icons.location_on),
-          ),
           ],
           floatingActionButton: FloatingActionButton(
             onPressed: () {
