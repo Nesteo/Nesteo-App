@@ -2,64 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
-import 'package:nesteo_app/blocs/location_bloc/location.dart';
+import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/frames.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
-import 'package:scoped_model/scoped_model.dart';
-
-import 'location_model.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new ScopedModel<LocationModel>(
-      model: new LocationModel(),
-      child: MaterialApp(
-        title: 'Nesteo',
-        localizationsDelegates: [
-          const LocDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+    return MaterialApp(
+      title: 'Nesteo',
+      localizationsDelegates: [
+        const LocDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('de', ''),
+      ],
+      // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<PageControlBloc>(
+            builder: (BuildContext context) => PageControlBloc(),
+          ),
+          BlocProvider<OnlineModeBloc>(
+            builder: (BuildContext context) => OnlineModeBloc(),
+          ),
+          BlocProvider<FrameControlBloc>(
+            builder: (BuildContext context) => FrameControlBloc(),
+          ),
+          BlocProvider<MapControlBloc>(
+            builder: (BuildContext context) => MapControlBloc(),
+          )
         ],
-        supportedLocales: [
-          const Locale('en', ''),
-          const Locale('de', ''),
-        ],
-        // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider<PageControlBloc>(
-              builder: (BuildContext context) => PageControlBloc(),
-            ),
-            BlocProvider<OnlineModeBloc>(
-              builder: (BuildContext context) => OnlineModeBloc(),
-            ),
-            BlocProvider<FrameControlBloc>(
-              builder: (BuildContext context) => FrameControlBloc(),
-            ),
-            BlocProvider<LocationBloc>(
-              builder: (BuildContext context) => LocationBloc(),
-            )
-          ],
-          child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
-            builder: (context, onlineState) =>
-                BlocBuilder<FrameControlBloc, FrameControlState>(
-              condition: (previousState, currentState) =>
-                  currentState.runtimeType != previousState.runtimeType,
-              builder: (context, frameState) {
-                if (frameState is FrameEnabledState) {
-                  return FramedScreen();
-                }
-                if (frameState is FrameDisabledState) {
-                  return FullScreen();
-                }
-                return null;
-              },
-            ),
+        child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
+          builder: (context, onlineState) =>
+              BlocBuilder<FrameControlBloc, FrameControlState>(
+            condition: (previousState, currentState) =>
+                currentState.runtimeType != previousState.runtimeType,
+            builder: (context, frameState) {
+              if (frameState is FrameEnabledState) {
+                return FramedScreen();
+              }
+              if (frameState is FrameDisabledState) {
+                return FullScreen();
+              }
+              return null;
+            },
           ),
         ),
       ),
