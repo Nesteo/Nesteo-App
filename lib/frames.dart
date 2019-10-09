@@ -53,6 +53,7 @@ class FullScreen extends StatelessWidget {
 }
 
 class FramedScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
@@ -83,7 +84,6 @@ class FramedScreen extends StatelessWidget {
             ),
             body: screen,
             floatingActionButton: screen.floatingActionButton,
-            // raisedButton: screen.raisedButton,
             bottomNavigationBar: BottomNavigationBar(
               currentIndex:
                   (state is MapScreenState || state is ToMapScreenState)

@@ -7,53 +7,59 @@ import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/frames.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:scoped_model/scoped_model.dart';
+
+import 'location_model.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Nesteo',
-      localizationsDelegates: [
-        const LocDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: [
-        const Locale('en', ''),
-        const Locale('de', ''),
-      ],
-      // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<PageControlBloc>(
-            builder: (BuildContext context) => PageControlBloc(),
-          ),
-          BlocProvider<OnlineModeBloc>(
-            builder: (BuildContext context) => OnlineModeBloc(),
-          ),
-          BlocProvider<FrameControlBloc>(
-            builder: (BuildContext context) => FrameControlBloc(),
-          ),
-          BlocProvider<LocationBloc>(
-            builder: (BuildContext context) => LocationBloc(),
-          )
+    return new ScopedModel<LocationModel>(
+      model: new LocationModel(),
+      child: MaterialApp(
+        title: 'Nesteo',
+        localizationsDelegates: [
+          const LocDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
         ],
-        child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
-          builder: (context, onlineState) =>
-              BlocBuilder<FrameControlBloc, FrameControlState>(
-            condition: (previousState, currentState) =>
-                currentState.runtimeType != previousState.runtimeType,
-            builder: (context, frameState) {
-              if (frameState is FrameEnabledState) {
-                return FramedScreen();
-              }
-              if (frameState is FrameDisabledState) {
-                return FullScreen();
-              }
-              return null;
-            },
+        supportedLocales: [
+          const Locale('en', ''),
+          const Locale('de', ''),
+        ],
+        // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<PageControlBloc>(
+              builder: (BuildContext context) => PageControlBloc(),
+            ),
+            BlocProvider<OnlineModeBloc>(
+              builder: (BuildContext context) => OnlineModeBloc(),
+            ),
+            BlocProvider<FrameControlBloc>(
+              builder: (BuildContext context) => FrameControlBloc(),
+            ),
+            BlocProvider<LocationBloc>(
+              builder: (BuildContext context) => LocationBloc(),
+            )
+          ],
+          child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
+            builder: (context, onlineState) =>
+                BlocBuilder<FrameControlBloc, FrameControlState>(
+              condition: (previousState, currentState) =>
+                  currentState.runtimeType != previousState.runtimeType,
+              builder: (context, frameState) {
+                if (frameState is FrameEnabledState) {
+                  return FramedScreen();
+                }
+                if (frameState is FrameDisabledState) {
+                  return FullScreen();
+                }
+                return null;
+              },
+            ),
           ),
         ),
       ),

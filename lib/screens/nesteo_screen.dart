@@ -9,7 +9,6 @@ import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 // Every displayed screen should either inherit from Framed or FullScreen
 abstract class NesteoScreen extends Container {
   final Widget floatingActionButton;
-  final Widget raisedButton;
   final bool hasAppBar;
   final Text appBarTitle;
   final List<Widget> appBarActions;
@@ -18,7 +17,6 @@ abstract class NesteoScreen extends Container {
   NesteoScreen(
     BuildContext context, {
     this.floatingActionButton,
-    this.raisedButton,
     @required this.hasAppBar,
     this.appBarTitle,
     this.appBarLeading,
@@ -31,13 +29,11 @@ abstract class NesteoFramedScreen extends NesteoScreen {
       {@required appBarTitle,
       appBarActions,
       appBarLeading,
-      floatingActionButton,
-      raisedButton
+      floatingActionButton
       })
       : super(
           context,
           floatingActionButton: floatingActionButton,
-          raisedButton: raisedButton,
           hasAppBar: true,
           appBarTitle: appBarTitle,
           appBarActions: appBarActions,
@@ -48,7 +44,6 @@ abstract class NesteoFramedScreen extends NesteoScreen {
 abstract class NesteoFullScreen extends NesteoScreen {
   NesteoFullScreen(BuildContext context,
       {floatingActionButton,
-      raisedButton,
       @required hasAppBar,
       appBarTitle,
       appBarLeading,
@@ -57,7 +52,6 @@ abstract class NesteoFullScreen extends NesteoScreen {
       : super(
           context,
           floatingActionButton: floatingActionButton,
-          raisedButton: raisedButton,
           hasAppBar: hasAppBar,
           appBarTitle: appBarTitle,
           appBarActions: appBarActions,
@@ -100,6 +94,7 @@ class GoBackButton extends StatelessWidget {
 }
 
 class LocationButton extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -109,10 +104,10 @@ class LocationButton extends StatelessWidget {
               : Icon(Icons.location_on),
       onPressed: () {
         LocationBloc mode = BlocProvider.of<LocationBloc>(context);
-        if (mode.currentState is OnlineState) {
+        if (mode.currentState is LocationDisabledState) {
           mode.dispatch(EnableLocationEvent());
         }
-        if (mode.currentState is OfflineState) {
+        if (mode.currentState is LocationEnabledState) {
           mode.dispatch(DisableLocationEvent());
         }
       },
