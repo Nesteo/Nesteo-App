@@ -12,6 +12,7 @@ key.properties
 .svn/
 .vscode/
 pubspec.lock
+.vs/
 
 # IntelliJ related
 *.iml

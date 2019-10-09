@@ -22,7 +22,17 @@
     "id": "ID",
     "oldid": "Alte ID",
     "addBox": "Nistkasten erstellen",
-    "hangDate": "Aufhängedatum"
+    "hangDate": "Aufhängedatum",
+    "untreatedWood": "Unbehandeltes Holz",
+    "material": "Material",
+    "treatedWood": "Behandeltes Holz",
+    "holeSize": "Lochgröße",
+    "big": "Groß",
+    "medium": "Mittel",
+    "small": "Klein",
+    "concrete": "Beton",
+    "addImage": "Bild hinzufügen",
+    "getPosition": "Position erfassen"
   },
   "login": {
     "domain": "Domain",
