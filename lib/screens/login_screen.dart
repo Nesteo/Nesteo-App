@@ -31,7 +31,7 @@ class LoginScreen extends NesteoFullScreen {
                   borderRadius: BorderRadius.circular(10),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: loc.login.domain,
+                      labelText: loc.login.domain,
                       border: InputBorder.none,
                       filled: true,
                       fillColor: Colors.white,
@@ -48,7 +48,7 @@ class LoginScreen extends NesteoFullScreen {
                   borderRadius: BorderRadius.circular(10),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: loc.login.username,
+                      labelText: loc.login.username,
                       filled: true,
                       fillColor: Colors.white,
                       prefixIcon: Icon(Icons.person, color: Colors.green),
@@ -63,7 +63,7 @@ class LoginScreen extends NesteoFullScreen {
                   borderRadius: BorderRadius.circular(10),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: loc.login.password,
+                      labelText: loc.login.password,
                       filled: true,
                       fillColor: Colors.white,
                       prefixIcon: Icon(Icons.lock, color: Colors.green),
