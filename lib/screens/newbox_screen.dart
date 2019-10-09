@@ -32,7 +32,7 @@ class NewBoxData extends StatefulWidget {
 }
 
 class _NewBoxDataState extends State<NewBoxData> {
-  String _dropDownMaterial = 'Wood';
+  String _dropDownMaterial;
   double _slideHoleSize = 1;
 
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _NewBoxDataState extends State<NewBoxData> {
               _createTextinput(loc.boxNew.oldid),
               _createTextinput(loc.boxNew.hangDate),
               _createHoleSizeSlider(),
-              _createMaterialSelection(),
+              _createMaterialSelection(context),
               IconButton(
                 icon: Icon(Icons.camera_alt),
                 tooltip: loc.boxNew.addImage,
@@ -91,10 +91,13 @@ class _NewBoxDataState extends State<NewBoxData> {
     );
   }
 
-  Widget _createMaterialSelection() {
+  Widget _createMaterialSelection(BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return Container(
       child: DropdownButton<String>(
-        value: _dropDownMaterial,
+        value: (_dropDownMaterial != null)
+            ? _dropDownMaterial
+            : loc.boxNew.untreatedWood,
         icon: Icon(Icons.arrow_downward),
         iconSize: 24,
         elevation: 16,
@@ -104,8 +107,11 @@ class _NewBoxDataState extends State<NewBoxData> {
             _dropDownMaterial = newValue;
           });
         },
-        items: <String>['treatedwpp', 'Wood', 'Concrete']
-            .map<DropdownMenuItem<String>>((String value) {
+        items: <String>[
+          loc.boxNew.untreatedWood,
+          loc.boxNew.treatedWood,
+          loc.boxNew.concrete
+        ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),
