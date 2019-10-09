@@ -1,21 +1,14 @@
-import 'dart:ffi';
-import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
+import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
-import 'package:nesteo_app/location_model.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class MapScreen extends NesteoFramedScreen {
-  static LocationModel locationModel = new LocationModel();
   MapScreen(BuildContext context)
       : super(
           context,
@@ -26,18 +19,29 @@ class MapScreen extends NesteoFramedScreen {
             // Reloads page.
             IconButton(
               onPressed: () async {
-                Position position = await Geolocator()
-                    .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-                print(position.latitude);
-                print(position.longitude);
-                locationModel.updateLocation(
-                    LatLng(position.latitude, position.longitude));
-                BlocProvider.of<PageControlBloc>(context)
-                    .dispatch(GoToMapEvent());
+                MapControlBloc mapControlBloc =
+                    BlocProvider.of<MapControlBloc>(context);
+                mapControlBloc.dispatch(CenterMapEvent());
               },
-              icon: Icon(Icons.location_on),
+              icon: Icon(Icons.gps_fixed),
             ),
-            OnlineModeButton(),
+            IconButton(
+              onPressed: () async {
+                MapControlBloc mapControlBloc =
+                    BlocProvider.of<MapControlBloc>(context);
+                mapControlBloc.dispatch(
+                  BuildMapEvent(
+                    mapType: (mapControlBloc.mapType == MapType.normal)
+                        ? MapType.hybrid
+                        : MapType.normal,
+                    tilt: mapControlBloc.tilt,
+                    zoom: mapControlBloc.zoom,
+                  ),
+                );
+              },
+              icon: Icon(Icons.layers),
+            ),
+            //OnlineModeButton(),
           ],
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -56,15 +60,26 @@ class MapScreen extends NesteoFramedScreen {
 
   @override
   Widget build(BuildContext context) {
-    print(locationModel.location);
+    MapControlBloc mapControlBloc = BlocProvider.of<MapControlBloc>(context);
     return Container(
-      child: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: locationModel.location,
-          zoom: 16,
-          tilt: 20,
-        ),
-        mapType: MapType.normal,
+      child: BlocBuilder<MapControlBloc, MapControlState>(
+        builder: (context, state) {
+          if (state is InitialMapControlState) {
+            print('Constructing Map');
+            mapControlBloc.dispatch(
+              BuildMapEvent(
+                mapType: MapType.normal,
+                zoom: 16,
+                tilt: 20,
+              ),
+            );
+            return CircularProgressIndicator();
+          }
+          if (state is MapReadyState) {
+            return mapControlBloc.map;
+          }
+          return CircularProgressIndicator();
+        },
       ),
     );
   }
