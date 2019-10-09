@@ -13,23 +13,8 @@ void main() {
       expect(locationBloc.initialState, LocationDisabledState());
     });
 
-    test('Going offline works', () {
-      final List<LocationState> expected = [
-        LocationEnabledState(),
-        LocationDisabledState(),
-      ];
-
-      expectLater(
-        locationBloc.state,
-        emitsInOrder(expected),
-      );
-
-      locationBloc.dispatch(DisableLocationEvent());
-    });
-
     test('Going online works', () {
       final List<LocationState> expected = [
-        LocationEnabledState(),
         LocationDisabledState(),
         LocationEnabledState(),
       ];
@@ -39,8 +24,23 @@ void main() {
         emitsInOrder(expected),
       );
 
-      locationBloc.dispatch(DisableLocationEvent());
       locationBloc.dispatch(EnableLocationEvent());
+    });
+
+    test('Going offline works', () {
+      final List<LocationState> expected = [
+        LocationDisabledState(),
+        LocationEnabledState(),
+        LocationDisabledState(),
+      ];
+
+      expectLater(
+        locationBloc.state,
+        emitsInOrder(expected),
+      );
+
+      locationBloc.dispatch(EnableLocationEvent());
+      locationBloc.dispatch(DisableLocationEvent());
     });
   });
 }
