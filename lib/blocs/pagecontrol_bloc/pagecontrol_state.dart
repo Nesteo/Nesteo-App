@@ -3,35 +3,80 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class PageControlState extends Equatable {
-  PageControlState([List props = const <dynamic>[]]) : super(props);
+  PageControlState([List props = const <dynamic>[]]);
 }
 
-class LoginScreenState extends PageControlState {}
+class LoginScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToHomeScreenState extends PageControlState {}
+class ToHomeScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class HomeScreenState extends PageControlState {}
+class HomeScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToMapScreenState extends PageControlState {}
+class ToMapScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class MapScreenState extends PageControlState {}
+class MapScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToBoxListScreenState extends PageControlState {}
+class ToBoxListScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class BoxListScreenState extends PageControlState {}
+class BoxListScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToNewBoxScreenState extends PageControlState {}
+class ToNewBoxScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class NewBoxScreenState extends PageControlState {}
+class NewBoxScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToBoxInfoScreenState extends PageControlState {}
+class ToBoxInfoScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class BoxInfoScreenState extends PageControlState {}
+class BoxInfoScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToInspectionScreenState extends PageControlState {}
+class ToInspectionScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class InspectionScreenState extends PageControlState {}
+class InspectionScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class ToNewInspectionScreenState extends PageControlState {}
+class ToNewInspectionScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}
 
-class NewInspectionScreenState extends PageControlState {}
+class NewInspectionScreenState extends PageControlState {
+  @override
+  List<Object> get props => [];
+}

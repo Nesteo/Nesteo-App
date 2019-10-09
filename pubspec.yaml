@@ -1,7 +1,7 @@
 name: nesteo_app
-description: A new Flutter project.
+description: Nesting box management app for ringing associations.
 
-version: 0.2.3
+version: 0.2.9+3
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -15,19 +15,23 @@ dependencies:
   google_maps_flutter: ^0.5.21+3
   bloc: ^0.15.0
   flutter_bloc: ^0.21.0
-  http: ^0.12.0+2
+  chopper: ^2.4.0
   image_picker: ^0.6.1+4
   path_provider: ^1.3.0
   path: ^1.6.4
   cupertino_icons: ^0.1.2
   meta: ^1.1.7
-  equatable: ^0.5.1
+  equatable: ^0.6.0
   font_awesome_flutter: ^8.5.0
   datetime_picker_formfield: ^0.4.3
+  geolocator: ^5.1.4
+  scoped_model: ^1.0.1
 
 dev_dependencies:
   mockito: ^4.1.1
   flutter_launcher_icons: ^0.7.3
+  chopper_generator: ^2.3.4
+  build_runner: any
   flutter_test:
     sdk: flutter
 

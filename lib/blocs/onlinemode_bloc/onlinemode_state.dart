@@ -3,9 +3,15 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class OnlineModeState extends Equatable {
-  OnlineModeState([List props = const <dynamic>[]]) : super(props);
+  OnlineModeState([List props = const <dynamic>[]]);
 }
 
-class OnlineState extends OnlineModeState {}
+class OnlineState extends OnlineModeState {
+  @override
+  List<Object> get props => [];
+}
 
-class OfflineState extends OnlineModeState {}
+class OfflineState extends OnlineModeState {
+  @override
+  List<Object> get props => [];
+}
