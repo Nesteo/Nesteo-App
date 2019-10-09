@@ -62,7 +62,7 @@ class BoxListScreen extends NesteoFramedScreen {
                 );
               },
             ),
-            OnlineModeButton(),
+            //OnlineModeButton(),
           ],
         );
 
