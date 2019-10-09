@@ -1,13 +1,21 @@
+import 'dart:ffi';
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/location_model.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class MapScreen extends NesteoFramedScreen {
+  static LocationModel locationModel = new LocationModel();
   MapScreen(BuildContext context)
       : super(
           context,
@@ -15,6 +23,20 @@ class MapScreen extends NesteoFramedScreen {
               Localizations.of<LocaleBase>(context, LocaleBase).screenName.map),
           appBarActions: <Widget>[
             OnlineModeButton(),
+              // Get location coordinates. Prompts for permission if not granted yet
+              // Reloads page.
+              RaisedButton(
+            onPressed: () async {
+              Position position = await Geolocator()
+                  .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+              print(position.latitude);
+              print(position.longitude);
+              locationModel.updateLocation(
+                  LatLng(position.latitude, position.longitude));
+              BlocProvider.of<PageControlBloc>(context).dispatch(GoToMapEvent());
+            },
+            child: Icon(Icons.location_on),
+          ),
           ],
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -33,12 +55,11 @@ class MapScreen extends NesteoFramedScreen {
 
   @override
   Widget build(BuildContext context) {
-    const LatLng hshPosition = LatLng(52.3537269, 9.724127);
-
+    print(locationModel.location);
     return Container(
       child: GoogleMap(
-        initialCameraPosition: const CameraPosition(
-          target: hshPosition,
+        initialCameraPosition: CameraPosition(
+          target: locationModel.location,
           zoom: 16,
           tilt: 20,
         ),
