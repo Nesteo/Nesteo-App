@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import './mapcontrol.dart';
@@ -45,9 +46,9 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
       print('Centering');
       Position position = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
       print('${position.latitude}, ${position.longitude}');
       this.location = LatLng(position.latitude, position.longitude);
-      print(controller.getVisibleRegion());
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
         target: this.location,
         zoom: this.zoom,
