@@ -17,7 +17,7 @@ jobs:
       - run: flutter doctor
       - run: flutter build apk
       - run: mkdir -p /tmp/artifacts
-      - run: mv build/app/outputs/bundle/release/* /tmp/artifacts/
+      - run: mv build/app/outputs/apk/release/* /tmp/artifacts/
       - store_artifacts:
           path: /tmp/artifacts
 workflows:
