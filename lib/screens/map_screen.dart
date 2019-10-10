@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
@@ -21,7 +22,32 @@ class MapScreen extends NesteoFramedScreen {
               onPressed: () async {
                 MapControlBloc mapControlBloc =
                     BlocProvider.of<MapControlBloc>(context);
-                mapControlBloc.dispatch(CenterMapEvent());
+                if (await Geolocator().isLocationServiceEnabled()) {
+                  mapControlBloc.dispatch(CenterMapEvent());
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Location Services disabled'),
+                        content: Text('Please enable GPS on your device!'),
+                        actions: <Widget>[
+                          FlatButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text('OK'),
+                            textColor: Colors.lightGreen,
+                            color: Colors.white,
+                          ),
+                        ],
+                        backgroundColor: Colors.lightGreen,
+                        contentTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 16),
+                        titleTextStyle:
+                            TextStyle(color: Colors.white, fontSize: 20),
+                      );
+                    },
+                  );
+                }
               },
               icon: Icon(Icons.gps_fixed),
             ),
@@ -43,14 +69,17 @@ class MapScreen extends NesteoFramedScreen {
             ),
             //OnlineModeButton(),
           ],
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               BlocProvider.of<PageControlBloc>(context)
                   .dispatch(GoToNewBoxEvent());
               BlocProvider.of<FrameControlBloc>(context)
                   .dispatch(DisableFrameEvent());
             },
-            child: Icon(Icons.add),
+            icon: Icon(Icons.add),
+            label: Text(Localizations.of<LocaleBase>(context, LocaleBase)
+                .screenName
+                .boxNew),
             backgroundColor: (BlocProvider.of<OnlineModeBloc>(context)
                     .currentState is OnlineState)
                 ? Colors.lightGreen
