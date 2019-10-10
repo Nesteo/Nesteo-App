@@ -1,7 +1,7 @@
 name: nesteo_app
 description: Nesting box management app for ringing associations.
 
-version: 0.2.9+3
+version: 0.2.13+4
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
