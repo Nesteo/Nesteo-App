@@ -26,3 +26,14 @@ class ChangeBoxTypeEvent extends BoxDataEvent {
   @override
   List<Object> get props => null;
 }
+
+class GetAllBoxEvent extends BoxDataEvent {
+  final List <NestingBox> boxes;
+
+  GetAllBoxEvent({
+    @required this.boxes
+  }) : super();
+
+  @override
+  List<Object> get props => null;
+}

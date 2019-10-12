@@ -12,7 +12,11 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   BoxDataState get initialState => InitialBoxDataState();
 
   NestingBoxesRepository _nestingBoxRepo = NestingBoxesRepository();
+  List<NestingBox> nestingBoxes = new List<NestingBox>();
   NestingBox nestingBox = new NestingBox();
+  String boxId = "F000001";
+
+
   @override
   Stream<BoxDataState> mapEventToState(
     BoxDataEvent event
@@ -23,11 +27,12 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       if (this.currentState is! InitialBoxDataState) {
         yield BoxChangingState();
       }
-      nestingBox = await _nestingBoxRepo.getNestingBoxById("F000001");
+      List<NestingBox> nestingBoxes =
+            await _nestingBoxRepo.getAllNestingBoxes();
+      print(nestingBoxes.length);
+      nestingBox = await _nestingBoxRepo.getNestingBoxById(boxId);
       print(nestingBox.toString());
       yield BoxReadyState();
     }
   }
-
-  
 }

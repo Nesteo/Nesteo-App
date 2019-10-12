@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_bloc.dart';
-import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_event.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,35 +22,56 @@ class BoxInfoScreen extends NesteoFullScreen {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
     NestingBox nestingBox = new NestingBox(id: "F23");
     boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
-    
+
     Widget imageSection = Container(
       child: Image.asset('images/testImage.jpg',
           width: 600, height: 240, fit: BoxFit.fitWidth),
     );
 
     Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              boxDataBloc.nestingBox.id,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            BlocBuilder<BoxDataBloc, BoxDataState>(
+              builder: (context, state) {
+                if (state is InitialBoxDataState) {
+                  boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
+                  return CircularProgressIndicator();
+                }
+                if (state is BoxReadyState) {
+                  return Container(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      boxDataBloc.nestingBox.id,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                }
+                return CircularProgressIndicator();
+              },
             ),
-          ),
-          Text(
-            boxDataBloc.nestingBox.region.name,
-            style: TextStyle(
-              color: Colors.grey[500],
+            BlocBuilder<BoxDataBloc, BoxDataState>(
+              builder: (context, state) {
+                if (state is InitialBoxDataState) {
+                  boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
+                  return CircularProgressIndicator();
+                }
+                if (state is BoxReadyState) {
+                  return Container(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(
+                      boxDataBloc.nestingBox.region.name,
+                    ),
+                  );
+                }
+                return CircularProgressIndicator();
+              },
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ));
 
     final Widget descSection = Container(
       padding: const EdgeInsets.all(32),
