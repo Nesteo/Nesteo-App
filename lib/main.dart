@@ -7,6 +7,7 @@ import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/frames.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'blocs/boxdata_bloc/boxdata_bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<MapControlBloc>(
             builder: (BuildContext context) => MapControlBloc(),
+          ),
+          BlocProvider<BoxDataBloc>(
+            builder: (BuildContext context) => BoxDataBloc(),
           )
         ],
         child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
