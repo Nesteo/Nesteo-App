@@ -11,8 +11,8 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   @override
   BoxDataState get initialState => InitialBoxDataState();
 
-  NestingBoxesRepository nestingBoxRepo = NestingBoxesRepository();
-  NestingBox nestingBox;
+  NestingBoxesRepository _nestingBoxRepo = NestingBoxesRepository();
+  NestingBox nestingBox = new NestingBox();
   @override
   Stream<BoxDataState> mapEventToState(
     BoxDataEvent event
@@ -23,13 +23,11 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       if (this.currentState is! InitialBoxDataState) {
         yield BoxChangingState();
       }
-      print("");
-      print("Getting box 0");
-      NestingBox nestingBox = await nestingBoxRepo.getNestingBoxById("F000001");
+      nestingBox = await _nestingBoxRepo.getNestingBoxById("F000001");
       print(nestingBox.toString());
-      print("DONE");
-      print("");
       yield BoxReadyState();
     }
   }
+
+  
 }

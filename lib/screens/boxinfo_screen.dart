@@ -23,6 +23,7 @@ class BoxInfoScreen extends NesteoFullScreen {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
     NestingBox nestingBox = new NestingBox(id: "F23");
     boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
+    
     Widget imageSection = Container(
       child: Image.asset('images/testImage.jpg',
           width: 600, height: 240, fit: BoxFit.fitWidth),
@@ -36,14 +37,14 @@ class BoxInfoScreen extends NesteoFullScreen {
           Container(
             padding: const EdgeInsets.only(bottom: 8),
             child: Text(
-              nestingBox.id,
+              boxDataBloc.nestingBox.id,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Text(
-            'another thing about Box 1',
+            boxDataBloc.nestingBox.region.name,
             style: TextStyle(
               color: Colors.grey[500],
             ),
