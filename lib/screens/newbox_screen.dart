@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 class NewBoxScreen extends NesteoFullScreen {
   NewBoxScreen(BuildContext context)
@@ -13,11 +17,11 @@ class NewBoxScreen extends NesteoFullScreen {
           appBarLeading: GoBackButton(),
           appBarActions: null,
         );
-
+//TODO add screeenstate to history here??
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1920,
+      constraints: BoxConstraints.expand(),
       color: Colors.lightGreen,
       child: NewBoxData(),
     );
@@ -34,6 +38,26 @@ class NewBoxData extends StatefulWidget {
 class _NewBoxDataState extends State<NewBoxData> {
   String _dropDownMaterial;
   double _slideHoleSize = 1;
+
+/*   @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent) {
+    print("BACK BUTTON!");
+
+    BlocProvider.of<PageControlBloc>(context).dispatch(BackbuttonEvent());
+    BlocProvider.of<FrameControlBloc>(context).dispatch(EnableFrameEvent());
+    return true;
+  } */
 
   Widget build(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);

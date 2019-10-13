@@ -3,6 +3,8 @@ import 'package:bloc/bloc.dart';
 import './pagecontrol.dart';
 
 class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
+  List<PageControlState> history =
+      new List(); //state history since starting the app
   @override
   PageControlState get initialState => LoginScreenState();
 
@@ -11,6 +13,8 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     PageControlEvent event,
   ) async* {
     if (event is GoToMapEvent) {
+      history.add(currentState);
+      print(currentState.toString());
       yield ToMapScreenState();
 
       await Future.delayed(Duration(seconds: 1));
@@ -22,6 +26,8 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     }
 
     if (event is GoToBoxListEvent) {
+      history.add(currentState);
+      print(currentState.toString());
       yield ToBoxListScreenState();
 
       await Future.delayed(Duration(seconds: 1));
@@ -33,6 +39,8 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     }
 
     if (event is GoToNewBoxEvent) {
+      history.add(currentState);
+      print(currentState.toString());
       yield ToNewBoxScreenState();
 
       await Future.delayed(Duration(seconds: 1));
@@ -44,6 +52,8 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     }
 
     if (event is GoToBoxInfoEvent) {
+      history.add(currentState);
+      print(currentState.toString());
       yield ToBoxInfoScreenState();
 
       await Future.delayed(Duration(seconds: 1));
@@ -55,6 +65,8 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     }
 
     if (event is GoToInspectionEvent) {
+      history.add(currentState);
+      print(currentState.toString());
       yield ToInspectionScreenState();
 
       await Future.delayed(Duration(seconds: 1));
@@ -66,6 +78,8 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     }
 
     if (event is GoToNewInspectionEvent) {
+      history.add(currentState);
+      print(currentState.toString());
       yield ToNewInspectionScreenState();
 
       await Future.delayed(Duration(seconds: 1));
@@ -75,6 +89,14 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     if (event is NewInspectionEvent) {
       yield NewInspectionScreenState();
     }
-    // TODO: Add the missing events / states here
+    if (event is BackbuttonEvent) {
+      if (history.isNotEmpty) {
+        yield history.last;
+        history.removeLast();
+      }
+
+      //TODO: define backbuttonevent
+    }
+    //Add the missing events / states here
   }
 }

@@ -5,6 +5,8 @@ import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/screens.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 
+import 'blocs/framecontrol_bloc/framecontrol_bloc.dart';
+import 'blocs/framecontrol_bloc/framecontrol_event.dart';
 import 'generated/locale_base.dart';
 
 class FullScreen extends StatelessWidget {

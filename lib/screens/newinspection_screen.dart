@@ -1,6 +1,9 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol_bloc.dart';
+import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol_event.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
@@ -45,6 +48,26 @@ class _NewInspectionDataState extends State<NewInspectionData> {
   int _ageInDays = 0;
   double _sliderCondition = 0;
   Color sliderColor;
+
+  /*  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent) {
+    BlocProvider.of<PageControlBloc>(context).dispatch(BackbuttonEvent());
+    BlocProvider.of<FrameControlBloc>(context).dispatch(DisableFrameEvent());
+
+    return true;
+  }
+ */
   Widget build(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return ListView(

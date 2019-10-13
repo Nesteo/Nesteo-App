@@ -75,3 +75,8 @@ class NewInspectionEvent extends PageControlEvent {
   @override
   List<Object> get props => [];
 }
+
+class BackbuttonEvent extends PageControlEvent {
+  @override //TODO define backbuttonevent
+  List<Object> get props => [];
+}
