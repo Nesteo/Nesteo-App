@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
-import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
@@ -20,58 +19,40 @@ class BoxInfoScreen extends NesteoFullScreen {
   @override
   Widget build(BuildContext context) {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    NestingBox nestingBox = new NestingBox();
-    boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
-
+    
     Widget imageSection = Container(
       child: Image.asset('images/testImage.jpg',
           width: 600, height: 240, fit: BoxFit.fitWidth),
     );
 
     Widget titleSection = Container(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            BlocBuilder<BoxDataBloc, BoxDataState>(
-              builder: (context, state) {
-                if (state is InitialBoxDataState) {
-                  boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
-                  return CircularProgressIndicator();
-                }
-                if (state is BoxReadyState) {
-                  return Container(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      boxDataBloc.nestingBox.id,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  );
-                }
-                return CircularProgressIndicator();
-              },
-            ),
-            BlocBuilder<BoxDataBloc, BoxDataState>(
-              builder: (context, state) {
-                if (state is InitialBoxDataState) {
-                  boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
-                  return CircularProgressIndicator();
-                }
-                if (state is BoxReadyState) {
-                  return Container(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(
-                      boxDataBloc.nestingBox.region.name,
-                    ),
-                  );
-                }
-                return CircularProgressIndicator();
-              },
-            ),
-          ],
-        ));
+      padding: const EdgeInsets.all(32),
+      child: BlocBuilder<BoxDataBloc, BoxDataState>(
+        builder: (context, state) {
+          if (state is InitialBoxDataState) {
+            boxDataBloc.dispatch(GetBoxEvent());
+            return CircularProgressIndicator();
+          }
+          if (state is BoxReadyState) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  boxDataBloc.nestingBox.id,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  boxDataBloc.nestingBox.region.name,
+                )
+              ],
+            );
+          }
+          return CircularProgressIndicator();
+        },
+      ),
+    );
 
     final Widget descSection = Container(
       padding: const EdgeInsets.all(32),

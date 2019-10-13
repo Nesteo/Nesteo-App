@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as prefix0;
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
@@ -79,25 +80,27 @@ class BoxListScreen extends NesteoFramedScreen {
           return CircularProgressIndicator();
         }
         if (state is BoxReadyState) {
-          print(boxDataBloc.nestingBoxList);
-          print(boxDataBloc.nestingBoxList.length);
-          
+          // print(boxDataBloc.nestingBoxList);
+          // print(boxDataBloc.nestingBoxList.length);
+
           return Container(
             child: ListView.builder(
               itemCount: boxDataBloc.nestingBoxList.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title:
-                      Text(boxDataBloc.nestingBoxList[index].id), //create testdata for listview
+                  title: Text(boxDataBloc
+                      .nestingBoxList[index].id), //create testdata for listview
                   isThreeLine: true,
                   subtitle: Text(boxDataBloc.nestingBoxList[index].region.name),
                   onTap: () {
+                    // Set the box Id to this selection and dispatch get box for the info page
                     boxDataBloc.boxId = boxDataBloc.nestingBoxList[index].id;
+                    BlocProvider.of<BoxDataBloc>(context)
+                        .dispatch(GetBoxEvent());
                     BlocProvider.of<PageControlBloc>(context)
                         .dispatch(GoToBoxInfoEvent());
                     BlocProvider.of<FrameControlBloc>(context)
                         .dispatch(DisableFrameEvent());
-                    
                   },
                 );
               },

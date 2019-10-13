@@ -18,11 +18,12 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   @override
   Stream<BoxDataState> mapEventToState(BoxDataEvent event) async* {
     // NestingBoxesApiService nestingBoxApi = NestingBoxesApiService.create();
-    print(event.toString());
+    // print(event.toString());
     if (event is GetBoxEvent) {
       if (this.currentState is! InitialBoxDataState) {
         yield BoxChangingState();
       }
+      // print(boxId);
       nestingBox = await _nestingBoxRepo.getNestingBoxById(boxId);
       yield BoxReadyState();
     }
