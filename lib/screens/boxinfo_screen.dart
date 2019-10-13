@@ -20,7 +20,7 @@ class BoxInfoScreen extends NesteoFullScreen {
   @override
   Widget build(BuildContext context) {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    NestingBox nestingBox = new NestingBox(id: "F23");
+    NestingBox nestingBox = new NestingBox();
     boxDataBloc.dispatch(GetBoxEvent(box: nestingBox));
 
     Widget imageSection = Container(

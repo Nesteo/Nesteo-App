@@ -18,21 +18,16 @@ class GetBoxEvent extends BoxDataEvent {
   List<Object> get props => null;
 }
 
-class ChangeBoxTypeEvent extends BoxDataEvent {
-  final NestingBoxesApiService nestingBoxesApi;
-
-  ChangeBoxTypeEvent({@required this.nestingBoxesApi}) : super();
+class GetAllBoxEvent extends BoxDataEvent {
 
   @override
   List<Object> get props => null;
 }
 
-class GetAllBoxEvent extends BoxDataEvent {
-  final List <NestingBox> boxes;
+class ChangeBoxTypeEvent extends BoxDataEvent {
+  final NestingBoxesApiService nestingBoxesApi;
 
-  GetAllBoxEvent({
-    @required this.boxes
-  }) : super();
+  ChangeBoxTypeEvent({@required this.nestingBoxesApi}) : super();
 
   @override
   List<Object> get props => null;

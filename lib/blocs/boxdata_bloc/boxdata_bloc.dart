@@ -7,31 +7,31 @@ import 'package:nesteo_app/model/nestingbox.dart';
 import './boxdata.dart';
 
 class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
-
   @override
   BoxDataState get initialState => InitialBoxDataState();
 
   NestingBoxesRepository _nestingBoxRepo = NestingBoxesRepository();
-  List<NestingBox> nestingBoxes = new List<NestingBox>();
+  List<NestingBox> nestingBoxList = new List<NestingBox>();
   NestingBox nestingBox = new NestingBox();
-  String boxId = "F000001";
-
+  String boxId = "";
 
   @override
-  Stream<BoxDataState> mapEventToState(
-    BoxDataEvent event
-  ) async* {
-     // NestingBoxesApiService nestingBoxApi = NestingBoxesApiService.create();
+  Stream<BoxDataState> mapEventToState(BoxDataEvent event) async* {
+    // NestingBoxesApiService nestingBoxApi = NestingBoxesApiService.create();
     print(event.toString());
     if (event is GetBoxEvent) {
       if (this.currentState is! InitialBoxDataState) {
         yield BoxChangingState();
       }
-      List<NestingBox> nestingBoxes =
-            await _nestingBoxRepo.getAllNestingBoxes();
-      print(nestingBoxes.length);
       nestingBox = await _nestingBoxRepo.getNestingBoxById(boxId);
-      print(nestingBox.toString());
+      yield BoxReadyState();
+    }
+    if (event is GetAllBoxEvent) {
+      if (this.currentState is! InitialBoxDataState) {
+        yield BoxChangingState();
+      }
+      nestingBoxList = await _nestingBoxRepo.getAllNestingBoxes();
+      // print(nestingBoxes.length);
       yield BoxReadyState();
     }
   }
