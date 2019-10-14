@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/screens.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 
@@ -45,7 +47,14 @@ class FullScreen extends StatelessWidget {
                     leading: screen.appBarLeading,
                   )
                 : null,
-            body: screen,
+            body: Builder(
+              builder: (BuildContext scaffoldContext) {
+                BlocProvider.of<SnackbarBloc>(context).dispatch(
+                  SetScaffoldContextEvent(scaffoldContext: scaffoldContext),
+                );
+                return screen;
+              },
+            ),
             floatingActionButton: screen.floatingActionButton,
           );
         },
@@ -83,14 +92,21 @@ class FramedScreen extends StatelessWidget {
               actions: screen.appBarActions,
               leading: screen.appBarLeading,
             ),
-            body: screen,
+            body: Builder(
+              builder: (BuildContext scaffoldContext) {
+                BlocProvider.of<SnackbarBloc>(context).dispatch(
+                  SetScaffoldContextEvent(scaffoldContext: scaffoldContext),
+                );
+                return screen;
+              },
+            ),
             floatingActionButton: screen.floatingActionButton,
             bottomNavigationBar: BottomNavigationBar(
               currentIndex:
                   (state is MapScreenState || state is ToMapScreenState)
                       ? 0
                       : 1,
-              selectedIconTheme: IconThemeData(size: 25),
+              selectedIconTheme: IconThemeData(size: 22),
               unselectedIconTheme: IconThemeData(size: 20),
               type: BottomNavigationBarType.fixed,
               unselectedItemColor: Colors.white70,

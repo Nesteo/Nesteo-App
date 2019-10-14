@@ -6,8 +6,11 @@ import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+
+typedef Marker MarkerUpdateAction(Marker marker);
 
 class MapScreen extends NesteoFramedScreen {
   MapScreen(BuildContext context)
@@ -24,28 +27,13 @@ class MapScreen extends NesteoFramedScreen {
                     BlocProvider.of<MapControlBloc>(context);
                 if (await Geolocator().isLocationServiceEnabled()) {
                   mapControlBloc.dispatch(CenterMapEvent());
+                  //mapControlBloc.dispatch(RebuildMapEvent());
                 } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Location Services disabled'),
-                        content: Text('Please enable GPS on your device!'),
-                        actions: <Widget>[
-                          FlatButton(
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: Text('OK'),
-                            textColor: Colors.lightGreen,
-                            color: Colors.white,
-                          ),
-                        ],
-                        backgroundColor: Colors.lightGreen,
-                        contentTextStyle:
-                            TextStyle(color: Colors.white, fontSize: 16),
-                        titleTextStyle:
-                            TextStyle(color: Colors.white, fontSize: 20),
-                      );
-                    },
+                  BlocProvider.of<SnackbarBloc>(context).dispatch(
+                    ShowSnackbarEvent(
+                        color: Colors.red,
+                        text: "Location Services disabled",
+                        scaffoldContext: context),
                   );
                 }
               },
@@ -62,6 +50,7 @@ class MapScreen extends NesteoFramedScreen {
                         : MapType.normal,
                     tilt: mapControlBloc.tilt,
                     zoom: mapControlBloc.zoom,
+                    markers: mapControlBloc.map.markers,
                   ),
                 );
               },
@@ -100,6 +89,7 @@ class MapScreen extends NesteoFramedScreen {
                 mapType: MapType.normal,
                 zoom: 16,
                 tilt: 20,
+                markers: Set<Marker>(),
               ),
             );
             return CircularProgressIndicator();
