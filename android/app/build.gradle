@@ -63,7 +63,7 @@ android {
         release {
             if (signFile.exists()) {
                 signingConfig signingConfigs.release
-                minifyEnabled true
+                minifyEnabled false
                 useProguard false
                 println "Signing with release keys"
             } else {

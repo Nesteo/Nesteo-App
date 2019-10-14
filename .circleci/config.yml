@@ -17,7 +17,7 @@ jobs:
       - run: flutter doctor
       - run: flutter build appbundle
       - run: mkdir -p /tmp/artifacts
-      - run: mv build/app/outputs/bundle/release/app.aab /tmp/artifacts/
+      - run: mv build/app/outputs/bundle/release/app.aab /tmp/artifacts/nesteo-app.aab
       - store_artifacts:
           path: /tmp/artifacts
 workflows:
