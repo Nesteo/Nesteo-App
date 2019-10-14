@@ -21,7 +21,7 @@ class InspectionDataBloc extends Bloc<InspectionDataEvent, InspectionDataState> 
       if (this.currentState is! InitialInspectionDataState) {
         yield InspectionChangingState();
       }
-      // print(InspectionId);
+      print(inspectionId);
       inspection = await _inspectionRepo.getInspectionById(inspectionId);
       yield InspectionReadyState();
     }
@@ -30,7 +30,7 @@ class InspectionDataBloc extends Bloc<InspectionDataEvent, InspectionDataState> 
         yield InspectionChangingState();
       }
       inspectionList = await _inspectionRepo.getAllInspections();
-      // print(nestingBoxes.length);
+      print(inspectionList.length);
       yield InspectionReadyState();
     }
   }
