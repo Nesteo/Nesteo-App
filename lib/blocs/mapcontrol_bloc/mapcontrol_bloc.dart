@@ -24,7 +24,6 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
       this.dispatch(
         BuildMapEvent(
           mapType: this.mapType,
-          markers: this.map.markers,
           tilt: this.tilt,
           zoom: this.zoom,
         ),
@@ -44,7 +43,6 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
           zoom: event.zoom,
           tilt: event.tilt,
         ),
-        markers: event.markers,
         mapType: this.mapType,
         onMapCreated: (GoogleMapController newController) {
           this.controller = newController;

@@ -10,8 +10,6 @@ import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 
-typedef Marker MarkerUpdateAction(Marker marker);
-
 class MapScreen extends NesteoFramedScreen {
   MapScreen(BuildContext context)
       : super(
@@ -50,13 +48,11 @@ class MapScreen extends NesteoFramedScreen {
                         : MapType.normal,
                     tilt: mapControlBloc.tilt,
                     zoom: mapControlBloc.zoom,
-                    markers: mapControlBloc.map.markers,
                   ),
                 );
               },
               icon: Icon(Icons.layers),
             ),
-            //OnlineModeButton(),
           ],
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
@@ -89,7 +85,6 @@ class MapScreen extends NesteoFramedScreen {
                 mapType: MapType.normal,
                 zoom: 16,
                 tilt: 20,
-                markers: Set<Marker>(),
               ),
             );
             return CircularProgressIndicator();

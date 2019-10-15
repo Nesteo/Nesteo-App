@@ -12,17 +12,14 @@ class CenterMapEvent extends MapControlEvent {
 }
 
 class BuildMapEvent extends MapControlEvent {
-  //final GoogleMap map;
   final MapType mapType;
   final double zoom;
   final double tilt;
-  final Set<Marker> markers;
 
   BuildMapEvent({
     @required this.mapType,
     @required this.zoom,
     @required this.tilt,
-    @required this.markers,
   }) : super();
 
   @override
