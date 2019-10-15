@@ -11,7 +11,7 @@ class GetBoxEvent extends BoxDataEvent {
   List<Object> get props => null;
 }
 
-class GetAllBoxEvent extends BoxDataEvent {
+class GetAllBoxPreviewEvent extends BoxDataEvent {
 
   @override
   List<Object> get props => null;

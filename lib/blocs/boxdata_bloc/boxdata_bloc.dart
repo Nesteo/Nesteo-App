@@ -26,11 +26,11 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       nestingBox = await _nestingBoxRepo.getNestingBoxById(boxId);
       yield BoxReadyState();
     }
-    if (event is GetAllBoxEvent) {
+    if (event is GetAllBoxPreviewEvent) {
       if (this.currentState is! InitialBoxDataState) {
         yield BoxChangingState();
       }
-      nestingBoxList = await _nestingBoxRepo.getAllNestingBoxes();
+      nestingBoxList = await _nestingBoxRepo.getAllNestingBoxPreviews();
       // print(nestingBoxes.length);
       yield BoxReadyState();
     }

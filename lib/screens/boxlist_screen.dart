@@ -72,11 +72,11 @@ class BoxListScreen extends NesteoFramedScreen {
   @override
   Widget build(BuildContext context) {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    boxDataBloc.dispatch(GetAllBoxEvent());
+    boxDataBloc.dispatch(GetAllBoxPreviewEvent());
     return BlocBuilder<BoxDataBloc, BoxDataState>(
       builder: (context, state) {
         if (state is InitialBoxDataState) {
-          boxDataBloc.dispatch(GetAllBoxEvent());
+          boxDataBloc.dispatch(GetAllBoxPreviewEvent());
           return CircularProgressIndicator();
         }
         if (state is BoxReadyState) {
