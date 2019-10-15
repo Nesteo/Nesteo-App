@@ -18,7 +18,7 @@ class NestingBox extends Equatable {
   final String imageFileName;
   final String comment;
   final String lastUpdated;
-  final String inspectionsCount;
+  final int inspectionsCount;
   final String lastInspected;
   final bool isPreview;
 
