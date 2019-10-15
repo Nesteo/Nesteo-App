@@ -27,4 +27,18 @@ class _$NestingBoxesApiService extends NestingBoxesApiService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  Future<Response> getAllNestingBoxPreviews() {
+    final $url = '/nesting-boxes/previews';
+    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  Future<Response> getNestingBoxPreviewById(String id) {
+    final $url = '/nesting-boxes/previews/${id}';
+    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

@@ -3,6 +3,8 @@ import 'package:nesteo_app/development/dev.dart';
 
 part 'inspections_api_service.chopper.dart';
 
+// IMPORTANT: The API-Services should never be used directly, only through one of the repositories
+
 @ChopperApi(baseUrl: '/inspections')
 abstract class InspectionsApiService extends ChopperService {
   @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})

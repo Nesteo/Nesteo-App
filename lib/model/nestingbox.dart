@@ -18,6 +18,9 @@ class NestingBox extends Equatable {
   final String imageFileName;
   final String comment;
   final String lastUpdated;
+  final int inspectionsCount;
+  final String lastInspected;
+  final bool isPreview;
 
   NestingBox({
     this.id,
@@ -34,6 +37,9 @@ class NestingBox extends Equatable {
     this.imageFileName,
     this.comment,
     this.lastUpdated,
+    this.inspectionsCount,
+    this.lastInspected,
+    this.isPreview,
   });
 
   @override
@@ -52,6 +58,9 @@ class NestingBox extends Equatable {
         imageFileName,
         comment,
         lastUpdated,
+        inspectionsCount,
+        lastInspected,
+        isPreview,
       ];
 
   @override
@@ -77,6 +86,23 @@ class NestingBox extends Equatable {
       imageFileName: json['imageFileName'],
       comment: json['comment'],
       lastUpdated: json['lastUpdated'],
+      inspectionsCount: json['inspectionsCount'],
+      lastInspected: json['lastInspected'],
+      isPreview: false,
+    );
+  }
+
+  factory NestingBox.previewFromJson(Map<String, dynamic> json) {
+    return new NestingBox(
+      id: json['id'],
+      region: Region.fromJson(json['region']),
+      oldId: json['oldId'],
+      foreignId: json['foreignId'],
+      coordinateLongitude: json['coordinateLongitude'],
+      coordinateLatitude: json['coordinateLatitude'],
+      inspectionsCount: json['inspectionsCount'],
+      lastInspected: json['lastInspected'],
+      isPreview: true,
     );
   }
 }
