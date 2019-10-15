@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<BoxDataBloc>(
             builder: (BuildContext context) => BoxDataBloc(),
-          )
+          ),
           BlocProvider<SnackbarBloc>(
             builder: (BuildContext context) => SnackbarBloc(),
           ),
