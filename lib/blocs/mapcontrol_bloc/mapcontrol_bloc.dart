@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import './mapcontrol.dart';
@@ -21,6 +20,15 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
     MapControlEvent event,
   ) async* {
     print(event.toString());
+    if (event is RebuildMapEvent) {
+      this.dispatch(
+        BuildMapEvent(
+          mapType: this.mapType,
+          tilt: this.tilt,
+          zoom: this.zoom,
+        ),
+      );
+    }
     if (event is BuildMapEvent) {
       if (this.currentState is! InitialMapControlState) {
         yield MapChangingState();

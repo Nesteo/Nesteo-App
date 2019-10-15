@@ -5,6 +5,7 @@ import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
+import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/frames.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'blocs/boxdata_bloc/boxdata_bloc.dart';
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<BoxDataBloc>(
             builder: (BuildContext context) => BoxDataBloc(),
           )
+          BlocProvider<SnackbarBloc>(
+            builder: (BuildContext context) => SnackbarBloc(),
+          ),
         ],
         child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
           builder: (context, onlineState) =>
