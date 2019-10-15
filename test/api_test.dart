@@ -17,6 +17,7 @@ void main() {
   group('API tests', () {
     group('Owners API tests', () {
       OwnersRepository ownersRepo;
+      int ownerId;
 
       setUp(() {
         ownersRepo = OwnersRepository();
@@ -25,11 +26,12 @@ void main() {
       test('Test /owners', () async {
         List<Owner> owners = await ownersRepo.getAllOwners();
         print(owners.toString());
+        ownerId = owners[0].id;
         expect(owners.length > 0, true);
       });
 
       test('Test /owners/{id}', () async {
-        Owner owner = await ownersRepo.getOwnerById(0);
+        Owner owner = await ownersRepo.getOwnerById(ownerId);
         if (owner != null) {
           print(owner.toString());
         }
@@ -37,6 +39,7 @@ void main() {
     });
     group('Users API tests', () {
       UsersRepository usersRepo;
+      String userId;
 
       setUp(() {
         usersRepo = UsersRepository();
@@ -45,12 +48,12 @@ void main() {
       test('Test /users', () async {
         List<User> users = await usersRepo.getAllUsers();
         print(users.toString());
+        userId = users[0].id;
         expect(users.length > 0, true);
       });
 
       test('Test /users/{id}', () async {
-        User user =
-            await usersRepo.getUserById("f80d95df-9e94-4646-9cbb-b4c7be679ce1");
+        User user = await usersRepo.getUserById(userId);
         if (user != null) {
           print(user.toString());
         }
@@ -70,6 +73,7 @@ void main() {
     });
     group('Region API tests', () {
       RegionsRepository regionsRepo;
+      int regionId;
 
       setUp(() {
         regionsRepo = RegionsRepository();
@@ -78,11 +82,12 @@ void main() {
       test('Test /regions', () async {
         List<Region> regions = await regionsRepo.getAllRegions();
         print(regions.toString());
+        regionId = regions[0].id;
         expect(regions.length > 0, true);
       });
 
       test('Test /regions/{id}', () async {
-        Region region = await regionsRepo.getRegionById(0);
+        Region region = await regionsRepo.getRegionById(regionId);
         if (region != null) {
           print(region.toString());
         }
@@ -110,6 +115,7 @@ void main() {
     });
     group('NestingBox API tests', () {
       NestingBoxesRepository nestingBoxRepo;
+      String nestingBoxId;
 
       setUp(() {
         nestingBoxRepo = NestingBoxesRepository();
@@ -119,14 +125,42 @@ void main() {
         List<NestingBox> nestingBoxes =
             await nestingBoxRepo.getAllNestingBoxes();
         print(nestingBoxes.toString());
+        if (nestingBoxes[0] != null) {
+          nestingBoxId = nestingBoxes[0].id;
+        }
         expect(nestingBoxes.length > 0, true);
+        expect(nestingBoxes[0].isPreview, false);
       });
 
       test('Test /nesting-boxes/{id}', () async {
-        NestingBox nestingBox =
-            await nestingBoxRepo.getNestingBoxById("F000001");
-        if (nestingBox != null) {
-          print(nestingBox.toString());
+        if (nestingBoxId != null) {
+          NestingBox nestingBox =
+              await nestingBoxRepo.getNestingBoxById(nestingBoxId);
+          if (nestingBox != null) {
+            print(nestingBox.toString());
+          }
+        }
+      });
+
+      test('Test /nesting-boxes/previews', () async {
+        List<NestingBox> nestingBoxes =
+            await nestingBoxRepo.getAllNestingBoxPreviews();
+        print(nestingBoxes.toString());
+        if (nestingBoxes[0] != null) {
+          nestingBoxId = nestingBoxes[0].id;
+          expect(nestingBoxes.length > 0, true);
+          expect(nestingBoxes[0].isPreview, true);
+        }
+      });
+
+      test('Test /nesting-boxes/previews/{id}', () async {
+        if (nestingBoxId != null) {
+          NestingBox nestingBox =
+              await nestingBoxRepo.getNestingBoxPreviewById(nestingBoxId);
+          if (nestingBox != null) {
+            print(nestingBox.toString());
+            expect(nestingBox.isPreview, true);
+          }
         }
       });
     });
