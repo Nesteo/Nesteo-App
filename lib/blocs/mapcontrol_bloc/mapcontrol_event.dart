@@ -12,7 +12,6 @@ class CenterMapEvent extends MapControlEvent {
 }
 
 class BuildMapEvent extends MapControlEvent {
-  //final GoogleMap map;
   final MapType mapType;
   final double zoom;
   final double tilt;
@@ -27,11 +26,27 @@ class BuildMapEvent extends MapControlEvent {
   List<Object> get props => null;
 }
 
+typedef Marker MarkerUpdateAction(Marker marker);
+
+class AddMarkerEvent extends MapControlEvent {
+  final Marker marker;
+
+  AddMarkerEvent({@required this.marker}) : super();
+
+  @override
+  List<Object> get props => null;
+}
+
 class ChangeMapTypeEvent extends MapControlEvent {
   final GoogleMap map;
 
   ChangeMapTypeEvent({@required this.map}) : super();
 
+  @override
+  List<Object> get props => null;
+}
+
+class RebuildMapEvent extends MapControlEvent {
   @override
   List<Object> get props => null;
 }
