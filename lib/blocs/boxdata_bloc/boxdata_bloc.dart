@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:nesteo_app/backend/repositories/nestingboxes_repository.dart';
-import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import './boxdata.dart';
 
