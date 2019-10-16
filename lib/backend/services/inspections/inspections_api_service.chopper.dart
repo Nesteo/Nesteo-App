@@ -27,4 +27,18 @@ class _$InspectionsApiService extends InspectionsApiService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  Future<Response> getAllInspectionPreviews() {
+    final $url = '/inspections/previews';
+    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
+
+  Future<Response> getInspectionPreviewById(int id) {
+    final $url = '/inspections/previews/${id}';
+    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $request = Request('GET', $url, client.baseUrl, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

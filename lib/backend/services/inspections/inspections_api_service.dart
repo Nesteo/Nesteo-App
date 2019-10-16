@@ -7,11 +7,28 @@ part 'inspections_api_service.chopper.dart';
 
 @ChopperApi(baseUrl: '/inspections')
 abstract class InspectionsApiService extends ChopperService {
-  @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
+  @Get(
+    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
+  )
   Future<Response> getAllInspections();
 
-  @Get(path: '/{id}', headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
+  @Get(
+    path: '/{id}',
+    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
+  )
   Future<Response> getInspectionById(@Path('id') int id);
+
+  @Get(
+    path: '/previews',
+    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
+  )
+  Future<Response> getAllInspectionPreviews();
+
+  @Get(
+    path: '/previews/{id}',
+    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
+  )
+  Future<Response> getInspectionPreviewById(@Path('id') int id);
 
   static InspectionsApiService create() {
     final client = ChopperClient(

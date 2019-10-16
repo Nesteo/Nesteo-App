@@ -95,6 +95,7 @@ void main() {
     });
     group('Species API tests', () {
       SpeciesRepository speciesRepo;
+      int speciesId;
 
       setUp(() {
         speciesRepo = SpeciesRepository();
@@ -102,12 +103,15 @@ void main() {
 
       test('Test /species', () async {
         List<Species> species = await speciesRepo.getAllSpecies();
+        if (species[0] != null) {
+          speciesId = species[0].id;
+        }
         print(species.toString());
         expect(species.length > 0, true);
       });
 
       test('Test /species/{id}', () async {
-        Species species = await speciesRepo.getSpeciesById(0);
+        Species species = await speciesRepo.getSpeciesById(speciesId);
         if (species != null) {
           print(species.toString());
         }
@@ -166,23 +170,49 @@ void main() {
     });
     group('Inspection API tests', () {
       InspectionsRepository inspectionRepo;
+      int inspectionId;
 
       setUp(() {
         inspectionRepo = InspectionsRepository();
       });
 
       test('Test /inspections', () async {
-        List<Inspection> inspectiones =
-            await inspectionRepo.getAllInspections();
-        print(inspectiones.toString());
-        expect(inspectiones.length > 0, true);
+        List<Inspection> inspections = await inspectionRepo.getAllInspections();
+        print(inspections.toString());
+        if (inspections[0] != null) {
+          inspectionId = inspections[0].id;
+          expect(inspections[0].isPreview, false);
+        }
+        expect(inspections.length > 0, true);
       });
 
       test('Test /inspections/{id}', () async {
-        Inspection inspection = await inspectionRepo.getInspectionById(0);
+        Inspection inspection =
+            await inspectionRepo.getInspectionById(inspectionId);
+        if (inspection != null) {
+          print(inspection.toString());
+          expect(inspection.isPreview, false);
+        }
+      });
+
+      test('Test /inspections/previews', () async {
+        List<Inspection> inspections =
+            await inspectionRepo.getAllInspectionPreviews();
+        print(inspections.toString());
+        if (inspections[0] != null) {
+          inspectionId = inspections[0].id;
+        }
+        expect(inspections.length > 0, true);
+        expect(inspections[0].isPreview, true);
+      });
+
+      test('Test /inspections/previews/{id}', () async {
+        Inspection inspection =
+            await inspectionRepo.getInspectionPreviewById(inspectionId);
         if (inspection != null) {
           print(inspection.toString());
         }
+        expect(inspection.isPreview, true);
       });
     });
   });

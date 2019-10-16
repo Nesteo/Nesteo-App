@@ -23,6 +23,8 @@ class Inspection extends Equatable {
   final String imageFileName;
   final String comment;
   final String lastUpdated;
+  final String nestingBoxId;
+  final bool isPreview;
 
   Inspection({
     this.id,
@@ -44,6 +46,8 @@ class Inspection extends Equatable {
     this.imageFileName,
     this.comment,
     this.lastUpdated,
+    this.nestingBoxId,
+    this.isPreview,
   });
 
   @override
@@ -67,6 +71,8 @@ class Inspection extends Equatable {
         imageFileName,
         comment,
         lastUpdated,
+        nestingBoxId,
+        isPreview,
       ];
 
   @override
@@ -97,6 +103,21 @@ class Inspection extends Equatable {
       imageFileName: json['imageFileName'],
       comment: json['comment'],
       lastUpdated: json['lastUpdated'],
+      nestingBoxId: json['nestingBox']['id'],
+      isPreview: false,
+    );
+  }
+
+  factory Inspection.previewFromJson(Map<String, dynamic> json) {
+    return new Inspection(
+      id: json['id'],
+      nestingBoxId: json['nestingBoxId'],
+      inspectionDate: json['inspectionDate'],
+      condition: json['condition'],
+      ringedChickCount: json['ringedChickCount'],
+      femaleParentBirdDiscovery: json['femaleParentBirdDiscovery'],
+      maleParentBirdDiscovery: json['maleParentBirdDiscovery'],
+      isPreview: true,
     );
   }
 }
