@@ -34,4 +34,30 @@ class InspectionsRepository {
       return null;
     }
   }
+
+  Future<Inspection> getInspectionPreviewById(int id) async {
+    final response = await inspectionsApi.getInspectionPreviewById(id);
+    if (response.statusCode == 200) {
+      print(response.body);
+      final Map result = json.decode(response.body);
+      return Inspection.previewFromJson(result);
+    } else {
+      print('Request failed');
+      return null;
+    }
+  }
+
+  Future<List<Inspection>> getAllInspectionPreviews() async {
+    final response = await inspectionsApi.getAllInspections();
+    if (response.statusCode == 200) {
+      print(response.body);
+      final List results = json.decode(response.body);
+      return results
+          .map((inspection) => Inspection.previewFromJson(inspection))
+          .toList();
+    } else {
+      print('Request failed');
+      return null;
+    }
+  }
 }
