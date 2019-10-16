@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
@@ -9,12 +10,16 @@ class BoxInfoScreen extends NesteoFullScreen {
   BoxInfoScreen(BuildContext context)
       : super(context,
             hasAppBar: true,
-            appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase).screenName.boxInfo),
+            appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase)
+                .screenName
+                .boxInfo),
             appBarActions: null,
             appBarLeading: GoBackButton());
 
   @override
   Widget build(BuildContext context) {
+    BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
+    
     Widget imageSection = Container(
       child: Image.asset('images/testImage.jpg',
           width: 600, height: 240, fit: BoxFit.fitWidth),
@@ -22,25 +27,30 @@ class BoxInfoScreen extends NesteoFullScreen {
 
     Widget titleSection = Container(
       padding: const EdgeInsets.all(32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Text(
-              'Box 1',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Text(
-            'another thing about Box 1',
-            style: TextStyle(
-              color: Colors.grey[500],
-            ),
-          ),
-        ],
+      child: BlocBuilder<BoxDataBloc, BoxDataState>(
+        builder: (context, state) {
+          if (state is InitialBoxDataState) {
+            boxDataBloc.dispatch(GetBoxEvent());
+            return CircularProgressIndicator();
+          }
+          if (state is BoxReadyState) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  boxDataBloc.nestingBox.id,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  boxDataBloc.nestingBox.region.name,
+                )
+              ],
+            );
+          }
+          return CircularProgressIndicator();
+        },
       ),
     );
 
