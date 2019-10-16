@@ -149,7 +149,7 @@ class InspectionScreen extends NesteoFullScreen {
         child: Column(children: <Widget>[
           titleSection(context),
           dataSection(context),
-          gridtest(context)
+          //gridtest(context)
         ]),
       ),
     );
