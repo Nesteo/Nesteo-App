@@ -55,8 +55,8 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
           builder: (context, onlineState) =>
               BlocBuilder<FrameControlBloc, FrameControlState>(
-            condition: (previousState, currentState) =>
-                currentState.runtimeType != previousState.runtimeType,
+            condition: (previousState, state) =>
+                state.runtimeType != previousState.runtimeType,
             builder: (context, frameState) {
               if (frameState is FrameEnabledState) {
                 return FramedScreen();

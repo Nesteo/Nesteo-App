@@ -5,20 +5,22 @@ import 'package:nesteo_app/backend/repositories/inspections_repository.dart';
 import 'package:nesteo_app/model/inspection.dart';
 import './inspectiondata.dart';
 
-class InspectionDataBloc extends Bloc<InspectionDataEvent, InspectionDataState> {
+class InspectionDataBloc
+    extends Bloc<InspectionDataEvent, InspectionDataState> {
   @override
   InspectionDataState get initialState => InitialInspectionDataState();
 
   InspectionsRepository _inspectionRepo = InspectionsRepository();
   List<Inspection> inspectionList = new List<Inspection>();
-            
+
   Inspection inspection = new Inspection();
   int inspectionId = 0;
 
   @override
-  Stream<InspectionDataState> mapEventToState(InspectionDataEvent event) async* {
+  Stream<InspectionDataState> mapEventToState(
+      InspectionDataEvent event) async* {
     if (event is GetInspectionEvent) {
-      if (this.currentState is! InitialInspectionDataState) {
+      if (this.state is! InitialInspectionDataState) {
         yield InspectionChangingState();
       }
       print(inspectionId);
@@ -26,7 +28,7 @@ class InspectionDataBloc extends Bloc<InspectionDataEvent, InspectionDataState> 
       yield InspectionReadyState();
     }
     if (event is GetAllInspectionEvent) {
-      if (this.currentState is! InitialInspectionDataState) {
+      if (this.state is! InitialInspectionDataState) {
         yield InspectionChangingState();
       }
       inspectionList = await _inspectionRepo.getAllInspections();

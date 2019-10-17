@@ -24,7 +24,7 @@ void main() {
         emitsInOrder(expected),
       );
 
-      onlineModeBloc.dispatch(OfflineEvent());
+      onlineModeBloc.add(OfflineEvent());
     });
 
     test('Going online works', () {
@@ -39,8 +39,8 @@ void main() {
         emitsInOrder(expected),
       );
 
-      onlineModeBloc.dispatch(OfflineEvent());
-      onlineModeBloc.dispatch(OnlineEvent());
+      onlineModeBloc.add(OfflineEvent());
+      onlineModeBloc.add(OnlineEvent());
     });
   });
 }

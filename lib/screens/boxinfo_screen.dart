@@ -19,7 +19,7 @@ class BoxInfoScreen extends NesteoFullScreen {
   @override
   Widget build(BuildContext context) {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    
+
     Widget imageSection = Container(
       child: Image.asset('images/testImage.jpg',
           width: 600, height: 240, fit: BoxFit.fitWidth),
@@ -30,7 +30,7 @@ class BoxInfoScreen extends NesteoFullScreen {
       child: BlocBuilder<BoxDataBloc, BoxDataState>(
         builder: (context, state) {
           if (state is InitialBoxDataState) {
-            boxDataBloc.dispatch(GetBoxEvent());
+            boxDataBloc.add(GetBoxEvent());
             return CircularProgressIndicator();
           }
           if (state is BoxReadyState) {
@@ -72,7 +72,7 @@ class BoxInfoScreen extends NesteoFullScreen {
             subtitle: Text('inspection date'),
             onTap: () {
               BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToInspectionEvent());
+                  .add(GoToInspectionEvent());
             },
           ),
           ListTile(
@@ -82,7 +82,7 @@ class BoxInfoScreen extends NesteoFullScreen {
             subtitle: Text('inspection date'),
             onTap: () {
               BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToInspectionEvent());
+                  .add(GoToInspectionEvent());
             },
           ),
           ListTile(
@@ -92,7 +92,7 @@ class BoxInfoScreen extends NesteoFullScreen {
             subtitle: Text('inspection date'),
             onTap: () {
               BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToInspectionEvent());
+                  .add(GoToInspectionEvent());
             },
           ),
           ListTile(
@@ -102,7 +102,7 @@ class BoxInfoScreen extends NesteoFullScreen {
             subtitle: Text('inspection date'),
             onTap: () {
               BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToInspectionEvent());
+                  .add(GoToInspectionEvent());
             },
           ),
         ],
@@ -118,9 +118,9 @@ class BoxInfoScreen extends NesteoFullScreen {
             child: Icon(icon, color: color),
             onTap: () {
               BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToNewInspectionEvent());
+                  .add(GoToNewInspectionEvent());
               BlocProvider.of<FrameControlBloc>(context)
-                  .dispatch(DisableFrameEvent());
+                  .add(DisableFrameEvent());
             },
           ),
           Container(

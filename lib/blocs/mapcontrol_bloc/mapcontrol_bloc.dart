@@ -6,7 +6,7 @@ import './mapcontrol.dart';
 
 class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
   GoogleMapController controller;
-  GoogleMap map;
+  GoogleMap googleMap;
   LatLng location = LatLng(52.3537269, 9.724127);
   MapType mapType = MapType.normal;
   double zoom = 16;
@@ -21,7 +21,7 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
   ) async* {
     print(event.toString());
     if (event is RebuildMapEvent) {
-      this.dispatch(
+      this.add(
         BuildMapEvent(
           mapType: this.mapType,
           tilt: this.tilt,
@@ -30,14 +30,14 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
       );
     }
     if (event is BuildMapEvent) {
-      if (this.currentState is! InitialMapControlState) {
+      if (this.state is! InitialMapControlState) {
         yield MapChangingState();
       }
       print('BuildMapEvent');
       location = this.location;
       mapType = event.mapType;
 
-      this.map = GoogleMap(
+      this.googleMap = GoogleMap(
         initialCameraPosition: CameraPosition(
           target: this.location,
           zoom: event.zoom,

@@ -19,16 +19,15 @@ class BoxListScreen extends NesteoFramedScreen {
           appBarLeading: null,
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToNewBoxEvent());
+              BlocProvider.of<PageControlBloc>(context).add(GoToNewBoxEvent());
               BlocProvider.of<FrameControlBloc>(context)
-                  .dispatch(DisableFrameEvent());
+                  .add(DisableFrameEvent());
             },
             child: Icon(Icons.add),
-            backgroundColor: (BlocProvider.of<OnlineModeBloc>(context)
-                    .currentState is OnlineState)
-                ? Colors.lightGreen
-                : Colors.red,
+            backgroundColor:
+                (BlocProvider.of<OnlineModeBloc>(context).state is OnlineState)
+                    ? Colors.lightGreen
+                    : Colors.red,
           ),
           appBarActions: <Widget>[
             IconButton(
@@ -72,11 +71,11 @@ class BoxListScreen extends NesteoFramedScreen {
   @override
   Widget build(BuildContext context) {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    boxDataBloc.dispatch(GetAllBoxPreviewEvent());
+    boxDataBloc.add(GetAllBoxPreviewEvent());
     return BlocBuilder<BoxDataBloc, BoxDataState>(
       builder: (context, state) {
         if (state is InitialBoxDataState) {
-          boxDataBloc.dispatch(GetAllBoxPreviewEvent());
+          boxDataBloc.add(GetAllBoxPreviewEvent());
           return CircularProgressIndicator();
         }
         if (state is BoxReadyState) {
@@ -93,14 +92,13 @@ class BoxListScreen extends NesteoFramedScreen {
                   isThreeLine: true,
                   subtitle: Text(boxDataBloc.nestingBoxList[index].region.name),
                   onTap: () {
-                    // Set the box Id to this selection and dispatch get box for the info page
+                    // Set the box Id to this selection and add get box for the info page
                     boxDataBloc.boxId = boxDataBloc.nestingBoxList[index].id;
-                    BlocProvider.of<BoxDataBloc>(context)
-                        .dispatch(GetBoxEvent());
+                    BlocProvider.of<BoxDataBloc>(context).add(GetBoxEvent());
                     BlocProvider.of<PageControlBloc>(context)
-                        .dispatch(GoToBoxInfoEvent());
+                        .add(GoToBoxInfoEvent());
                     BlocProvider.of<FrameControlBloc>(context)
-                        .dispatch(DisableFrameEvent());
+                        .add(DisableFrameEvent());
                   },
                 );
               },

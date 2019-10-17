@@ -17,7 +17,7 @@ class SnackbarBloc extends Bloc<SnackbarEvent, SnackbarState> {
       this.scaffoldContext = event.scaffoldContext;
       yield SnackbarReadyState();
     }
-    if (event is ShowSnackbarEvent && this.currentState is SnackbarReadyState) {
+    if (event is ShowSnackbarEvent && this.state is SnackbarReadyState) {
       Scaffold.of(this.scaffoldContext).showSnackBar(
         SnackBar(
           content: Text(event.text),

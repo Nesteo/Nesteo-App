@@ -113,9 +113,9 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                     color: Colors.green,
                     onPressed: () {
                       BlocProvider.of<PageControlBloc>(context)
-                          .dispatch(GoToMapEvent());
+                          .add(GoToMapEvent());
                       BlocProvider.of<FrameControlBloc>(context)
-                          .dispatch(EnableFrameEvent());
+                          .add(EnableFrameEvent());
                     },
                     child: Text(
                       loc.login.logInButton,

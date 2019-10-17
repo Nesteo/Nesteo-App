@@ -24,10 +24,10 @@ class MapScreen extends NesteoFramedScreen {
                 MapControlBloc mapControlBloc =
                     BlocProvider.of<MapControlBloc>(context);
                 if (await Geolocator().isLocationServiceEnabled()) {
-                  mapControlBloc.dispatch(CenterMapEvent());
-                  //mapControlBloc.dispatch(RebuildMapEvent());
+                  mapControlBloc.add(CenterMapEvent());
+                  //mapControlBloc.add(RebuildMapEvent());
                 } else {
-                  BlocProvider.of<SnackbarBloc>(context).dispatch(
+                  BlocProvider.of<SnackbarBloc>(context).add(
                     ShowSnackbarEvent(
                         color: Colors.red,
                         text: "Location Services disabled",
@@ -41,7 +41,7 @@ class MapScreen extends NesteoFramedScreen {
               onPressed: () async {
                 MapControlBloc mapControlBloc =
                     BlocProvider.of<MapControlBloc>(context);
-                mapControlBloc.dispatch(
+                mapControlBloc.add(
                   BuildMapEvent(
                     mapType: (mapControlBloc.mapType == MapType.normal)
                         ? MapType.hybrid
@@ -56,19 +56,18 @@ class MapScreen extends NesteoFramedScreen {
           ],
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .dispatch(GoToNewBoxEvent());
+              BlocProvider.of<PageControlBloc>(context).add(GoToNewBoxEvent());
               BlocProvider.of<FrameControlBloc>(context)
-                  .dispatch(DisableFrameEvent());
+                  .add(DisableFrameEvent());
             },
             icon: Icon(Icons.add),
             label: Text(Localizations.of<LocaleBase>(context, LocaleBase)
                 .screenName
                 .boxNew),
-            backgroundColor: (BlocProvider.of<OnlineModeBloc>(context)
-                    .currentState is OnlineState)
-                ? Colors.lightGreen
-                : Colors.red,
+            backgroundColor:
+                (BlocProvider.of<OnlineModeBloc>(context).state is OnlineState)
+                    ? Colors.lightGreen
+                    : Colors.red,
           ),
         );
 
@@ -80,7 +79,7 @@ class MapScreen extends NesteoFramedScreen {
         builder: (context, state) {
           if (state is InitialMapControlState) {
             print('Constructing Map');
-            mapControlBloc.dispatch(
+            mapControlBloc.add(
               BuildMapEvent(
                 mapType: MapType.normal,
                 zoom: 16,
@@ -90,7 +89,7 @@ class MapScreen extends NesteoFramedScreen {
             return CircularProgressIndicator();
           }
           if (state is MapReadyState) {
-            return mapControlBloc.map;
+            return mapControlBloc.googleMap;
           }
           return CircularProgressIndicator();
         },

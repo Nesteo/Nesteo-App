@@ -19,7 +19,7 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
     // NestingBoxesApiService nestingBoxApi = NestingBoxesApiService.create();
     // print(event.toString());
     if (event is GetBoxEvent) {
-      if (this.currentState is! InitialBoxDataState) {
+      if (this.state is! InitialBoxDataState) {
         yield BoxChangingState();
       }
       // print(boxId);
@@ -27,7 +27,7 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       yield BoxReadyState();
     }
     if (event is GetAllBoxPreviewEvent) {
-      if (this.currentState is! InitialBoxDataState) {
+      if (this.state is! InitialBoxDataState) {
         yield BoxChangingState();
       }
       nestingBoxList = await _nestingBoxRepo.getAllNestingBoxPreviews();
