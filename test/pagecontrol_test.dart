@@ -29,7 +29,7 @@ void main() {
       ];
 
       expectLater(
-        pageControlBloc.state,
+        pageControlBloc,
         emitsInOrder(expected),
       );
 
