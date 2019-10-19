@@ -16,15 +16,10 @@ void main() {
     test('Login to Transition to Map States working', () {
       final List<PageControlState> expected = [
         LoginScreenState(),
-        ToMapScreenState(),
         MapScreenState(),
-        ToBoxListScreenState(),
         BoxListScreenState(),
-        ToNewBoxScreenState(),
         NewBoxScreenState(),
-        ToBoxInfoScreenState(),
         BoxInfoScreenState(),
-        ToInspectionScreenState(),
         InspectionScreenState(),
       ];
 
