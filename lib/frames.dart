@@ -18,8 +18,8 @@ class FullScreen extends StatelessWidget {
 
     return Container(
       child: BlocBuilder<PageControlBloc, PageControlState>(
-        condition: (previousState, currentState) =>
-            currentState.runtimeType != previousState.runtimeType,
+        condition: (previousState, state) =>
+            state.runtimeType != previousState.runtimeType,
         builder: (context, state) {
           if (state is LoginScreenState) {
             screen = LoginScreen(context);
@@ -38,10 +38,9 @@ class FullScreen extends StatelessWidget {
           return Scaffold(
             appBar: (screen.hasAppBar)
                 ? AppBar(
-                    backgroundColor:
-                        (onlineModeBloc.currentState is OnlineState)
-                            ? Colors.lightGreen
-                            : Colors.red,
+                    backgroundColor: (onlineModeBloc.state is OnlineState)
+                        ? Colors.lightGreen
+                        : Colors.red,
                     title: screen.appBarTitle,
                     actions: screen.appBarActions,
                     leading: screen.appBarLeading,
@@ -49,7 +48,7 @@ class FullScreen extends StatelessWidget {
                 : null,
             body: Builder(
               builder: (BuildContext scaffoldContext) {
-                BlocProvider.of<SnackbarBloc>(context).dispatch(
+                BlocProvider.of<SnackbarBloc>(context).add(
                   SetScaffoldContextEvent(scaffoldContext: scaffoldContext),
                 );
                 return screen;
@@ -85,7 +84,7 @@ class FramedScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: (onlineModeBloc.currentState is OnlineState)
+              backgroundColor: (onlineModeBloc.state is OnlineState)
                   ? Colors.lightGreen
                   : Colors.red,
               title: screen.appBarTitle,
@@ -94,7 +93,7 @@ class FramedScreen extends StatelessWidget {
             ),
             body: Builder(
               builder: (BuildContext scaffoldContext) {
-                BlocProvider.of<SnackbarBloc>(context).dispatch(
+                BlocProvider.of<SnackbarBloc>(context).add(
                   SetScaffoldContextEvent(scaffoldContext: scaffoldContext),
                 );
                 return screen;
@@ -111,17 +110,15 @@ class FramedScreen extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               unselectedItemColor: Colors.white70,
               selectedItemColor: Colors.white,
-              backgroundColor: (onlineModeBloc.currentState is OnlineState)
+              backgroundColor: (onlineModeBloc.state is OnlineState)
                   ? Colors.lightGreen
                   : Colors.red,
               onTap: (index) {
-                if (!(pageControlBloc.currentState is MapScreenState) &&
-                    index == 0) {
-                  pageControlBloc.dispatch(GoToMapEvent());
-                } else if (!(pageControlBloc.currentState
-                        is BoxListScreenState) &&
+                if (!(pageControlBloc.state is MapScreenState) && index == 0) {
+                  pageControlBloc.add(GoToMapEvent());
+                } else if (!(pageControlBloc.state is BoxListScreenState) &&
                     index == 1) {
-                  pageControlBloc.dispatch(GoToBoxListEvent());
+                  pageControlBloc.add(GoToBoxListEvent());
                 }
               },
               items: <BottomNavigationBarItem>[

@@ -29,16 +29,16 @@ void main() {
       ];
 
       expectLater(
-        pageControlBloc.state,
+        pageControlBloc,
         emitsInOrder(expected),
       );
 
-      pageControlBloc.dispatch(GoToHomeEvent());
-      pageControlBloc.dispatch(GoToMapEvent());
-      pageControlBloc.dispatch(GoToBoxListEvent());
-      pageControlBloc.dispatch(GoToNewBoxEvent());
-      pageControlBloc.dispatch(GoToBoxInfoEvent());
-      pageControlBloc.dispatch(GoToInspectionEvent());
+      pageControlBloc.add(GoToHomeEvent());
+      pageControlBloc.add(GoToMapEvent());
+      pageControlBloc.add(GoToBoxListEvent());
+      pageControlBloc.add(GoToNewBoxEvent());
+      pageControlBloc.add(GoToBoxInfoEvent());
+      pageControlBloc.add(GoToInspectionEvent());
     });
   });
 }
