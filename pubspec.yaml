@@ -1,7 +1,7 @@
 name: nesteo_app
 description: Nesting box management app for ringing associations.
 
-version: 0.3.3+8
+version: 0.3.4+9
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -25,7 +25,6 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   datetime_picker_formfield: ^0.4.3
   geolocator: ^5.1.4
-  scoped_model: ^1.0.1
 
 dev_dependencies:
   mockito: ^4.1.1
