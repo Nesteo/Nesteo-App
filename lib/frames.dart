@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/screens.dart';
@@ -11,8 +10,6 @@ import 'generated/locale_base.dart';
 class FullScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final OnlineModeBloc onlineModeBloc =
-        BlocProvider.of<OnlineModeBloc>(context);
     NesteoFullScreen screen;
 
     return Container(
@@ -37,9 +34,7 @@ class FullScreen extends StatelessWidget {
           return Scaffold(
             appBar: (screen.hasAppBar)
                 ? AppBar(
-                    backgroundColor: (onlineModeBloc.state is OnlineState)
-                        ? Colors.lightGreen
-                        : Colors.red,
+                    backgroundColor: Colors.lightGreen,
                     title: screen.appBarTitle,
                     actions: screen.appBarActions,
                     leading: screen.appBarLeading,
@@ -66,8 +61,6 @@ class FramedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final PageControlBloc pageControlBloc =
         BlocProvider.of<PageControlBloc>(context);
-    final OnlineModeBloc onlineModeBloc =
-        BlocProvider.of<OnlineModeBloc>(context);
     NesteoFramedScreen screen;
 
     return Container(
@@ -83,9 +76,7 @@ class FramedScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: (onlineModeBloc.state is OnlineState)
-                  ? Colors.lightGreen
-                  : Colors.red,
+              backgroundColor: Colors.lightGreen,
               title: screen.appBarTitle,
               actions: screen.appBarActions,
               leading: screen.appBarLeading,
@@ -106,9 +97,7 @@ class FramedScreen extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               unselectedItemColor: Colors.white70,
               selectedItemColor: Colors.white,
-              backgroundColor: (onlineModeBloc.state is OnlineState)
-                  ? Colors.lightGreen
-                  : Colors.red,
+              backgroundColor: Colors.lightGreen,
               onTap: (index) {
                 if (!(pageControlBloc.state is MapScreenState) && index == 0) {
                   pageControlBloc.add(GoToMapEvent());

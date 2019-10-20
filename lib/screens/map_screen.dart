@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
-import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
@@ -57,17 +55,12 @@ class MapScreen extends NesteoFramedScreen {
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               BlocProvider.of<PageControlBloc>(context).add(GoToNewBoxEvent());
-              BlocProvider.of<FrameControlBloc>(context)
-                  .add(DisableFrameEvent());
             },
             icon: Icon(Icons.add),
             label: Text(Localizations.of<LocaleBase>(context, LocaleBase)
                 .screenName
                 .boxNew),
-            backgroundColor:
-                (BlocProvider.of<OnlineModeBloc>(context).state is OnlineState)
-                    ? Colors.lightGreen
-                    : Colors.red,
+            backgroundColor: Colors.lightGreen,
           ),
         );
 

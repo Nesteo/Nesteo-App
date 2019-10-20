@@ -12,7 +12,6 @@ class UsersRepository {
   Future<User> getUserById(String id) async {
     final response = await usersApi.getUserById(id);
     if (response.statusCode == 200) {
-      print(response.body);
       final Map result = json.decode(response.body);
       return User.fromJson(result);
     } else {
@@ -24,7 +23,6 @@ class UsersRepository {
   Future<List<User>> getAllUsers() async {
     final response = await usersApi.getAllUsers();
     if (response.statusCode == 200) {
-      print(response.body);
       final List results = json.decode(response.body);
       return results.map((user) => User.fromJson(user)).toList();
     } else {

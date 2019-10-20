@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' as prefix0;
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
-import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
-import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
-import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 
 class BoxListScreen extends NesteoFramedScreen {
   BoxListScreen(BuildContext context)
@@ -20,14 +16,9 @@ class BoxListScreen extends NesteoFramedScreen {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               BlocProvider.of<PageControlBloc>(context).add(GoToNewBoxEvent());
-              BlocProvider.of<FrameControlBloc>(context)
-                  .add(DisableFrameEvent());
             },
             child: Icon(Icons.add),
-            backgroundColor:
-                (BlocProvider.of<OnlineModeBloc>(context).state is OnlineState)
-                    ? Colors.lightGreen
-                    : Colors.red,
+            backgroundColor: Colors.lightGreen,
           ),
           appBarActions: <Widget>[
             IconButton(
@@ -64,7 +55,6 @@ class BoxListScreen extends NesteoFramedScreen {
                 );
               },
             ),
-            //OnlineModeButton(),
           ],
         );
 
@@ -97,8 +87,6 @@ class BoxListScreen extends NesteoFramedScreen {
                     BlocProvider.of<BoxDataBloc>(context).add(GetBoxEvent());
                     BlocProvider.of<PageControlBloc>(context)
                         .add(GoToBoxInfoEvent());
-                    BlocProvider.of<FrameControlBloc>(context)
-                        .add(DisableFrameEvent());
                   },
                 );
               },

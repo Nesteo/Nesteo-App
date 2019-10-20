@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
-import 'package:nesteo_app/blocs/onlinemode_bloc/onlinemode.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/inspectiondata_bloc/inspectiondata.dart';
@@ -27,17 +25,11 @@ class MyApp extends StatelessWidget {
         const Locale('en', ''),
         const Locale('de', ''),
       ],
-      // This MultiBlocProvider provides the PageControlBloc and the OnlineModeBloc to the Widget tree
+      // This MultiBlocProvider provides the PageControlBloc to the Widget tree
       home: MultiBlocProvider(
         providers: [
           BlocProvider<PageControlBloc>(
             builder: (BuildContext context) => PageControlBloc(),
-          ),
-          BlocProvider<OnlineModeBloc>(
-            builder: (BuildContext context) => OnlineModeBloc(),
-          ),
-          BlocProvider<FrameControlBloc>(
-            builder: (BuildContext context) => FrameControlBloc(),
           ),
           BlocProvider<MapControlBloc>(
             builder: (BuildContext context) => MapControlBloc(),
@@ -52,21 +44,18 @@ class MyApp extends StatelessWidget {
             builder: (BuildContext context) => InspectionDataBloc(),
           )
         ],
-        child: BlocBuilder<OnlineModeBloc, OnlineModeState>(
-          builder: (context, onlineState) =>
-              BlocBuilder<FrameControlBloc, FrameControlState>(
-            condition: (previousState, state) =>
-                state.runtimeType != previousState.runtimeType,
-            builder: (context, frameState) {
-              if (frameState is FrameEnabledState) {
-                return FramedScreen();
-              }
-              if (frameState is FrameDisabledState) {
-                return FullScreen();
-              }
-              return null;
-            },
-          ),
+        child: BlocBuilder<PageControlBloc, PageControlState>(
+          condition: (previousState, state) =>
+              state.navigationBarEnabled != previousState.navigationBarEnabled,
+          builder: (context, navigationBarState) {
+            if (navigationBarState.navigationBarEnabled) {
+              return FramedScreen();
+            }
+            if (!navigationBarState.navigationBarEnabled) {
+              return FullScreen();
+            }
+            return null;
+          },
         ),
       ),
     );

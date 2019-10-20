@@ -13,7 +13,7 @@ void main() {
       expect(pageControlBloc.initialState, LoginScreenState());
     });
 
-    test('Login to Transition to Map States working', () {
+    test('States change as expected', () {
       final List<PageControlState> expected = [
         LoginScreenState(),
         MapScreenState(),
@@ -21,6 +21,7 @@ void main() {
         NewBoxScreenState(),
         BoxInfoScreenState(),
         InspectionScreenState(),
+        NewInspectionScreenState(),
       ];
 
       expectLater(
@@ -34,6 +35,7 @@ void main() {
       pageControlBloc.add(GoToNewBoxEvent());
       pageControlBloc.add(GoToBoxInfoEvent());
       pageControlBloc.add(GoToInspectionEvent());
+      pageControlBloc.add(GoToNewInspectionEvent());
     });
   });
 }

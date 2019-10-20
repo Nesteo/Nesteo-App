@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nesteo_app/blocs/framecontrol_bloc/framecontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:nesteo_app/screens/screens.dart';
@@ -114,8 +113,6 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                     onPressed: () {
                       BlocProvider.of<PageControlBloc>(context)
                           .add(GoToMapEvent());
-                      BlocProvider.of<FrameControlBloc>(context)
-                          .add(EnableFrameEvent());
                     },
                     child: Text(
                       loc.login.logInButton,
