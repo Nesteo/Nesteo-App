@@ -119,8 +119,6 @@ class BoxInfoScreen extends NesteoFullScreen {
             onTap: () {
               BlocProvider.of<PageControlBloc>(context)
                   .add(GoToNewInspectionEvent());
-              BlocProvider.of<FrameControlBloc>(context)
-                  .add(DisableFrameEvent());
             },
           ),
           Container(

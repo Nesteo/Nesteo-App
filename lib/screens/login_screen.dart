@@ -114,8 +114,6 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                     onPressed: () {
                       BlocProvider.of<PageControlBloc>(context)
                           .add(GoToMapEvent());
-                      BlocProvider.of<FrameControlBloc>(context)
-                          .add(EnableFrameEvent());
                     },
                     child: Text(
                       loc.login.logInButton,
