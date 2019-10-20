@@ -25,16 +25,14 @@ void main() {
 
       test('Test /owners', () async {
         List<Owner> owners = await ownersRepo.getAllOwners();
-        print(owners.toString());
+
         ownerId = owners[0].id;
         expect(owners.length > 0, true);
       });
 
       test('Test /owners/{id}', () async {
         Owner owner = await ownersRepo.getOwnerById(ownerId);
-        if (owner != null) {
-          print(owner.toString());
-        }
+        expect(owner != null, true);
       });
     });
     group('Users API tests', () {
@@ -47,16 +45,14 @@ void main() {
 
       test('Test /users', () async {
         List<User> users = await usersRepo.getAllUsers();
-        print(users.toString());
+
         userId = users[0].id;
         expect(users.length > 0, true);
       });
 
       test('Test /users/{id}', () async {
         User user = await usersRepo.getUserById(userId);
-        if (user != null) {
-          print(user.toString());
-        }
+        expect(user != null, true);
       });
     });
     group('Auth API tests', () {
@@ -68,7 +64,7 @@ void main() {
 
       test('Test /auth', () async {
         User user = await authRepo.getAuth();
-        print(user.toString());
+        expect(user != null, true);
       });
     });
     group('Region API tests', () {
@@ -81,16 +77,14 @@ void main() {
 
       test('Test /regions', () async {
         List<Region> regions = await regionsRepo.getAllRegions();
-        print(regions.toString());
+
         regionId = regions[0].id;
         expect(regions.length > 0, true);
       });
 
       test('Test /regions/{id}', () async {
         Region region = await regionsRepo.getRegionById(regionId);
-        if (region != null) {
-          print(region.toString());
-        }
+        expect(region != null, true);
       });
     });
     group('Species API tests', () {
@@ -106,15 +100,13 @@ void main() {
         if (species[0] != null) {
           speciesId = species[0].id;
         }
-        print(species.toString());
+
         expect(species.length > 0, true);
       });
 
       test('Test /species/{id}', () async {
         Species species = await speciesRepo.getSpeciesById(speciesId);
-        if (species != null) {
-          print(species.toString());
-        }
+        expect(species != null, true);
       });
     });
     group('NestingBox API tests', () {
@@ -128,7 +120,7 @@ void main() {
       test('Test /nesting-boxes', () async {
         List<NestingBox> nestingBoxes =
             await nestingBoxRepo.getAllNestingBoxes();
-        print(nestingBoxes.toString());
+
         if (nestingBoxes[0] != null) {
           nestingBoxId = nestingBoxes[0].id;
         }
@@ -140,16 +132,15 @@ void main() {
         if (nestingBoxId != null) {
           NestingBox nestingBox =
               await nestingBoxRepo.getNestingBoxById(nestingBoxId);
-          if (nestingBox != null) {
-            print(nestingBox.toString());
-          }
+          expect(nestingBox != null, true);
+          expect(nestingBox.isPreview, false);
         }
       });
 
       test('Test /nesting-boxes/previews', () async {
         List<NestingBox> nestingBoxes =
             await nestingBoxRepo.getAllNestingBoxPreviews();
-        print(nestingBoxes.toString());
+
         if (nestingBoxes[0] != null) {
           nestingBoxId = nestingBoxes[0].id;
           expect(nestingBoxes.length > 0, true);
@@ -161,10 +152,8 @@ void main() {
         if (nestingBoxId != null) {
           NestingBox nestingBox =
               await nestingBoxRepo.getNestingBoxPreviewById(nestingBoxId);
-          if (nestingBox != null) {
-            print(nestingBox.toString());
-            expect(nestingBox.isPreview, true);
-          }
+          expect(nestingBox != null, true);
+          expect(nestingBox.isPreview, true);
         }
       });
     });
@@ -178,7 +167,7 @@ void main() {
 
       test('Test /inspections', () async {
         List<Inspection> inspections = await inspectionRepo.getAllInspections();
-        print(inspections.toString());
+
         if (inspections[0] != null) {
           inspectionId = inspections[0].id;
           expect(inspections[0].isPreview, false);
@@ -189,16 +178,14 @@ void main() {
       test('Test /inspections/{id}', () async {
         Inspection inspection =
             await inspectionRepo.getInspectionById(inspectionId);
-        if (inspection != null) {
-          print(inspection.toString());
-          expect(inspection.isPreview, false);
-        }
+        expect(inspection != null, true);
+        expect(inspection.isPreview, false);
       });
 
       test('Test /inspections/previews', () async {
         List<Inspection> inspections =
             await inspectionRepo.getAllInspectionPreviews();
-        print(inspections.toString());
+
         if (inspections[0] != null) {
           inspectionId = inspections[0].id;
         }
@@ -209,9 +196,7 @@ void main() {
       test('Test /inspections/previews/{id}', () async {
         Inspection inspection =
             await inspectionRepo.getInspectionPreviewById(inspectionId);
-        if (inspection != null) {
-          print(inspection.toString());
-        }
+        expect(inspection != null, true);
         expect(inspection.isPreview, true);
       });
     });
