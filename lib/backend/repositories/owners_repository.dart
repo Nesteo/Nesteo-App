@@ -12,7 +12,6 @@ class OwnersRepository {
   Future<Owner> getOwnerById(int id) async {
     final response = await ownersApi.getOwnerById(id);
     if (response.statusCode == 200) {
-      print(response.body);
       final Map result = json.decode(response.body);
       return Owner.fromJson(result);
     } else {
@@ -24,7 +23,6 @@ class OwnersRepository {
   Future<List<Owner>> getAllOwners() async {
     final response = await ownersApi.getAllOwners();
     if (response.statusCode == 200) {
-      print(response.body);
       final List results = json.decode(response.body);
       return results.map((owner) => Owner.fromJson(owner)).toList();
     } else {

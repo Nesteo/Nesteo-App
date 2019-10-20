@@ -12,7 +12,6 @@ class InspectionsRepository {
   Future<Inspection> getInspectionById(int id) async {
     final response = await inspectionsApi.getInspectionById(id);
     if (response.statusCode == 200) {
-      print(response.body);
       final Map result = json.decode(response.body);
       return Inspection.fromJson(result);
     } else {
@@ -24,7 +23,6 @@ class InspectionsRepository {
   Future<List<Inspection>> getAllInspections() async {
     final response = await inspectionsApi.getAllInspections();
     if (response.statusCode == 200) {
-      print(response.body);
       final List results = json.decode(response.body);
       return results
           .map((inspection) => Inspection.fromJson(inspection))
@@ -38,7 +36,6 @@ class InspectionsRepository {
   Future<Inspection> getInspectionPreviewById(int id) async {
     final response = await inspectionsApi.getInspectionPreviewById(id);
     if (response.statusCode == 200) {
-      print(response.body);
       final Map result = json.decode(response.body);
       return Inspection.previewFromJson(result);
     } else {
@@ -50,7 +47,6 @@ class InspectionsRepository {
   Future<List<Inspection>> getAllInspectionPreviews() async {
     final response = await inspectionsApi.getAllInspections();
     if (response.statusCode == 200) {
-      print(response.body);
       final List results = json.decode(response.body);
       return results
           .map((inspection) => Inspection.previewFromJson(inspection))

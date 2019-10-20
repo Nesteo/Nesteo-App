@@ -12,7 +12,6 @@ class AuthRepository {
   Future<User> getAuth() async {
     final response = await authApi.getAuth();
     if (response.statusCode == 200) {
-      print(response.body);
       final Map data = json.decode(response.body);
       return User.fromJson(data);
     } else {
