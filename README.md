@@ -1,4 +1,4 @@
-# Nesteo-App
+# Nesteo
 
 Frontend Mobile-App of the Nesteo nesting box management application for ringing associations. - [More Information](https://github.com/Nesteo/Nesteo)
 
