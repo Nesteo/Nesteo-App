@@ -9,9 +9,8 @@ class BoxInfoScreen extends NesteoFullScreen {
   BoxInfoScreen(BuildContext context)
       : super(context,
             hasAppBar: true,
-            appBarTitle: Text(Localizations.of<LocaleBase>(context, LocaleBase)
-                .screenName
-                .boxInfo),
+            appBarTitle: Text(
+                "${Localizations.of<LocaleBase>(context, LocaleBase).screenName.boxInfo} ${BlocProvider.of<BoxDataBloc>(context).nestingBox.id}"),
             appBarActions: null,
             appBarLeading: GoBackButton());
 
