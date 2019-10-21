@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
@@ -74,7 +76,6 @@ class BoxListScreen extends NesteoFramedScreen {
           // print(boxDataBloc.nestingBoxList.length);
 
           return Container(
-            color: Colors.lightGreen,
             child: ListView.builder(
               itemCount: boxDataBloc.nestingBoxList.length,
               itemBuilder: (context, index) {
@@ -82,14 +83,14 @@ class BoxListScreen extends NesteoFramedScreen {
                     .difference(boxDataBloc.nestingBoxList[index].lastInspected)
                     .inDays;
                 return Container(
-                  color: (daysSinceLastInspection > 365)
-                      ? Colors.red
-                      : (daysSinceLastInspection > 200)
-                          ? Colors.yellow
-                          : Colors.green,
                   child: Card(
+                    color: Color.lerp(
+                      Colors.white,
+                      Colors.red,
+                      log(daysSinceLastInspection / 330),
+                    ),
                     child: ListTile(
-                      leading: (daysSinceLastInspection > 200)
+                      leading: (daysSinceLastInspection > 300)
                           ? Icon(Icons.warning,
                               size: 40,
                               color: (daysSinceLastInspection > 365)
@@ -111,6 +112,10 @@ class BoxListScreen extends NesteoFramedScreen {
                       title: Text(boxDataBloc.nestingBoxList[index]
                           .id), //create testdata for listview
                       isThreeLine: false,
+                      onLongPress: () {
+                        BlocProvider.of<PageControlBloc>(context)
+                            .add(GoToNewInspectionEvent());
+                      },
                       subtitle: Text(
                           "Last Inspection: $daysSinceLastInspection days ago"),
                       onTap: () {
