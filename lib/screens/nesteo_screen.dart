@@ -10,42 +10,49 @@ abstract class NesteoScreen extends Container {
   final List<Widget> appBarActions;
   final Widget appBarLeading;
 
-  NesteoScreen(BuildContext context,
-      {this.floatingActionButton,
-      @required this.hasAppBar,
-      this.appBarTitle,
-      this.appBarLeading,
-      this.appBarActions})
-      : super();
+  NesteoScreen(
+    BuildContext context, {
+    this.floatingActionButton,
+    @required this.hasAppBar,
+    this.appBarTitle,
+    this.appBarLeading,
+    this.appBarActions,
+  }) : super();
 }
 
 abstract class NesteoFramedScreen extends NesteoScreen {
-  NesteoFramedScreen(BuildContext context,
-      {@required appBarTitle,
-      appBarActions,
-      appBarLeading,
-      floatingActionButton})
-      : super(context,
-            floatingActionButton: floatingActionButton,
-            hasAppBar: true,
-            appBarTitle: appBarTitle,
-            appBarActions: appBarActions,
-            appBarLeading: appBarLeading);
+  NesteoFramedScreen(
+    BuildContext context, {
+    appBarTitle,
+    appBarActions,
+    appBarLeading,
+    floatingActionButton,
+  }) : super(
+          context,
+          floatingActionButton: floatingActionButton,
+          hasAppBar: true,
+          appBarTitle: appBarTitle,
+          appBarActions: appBarActions,
+          appBarLeading: appBarLeading,
+        );
 }
 
 abstract class NesteoFullScreen extends NesteoScreen {
-  NesteoFullScreen(BuildContext context,
-      {floatingActionButton,
-      @required hasAppBar,
-      appBarTitle,
-      appBarLeading,
-      appBarActions})
-      : super(context,
-            floatingActionButton: floatingActionButton,
-            hasAppBar: hasAppBar,
-            appBarTitle: appBarTitle,
-            appBarActions: appBarActions,
-            appBarLeading: appBarLeading);
+  NesteoFullScreen(
+    BuildContext context, {
+    floatingActionButton,
+    @required hasAppBar,
+    appBarTitle,
+    appBarLeading,
+    appBarActions,
+  }) : super(
+          context,
+          floatingActionButton: floatingActionButton,
+          hasAppBar: hasAppBar,
+          appBarTitle: appBarTitle,
+          appBarActions: appBarActions,
+          appBarLeading: appBarLeading,
+        );
 }
 
 class GoBackButton extends StatelessWidget {

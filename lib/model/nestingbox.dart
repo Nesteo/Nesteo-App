@@ -19,7 +19,7 @@ class NestingBox extends Equatable {
   final String comment;
   final String lastUpdated;
   final int inspectionsCount;
-  final String lastInspected;
+  final DateTime lastInspected;
   final bool isPreview;
 
   NestingBox({
@@ -87,7 +87,7 @@ class NestingBox extends Equatable {
       comment: json['comment'],
       lastUpdated: json['lastUpdated'],
       inspectionsCount: json['inspectionsCount'],
-      lastInspected: json['lastInspected'],
+      lastInspected: DateTime.parse(json['lastInspected']),
       isPreview: false,
     );
   }
@@ -101,8 +101,10 @@ class NestingBox extends Equatable {
       coordinateLongitude: json['coordinateLongitude'],
       coordinateLatitude: json['coordinateLatitude'],
       inspectionsCount: json['inspectionsCount'],
-      lastInspected: json['lastInspected'],
+      lastInspected: DateTime.parse(json['lastInspected']),
       isPreview: true,
     );
   }
 }
+
+//2019-10-21T16:25:10.533Z
