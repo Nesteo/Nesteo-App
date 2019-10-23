@@ -40,3 +40,8 @@ class GoToNewInspectionEvent extends PageControlEvent {
   @override
   List<Object> get props => [];
 }
+
+class BackButtonEvent extends PageControlEvent {
+  @override
+  List<Object> get props => [];
+}

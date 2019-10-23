@@ -25,6 +25,7 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   datetime_picker_formfield: ^0.4.3
   geolocator: ^5.1.4
+  back_button_interceptor: ^4.1.1
 
 dev_dependencies:
   mockito: ^4.1.1
