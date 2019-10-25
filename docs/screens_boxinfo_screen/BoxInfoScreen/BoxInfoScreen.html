@@ -110,9 +110,8 @@
       <pre class="language-dart"><code class="language-dart">BoxInfoScreen(BuildContext context)
     : super(context,
           hasAppBar: true,
-          appBarTitle: Text(Localizations.of&lt;LocaleBase&gt;(context, LocaleBase)
-              .screenName
-              .boxInfo),
+          appBarTitle: Text(
+              &quot;${Localizations.of&lt;LocaleBase&gt;(context, LocaleBase).screenName.boxInfo} ${BlocProvider.of&lt;BoxDataBloc&gt;(context).nestingBox.id}&quot;),
           appBarActions: null,
           appBarLeading: GoBackButton());</code></pre>
     </section>
@@ -126,7 +125,7 @@
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   

@@ -101,23 +101,26 @@
 
     <section class="multi-line-signature">
       
-      <span class="name ">NesteoFramedScreen</span>(<wbr><span class="parameter" id="-param-context"><span class="type-annotation">BuildContext</span> <span class="parameter-name">context</span>, {</span> <span class="parameter" id="-param-appBarTitle"><span>@required</span> <span class="type-annotation">dynamic</span> <span class="parameter-name">appBarTitle</span>, </span> <span class="parameter" id="-param-appBarActions"><span class="type-annotation">dynamic</span> <span class="parameter-name">appBarActions</span>, </span> <span class="parameter" id="-param-appBarLeading"><span class="type-annotation">dynamic</span> <span class="parameter-name">appBarLeading</span>, </span> <span class="parameter" id="-param-floatingActionButton"><span class="type-annotation">dynamic</span> <span class="parameter-name">floatingActionButton</span></span> })
+      <span class="name ">NesteoFramedScreen</span>(<wbr><span class="parameter" id="-param-context"><span class="type-annotation">BuildContext</span> <span class="parameter-name">context</span>, {</span> <span class="parameter" id="-param-appBarTitle"><span class="type-annotation">dynamic</span> <span class="parameter-name">appBarTitle</span>, </span> <span class="parameter" id="-param-appBarActions"><span class="type-annotation">dynamic</span> <span class="parameter-name">appBarActions</span>, </span> <span class="parameter" id="-param-appBarLeading"><span class="type-annotation">dynamic</span> <span class="parameter-name">appBarLeading</span>, </span> <span class="parameter" id="-param-floatingActionButton"><span class="type-annotation">dynamic</span> <span class="parameter-name">floatingActionButton</span></span> })
     </section>
 
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
-      <pre class="language-dart"><code class="language-dart">NesteoFramedScreen(BuildContext context,
-    {@required appBarTitle,
-    appBarActions,
-    appBarLeading,
-    floatingActionButton})
-    : super(context,
-          floatingActionButton: floatingActionButton,
-          hasAppBar: true,
-          appBarTitle: appBarTitle,
-          appBarActions: appBarActions,
-          appBarLeading: appBarLeading);</code></pre>
+      <pre class="language-dart"><code class="language-dart">NesteoFramedScreen(
+  BuildContext context, {
+  appBarTitle,
+  appBarActions,
+  appBarLeading,
+  floatingActionButton,
+}) : super(
+        context,
+        floatingActionButton: floatingActionButton,
+        hasAppBar: true,
+        appBarTitle: appBarTitle,
+        appBarActions: appBarActions,
+        appBarLeading: appBarLeading,
+      );</code></pre>
     </section>
 
   </div> <!-- /.main-content -->
@@ -129,7 +132,7 @@
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   

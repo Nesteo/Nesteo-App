@@ -86,6 +86,12 @@
 (<wbr>)
       
     </section>
+    <section class="desc markdown">
+      <p>Requests information about all Owners in the database from a <a href="backend_services_owners_owners_api_service/OwnersApiService-class.html">OwnersApiService</a> and converts it to a <a href="dart-core/List-class.html">List&lt;Owner&gt;</a>.</p>
+<pre class="language-dart"><code class="language-dart">var ownerRepository = OwnersRepository();
+List&lt;Owner&gt;  owners = await ownerRepository.getAllOwners();
+</code></pre>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
@@ -110,7 +116,7 @@
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   
