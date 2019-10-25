@@ -56,10 +56,9 @@
       <li class="section-title"><a href="backend_repositories_inspections_repository/InspectionsRepository-class.html#constructors">Constructors</a></li>
       <li><a href="backend_repositories_inspections_repository/InspectionsRepository/InspectionsRepository.html">InspectionsRepository</a></li>
     
-      <li class="section-title">
+      <li class="section-title inherited">
         <a href="backend_repositories_inspections_repository/InspectionsRepository-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="backend_repositories_inspections_repository/InspectionsRepository/inspectionsApi.html">inspectionsApi</a></li>
       <li class="inherited"><a href="dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="dart-core/Object/runtimeType.html">runtimeType</a></li>
     
@@ -100,7 +99,7 @@ inspections[0].isPreview == false;
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Inspection&gt;&gt; getAllInspections() async {
-  final response = await inspectionsApi.getAllInspections();
+  final response = await _inspectionsApi.getAllInspections();
   if (response.statusCode == 200) {
     final List results = json.decode(response.body);
     return results

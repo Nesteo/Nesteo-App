@@ -56,10 +56,9 @@
       <li class="section-title"><a href="backend_repositories_nestingboxes_repository/NestingBoxesRepository-class.html#constructors">Constructors</a></li>
       <li><a href="backend_repositories_nestingboxes_repository/NestingBoxesRepository/NestingBoxesRepository.html">NestingBoxesRepository</a></li>
     
-      <li class="section-title">
+      <li class="section-title inherited">
         <a href="backend_repositories_nestingboxes_repository/NestingBoxesRepository-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="backend_repositories_nestingboxes_repository/NestingBoxesRepository/nestingBoxesApi.html">nestingBoxesApi</a></li>
       <li class="inherited"><a href="dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="dart-core/Object/runtimeType.html">runtimeType</a></li>
     
@@ -100,7 +99,7 @@ nestingBox.isPreview == false;
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;NestingBox&gt; getNestingBoxById(String id) async {
-  final response = await nestingBoxesApi.getNestingBoxById(id);
+  final response = await _nestingBoxesApi.getNestingBoxById(id);
   if (response.statusCode == 200) {
     final Map result = json.decode(response.body);
     return NestingBox.fromJson(result);
