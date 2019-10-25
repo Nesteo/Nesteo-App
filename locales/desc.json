@@ -22,6 +22,10 @@
     "boxConditionRepair": "repair",
     "boxConditionFixed": "fixed"
   },
+  "boxList": {
+    "sortByID": "sort boxlist by ID",
+    "sortByLastInspection": "sort boxlist by last inspection"
+  },
   "boxNew": {
     "id": "id",
     "oldid": "old id",

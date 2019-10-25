@@ -22,6 +22,10 @@
     "boxConditionRepair": "Reparieren",
     "boxConditionFixed": "Heile"
   },
+  "boxList": {
+    "sortByID": "Sortieren nach ID",
+    "sortByLastInspection": "Sortiere nach letzter Inspektion"
+  },
   "boxNew": {
     "id": "ID",
     "oldid": "Alte ID",
