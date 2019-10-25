@@ -147,7 +147,7 @@ Widget build(BuildContext context) {
     builder: (context, state) {
       if (state is InitialBoxDataState) {
         boxDataBloc.add(GetAllBoxPreviewEvent());
-        return CircularProgressIndicator();
+        return LinearProgressIndicator();
       }
       if (state is BoxReadyState) {
         &#47;&#47; print(boxDataBloc.nestingBoxList);
@@ -157,24 +157,64 @@ Widget build(BuildContext context) {
           child: ListView.builder(
             itemCount: boxDataBloc.nestingBoxList.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(boxDataBloc
-                    .nestingBoxList[index].id), &#47;&#47;create testdata for listview
-                isThreeLine: true,
-                subtitle: Text(boxDataBloc.nestingBoxList[index].region.name),
-                onTap: () {
-                  &#47;&#47; Set the box Id to this selection and add get box for the info page
-                  boxDataBloc.boxId = boxDataBloc.nestingBoxList[index].id;
-                  BlocProvider.of&lt;BoxDataBloc&gt;(context).add(GetBoxEvent());
-                  BlocProvider.of&lt;PageControlBloc&gt;(context)
-                      .add(GoToBoxInfoEvent());
-                },
+              int daysSinceLastInspection = DateTime.now()
+                  .difference(boxDataBloc.nestingBoxList[index].lastInspected)
+                  .inDays;
+              return Container(
+                child: Card(
+                  color: Color.lerp(
+                    Colors.white,
+                    Colors.red,
+                    log(daysSinceLastInspection &#47; 330),
+                  ),
+                  child: ListTile(
+                    leading: (daysSinceLastInspection &gt; 300)
+                        ? Icon(Icons.warning,
+                            size: 40,
+                            color: (daysSinceLastInspection &gt; 365)
+                                ? Colors.red
+                                : Colors.yellow)
+                        : Icon(Icons.check, size: 40, color: Colors.green),
+                    trailing: IconButton(
+                      icon: Icon(Icons.gps_fixed),
+                      onPressed: () {
+                        BlocProvider.of&lt;SnackbarBloc&gt;(context).add(
+                          ShowSnackbarEvent(
+                            color: Colors.lightGreen,
+                            text: &quot;Currently in development&quot;,
+                            scaffoldContext: context,
+                          ),
+                        );
+                      },
+                    ),
+                    title: Text(boxDataBloc.nestingBoxList[index]
+                        .id), &#47;&#47;create testdata for listview
+                    isThreeLine: false,
+                    onLongPress: () {
+                      BlocProvider.of&lt;PageControlBloc&gt;(context)
+                          .add(GoToNewInspectionEvent());
+                    },
+                    subtitle: Text(
+                        &quot;Last Inspection: $daysSinceLastInspection days ago&quot;),
+                    onTap: () {
+                      &#47;&#47; Set the box Id to this selection and add get box for the info page
+                      boxDataBloc.boxId =
+                          boxDataBloc.nestingBoxList[index].id;
+                      BlocProvider.of&lt;BoxDataBloc&gt;(context)
+                          .add(GetBoxEvent());
+                      BlocProvider.of&lt;PageControlBloc&gt;(context)
+                          .add(GoToBoxInfoEvent());
+                    },
+                  ),
+                ),
               );
             },
           ),
         );
       }
-      return CircularProgressIndicator();
+      return LinearProgressIndicator(
+        backgroundColor: Colors.green,
+      );
     },
   );
 }</code></pre>
@@ -189,7 +229,7 @@ Widget build(BuildContext context) {
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   

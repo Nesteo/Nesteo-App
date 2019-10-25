@@ -56,10 +56,9 @@
       <li class="section-title"><a href="backend_repositories_regions_repository/RegionsRepository-class.html#constructors">Constructors</a></li>
       <li><a href="backend_repositories_regions_repository/RegionsRepository/RegionsRepository.html">RegionsRepository</a></li>
     
-      <li class="section-title">
+      <li class="section-title inherited">
         <a href="backend_repositories_regions_repository/RegionsRepository-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="backend_repositories_regions_repository/RegionsRepository/regionsApi.html">regionsApi</a></li>
       <li class="inherited"><a href="dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="dart-core/Object/runtimeType.html">runtimeType</a></li>
     
@@ -86,11 +85,17 @@
 (<wbr>)
       
     </section>
+    <section class="desc markdown">
+      <p>Requests information about all Regions in the database from a <a href="backend_services_regions_regions_api_service/RegionsApiService-class.html">RegionsApiService</a> and converts it to a <a href="dart-core/List-class.html">List&lt;Region&gt;</a>.</p>
+<pre class="language-dart"><code class="language-dart">var regionRepository = RegionsRepository();
+List&lt;Region&gt; regions = await regionRepository.getAllRegions();
+</code></pre>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;Region&gt;&gt; getAllRegions() async {
-  final response = await regionsApi.getAllRegions();
+  final response = await _regionsApi.getAllRegions();
   if (response.statusCode == 200) {
     final List results = json.decode(response.body);
     return results.map((region) =&gt; Region.fromJson(region)).toList();
@@ -110,7 +115,7 @@
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   

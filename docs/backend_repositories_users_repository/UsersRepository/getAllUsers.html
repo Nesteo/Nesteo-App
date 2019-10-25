@@ -56,10 +56,9 @@
       <li class="section-title"><a href="backend_repositories_users_repository/UsersRepository-class.html#constructors">Constructors</a></li>
       <li><a href="backend_repositories_users_repository/UsersRepository/UsersRepository.html">UsersRepository</a></li>
     
-      <li class="section-title">
+      <li class="section-title inherited">
         <a href="backend_repositories_users_repository/UsersRepository-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="backend_repositories_users_repository/UsersRepository/usersApi.html">usersApi</a></li>
       <li class="inherited"><a href="dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="dart-core/Object/runtimeType.html">runtimeType</a></li>
     
@@ -86,11 +85,17 @@
 (<wbr>)
       
     </section>
+    <section class="desc markdown">
+      <p>Requests information about all Users in the database from a <a href="backend_services_users_users_api_service/UsersApiService-class.html">UsersApiService</a> and converts it to a <a href="dart-core/List-class.html">List&lt;User&gt;</a>.</p>
+<pre class="language-dart"><code class="language-dart">var userRepository = UsersRepository();
+List&lt;User&gt;  user = await userRepository.getAllUsers();
+</code></pre>
+    </section>
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span></h2>
       <pre class="language-dart"><code class="language-dart">Future&lt;List&lt;User&gt;&gt; getAllUsers() async {
-  final response = await usersApi.getAllUsers();
+  final response = await _usersApi.getAllUsers();
   if (response.statusCode == 200) {
     final List results = json.decode(response.body);
     return results.map((user) =&gt; User.fromJson(user)).toList();
@@ -110,7 +115,7 @@
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   
