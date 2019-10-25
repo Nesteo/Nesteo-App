@@ -13,15 +13,15 @@ import 'package:nesteo_app/model/user.dart';
 ///
 /// *Author: Simon Oyen*
 class AuthRepository {
-  AuthApiService authApi;
+  AuthApiService _authApi;
 
   AuthRepository() {
-    authApi = AuthApiService.create();
+    _authApi = AuthApiService.create();
   }
 
   /// Requests information about the authenticated user from a [AuthApiService] and converts it to a [User] object
   Future<User> getAuth() async {
-    final response = await authApi.getAuth();
+    final response = await _authApi.getAuth();
     if (response.statusCode == 200) {
       final Map data = json.decode(response.body);
       return User.fromJson(data);

@@ -6,10 +6,10 @@ import 'package:nesteo_app/model/species.dart';
 ///
 /// *Author: Simon Oyen*
 class SpeciesRepository {
-  SpeciesApiService speciesApi;
+  SpeciesApiService _speciesApi;
 
   SpeciesRepository() {
-    speciesApi = SpeciesApiService.create();
+    _speciesApi = SpeciesApiService.create();
   }
 
   /// Requests information about an specific Specie by [id] from a [SpeciesApiService] and converts it to a [Species] object.
@@ -19,7 +19,7 @@ class SpeciesRepository {
   /// Species species = await speciesRepository.getSpecieById(4);
   /// ```
   Future<Species> getSpeciesById(int id) async {
-    final response = await speciesApi.getSpeciesById(id);
+    final response = await _speciesApi.getSpeciesById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return Species.fromJson(result);
@@ -36,7 +36,7 @@ class SpeciesRepository {
   /// List<Species>  species = await speciesRepository.getAllSpecies();
   /// ```
   Future<List<Species>> getAllSpecies() async {
-    final response = await speciesApi.getAllSpecies();
+    final response = await _speciesApi.getAllSpecies();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results.map((species) => Species.fromJson(species)).toList();

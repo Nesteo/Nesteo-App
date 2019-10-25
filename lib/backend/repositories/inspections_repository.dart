@@ -8,10 +8,10 @@ import 'package:nesteo_app/model/inspection.dart';
 ///
 /// *Author: Simon Oyen*
 class InspectionsRepository {
-  InspectionsApiService inspectionsApi;
+  InspectionsApiService _inspectionsApi;
 
   InspectionsRepository() {
-    inspectionsApi = InspectionsApiService.create();
+    _inspectionsApi = InspectionsApiService.create();
   }
 
   /// Requests information about an specific Inspection by [id] from a [InspectionsApiService] and converts it to a [Inspection] object.
@@ -24,7 +24,7 @@ class InspectionsRepository {
   /// inspection.isPreview == false;
   /// ```
   Future<Inspection> getInspectionById(int id) async {
-    final response = await inspectionsApi.getInspectionById(id);
+    final response = await _inspectionsApi.getInspectionById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return Inspection.fromJson(result);
@@ -44,7 +44,7 @@ class InspectionsRepository {
   /// inspections[0].isPreview == false;
   /// ```
   Future<List<Inspection>> getAllInspections() async {
-    final response = await inspectionsApi.getAllInspections();
+    final response = await _inspectionsApi.getAllInspections();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
@@ -66,7 +66,7 @@ class InspectionsRepository {
   /// inspection.isPreview == true;
   /// ```
   Future<Inspection> getInspectionPreviewById(int id) async {
-    final response = await inspectionsApi.getInspectionPreviewById(id);
+    final response = await _inspectionsApi.getInspectionPreviewById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return Inspection.previewFromJson(result);
@@ -86,7 +86,7 @@ class InspectionsRepository {
   /// inspections[0].isPreview == true;
   /// ```
   Future<List<Inspection>> getAllInspectionPreviews() async {
-    final response = await inspectionsApi.getAllInspections();
+    final response = await _inspectionsApi.getAllInspections();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results

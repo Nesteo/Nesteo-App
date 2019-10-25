@@ -8,10 +8,10 @@ import 'package:nesteo_app/model/nestingbox.dart';
 ///
 /// *Author: Simon Oyen*
 class NestingBoxesRepository {
-  NestingBoxesApiService nestingBoxesApi;
+  NestingBoxesApiService _nestingBoxesApi;
 
   NestingBoxesRepository() {
-    nestingBoxesApi = NestingBoxesApiService.create();
+    _nestingBoxesApi = NestingBoxesApiService.create();
   }
 
   /// Requests information about an specific NestingBox by [id] from a [NestingBoxesApiService] and converts it to a [NestingBox] object.
@@ -24,7 +24,7 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == false;
   /// ```
   Future<NestingBox> getNestingBoxById(String id) async {
-    final response = await nestingBoxesApi.getNestingBoxById(id);
+    final response = await _nestingBoxesApi.getNestingBoxById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return NestingBox.fromJson(result);
@@ -44,7 +44,7 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == false;
   /// ```
   Future<List<NestingBox>> getAllNestingBoxes() async {
-    final response = await nestingBoxesApi.getAllNestingBoxes();
+    final response = await _nestingBoxesApi.getAllNestingBoxes();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
@@ -66,7 +66,7 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == true;
   /// ```
   Future<NestingBox> getNestingBoxPreviewById(String id) async {
-    final response = await nestingBoxesApi.getNestingBoxPreviewById(id);
+    final response = await _nestingBoxesApi.getNestingBoxPreviewById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return NestingBox.previewFromJson(result);
@@ -86,7 +86,7 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == true;
   /// ```
   Future<List<NestingBox>> getAllNestingBoxPreviews() async {
-    final response = await nestingBoxesApi.getAllNestingBoxPreviews();
+    final response = await _nestingBoxesApi.getAllNestingBoxPreviews();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results

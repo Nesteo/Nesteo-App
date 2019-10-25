@@ -6,10 +6,10 @@ import 'package:nesteo_app/model/region.dart';
 ///
 /// *Author: Simon Oyen*
 class RegionsRepository {
-  RegionsApiService regionsApi;
+  RegionsApiService _regionsApi;
 
   RegionsRepository() {
-    regionsApi = RegionsApiService.create();
+    _regionsApi = RegionsApiService.create();
   }
 
   /// Requests information about an specific Region by [id] from a [RegionsApiService] and converts it to a [Region] object.
@@ -19,7 +19,7 @@ class RegionsRepository {
   /// Region region = await regionRepository.getRegionById(4);
   /// ```
   Future<Region> getRegionById(int id) async {
-    final response = await regionsApi.getRegionById(id);
+    final response = await _regionsApi.getRegionById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return Region.fromJson(result);
@@ -36,7 +36,7 @@ class RegionsRepository {
   /// List<Region> regions = await regionRepository.getAllRegions();
   /// ```
   Future<List<Region>> getAllRegions() async {
-    final response = await regionsApi.getAllRegions();
+    final response = await _regionsApi.getAllRegions();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results.map((region) => Region.fromJson(region)).toList();

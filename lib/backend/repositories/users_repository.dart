@@ -6,10 +6,10 @@ import 'package:nesteo_app/model/user.dart';
 ///
 /// *Author: Simon Oyen*
 class UsersRepository {
-  UsersApiService usersApi;
+  UsersApiService _usersApi;
 
   UsersRepository() {
-    usersApi = UsersApiService.create();
+    _usersApi = UsersApiService.create();
   }
 
   /// Requests information about an specific User by [id] from a [UsersApiService] and converts it to a [User] object.
@@ -19,7 +19,7 @@ class UsersRepository {
   /// User user = await userRepository.getUserById(4);
   /// ```
   Future<User> getUserById(String id) async {
-    final response = await usersApi.getUserById(id);
+    final response = await _usersApi.getUserById(id);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return User.fromJson(result);
@@ -36,7 +36,7 @@ class UsersRepository {
   /// List<User>  user = await userRepository.getAllUsers();
   /// ```
   Future<List<User>> getAllUsers() async {
-    final response = await usersApi.getAllUsers();
+    final response = await _usersApi.getAllUsers();
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results.map((user) => User.fromJson(user)).toList();
