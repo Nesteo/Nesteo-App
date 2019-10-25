@@ -49,3 +49,5 @@ Please follow the guidelines at <https://dart.dev/guides/language/effective-dart
 The documentation can be generated with `dartdoc`, which is automatically installed with the dart SDK. You might need to include the `bin` directory of your dart SDK folder to PATH.
 
 Dartdoc should be executed in the projects root-folder with the following command: `dartdoc --output ./docs/`
+
+Please refer to the doc-comments in the `lib/backend/repositories/`-Folder.
