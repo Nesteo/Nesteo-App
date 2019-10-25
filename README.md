@@ -37,3 +37,15 @@ set ORG_GRADLE_PROJECT_MAPS_API_KEY "REPLACEWITHYOURKEY"
 On iOS in XCode, add your environment variable in the project scheme.
 Name: ORG_GRADLE_PROJECT_MAPS_API_KEY
 Value: REPLACEWITHYOURKEY
+
+## Documentation
+
+The auto-generated documentation can be found at <https://nesteo.github.io/Nesteo-App/>
+
+### Writing Documentation
+
+Please follow the guidelines at <https://dart.dev/guides/language/effective-dart/documentation> for documentation comments.
+
+The documentation can be generated with `dartdoc`, which is automatically installed with the dart SDK. You might need to include the `bin` directory of your dart SDK folder to PATH.
+
+Dartdoc should be executed in the projects root-folder with the following command: `dartdoc --output ./docs/`
