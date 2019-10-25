@@ -23,9 +23,6 @@ class BoxInfoScreen extends NesteoFullScreen {
   Widget build(BuildContext context) {
     PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    NestingBox nestingBox = boxDataBloc.nestingBox;
-    int daysSinceLastInspection =
-        DateTime.now().difference(nestingBox.lastInspected).inDays;
 
     return Container(
       color: Colors.lightGreen,
@@ -39,6 +36,10 @@ class BoxInfoScreen extends NesteoFullScreen {
             return LinearProgressIndicator();
           }
           if (state is BoxReadyState) {
+            NestingBox nestingBox = boxDataBloc.nestingBox;
+            int daysSinceLastInspection =
+                DateTime.now().difference(nestingBox.lastInspected).inDays;
+
             Row _inspectionButtons = Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -148,7 +149,6 @@ class BoxInfoScreen extends NesteoFullScreen {
                 _commentRow,
               ],
             );
-
             return ListView(
               children: <Widget>[
                 Card(
