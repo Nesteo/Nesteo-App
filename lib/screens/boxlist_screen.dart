@@ -27,34 +27,14 @@ class BoxListScreen extends NesteoFramedScreen {
             IconButton(
               icon: Icon(Icons.sort),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    // set up the sorting options
-                    Widget sortOptionName = SimpleDialogOption(
-                      child: const Text('Name'),
-                      onPressed: () {},
-                    );
-                    Widget sortOptionDistance = SimpleDialogOption(
-                      child: const Text('Distance'),
-                      onPressed: () {},
-                    );
-                    Widget sortOptionId = SimpleDialogOption(
-                      child: const Text('ID'),
-                      onPressed: () {},
-                    );
-
-                    //sorting dialog widget
-                    SimpleDialog sortDialog = SimpleDialog(
-                      title: const Text("Sort List"),
-                      children: <Widget>[
-                        sortOptionDistance,
-                        sortOptionName,
-                        sortOptionId
-                      ],
-                    );
-                    return sortDialog;
-                  },
+                BlocProvider.of<BoxDataBloc>(context).add(SortBoxEvent());
+                BlocProvider.of<SnackbarBloc>(context).add(
+                  ShowSnackbarEvent(
+                    color: Colors.lightGreen,
+                    text:
+                        BlocProvider.of<BoxDataBloc>(context).currentSortOption,
+                    scaffoldContext: context,
+                  ),
                 );
               },
             ),

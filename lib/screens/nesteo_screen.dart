@@ -61,7 +61,7 @@ class GoBackButton extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        BlocProvider.of<PageControlBloc>(context).add(GoToBoxListEvent());
+        BlocProvider.of<PageControlBloc>(context).add(BackButtonEvent());
       },
     );
   }

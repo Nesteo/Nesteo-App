@@ -12,7 +12,6 @@ class GetBoxEvent extends BoxDataEvent {
 }
 
 class GetAllBoxPreviewEvent extends BoxDataEvent {
-
   @override
   List<Object> get props => null;
 }
@@ -24,4 +23,9 @@ class ChangeBoxTypeEvent extends BoxDataEvent {
 
   @override
   List<Object> get props => null;
+}
+
+class SortBoxEvent extends BoxDataEvent {
+  @override
+  List<Object> get props => [];
 }

@@ -20,9 +20,9 @@ class SnackbarBloc extends Bloc<SnackbarEvent, SnackbarState> {
     if (event is ShowSnackbarEvent && this.state is SnackbarReadyState) {
       Scaffold.of(this.scaffoldContext).showSnackBar(
         SnackBar(
-          content: Text(event.text),
-          backgroundColor: event.color,
-        ),
+            content: Text(event.text),
+            backgroundColor: event.color,
+            duration: Duration(milliseconds: 750)),
       );
     }
   }
