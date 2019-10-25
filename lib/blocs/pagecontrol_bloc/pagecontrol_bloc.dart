@@ -5,7 +5,6 @@ import './pagecontrol.dart';
 
 class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
   PageControlBloc() : super() {
-    //TODO interceptor
     BackButtonInterceptor.add(myInterceptor);
   }
   bool myInterceptor(bool stopDefaultButtonEvent) {

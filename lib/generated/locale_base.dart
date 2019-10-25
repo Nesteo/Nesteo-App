@@ -19,6 +19,8 @@ class LocaleBase {
 
   LocaleboxInfo _boxInfo;
   LocaleboxInfo get boxInfo => _boxInfo;
+  LocaleboxList _boxList;
+  LocaleboxList get boxList => _boxList;
   LocaleboxNew _boxNew;
   LocaleboxNew get boxNew => _boxNew;
   Localelogin _login;
@@ -28,6 +30,7 @@ class LocaleBase {
 
   void initAll() {
     _boxInfo = LocaleboxInfo(Map<String, String>.from(_data['boxInfo']));
+    _boxList = LocaleboxList(Map<String, String>.from(_data['boxList']));
     _boxNew = LocaleboxNew(Map<String, String>.from(_data['boxNew']));
     _login = Localelogin(Map<String, String>.from(_data['login']));
     _screenName = LocalescreenName(Map<String, String>.from(_data['screenName']));
@@ -59,6 +62,13 @@ class LocaleboxInfo {
   String get boxConditionReplace => _data["boxConditionReplace"];
   String get boxConditionRepair => _data["boxConditionRepair"];
   String get boxConditionFixed => _data["boxConditionFixed"];
+}
+class LocaleboxList {
+  final Map<String, String> _data;
+  LocaleboxList(this._data);
+
+  String get sortByID => _data["sortByID"];
+  String get sortByLastInspection => _data["sortByLastInspection"];
 }
 class LocaleboxNew {
   final Map<String, String> _data;
