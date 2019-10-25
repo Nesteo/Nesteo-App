@@ -11,13 +11,14 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   @override
   BoxDataState get initialState => InitialBoxDataState();
   int _sortOptionCounter = 0;
+  int _ascDescCounter = 0;
   NestingBoxesRepository _nestingBoxRepo = NestingBoxesRepository();
   List<NestingBox> nestingBoxList = new List<NestingBox>();
   NestingBox nestingBox = new NestingBox();
   String boxId = "";
   List<String> sortOptionNames = [
-    "sortbyid",
-    "sortbylastinspection"
+    "sortbyidasc",
+    "sortbylastinspectionasc"
   ]; //todo put output text for snackbar in screen
   String currentSortOption = "";
 
@@ -26,8 +27,13 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
     //List of Functions to use for sorting the List, accessed via a counter
     //that increments with every sort-button press and then modulo the length of the functions list,
     // to iterate through it again and again
-    List<Function> sortOptions = [sortById, sortByLastInspected];
+    //List<Function> sortOptions = [sortByIdAsc, sortByLastInspectedAsc];
+    //var boxes = new List.generate(width, (_) => new List(height));
 
+    var sortOptions = [
+      [sortByIdAsc, sortByIdDesc],
+      [sortByLastInspectedAsc, sortByLastInspectedDesc]
+    ];
     // NestingBoxesApiService nestingBoxApi = NestingBoxesApiService.create();
     // print(event.toString());
     if (event is GetBoxEvent) {
@@ -43,8 +49,7 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
         yield BoxChangingState();
       }
       nestingBoxList = await _nestingBoxRepo.getAllNestingBoxPreviews();
-      nestingBoxList.sort(
-          (a, b) => sortOptions[_sortOptionCounter % sortOptions.length](a, b));
+
       // print(nestingBoxes.length);
       yield BoxReadyState();
     }
@@ -52,20 +57,38 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       if (this.state is! InitialBoxDataState) {
         yield BoxChangingState();
       }
-      _sortOptionCounter++;
-      nestingBoxList.sort(
-          (a, b) => sortOptions[_sortOptionCounter % sortOptions.length](a, b));
+
+      nestingBoxList.sort((a, b) =>
+          sortOptions[_sortOptionCounter % sortOptions[0].length]
+              [_ascDescCounter % sortOptions[1].length](a, b));
       currentSortOption =
           sortOptionNames[_sortOptionCounter % sortOptionNames.length];
       yield BoxReadyState();
     }
+
+    if (event is ChangeSortDirectionEvent) {
+      _ascDescCounter++;
+      add(SortBoxEvent());
+    }
+    if (event is ChangeSortTypeEvent) {
+      _sortOptionCounter++;
+      add(SortBoxEvent());
+    }
   }
 
-  int sortByLastInspected(a, b) {
+  int sortByLastInspectedAsc(a, b) {
     return a.lastInspected.compareTo(b.lastInspected);
   }
 
-  int sortById(a, b) {
+  int sortByIdAsc(a, b) {
     return a.id.compareTo(b.id);
+  }
+
+  int sortByLastInspectedDesc(a, b) {
+    return b.lastInspected.compareTo(a.lastInspected);
+  }
+
+  int sortByIdDesc(a, b) {
+    return b.id.compareTo(a.id);
   }
 }
