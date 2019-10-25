@@ -29,3 +29,13 @@ class SortBoxEvent extends BoxDataEvent {
   @override
   List<Object> get props => [];
 }
+
+class ChangeSortDirectionEvent extends BoxDataEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class ChangeSortTypeEvent extends BoxDataEvent {
+  @override
+  List<Object> get props => [];
+}

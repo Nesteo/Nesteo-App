@@ -27,12 +27,27 @@ class BoxListScreen extends NesteoFramedScreen {
             IconButton(
               icon: Icon(Icons.sort),
               onPressed: () {
-                BlocProvider.of<BoxDataBloc>(context).add(SortBoxEvent());
+                BlocProvider.of<BoxDataBloc>(context)
+                    .add(ChangeSortTypeEvent());
                 BlocProvider.of<SnackbarBloc>(context).add(
                   ShowSnackbarEvent(
                     color: Colors.lightGreen,
                     text:
                         BlocProvider.of<BoxDataBloc>(context).currentSortOption,
+                    scaffoldContext: context,
+                  ),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.arrow_upward),
+              onPressed: () {
+                BlocProvider.of<BoxDataBloc>(context)
+                    .add(ChangeSortDirectionEvent());
+                BlocProvider.of<SnackbarBloc>(context).add(
+                  ShowSnackbarEvent(
+                    color: Colors.lightGreen,
+                    text: "auf/absteigend",
                     scaffoldContext: context,
                   ),
                 );
