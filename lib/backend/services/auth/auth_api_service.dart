@@ -3,8 +3,9 @@ import 'package:nesteo_app/development/dev.dart';
 
 part 'auth_api_service.chopper.dart';
 
-// IMPORTANT: The API-Services should never be used directly, only through one of the repositories
-
+/// **IMPORTANT**: The API-Service should never be used directly, only through a [AuthRepository]
+///
+/// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/auth')
 abstract class AuthApiService extends ChopperService {
   @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})

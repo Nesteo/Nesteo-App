@@ -3,8 +3,9 @@ import 'package:nesteo_app/development/dev.dart';
 
 part 'nestingboxes_api_service.chopper.dart';
 
-// IMPORTANT: The API-Services should never be used directly, only through one of the repositories
-
+/// **IMPORTANT**: The API-Service should never be used directly, only through a [NestingBoxesRepository]
+///
+/// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/nesting-boxes')
 abstract class NestingBoxesApiService extends ChopperService {
   @Get(

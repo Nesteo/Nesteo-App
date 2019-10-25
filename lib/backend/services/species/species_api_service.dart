@@ -3,8 +3,9 @@ import 'package:nesteo_app/development/dev.dart';
 
 part 'species_api_service.chopper.dart';
 
-// IMPORTANT: The API-Services should never be used directly, only through one of the repositories
-
+/// **IMPORTANT**: The API-Service should never be used directly, only through a [SpeciesRepository]
+///
+/// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/species')
 abstract class SpeciesApiService extends ChopperService {
   @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})

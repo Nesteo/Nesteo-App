@@ -66,6 +66,14 @@
   <div id="dartdoc-main-content" class="col-xs-12 col-sm-9 col-md-8 main-content">
       <div><h1><span class="kind-class">AuthRepository</span> class </h1></div>
 
+    <section class="desc markdown">
+      <p>Wrapper that generates and returns a <a href="model_user/User-class.html">User</a> object from json returned by a <a href="backend_services_auth_auth_api_service/AuthApiService-class.html">AuthApiService</a>.</p>
+<p>The returned <a href="model_user/User-class.html">User</a> represents the user that was authenticated during the request.o</p>
+<pre class="language-dart"><code class="language-dart">var authRepository = AuthRepository();
+User authenticatedUser = await authRepository.getAuth();
+</code></pre>
+<p><em>Author: Simon Oyen</em></p>
+    </section>
     
 
     <section class="summary offset-anchor" id="constructors">
@@ -81,18 +89,10 @@
       </dl>
     </section>
 
-    <section class="summary offset-anchor" id="instance-properties">
+    <section class="summary offset-anchor inherited" id="instance-properties">
       <h2>Properties</h2>
 
       <dl class="properties">
-        <dt id="authApi" class="property">
-          <span class="name"><a href="backend_repositories_auth_repository/AuthRepository/authApi.html">authApi</a></span>
-          <span class="signature">&#8596; <a href="backend_services_auth_auth_api_service/AuthApiService-class.html">AuthApiService</a></span>         
-        </dt>
-        <dd>
-          
-                  <div class="features">read / write</div>
-</dd>
         <dt id="hashCode" class="property inherited">
           <span class="name"><a href="dart-core/Object/hashCode.html">hashCode</a></span>
           <span class="signature">&#8594; <a href="dart-core/int-class.html">int</a></span>         
@@ -121,7 +121,7 @@
           </span>
                   </dt>
         <dd>
-          
+          Requests information about the authenticated user from a <a href="backend_services_auth_auth_api_service/AuthApiService-class.html">AuthApiService</a> and converts it to a <a href="model_user/User-class.html">User</a> object
                   
 </dd>
         <dt id="noSuchMethod" class="callable inherited">
@@ -170,10 +170,9 @@
       <li class="section-title"><a href="backend_repositories_auth_repository/AuthRepository-class.html#constructors">Constructors</a></li>
       <li><a href="backend_repositories_auth_repository/AuthRepository/AuthRepository.html">AuthRepository</a></li>
     
-      <li class="section-title">
+      <li class="section-title inherited">
         <a href="backend_repositories_auth_repository/AuthRepository-class.html#instance-properties">Properties</a>
       </li>
-      <li><a href="backend_repositories_auth_repository/AuthRepository/authApi.html">authApi</a></li>
       <li class="inherited"><a href="dart-core/Object/hashCode.html">hashCode</a></li>
       <li class="inherited"><a href="dart-core/Object/runtimeType.html">runtimeType</a></li>
     
@@ -194,7 +193,7 @@
 
 <footer>
   <span class="no-break">
-    nesteo_app 0.3.3+8
+    nesteo_app 0.3.5+9
   </span>
 
   
