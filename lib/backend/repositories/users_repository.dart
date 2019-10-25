@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:nesteo_app/backend/services/users/users_api_service.dart';
 import 'package:nesteo_app/model/user.dart';
 
+/// Wrapper that generates and returns [User] objects from json returned by a [UsersApiService].
+///
+/// *Author: Simon Oyen*
 class UsersRepository {
   UsersApiService usersApi;
 
@@ -9,6 +12,12 @@ class UsersRepository {
     usersApi = UsersApiService.create();
   }
 
+  /// Requests information about an specific User by [id] from a [UsersApiService] and converts it to a [User] object.
+  ///
+  /// ```dart
+  /// var userRepository = UsersRepository();
+  /// User user = await userRepository.getUserById(4);
+  /// ```
   Future<User> getUserById(String id) async {
     final response = await usersApi.getUserById(id);
     if (response.statusCode == 200) {
@@ -20,6 +29,12 @@ class UsersRepository {
     }
   }
 
+  /// Requests information about all Users in the database from a [UsersApiService] and converts it to a [List<User>].
+  ///
+  /// ```dart
+  /// var userRepository = UsersRepository();
+  /// List<User>  user = await userRepository.getAllUsers();
+  /// ```
   Future<List<User>> getAllUsers() async {
     final response = await usersApi.getAllUsers();
     if (response.statusCode == 200) {
