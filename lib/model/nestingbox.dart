@@ -10,7 +10,7 @@ class NestingBox extends Equatable {
   final String foreignId;
   final double coordinateLongitude;
   final double coordinateLatitude;
-  final String hangUpDate;
+  final DateTime hangUpDate;
   final User hangUpUser;
   final Owner owner;
   final String material;
@@ -76,7 +76,7 @@ class NestingBox extends Equatable {
       foreignId: json['foreignId'],
       coordinateLongitude: json['coordinateLongitude'],
       coordinateLatitude: json['coordinateLatitude'],
-      hangUpDate: json['hangUpDate'],
+      hangUpDate: DateTime.parse(json['hangUpDate']),
       hangUpUser: (json['hangUpUser'] != null)
           ? User.fromJson(json['hangUpUser'])
           : null,

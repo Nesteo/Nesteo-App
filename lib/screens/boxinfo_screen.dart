@@ -1,9 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
+import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 
 class BoxInfoScreen extends NesteoFullScreen {
   BoxInfoScreen(BuildContext context)
@@ -16,147 +21,185 @@ class BoxInfoScreen extends NesteoFullScreen {
 
   @override
   Widget build(BuildContext context) {
+    PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
+    NestingBox nestingBox = boxDataBloc.nestingBox;
+    int daysSinceLastInspection =
+        DateTime.now().difference(nestingBox.lastInspected).inDays;
 
-    Widget imageSection = Container(
-      child: Image.asset('images/testImage.jpg',
-          width: 600, height: 240, fit: BoxFit.fitWidth),
-    );
-
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
+    return Container(
+      color: Colors.lightGreen,
       child: BlocBuilder<BoxDataBloc, BoxDataState>(
         builder: (context, state) {
           if (state is InitialBoxDataState) {
             boxDataBloc.add(GetBoxEvent());
-            return CircularProgressIndicator();
+            return LinearProgressIndicator();
+          }
+          if (state is BoxChangingState) {
+            return LinearProgressIndicator();
           }
           if (state is BoxReadyState) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  boxDataBloc.nestingBox.id,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+            Row _inspectionButtons = Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlatButton.icon(
+                  icon: Icon(Icons.add),
+                  label: Text("New Inspection", style: TextStyle(fontSize: 16)),
+                  onPressed: () {
+                    pageControlBloc.add(GoToNewInspectionEvent());
+                  },
+                ),
+                FlatButton.icon(
+                  icon: Icon(Icons.list),
+                  label: Text("Show Inspections"),
+                  onPressed: () {
+                    pageControlBloc.add(GoToInspectionEvent());
+                  },
+                ),
+              ],
+            );
+
+            TableRow _hangUpUserRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                    title: Text("Hanged-up by:"),
+                    leading: Icon(FontAwesomeIcons.tools),
                   ),
                 ),
-                Text(
-                  boxDataBloc.nestingBox.region.name,
-                )
+                TableCell(
+                  child: ListTile(
+                    title: Text(
+                        "${nestingBox.hangUpUser.firstName} ${nestingBox.hangUpUser.lastName}"),
+                  ),
+                ),
+              ],
+            );
+
+            TableRow _hangUpDateRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                    title: Text("Hangup-Date:"),
+                    leading: Icon(FontAwesomeIcons.calendarAlt),
+                  ),
+                ),
+                TableCell(
+                  child: ListTile(
+                    title: Text(
+                        "${nestingBox.hangUpDate.month}/${nestingBox.hangUpDate.day}/${nestingBox.hangUpDate.year}"),
+                  ),
+                ),
+              ],
+            );
+
+            TableRow _inspectionCountRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                      title: Text("Inspected:"),
+                      leading: Icon(FontAwesomeIcons.search)),
+                ),
+                TableCell(
+                  child: ListTile(
+                    title: Text("${nestingBox.inspectionsCount} times"),
+                  ),
+                ),
+              ],
+            );
+
+            TableRow _materialRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                      title: Text("Material:"),
+                      leading: Icon(FontAwesomeIcons.box)),
+                ),
+                TableCell(
+                  child: ListTile(
+                    title: Text("${nestingBox.material}"),
+                  ),
+                ),
+              ],
+            );
+
+            TableRow _commentRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                    title: Text("Comment:"),
+                    leading: Icon(FontAwesomeIcons.pen),
+                  ),
+                ),
+                TableCell(
+                  child: ListTile(
+                    subtitle: Text(nestingBox.comment),
+                  ),
+                ),
+              ],
+            );
+
+            Table _informationTable = Table(
+              children: [
+                _hangUpUserRow,
+                _hangUpDateRow,
+                _inspectionCountRow,
+                _materialRow,
+                _commentRow,
+              ],
+            );
+
+            return ListView(
+              children: <Widget>[
+                Card(
+                  child: Image.asset(
+                      'images/vogelhaus${Random().nextInt(4)}.jpg',
+                      width: 600,
+                      height: 240,
+                      fit: BoxFit.cover),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text("Box ID: ${nestingBox.id}"),
+                    subtitle: Text(
+                        "Last Inspection: $daysSinceLastInspection days ago"),
+                    trailing: IconButton(
+                      icon: Icon(Icons.gps_fixed),
+                      onPressed: () {
+                        BlocProvider.of<SnackbarBloc>(context).add(
+                          ShowSnackbarEvent(
+                            color: Colors.lightGreen,
+                            text: "Currently in development",
+                            scaffoldContext: context,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Card(
+                  child: _inspectionButtons,
+                ),
+                Card(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title:
+                            Text("Information", style: TextStyle(fontSize: 18)),
+                      ),
+                      Container(
+                        child: DefaultTextStyle(
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                          child: _informationTable,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             );
           }
-          return CircularProgressIndicator();
         },
-      ),
-    );
-
-    final Widget descSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Text(
-        'hlorem ipsum',
-        softWrap: true,
-      ),
-    );
-
-    final Widget listSection = Container(
-      child: ListView(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.photo),
-            title: Text('Inspection 1'),
-            isThreeLine: true,
-            subtitle: Text('inspection date'),
-            onTap: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .add(GoToInspectionEvent());
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.photo),
-            title: Text('Inspection 2'),
-            isThreeLine: true,
-            subtitle: Text('inspection date'),
-            onTap: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .add(GoToInspectionEvent());
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.photo),
-            title: Text('Inspection 3'),
-            isThreeLine: true,
-            subtitle: Text('inspection date'),
-            onTap: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .add(GoToInspectionEvent());
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.photo),
-            title: Text('Inspection 5'),
-            isThreeLine: true,
-            subtitle: Text('inspection date'),
-            onTap: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .add(GoToInspectionEvent());
-            },
-          ),
-        ],
-      ),
-    );
-
-    Column _buildButtonColumn(Color color, IconData icon, String label) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            child: Icon(icon, color: color),
-            onTap: () {
-              BlocProvider.of<PageControlBloc>(context)
-                  .add(GoToNewInspectionEvent());
-            },
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 8),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: color,
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
-    Widget buttonSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildButtonColumn(Colors.blue, Icons.add, 'New Inspection'),
-          _buildButtonColumn(Colors.blue, Icons.add_a_photo, 'Add Photo'),
-          _buildButtonColumn(Colors.blue, Icons.settings, 'Change Data')
-        ],
-      ),
-    );
-
-    return Container(
-      // child: SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          imageSection,
-          titleSection,
-          buttonSection,
-          //descSection,
-          Expanded(
-              child:
-                  listSection) // SingleChildScrollView & listSection dont work together yet
-        ],
       ),
     );
   }
