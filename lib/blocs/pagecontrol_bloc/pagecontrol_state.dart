@@ -55,3 +55,10 @@ class NewInspectionScreenState extends PageControlState {
   @override
   List<Object> get props => [];
 }
+
+class InspectionListScreenState extends PageControlState {
+  InspectionListScreenState() : super(false);
+
+  @override
+  List<Object> get props => [];
+}
