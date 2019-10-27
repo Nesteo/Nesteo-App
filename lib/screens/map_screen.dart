@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_bloc.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
@@ -46,6 +48,8 @@ class MapScreen extends NesteoFramedScreen {
                         : MapType.normal,
                     tilt: mapControlBloc.tilt,
                     zoom: mapControlBloc.zoom,
+                    markers: mapControlBloc.markers,
+                    nestingBoxList: mapControlBloc.nestingBoxList,
                   ),
                 );
               },
@@ -67,24 +71,40 @@ class MapScreen extends NesteoFramedScreen {
   @override
   Widget build(BuildContext context) {
     MapControlBloc mapControlBloc = BlocProvider.of<MapControlBloc>(context);
+    BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
+
     return Container(
       child: BlocBuilder<MapControlBloc, MapControlState>(
-        builder: (context, state) {
-          if (state is InitialMapControlState) {
-            print('Constructing Map');
+        condition: (previousState, state) =>
+            state.runtimeType != previousState.runtimeType,
+        builder: (context, mapState) {
+          if (mapState is InitialMapControlState) {
+            boxDataBloc.add(GetAllBoxPreviewEvent());
             mapControlBloc.add(
               BuildMapEvent(
                 mapType: MapType.normal,
                 zoom: 16,
                 tilt: 20,
+                markers: null,
+                nestingBoxList: [],
               ),
             );
-            return CircularProgressIndicator();
           }
-          if (state is MapReadyState) {
-            return mapControlBloc.googleMap;
+
+          if (mapState is MapReadyState || mapState is MapBuiltState) {
+            return BlocBuilder<BoxDataBloc, BoxDataState>(
+              builder: (context, boxState) {
+                if (boxState is BoxReadyState) {
+                  if (mapState is MapBuiltState) {
+                    mapControlBloc.add(RebuildMapEvent(
+                        nestingBoxList: boxDataBloc.nestingBoxList));
+                  }
+                }
+                return mapControlBloc.googleMap;
+              },
+            );
           }
-          return CircularProgressIndicator();
+          return LinearProgressIndicator();
         },
       ),
     );
