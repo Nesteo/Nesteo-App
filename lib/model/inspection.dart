@@ -6,7 +6,7 @@ import 'package:nesteo_app/model/user.dart';
 class Inspection extends Equatable {
   final int id;
   final NestingBox nestingBox;
-  final String inspectionDate;
+  final DateTime inspectionDate;
   final User inspectedByUser;
   final bool hasBeenCleaned;
   final String condition;
@@ -84,7 +84,7 @@ class Inspection extends Equatable {
     return new Inspection(
       id: json['id'],
       nestingBox: NestingBox.fromJson(json['nestingBox']),
-      inspectionDate: json['inspectionDate'],
+      inspectionDate: DateTime.parse(json['inspectionDate']),
       inspectedByUser: (json['inspectedByUser'] != null)
           ? User.fromJson(json['inspectedByUser'])
           : null,
@@ -112,7 +112,7 @@ class Inspection extends Equatable {
     return new Inspection(
       id: json['id'],
       nestingBoxId: json['nestingBoxId'],
-      inspectionDate: json['inspectionDate'],
+      inspectionDate: DateTime.parse(json['inspectionDate']),
       condition: json['condition'],
       ringedChickCount: json['ringedChickCount'],
       femaleParentBirdDiscovery: json['femaleParentBirdDiscovery'],

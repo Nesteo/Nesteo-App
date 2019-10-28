@@ -7,3 +7,4 @@ export 'package:nesteo_app/screens/inspection_screen.dart';
 export 'package:nesteo_app/screens/map_screen.dart';
 export 'package:nesteo_app/screens/nesteo_screen.dart';
 export 'package:nesteo_app/screens/newinspection_screen.dart';
+export 'package:nesteo_app/screens/inspectionlist_screen.dart';
