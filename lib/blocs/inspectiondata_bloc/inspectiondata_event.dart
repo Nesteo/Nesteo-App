@@ -12,7 +12,11 @@ class GetInspectionEvent extends InspectionDataEvent {
 }
 
 class GetAllInspectionEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => null;
+}
 
+class GetAllInspectionPreviewEvent extends InspectionDataEvent {
   @override
   List<Object> get props => null;
 }
@@ -24,4 +28,24 @@ class ChangeInspectionTypeEvent extends InspectionDataEvent {
 
   @override
   List<Object> get props => null;
+}
+
+class SortInspectionEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class ChangeSortDirectionEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class ChangeSortTypeEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class GetInspectionPreviewsByNestingBoxEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => [];
 }

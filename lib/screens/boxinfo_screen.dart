@@ -54,7 +54,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                   icon: Icon(Icons.list),
                   label: Text("Show Inspections"),
                   onPressed: () {
-                    pageControlBloc.add(GoToInspectionEvent());
+                    pageControlBloc.add(GoToInspectionListEvent());
                   },
                 ),
               ],

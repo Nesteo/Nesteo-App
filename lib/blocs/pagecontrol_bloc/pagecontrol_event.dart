@@ -31,6 +31,11 @@ class GoToBoxInfoEvent extends PageControlEvent {
   List<Object> get props => [];
 }
 
+class GoToInspectionListEvent extends PageControlEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class GoToInspectionEvent extends PageControlEvent {
   @override
   List<Object> get props => [];

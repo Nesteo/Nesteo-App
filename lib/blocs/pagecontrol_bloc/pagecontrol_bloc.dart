@@ -55,6 +55,10 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
       navigationBarEnabled = false;
       yield NewInspectionScreenState();
     }
+    if (event is GoToInspectionListEvent) {
+      navigationBarEnabled = false;
+      yield InspectionListScreenState();
+    }
     if (event is BackButtonEvent) {
       if (history.isNotEmpty) {
         yield history.last;

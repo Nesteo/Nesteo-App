@@ -110,4 +110,5 @@ class LocalescreenName {
   String get boxNew => _data["boxNew"];
   String get load => _data["load"];
   String get list => _data["list"];
+  String get inspectionlist => _data["inspectionlist"];
 }
