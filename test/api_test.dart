@@ -111,10 +111,12 @@ void main() {
     });
     group('NestingBox API tests', () {
       NestingBoxesRepository nestingBoxRepo;
+      InspectionsRepository inspectionsRepo;
       String nestingBoxId;
 
       setUp(() {
         nestingBoxRepo = NestingBoxesRepository();
+        inspectionsRepo = InspectionsRepository();
       });
 
       test('Test /nesting-boxes', () async {
@@ -154,6 +156,24 @@ void main() {
               await nestingBoxRepo.getNestingBoxPreviewById(nestingBoxId);
           expect(nestingBox != null, true);
           expect(nestingBox.isPreview, true);
+        }
+      });
+
+      test('Test /nesting-boxes/{id}/inspections', () async {
+        if (nestingBoxId != null) {
+          List<Inspection> inspections =
+              await inspectionsRepo.getInspectionsByNestingBoxId(nestingBoxId);
+          expect(inspections[0] != null, true);
+          expect(inspections[0].isPreview, false);
+        }
+      });
+
+      test('Test /nesting-boxes/{id}/inspections/previews', () async {
+        if (nestingBoxId != null) {
+          List<Inspection> inspections = await inspectionsRepo
+              .getInspectionPreviewsByNestingBoxId(nestingBoxId);
+          expect(inspections[0] != null, true);
+          expect(inspections[0].isPreview, true);
         }
       });
     });
