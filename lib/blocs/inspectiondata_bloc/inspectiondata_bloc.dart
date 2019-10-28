@@ -16,7 +16,7 @@ class InspectionDataBloc
   int _ascDescCounter = 0;
   InspectionsRepository _inspectionRepo = InspectionsRepository();
   List<Inspection> inspectionList = new List<Inspection>();
-  NestingBox nestingBox = new NestingBox();
+
   String boxId = "";
   Inspection inspection = new Inspection();
   int inspectionId = 0;
@@ -62,6 +62,7 @@ class InspectionDataBloc
       if (this.state is! InitialInspectionDataState) {
         yield InspectionChangingState();
       }
+
       inspectionList =
           await _inspectionRepo.getInspectionPreviewsByNestingBoxId(boxId);
       print(inspectionList.length);

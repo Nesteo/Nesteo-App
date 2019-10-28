@@ -69,16 +69,30 @@ class InspectionListScreen extends NesteoFullScreen {
                     child: Card(
                       child: ListTile(
                         onTap: () {
-                          //   inspectionDataBloc.inspectionId =
-                          //     inspectionDataBloc.inspectionList[index].id;
+                          inspectionDataBloc.inspectionId =
+                              inspectionDataBloc.inspectionList[index].id;
+
                           BlocProvider.of<InspectionDataBloc>(context)
-                              .add(GetInspectionPreviewsByNestingBoxEvent());
+                              .add(GetInspectionEvent());
+                          // BlocProvider.of<InspectionDataBloc>(context)
+                          //      .add(GetInspectionPreviewsByNestingBoxEvent());
                           BlocProvider.of<PageControlBloc>(context)
                               .add(GoToInspectionEvent());
                         },
                         isThreeLine: true,
-                        title: Text("Inspektion ${id} ",
-                            style: TextStyle(fontSize: 18)),
+                        title: Padding(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "Inspektion $id ",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              Icon(Icons.open_in_new)
+                            ],
+                          ),
+                        ),
                         subtitle: Container(
                           child: DefaultTextStyle(
                             style: TextStyle(fontSize: 25, color: Colors.black),
