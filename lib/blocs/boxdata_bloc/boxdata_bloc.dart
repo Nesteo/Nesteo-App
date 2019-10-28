@@ -27,9 +27,6 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
     //List of Functions to use for sorting the List, accessed via a counter
     //that increments with every sort-button press and then modulo the length of the functions list,
     // to iterate through it again and again
-    //List<Function> sortOptions = [sortByIdAsc, sortByLastInspectedAsc];
-    //var boxes = new List.generate(width, (_) => new List(height));
-
     var sortOptions = [
       [sortByIdAsc, sortByIdDesc],
       [sortByLastInspectedAsc, sortByLastInspectedDesc]

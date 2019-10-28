@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import './pagecontrol.dart';
 
 /// BLoC that handles page control and transitioning.
@@ -17,6 +16,7 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     GoToInspectionEvent: InspectionScreenState(),
     GoToNewInspectionEvent: NewInspectionScreenState(),
     GoToNewBoxEvent: NewBoxScreenState(),
+    GoToInspectionListEvent: InspectionListScreenState(),
   };
 
   PageControlBloc() : super() {
