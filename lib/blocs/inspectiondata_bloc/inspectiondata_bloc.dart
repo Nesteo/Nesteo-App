@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/backend/repositories/inspections_repository.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_bloc.dart';
 import 'package:nesteo_app/model/inspection.dart';
+import 'package:nesteo_app/model/nestingbox.dart';
 import './inspectiondata.dart';
 
 class InspectionDataBloc
@@ -13,7 +16,8 @@ class InspectionDataBloc
   int _ascDescCounter = 0;
   InspectionsRepository _inspectionRepo = InspectionsRepository();
   List<Inspection> inspectionList = new List<Inspection>();
-
+  NestingBox nestingBox = new NestingBox();
+  String boxId = "";
   Inspection inspection = new Inspection();
   int inspectionId = 0;
   List<String> sortOptionNames = [
@@ -53,6 +57,17 @@ class InspectionDataBloc
       print(inspectionList.length);
       yield InspectionReadyState();
     }
+
+    if (event is GetInspectionPreviewsByNestingBoxEvent) {
+      if (this.state is! InitialInspectionDataState) {
+        yield InspectionChangingState();
+      }
+      inspectionList =
+          await _inspectionRepo.getInspectionPreviewsByNestingBoxId(boxId);
+      print(inspectionList.length);
+      yield InspectionReadyState();
+    }
+
     if (event is SortInspectionEvent) {
       if (this.state is! InitialInspectionDataState) {
         yield InspectionChangingState();

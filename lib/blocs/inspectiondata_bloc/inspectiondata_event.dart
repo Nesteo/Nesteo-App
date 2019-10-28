@@ -44,3 +44,8 @@ class ChangeSortTypeEvent extends InspectionDataEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetInspectionPreviewsByNestingBoxEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => [];
+}
