@@ -20,6 +20,18 @@ abstract class NestingBoxesApiService extends ChopperService {
   Future<Response> getNestingBoxById(@Path('id') String id);
 
   @Get(
+    path: '/{id}/inspections',
+    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
+  )
+  Future<Response> getInspectionsByNestingBoxId(@Path('id') String id);
+
+  @Get(
+    path: '/{id}/inspections/previews',
+    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
+  )
+  Future<Response> getInspectionPreviewsByNestingBoxId(@Path('id') String id);
+
+  @Get(
     path: '/previews',
     headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
   )
