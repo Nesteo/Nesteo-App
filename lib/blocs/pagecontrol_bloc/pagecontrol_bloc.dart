@@ -3,58 +3,57 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
 import './pagecontrol.dart';
 
+/// BLoC that handles page control and transitioning.
+///
+/// *Author: Simon Oyen*
 class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
+  bool navigationBarEnabled = false;
+  List<PageControlState> history = new List();
+  final Map<Type, PageControlState> eventStateMap = {
+    GoToMapEvent: MapScreenState(),
+    GoToBoxListEvent: BoxListScreenState(),
+    GoToBoxInfoEvent: BoxInfoScreenState(),
+    GoToInspectionEvent: InspectionScreenState(),
+    GoToNewInspectionEvent: NewInspectionScreenState(),
+    GoToNewBoxEvent: NewBoxScreenState(),
+    GoToInspectionListEvent: InspectionListScreenState(),
+  };
+
   PageControlBloc() : super() {
-    BackButtonInterceptor.add(myInterceptor);
+    BackButtonInterceptor.add(interceptFunc);
   }
-  bool myInterceptor(bool stopDefaultButtonEvent) {
+
+  /// Is called when the hardware backbutton is pressed
+  ///
+  /// Returns true when the normal backbutton behaviour should be blocked.
+  bool interceptFunc(bool stopDefaultButtonEvent) {
     this.add(BackButtonEvent());
     return true;
   }
 
-  bool navigationBarEnabled = false;
-  List<PageControlState> history =
-      new List(); //state history since starting the app
+  /// Returns the BLoCs initial state, [LoginScreenState]
   @override
   PageControlState get initialState => LoginScreenState();
 
+  /// Maps received events to corresponding states and handles the navigationbar
   @override
   Stream<PageControlState> mapEventToState(
     PageControlEvent event,
   ) async* {
-    if (event is! BackButtonEvent && state != LoginScreenState()) {
-      history.add(state);
+    if (event is! BackButtonEvent) {
+      if (state != LoginScreenState()) {
+        history.add(state);
+      }
+      navigationBarEnabled =
+          (event is GoToMapEvent || event is GoToBoxListEvent);
     }
 
-    if (event is GoToMapEvent) {
-      navigationBarEnabled = true;
-      yield MapScreenState();
+    PageControlState nextState = eventStateMap[event.runtimeType];
+
+    if (nextState != null) {
+      yield nextState;
     }
 
-    if (event is GoToBoxListEvent) {
-      navigationBarEnabled = true;
-      yield BoxListScreenState();
-    }
-
-    if (event is GoToNewBoxEvent) {
-      navigationBarEnabled = false;
-      yield NewBoxScreenState();
-    }
-
-    if (event is GoToBoxInfoEvent) {
-      navigationBarEnabled = false;
-      yield BoxInfoScreenState();
-    }
-
-    if (event is GoToInspectionEvent) {
-      navigationBarEnabled = false;
-      yield InspectionScreenState();
-    }
-
-    if (event is GoToNewInspectionEvent) {
-      navigationBarEnabled = false;
-      yield NewInspectionScreenState();
-    }
     if (event is BackButtonEvent) {
       if (history.isNotEmpty) {
         yield history.last;

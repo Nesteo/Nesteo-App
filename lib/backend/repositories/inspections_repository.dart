@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:nesteo_app/backend/services/inspections/inspections_api_service.dart';
+import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
 import 'package:nesteo_app/model/inspection.dart';
 
 /// Wrapper that generates and returns [Inspection] objects from json returned by a [InspectionsApiService].
@@ -9,9 +10,11 @@ import 'package:nesteo_app/model/inspection.dart';
 /// *Author: Simon Oyen*
 class InspectionsRepository {
   InspectionsApiService _inspectionsApi;
+  NestingBoxesApiService _nestingBoxesApi;
 
   InspectionsRepository() {
     _inspectionsApi = InspectionsApiService.create();
+    _nestingBoxesApi = NestingBoxesApiService.create();
   }
 
   /// Requests information about an specific Inspection by [id] from a [InspectionsApiService] and converts it to a [Inspection] object.
@@ -91,6 +94,52 @@ class InspectionsRepository {
       final List results = json.decode(response.body);
       return results
           .map((inspection) => Inspection.previewFromJson(inspection))
+          .toList();
+    } else {
+      print('Request failed');
+      return null;
+    }
+  }
+
+  /// Requests information about all Inspections for a NestingBox with [id] from a [NestingBoxesApiService] and converts it to a [List<Inspection>].
+  ///
+  /// The [Inspection] objects in the returned [List<Inspection>] **are preview-versions**
+  ///
+  /// ```dart
+  /// var inspectionsRepository = InspectionsRepository();
+  /// List<Inspection> inspections = await inspectionsRepository.getInspectionPreviewsByNestingBoxId();
+  /// inspections[0].isPreview == true;
+  /// ```
+  Future<List<Inspection>> getInspectionPreviewsByNestingBoxId(
+      String id) async {
+    final response =
+        await _nestingBoxesApi.getInspectionPreviewsByNestingBoxId(id);
+    if (response.statusCode == 200) {
+      final List results = json.decode(response.body);
+      return results
+          .map((inspection) => Inspection.previewFromJson(inspection))
+          .toList();
+    } else {
+      print('Request failed');
+      return null;
+    }
+  }
+
+  /// Requests information about all Inspections for a NestingBox with [id] from a [NestingBoxesApiService] and converts it to a [List<Inspection>].
+  ///
+  /// The [Inspection] objects in the returned [List<Inspection>] are **NOT** preview-versions.
+  ///
+  /// ```dart
+  /// var inspectionsRepository = InspectionsRepository();
+  /// List<Inspection> inspections = await inspectionsRepository.getInspectionsByNestingBoxId();
+  /// inspections[0].isPreview == true;
+  /// ```
+  Future<List<Inspection>> getInspectionsByNestingBoxId(String id) async {
+    final response = await _nestingBoxesApi.getInspectionsByNestingBoxId(id);
+    if (response.statusCode == 200) {
+      final List results = json.decode(response.body);
+      return results
+          .map((inspection) => Inspection.fromJson(inspection))
           .toList();
     } else {
       print('Request failed');
