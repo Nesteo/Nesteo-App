@@ -9,6 +9,11 @@ class InitialMapControlState extends MapControlState {
   List<Object> get props => [];
 }
 
+class MapBuiltState extends MapControlState {
+  @override
+  List<Object> get props => [];
+}
+
 class MapReadyState extends MapControlState {
   @override
   List<Object> get props => null;
