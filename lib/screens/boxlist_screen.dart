@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
+import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
@@ -59,7 +62,8 @@ class BoxListScreen extends NesteoFramedScreen {
   @override
   Widget build(BuildContext context) {
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-    boxDataBloc.add(GetAllBoxPreviewEvent());
+    MapControlBloc mapControlBloc = BlocProvider.of<MapControlBloc>(context);
+
     return BlocBuilder<BoxDataBloc, BoxDataState>(
       builder: (context, state) {
         if (state is InitialBoxDataState) {
@@ -94,15 +98,7 @@ class BoxListScreen extends NesteoFramedScreen {
                           : Icon(Icons.check, size: 40, color: Colors.green),
                       trailing: IconButton(
                         icon: Icon(Icons.gps_fixed),
-                        onPressed: () {
-                          BlocProvider.of<SnackbarBloc>(context).add(
-                            ShowSnackbarEvent(
-                              color: Colors.lightGreen,
-                              text: "Currently in development",
-                              scaffoldContext: context,
-                            ),
-                          );
-                        },
+                        onPressed: () {},
                       ),
                       title: Text(boxDataBloc.nestingBoxList[index]
                           .id), //create testdata for listview
