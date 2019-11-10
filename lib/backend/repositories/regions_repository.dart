@@ -8,11 +8,8 @@ import 'package:nesteo_app/model/region.dart';
 /// *Author: Simon Oyen*
 class RegionsRepository {
   AuthenticationBloc _authBloc;
-  RegionsApiService _regionsApi;
 
-  RegionsRepository(this._authBloc) {
-    _regionsApi = RegionsApiService.create(_authBloc.domain);
-  }
+  RegionsRepository(this._authBloc);
 
   /// Requests information about an specific Region by [id] from a [RegionsApiService] and converts it to a [Region] object.
   ///
@@ -21,6 +18,7 @@ class RegionsRepository {
   /// Region region = await regionRepository.getRegionById(4);
   /// ```
   Future<Region> getRegionById(int id) async {
+    RegionsApiService _regionsApi = RegionsApiService.create(_authBloc.domain);
     final response = await _regionsApi.getRegionById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
@@ -38,6 +36,7 @@ class RegionsRepository {
   /// List<Region> regions = await regionRepository.getAllRegions();
   /// ```
   Future<List<Region>> getAllRegions() async {
+    RegionsApiService _regionsApi = RegionsApiService.create(_authBloc.domain);
     final response = await _regionsApi.getAllRegions(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);

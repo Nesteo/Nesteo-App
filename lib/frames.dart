@@ -18,8 +18,10 @@ class FullScreen extends StatelessWidget {
         condition: (previousState, state) =>
             state.runtimeType != previousState.runtimeType,
         builder: (context, authState) {
-          if (authState is AuthenticatedState) {
-            BlocProvider.of<PageControlBloc>(context).add(GoToMapEvent());
+          PageControlBloc pageBloc = BlocProvider.of<PageControlBloc>(context);
+          if (authState is AuthenticatedState &&
+              pageBloc.state is LoginScreenState) {
+            pageBloc.add(GoToMapEvent());
           }
           return BlocBuilder<PageControlBloc, PageControlState>(
             condition: (previousState, state) =>
