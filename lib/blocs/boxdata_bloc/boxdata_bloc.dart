@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/backend/repositories/nestingboxes_repository.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
 import 'package:nesteo_app/model/nestingbox.dart';
@@ -12,7 +14,8 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   BoxDataState get initialState => InitialBoxDataState();
   int _sortOptionCounter = 0;
   int _ascDescCounter = 0;
-  NestingBoxesRepository _nestingBoxRepo = NestingBoxesRepository();
+  NestingBoxesRepository _nestingBoxRepo;
+
   List<NestingBox> nestingBoxList = new List<NestingBox>();
   NestingBox nestingBox = new NestingBox();
   String boxId = "";
@@ -21,6 +24,10 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
     "sortbylastinspectionasc"
   ]; //todo put output text for snackbar in screen
   String currentSortOption = "";
+
+  BoxDataBloc(AuthenticationBloc authBloc) : super() {
+    _nestingBoxRepo = NestingBoxesRepository(authBloc);
+  }
 
   @override
   Stream<BoxDataState> mapEventToState(BoxDataEvent event) async* {
