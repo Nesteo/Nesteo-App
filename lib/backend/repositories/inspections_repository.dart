@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:nesteo_app/backend/services/inspections/inspections_api_service.dart';
 import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/model/inspection.dart';
 
 /// Wrapper that generates and returns [Inspection] objects from json returned by a [InspectionsApiService].
@@ -9,12 +10,13 @@ import 'package:nesteo_app/model/inspection.dart';
 ///
 /// *Author: Simon Oyen*
 class InspectionsRepository {
+  AuthenticationBloc _authBloc;
   InspectionsApiService _inspectionsApi;
   NestingBoxesApiService _nestingBoxesApi;
 
-  InspectionsRepository() {
-    _inspectionsApi = InspectionsApiService.create();
-    _nestingBoxesApi = NestingBoxesApiService.create();
+  InspectionsRepository(this._authBloc) {
+    _inspectionsApi = InspectionsApiService.create(_authBloc.domain);
+    _nestingBoxesApi = NestingBoxesApiService.create(_authBloc.domain);
   }
 
   /// Requests information about an specific Inspection by [id] from a [InspectionsApiService] and converts it to a [Inspection] object.
@@ -27,7 +29,8 @@ class InspectionsRepository {
   /// inspection.isPreview == false;
   /// ```
   Future<Inspection> getInspectionById(int id) async {
-    final response = await _inspectionsApi.getInspectionById(id);
+    final response =
+        await _inspectionsApi.getInspectionById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return Inspection.fromJson(result);
@@ -47,7 +50,7 @@ class InspectionsRepository {
   /// inspections[0].isPreview == false;
   /// ```
   Future<List<Inspection>> getAllInspections() async {
-    final response = await _inspectionsApi.getAllInspections();
+    final response = await _inspectionsApi.getAllInspections(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
@@ -69,7 +72,8 @@ class InspectionsRepository {
   /// inspection.isPreview == true;
   /// ```
   Future<Inspection> getInspectionPreviewById(int id) async {
-    final response = await _inspectionsApi.getInspectionPreviewById(id);
+    final response =
+        await _inspectionsApi.getInspectionPreviewById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return Inspection.previewFromJson(result);
@@ -89,7 +93,7 @@ class InspectionsRepository {
   /// inspections[0].isPreview == true;
   /// ```
   Future<List<Inspection>> getAllInspectionPreviews() async {
-    final response = await _inspectionsApi.getAllInspections();
+    final response = await _inspectionsApi.getAllInspections(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
@@ -112,8 +116,8 @@ class InspectionsRepository {
   /// ```
   Future<List<Inspection>> getInspectionPreviewsByNestingBoxId(
       String id) async {
-    final response =
-        await _nestingBoxesApi.getInspectionPreviewsByNestingBoxId(id);
+    final response = await _nestingBoxesApi.getInspectionPreviewsByNestingBoxId(
+        id, _authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
@@ -135,7 +139,8 @@ class InspectionsRepository {
   /// inspections[0].isPreview == true;
   /// ```
   Future<List<Inspection>> getInspectionsByNestingBoxId(String id) async {
-    final response = await _nestingBoxesApi.getInspectionsByNestingBoxId(id);
+    final response =
+        await _nestingBoxesApi.getInspectionsByNestingBoxId(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
