@@ -1,5 +1,4 @@
 import 'package:chopper/chopper.dart';
-import 'package:nesteo_app/development/dev.dart';
 
 part 'regions_api_service.chopper.dart';
 
@@ -8,15 +7,20 @@ part 'regions_api_service.chopper.dart';
 /// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/regions')
 abstract class RegionsApiService extends ChopperService {
-  @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
-  Future<Response> getAllRegions();
+  @Get()
+  Future<Response> getAllRegions([
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(path: '/{id}', headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
-  Future<Response> getRegionById(@Path('id') int id);
+  @Get(path: '/{id}')
+  Future<Response> getRegionById([
+    @Path('id') int id,
+    @Header('Authorization') String authHeader,
+  ]);
 
-  static RegionsApiService create() {
+  static RegionsApiService create(String url) {
     final client = ChopperClient(
-      baseUrl: 'http://${Dev.host}/api/v1',
+      baseUrl: 'https://$url/api/v1',
       services: [
         _$RegionsApiService(),
       ],
