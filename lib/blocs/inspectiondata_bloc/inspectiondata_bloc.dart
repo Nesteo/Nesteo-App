@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/backend/repositories/inspections_repository.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_bloc.dart';
 import 'package:nesteo_app/model/inspection.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
@@ -14,7 +15,7 @@ class InspectionDataBloc
   InspectionDataState get initialState => InitialInspectionDataState();
   int _sortOptionCounter = 0;
   int _ascDescCounter = 0;
-  InspectionsRepository _inspectionRepo = InspectionsRepository();
+  InspectionsRepository _inspectionRepo;
   List<Inspection> inspectionList = new List<Inspection>();
 
   String boxId = "";
@@ -25,6 +26,11 @@ class InspectionDataBloc
     "sortbydatenasc"
   ]; //todo put output text for snackbar in screen
   String currentSortOption = "";
+
+  InspectionDataBloc(AuthenticationBloc authBloc) : super() {
+    _inspectionRepo = InspectionsRepository(authBloc);
+  }
+
   @override
   Stream<InspectionDataState> mapEventToState(
       InspectionDataEvent event) async* {

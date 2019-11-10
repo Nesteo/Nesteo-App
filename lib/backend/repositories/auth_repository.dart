@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:nesteo_app/backend/services/auth/auth_api_service.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/model/user.dart';
 
 /// Wrapper that generates and returns a [User] object from json returned by a [AuthApiService].
@@ -13,15 +14,15 @@ import 'package:nesteo_app/model/user.dart';
 ///
 /// *Author: Simon Oyen*
 class AuthRepository {
-  AuthApiService _authApi;
+  AuthenticationBloc _authBloc;
 
-  AuthRepository() {
-    _authApi = AuthApiService.create();
-  }
+  AuthRepository(this._authBloc);
 
   /// Requests information about the authenticated user from a [AuthApiService] and converts it to a [User] object
   Future<User> getAuth() async {
-    final response = await _authApi.getAuth();
+    AuthApiService _authApi = AuthApiService.create(_authBloc.domain);
+
+    final response = await _authApi.getAuth(_authBloc.auth);
     if (response.statusCode == 200) {
       final Map data = json.decode(response.body);
       return User.fromJson(data);

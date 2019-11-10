@@ -14,16 +14,16 @@ class _$UsersApiService extends UsersApiService {
 
   final definitionType = UsersApiService;
 
-  Future<Response> getAllUsers() {
+  Future<Response> getAllUsers([String authHeader]) {
     final $url = '/users';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getUserById(String id) {
-    final $url = '/users/${id}';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+  Future<Response> getUserById([String id, String authHeader]) {
+    final $url = '/users/$id';
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }

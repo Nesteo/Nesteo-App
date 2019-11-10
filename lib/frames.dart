@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
 import 'package:nesteo_app/screens/screens.dart';
@@ -13,44 +14,55 @@ class FullScreen extends StatelessWidget {
     NesteoFullScreen screen;
 
     return Container(
-      child: BlocBuilder<PageControlBloc, PageControlState>(
+      child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         condition: (previousState, state) =>
             state.runtimeType != previousState.runtimeType,
-        builder: (context, state) {
-          if (state is LoginScreenState) {
-            screen = LoginScreen(context);
-          } else if (state is BoxInfoScreenState) {
-            screen = BoxInfoScreen(context);
-          } else if (state is NewBoxScreenState) {
-            screen = NewBoxScreen(context);
-          } else if (state is InspectionScreenState) {
-            screen = InspectionScreen(context);
-          } else if (state is InspectionListScreenState) {
-            screen = InspectionListScreen(context);
-          } else if (state is NewInspectionScreenState) {
-            screen = NewInspectionScreen(context);
-          } else {
-            screen = TransitionFullScreen(context);
+        builder: (context, authState) {
+          if (authState is AuthenticatedState) {
+            BlocProvider.of<PageControlBloc>(context).add(GoToMapEvent());
           }
+          return BlocBuilder<PageControlBloc, PageControlState>(
+            condition: (previousState, state) =>
+                state.runtimeType != previousState.runtimeType,
+            builder: (context, state) {
+              if (authState is! AuthenticatedState) {
+                screen = LoginScreen(context);
+              } else {
+                if (state is BoxInfoScreenState) {
+                  screen = BoxInfoScreen(context);
+                } else if (state is NewBoxScreenState) {
+                  screen = NewBoxScreen(context);
+                } else if (state is InspectionScreenState) {
+                  screen = InspectionScreen(context);
+                } else if (state is InspectionListScreenState) {
+                  screen = InspectionListScreen(context);
+                } else if (state is NewInspectionScreenState) {
+                  screen = NewInspectionScreen(context);
+                } else {
+                  screen = TransitionFullScreen(context);
+                }
+              }
 
-          return Scaffold(
-            appBar: (screen.hasAppBar)
-                ? AppBar(
-                    backgroundColor: Colors.lightGreen,
-                    title: screen.appBarTitle,
-                    actions: screen.appBarActions,
-                    leading: screen.appBarLeading,
-                  )
-                : null,
-            body: Builder(
-              builder: (BuildContext scaffoldContext) {
-                BlocProvider.of<SnackbarBloc>(context).add(
-                  SetScaffoldContextEvent(scaffoldContext: scaffoldContext),
-                );
-                return screen;
-              },
-            ),
-            floatingActionButton: screen.floatingActionButton,
+              return Scaffold(
+                appBar: (screen.hasAppBar)
+                    ? AppBar(
+                        backgroundColor: Colors.lightGreen,
+                        title: screen.appBarTitle,
+                        actions: screen.appBarActions,
+                        leading: screen.appBarLeading,
+                      )
+                    : null,
+                body: Builder(
+                  builder: (BuildContext scaffoldContext) {
+                    BlocProvider.of<SnackbarBloc>(context).add(
+                      SetScaffoldContextEvent(scaffoldContext: scaffoldContext),
+                    );
+                    return screen;
+                  },
+                ),
+                floatingActionButton: screen.floatingActionButton,
+              );
+            },
           );
         },
       ),

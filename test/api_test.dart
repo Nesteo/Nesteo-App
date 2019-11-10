@@ -6,6 +6,8 @@ import 'package:nesteo_app/backend/repositories/owners_repository.dart';
 import 'package:nesteo_app/backend/repositories/regions_repository.dart';
 import 'package:nesteo_app/backend/repositories/species_repository.dart';
 import 'package:nesteo_app/backend/repositories/users_repository.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:nesteo_app/development/dev.dart';
 import 'package:nesteo_app/model/inspection.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/model/owner.dart';
@@ -15,12 +17,18 @@ import 'package:nesteo_app/model/user.dart';
 
 void main() {
   group('API tests', () {
+    AuthenticationBloc authBloc;
+    setUp(() {
+      authBloc = AuthenticationBloc();
+      authBloc.auth = "Basic QWRtaW46QWRtaW4xMjM=";
+      authBloc.domain = Dev.host;
+    });
     group('Owners API tests', () {
       OwnersRepository ownersRepo;
       int ownerId;
 
       setUp(() {
-        ownersRepo = OwnersRepository();
+        ownersRepo = OwnersRepository(authBloc);
       });
 
       test('Test /owners', () async {
@@ -40,7 +48,7 @@ void main() {
       String userId;
 
       setUp(() {
-        usersRepo = UsersRepository();
+        usersRepo = UsersRepository(authBloc);
       });
 
       test('Test /users', () async {
@@ -59,7 +67,7 @@ void main() {
       AuthRepository authRepo;
 
       setUp(() {
-        authRepo = AuthRepository();
+        authRepo = AuthRepository(authBloc);
       });
 
       test('Test /auth', () async {
@@ -72,7 +80,7 @@ void main() {
       int regionId;
 
       setUp(() {
-        regionsRepo = RegionsRepository();
+        regionsRepo = RegionsRepository(authBloc);
       });
 
       test('Test /regions', () async {
@@ -92,7 +100,7 @@ void main() {
       int speciesId;
 
       setUp(() {
-        speciesRepo = SpeciesRepository();
+        speciesRepo = SpeciesRepository(authBloc);
       });
 
       test('Test /species', () async {
@@ -115,8 +123,8 @@ void main() {
       String nestingBoxId;
 
       setUp(() {
-        nestingBoxRepo = NestingBoxesRepository();
-        inspectionsRepo = InspectionsRepository();
+        nestingBoxRepo = NestingBoxesRepository(authBloc);
+        inspectionsRepo = InspectionsRepository(authBloc);
       });
 
       test('Test /nesting-boxes', () async {
@@ -182,7 +190,7 @@ void main() {
       int inspectionId;
 
       setUp(() {
-        inspectionRepo = InspectionsRepository();
+        inspectionRepo = InspectionsRepository(authBloc);
       });
 
       test('Test /inspections', () async {

@@ -1,5 +1,4 @@
 import 'package:chopper/chopper.dart';
-import 'package:nesteo_app/development/dev.dart';
 
 part 'auth_api_service.chopper.dart';
 
@@ -8,12 +7,14 @@ part 'auth_api_service.chopper.dart';
 /// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/auth')
 abstract class AuthApiService extends ChopperService {
-  @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
-  Future<Response> getAuth();
+  @Get()
+  Future<Response> getAuth([
+    @Header('Authorization') String authHeader,
+  ]);
 
-  static AuthApiService create() {
+  static AuthApiService create(String url) {
     final client = ChopperClient(
-      baseUrl: 'http://${Dev.host}/api/v1',
+      baseUrl: 'https://$url/api/v1',
       services: [
         _$AuthApiService(),
       ],

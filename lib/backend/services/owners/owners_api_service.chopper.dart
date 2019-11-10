@@ -14,16 +14,16 @@ class _$OwnersApiService extends OwnersApiService {
 
   final definitionType = OwnersApiService;
 
-  Future<Response> getAllOwners() {
+  Future<Response> getAllOwners([String authHeader]) {
     final $url = '/owners';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getOwnerById(int id) {
-    final $url = '/owners/${id}';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+  Future<Response> getOwnerById([int id, String authHeader]) {
+    final $url = '/owners/$id';
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }

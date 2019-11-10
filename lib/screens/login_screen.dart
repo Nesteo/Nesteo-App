@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:nesteo_app/screens/screens.dart';
@@ -30,6 +31,7 @@ class LoginScreenData extends StatefulWidget {
 class _LoginScreenDataState extends State<LoginScreenData> {
   Widget build(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    final authBloc = BlocProvider.of<AuthenticationBloc>(context);
     return SingleChildScrollView(
       child: Container(
         child: Center(
@@ -59,6 +61,8 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: TextField(
+                    onChanged: (value) =>
+                        authBloc.add(DomainInputChangedEvent(domain: value)),
                     decoration: InputDecoration(
                       labelText: loc.login.domain,
                       border: InputBorder.none,
@@ -76,6 +80,8 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: TextField(
+                    onChanged: (value) => authBloc
+                        .add(UsernameInputChangedEvent(username: value)),
                     decoration: InputDecoration(
                       labelText: loc.login.username,
                       border: InputBorder.none,
@@ -92,6 +98,8 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: TextField(
+                    onChanged: (value) => authBloc
+                        .add(PasswordInputChangedEvent(password: value)),
                     decoration: InputDecoration(
                       labelText: loc.login.password,
                       border: InputBorder.none,
@@ -106,22 +114,29 @@ class _LoginScreenDataState extends State<LoginScreenData> {
               Container(
                 width: 250,
                 padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: RaisedButton(
-                    color: Colors.green,
-                    onPressed: () {
-                      BlocProvider.of<PageControlBloc>(context)
-                          .add(GoToMapEvent());
-                    },
-                    child: Text(
-                      loc.login.logInButton,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
+                child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                  builder: (context, state) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: RaisedButton(
+                        color: state is AuthenticatingState
+                            ? Colors.orange
+                            : state is NotAuthenticatedState
+                                ? Colors.red
+                                : Colors.green,
+                        onPressed: () {
+                          authBloc.add(CheckNewAuthenticationEvent());
+                        },
+                        child: Text(
+                          loc.login.logInButton,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 
 /// Wrapper that generates and returns [NestingBox] objects from json returned by a [NestingBoxesApiService].
@@ -8,10 +9,11 @@ import 'package:nesteo_app/model/nestingbox.dart';
 ///
 /// *Author: Simon Oyen*
 class NestingBoxesRepository {
+  AuthenticationBloc _authBloc;
   NestingBoxesApiService _nestingBoxesApi;
 
-  NestingBoxesRepository() {
-    _nestingBoxesApi = NestingBoxesApiService.create();
+  NestingBoxesRepository(this._authBloc) {
+    _nestingBoxesApi = NestingBoxesApiService.create(_authBloc.domain);
   }
 
   /// Requests information about an specific NestingBox by [id] from a [NestingBoxesApiService] and converts it to a [NestingBox] object.
@@ -24,7 +26,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == false;
   /// ```
   Future<NestingBox> getNestingBoxById(String id) async {
-    final response = await _nestingBoxesApi.getNestingBoxById(id);
+    final response =
+        await _nestingBoxesApi.getNestingBoxById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return NestingBox.fromJson(result);
@@ -44,7 +47,7 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == false;
   /// ```
   Future<List<NestingBox>> getAllNestingBoxes() async {
-    final response = await _nestingBoxesApi.getAllNestingBoxes();
+    final response = await _nestingBoxesApi.getAllNestingBoxes(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
@@ -66,7 +69,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == true;
   /// ```
   Future<NestingBox> getNestingBoxPreviewById(String id) async {
-    final response = await _nestingBoxesApi.getNestingBoxPreviewById(id);
+    final response =
+        await _nestingBoxesApi.getNestingBoxPreviewById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
       return NestingBox.previewFromJson(result);
@@ -86,7 +90,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == true;
   /// ```
   Future<List<NestingBox>> getAllNestingBoxPreviews() async {
-    final response = await _nestingBoxesApi.getAllNestingBoxPreviews();
+    final response =
+        await _nestingBoxesApi.getAllNestingBoxPreviews(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
