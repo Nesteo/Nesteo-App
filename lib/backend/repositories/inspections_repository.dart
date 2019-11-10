@@ -11,13 +11,8 @@ import 'package:nesteo_app/model/inspection.dart';
 /// *Author: Simon Oyen*
 class InspectionsRepository {
   AuthenticationBloc _authBloc;
-  InspectionsApiService _inspectionsApi;
-  NestingBoxesApiService _nestingBoxesApi;
 
-  InspectionsRepository(this._authBloc) {
-    _inspectionsApi = InspectionsApiService.create(_authBloc.domain);
-    _nestingBoxesApi = NestingBoxesApiService.create(_authBloc.domain);
-  }
+  InspectionsRepository(this._authBloc);
 
   /// Requests information about an specific Inspection by [id] from a [InspectionsApiService] and converts it to a [Inspection] object.
   ///
@@ -29,6 +24,8 @@ class InspectionsRepository {
   /// inspection.isPreview == false;
   /// ```
   Future<Inspection> getInspectionById(int id) async {
+    InspectionsApiService _inspectionsApi =
+        InspectionsApiService.create(_authBloc.domain);
     final response =
         await _inspectionsApi.getInspectionById(id, _authBloc.auth);
     if (response.statusCode == 200) {
@@ -50,6 +47,8 @@ class InspectionsRepository {
   /// inspections[0].isPreview == false;
   /// ```
   Future<List<Inspection>> getAllInspections() async {
+    InspectionsApiService _inspectionsApi =
+        InspectionsApiService.create(_authBloc.domain);
     final response = await _inspectionsApi.getAllInspections(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
@@ -72,6 +71,8 @@ class InspectionsRepository {
   /// inspection.isPreview == true;
   /// ```
   Future<Inspection> getInspectionPreviewById(int id) async {
+    InspectionsApiService _inspectionsApi =
+        InspectionsApiService.create(_authBloc.domain);
     final response =
         await _inspectionsApi.getInspectionPreviewById(id, _authBloc.auth);
     if (response.statusCode == 200) {
@@ -93,6 +94,8 @@ class InspectionsRepository {
   /// inspections[0].isPreview == true;
   /// ```
   Future<List<Inspection>> getAllInspectionPreviews() async {
+    InspectionsApiService _inspectionsApi =
+        InspectionsApiService.create(_authBloc.domain);
     final response = await _inspectionsApi.getAllInspections(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
@@ -116,6 +119,8 @@ class InspectionsRepository {
   /// ```
   Future<List<Inspection>> getInspectionPreviewsByNestingBoxId(
       String id) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
     final response = await _nestingBoxesApi.getInspectionPreviewsByNestingBoxId(
         id, _authBloc.auth);
     if (response.statusCode == 200) {
@@ -139,6 +144,8 @@ class InspectionsRepository {
   /// inspections[0].isPreview == true;
   /// ```
   Future<List<Inspection>> getInspectionsByNestingBoxId(String id) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
     final response =
         await _nestingBoxesApi.getInspectionsByNestingBoxId(id, _authBloc.auth);
     if (response.statusCode == 200) {
