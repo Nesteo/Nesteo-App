@@ -8,11 +8,8 @@ import 'package:nesteo_app/model/owner.dart';
 /// *Author: Simon Oyen*
 class OwnersRepository {
   AuthenticationBloc _authBloc;
-  OwnersApiService _ownersApi;
 
-  OwnersRepository(this._authBloc) {
-    _ownersApi = OwnersApiService.create(_authBloc.domain);
-  }
+  OwnersRepository(this._authBloc);
 
   /// Requests information about an specific Owner by [id] from a [OwnersApiService] and converts it to a [Owner] object.
   ///
@@ -21,6 +18,7 @@ class OwnersRepository {
   /// Owner owner = await ownerRepository.getOwnerById(4);
   /// ```
   Future<Owner> getOwnerById(int id) async {
+    OwnersApiService _ownersApi = OwnersApiService.create(_authBloc.domain);
     final response = await _ownersApi.getOwnerById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
@@ -38,6 +36,7 @@ class OwnersRepository {
   /// List<Owner>  owners = await ownerRepository.getAllOwners();
   /// ```
   Future<List<Owner>> getAllOwners() async {
+    OwnersApiService _ownersApi = OwnersApiService.create(_authBloc.domain);
     final response = await _ownersApi.getAllOwners(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);

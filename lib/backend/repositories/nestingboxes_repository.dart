@@ -10,11 +10,8 @@ import 'package:nesteo_app/model/nestingbox.dart';
 /// *Author: Simon Oyen*
 class NestingBoxesRepository {
   AuthenticationBloc _authBloc;
-  NestingBoxesApiService _nestingBoxesApi;
 
-  NestingBoxesRepository(this._authBloc) {
-    _nestingBoxesApi = NestingBoxesApiService.create(_authBloc.domain);
-  }
+  NestingBoxesRepository(this._authBloc);
 
   /// Requests information about an specific NestingBox by [id] from a [NestingBoxesApiService] and converts it to a [NestingBox] object.
   ///
@@ -26,6 +23,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == false;
   /// ```
   Future<NestingBox> getNestingBoxById(String id) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
     final response =
         await _nestingBoxesApi.getNestingBoxById(id, _authBloc.auth);
     if (response.statusCode == 200) {
@@ -47,6 +46,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == false;
   /// ```
   Future<List<NestingBox>> getAllNestingBoxes() async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
     final response = await _nestingBoxesApi.getAllNestingBoxes(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
@@ -69,6 +70,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == true;
   /// ```
   Future<NestingBox> getNestingBoxPreviewById(String id) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
     final response =
         await _nestingBoxesApi.getNestingBoxPreviewById(id, _authBloc.auth);
     if (response.statusCode == 200) {
@@ -90,6 +93,8 @@ class NestingBoxesRepository {
   /// nestingBox.isPreview == true;
   /// ```
   Future<List<NestingBox>> getAllNestingBoxPreviews() async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
     final response =
         await _nestingBoxesApi.getAllNestingBoxPreviews(_authBloc.auth);
     if (response.statusCode == 200) {

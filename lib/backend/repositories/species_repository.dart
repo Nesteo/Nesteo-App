@@ -8,11 +8,8 @@ import 'package:nesteo_app/model/species.dart';
 /// *Author: Simon Oyen*
 class SpeciesRepository {
   AuthenticationBloc _authBloc;
-  SpeciesApiService _speciesApi;
 
-  SpeciesRepository(this._authBloc) {
-    _speciesApi = SpeciesApiService.create(_authBloc.domain);
-  }
+  SpeciesRepository(this._authBloc);
 
   /// Requests information about an specific Specie by [id] from a [SpeciesApiService] and converts it to a [Species] object.
   ///
@@ -21,6 +18,7 @@ class SpeciesRepository {
   /// Species species = await speciesRepository.getSpecieById(4);
   /// ```
   Future<Species> getSpeciesById(int id) async {
+    SpeciesApiService _speciesApi = SpeciesApiService.create(_authBloc.domain);
     final response = await _speciesApi.getSpeciesById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
@@ -38,6 +36,7 @@ class SpeciesRepository {
   /// List<Species>  species = await speciesRepository.getAllSpecies();
   /// ```
   Future<List<Species>> getAllSpecies() async {
+    SpeciesApiService _speciesApi = SpeciesApiService.create(_authBloc.domain);
     final response = await _speciesApi.getAllSpecies(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);

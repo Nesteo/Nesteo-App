@@ -8,11 +8,8 @@ import 'package:nesteo_app/model/user.dart';
 /// *Author: Simon Oyen*
 class UsersRepository {
   AuthenticationBloc _authBloc;
-  UsersApiService _usersApi;
 
-  UsersRepository(this._authBloc) {
-    _usersApi = UsersApiService.create(_authBloc.domain);
-  }
+  UsersRepository(this._authBloc);
 
   /// Requests information about an specific User by [id] from a [UsersApiService] and converts it to a [User] object.
   ///
@@ -21,6 +18,7 @@ class UsersRepository {
   /// User user = await userRepository.getUserById(4);
   /// ```
   Future<User> getUserById(String id) async {
+    UsersApiService _usersApi = UsersApiService.create(_authBloc.domain);
     final response = await _usersApi.getUserById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
@@ -38,6 +36,7 @@ class UsersRepository {
   /// List<User>  user = await userRepository.getAllUsers();
   /// ```
   Future<List<User>> getAllUsers() async {
+    UsersApiService _usersApi = UsersApiService.create(_authBloc.domain);
     final response = await _usersApi.getAllUsers(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
