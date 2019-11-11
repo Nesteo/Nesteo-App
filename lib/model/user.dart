@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable(nullable: false)
 class User extends Equatable {
   final String id;
   final String userName;
@@ -25,14 +29,6 @@ class User extends Equatable {
     return 'User: $id, $userName, $firstName, $lastName, $email, $phoneNumber';
   }
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return new User(
-      id: json['id'],
-      userName: json['userName'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      email: json['email'],
-      phoneNumber: json['phoneNumber'],
-    );
-  }
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

@@ -73,7 +73,7 @@ class NestingBoxesRepository {
         await _nestingBoxesApi.getNestingBoxPreviewById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
-      return NestingBox.previewFromJson(result);
+      return NestingBox.fromJson(result);
     } else {
       print('Request failed');
       return null;
@@ -95,7 +95,7 @@ class NestingBoxesRepository {
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
-          .map((nestingBox) => NestingBox.previewFromJson(nestingBox))
+          .map((nestingBox) => NestingBox.fromJson(nestingBox))
           .toList();
     } else {
       print('Request failed');

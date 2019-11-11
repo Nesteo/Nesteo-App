@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nesteo_app/backend/repositories/auth_repository.dart';
 import 'package:nesteo_app/backend/repositories/inspections_repository.dart';
@@ -135,7 +137,7 @@ void main() {
           nestingBoxId = nestingBoxes[0].id;
         }
         expect(nestingBoxes.length > 0, true);
-        expect(nestingBoxes[0].isPreview, false);
+        expect(nestingBoxes[0].material == null, false);
       });
 
       test('Test /nesting-boxes/{id}', () async {
@@ -143,7 +145,7 @@ void main() {
           NestingBox nestingBox =
               await nestingBoxRepo.getNestingBoxById(nestingBoxId);
           expect(nestingBox != null, true);
-          expect(nestingBox.isPreview, false);
+          expect(nestingBox.material == null, false);
         }
       });
 
@@ -154,7 +156,7 @@ void main() {
         if (nestingBoxes[0] != null) {
           nestingBoxId = nestingBoxes[0].id;
           expect(nestingBoxes.length > 0, true);
-          expect(nestingBoxes[0].isPreview, true);
+          expect(nestingBoxes[0].material == null, true);
         }
       });
 
@@ -163,7 +165,7 @@ void main() {
           NestingBox nestingBox =
               await nestingBoxRepo.getNestingBoxPreviewById(nestingBoxId);
           expect(nestingBox != null, true);
-          expect(nestingBox.isPreview, true);
+          expect(nestingBox.material == null, true);
         }
       });
 

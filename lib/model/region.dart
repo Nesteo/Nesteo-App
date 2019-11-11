@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'region.g.dart';
+
+@JsonSerializable(nullable: false)
 class Region extends Equatable {
   final int id;
   final String name;
@@ -15,11 +19,6 @@ class Region extends Equatable {
     return 'Region: $id, $name, $nestingBoxIdPrefix';
   }
 
-  factory Region.fromJson(Map<String, dynamic> json) {
-    return new Region(
-      id: json['id'],
-      name: json['name'],
-      nestingBoxIdPrefix: json['nestingBoxIdPrefix'],
-    );
-  }
+  factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
+  Map<String, dynamic> toJson() => _$RegionToJson(this);
 }

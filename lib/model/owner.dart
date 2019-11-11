@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'owner.g.dart';
+
+@JsonSerializable(nullable: false)
 class Owner extends Equatable {
   final int id;
   final String name;
@@ -14,10 +18,6 @@ class Owner extends Equatable {
     return 'Owner: $id, $name';
   }
 
-  factory Owner.fromJson(Map<String, dynamic> json) {
-    return new Owner(
-      id: json['id'],
-      name: json['name'],
-    );
-  }
+  factory Owner.fromJson(Map<String, dynamic> json) => _$OwnerFromJson(json);
+  Map<String, dynamic> toJson() => _$OwnerToJson(this);
 }
