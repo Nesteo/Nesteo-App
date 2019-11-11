@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication_event.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
@@ -31,23 +33,30 @@ class MyApp extends StatelessWidget {
           BlocProvider<PageControlBloc>(
             builder: (BuildContext context) => PageControlBloc(),
           ),
+          BlocProvider<AuthenticationBloc>(
+            builder: (BuildContext context) => AuthenticationBloc(),
+          ),
           BlocProvider<MapControlBloc>(
             builder: (BuildContext context) => MapControlBloc(),
           ),
           BlocProvider<BoxDataBloc>(
-            builder: (BuildContext context) => BoxDataBloc(),
+            builder: (BuildContext context) =>
+                BoxDataBloc(BlocProvider.of<AuthenticationBloc>(context)),
           ),
           BlocProvider<SnackbarBloc>(
             builder: (BuildContext context) => SnackbarBloc(),
           ),
           BlocProvider<InspectionDataBloc>(
-            builder: (BuildContext context) => InspectionDataBloc(),
-          )
+            builder: (BuildContext context) => InspectionDataBloc(
+                BlocProvider.of<AuthenticationBloc>(context)),
+          ),
         ],
         child: BlocBuilder<PageControlBloc, PageControlState>(
           condition: (previousState, state) =>
               state.navigationBarEnabled != previousState.navigationBarEnabled,
           builder: (context, navigationBarState) {
+            BlocProvider.of<AuthenticationBloc>(context)
+                .add(CheckExistingAuthenticationEvent());
             if (navigationBarState.navigationBarEnabled) {
               return FramedScreen();
             }

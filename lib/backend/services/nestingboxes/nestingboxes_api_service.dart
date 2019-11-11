@@ -1,5 +1,4 @@
 import 'package:chopper/chopper.dart';
-import 'package:nesteo_app/development/dev.dart';
 
 part 'nestingboxes_api_service.chopper.dart';
 
@@ -8,44 +7,43 @@ part 'nestingboxes_api_service.chopper.dart';
 /// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/nesting-boxes')
 abstract class NestingBoxesApiService extends ChopperService {
-  @Get(
-    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
-  )
-  Future<Response> getAllNestingBoxes();
+  @Get()
+  Future<Response> getAllNestingBoxes([
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(
-    path: '/{id}',
-    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
-  )
-  Future<Response> getNestingBoxById(@Path('id') String id);
+  @Get(path: '/{id}')
+  Future<Response> getNestingBoxById([
+    @Path('id') String id,
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(
-    path: '/{id}/inspections',
-    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
-  )
-  Future<Response> getInspectionsByNestingBoxId(@Path('id') String id);
+  @Get(path: '/{id}/inspections')
+  Future<Response> getInspectionsByNestingBoxId([
+    @Path('id') String id,
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(
-    path: '/{id}/inspections/previews',
-    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
-  )
-  Future<Response> getInspectionPreviewsByNestingBoxId(@Path('id') String id);
+  @Get(path: '/{id}/inspections/previews')
+  Future<Response> getInspectionPreviewsByNestingBoxId([
+    @Path('id') String id,
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(
-    path: '/previews',
-    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
-  )
-  Future<Response> getAllNestingBoxPreviews();
+  @Get(path: '/previews')
+  Future<Response> getAllNestingBoxPreviews([
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(
-    path: '/previews/{id}',
-    headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='},
-  )
-  Future<Response> getNestingBoxPreviewById(@Path('id') String id);
+  @Get(path: '/previews/{id}')
+  Future<Response> getNestingBoxPreviewById([
+    @Path('id') String id,
+    @Header('Authorization') String authHeader,
+  ]);
 
-  static NestingBoxesApiService create() {
+  static NestingBoxesApiService create(String url) {
     final client = ChopperClient(
-      baseUrl: 'http://${Dev.host}/api/v1',
+      baseUrl: 'https://$url/api/v1',
       services: [
         _$NestingBoxesApiService(),
       ],
