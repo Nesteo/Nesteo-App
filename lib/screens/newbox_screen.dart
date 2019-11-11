@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class NewBoxScreen extends NesteoFullScreen {
   NewBoxScreen(BuildContext context)
@@ -17,7 +20,7 @@ class NewBoxScreen extends NesteoFullScreen {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 1920,
+      constraints: BoxConstraints.expand(),
       color: Colors.lightGreen,
       child: NewBoxData(),
     );
@@ -32,6 +35,11 @@ class NewBoxData extends StatefulWidget {
 }
 
 class _NewBoxDataState extends State<NewBoxData> {
+  String id;
+  String oldId;
+  DateTime hangDate;
+  String material;
+
   String _dropDownMaterial;
   double _slideHoleSize = 1;
 
@@ -39,53 +47,133 @@ class _NewBoxDataState extends State<NewBoxData> {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
 
     return GestureDetector(
-      child: Form(
+      child: Container(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _createTextinput(loc.boxNew.id),
-              _createTextinput(loc.boxNew.oldid),
-              _createTextinput(loc.boxNew.hangDate),
-              _createHoleSizeSlider(),
-              _createMaterialSelection(context),
-              IconButton(
-                icon: Icon(Icons.camera_alt),
-                tooltip: loc.boxNew.addImage,
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.gps_fixed),
-                tooltip: loc.boxNew.getPosition,
-                onPressed: () {},
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: RaisedButton(
-                  onPressed: () {},
-                  child: Text(loc.boxNew.addBox),
+          child: Column(children: <Widget>[
+            Card(
+              child: ListTile(
+                title: Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.hashtag),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text("IDs"))
+                  ],
+                ),
+                subtitle: ListTile(
+                  title: Container(
+                    padding: EdgeInsets.all(7),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          labelText: "ID - optional",
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  subtitle: Container(
+                    padding: EdgeInsets.all(7),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: TextFormField(
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          labelText: "old ID - optional",
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _createTextinput(String labelText) {
-    return Container(
-      padding: EdgeInsets.all(7),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: TextFormField(
-          textAlign: TextAlign.right,
-          decoration: InputDecoration(
-            labelText: labelText,
-            border: InputBorder.none,
-            filled: true,
-            fillColor: Colors.white,
-          ),
+            ),
+            Card(
+                child: ListTile(
+                    title: Row(children: <Widget>[
+                      Icon(FontAwesomeIcons.calendarAlt),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 20, 10, 10)),
+                      Text("Date"),
+                    ]),
+                    subtitle: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: DateTimePickerFormField(
+                        decoration: InputDecoration(
+                          labelText: "select Day",
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                        inputType: InputType.date,
+                        format: DateFormat("yyyy-MM-dd"),
+                        initialDate: DateTime.now(),
+                        editable: false,
+                        onChanged: (dt) {
+                          setState(() => hangDate = dt);
+                        },
+                      ),
+                    ))),
+            Card(
+              child: ListTile(
+                title: Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.box),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text("Box"))
+                  ],
+                ),
+                subtitle: Column(children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(child: Text("Material:")),
+                          _createMaterialSelection(context),
+                        ],
+                      )),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text("Hole size:"),
+                      ),
+                      _createHoleSizeSlider()
+                    ],
+                  )
+                ]),
+              ),
+            ),
+            Card(
+              child: ListTile(
+                title: Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.comment),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text("Comment"))
+                  ],
+                ),
+                subtitle: TextFormField(
+                  maxLines: 3,
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+            RaisedButton(
+              color: Colors.blue,
+              onPressed: () {},
+              child: Text(
+                "Send",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ]),
         ),
       ),
     );
@@ -100,7 +188,6 @@ class _NewBoxDataState extends State<NewBoxData> {
             : loc.boxNew.untreatedWood,
         icon: Icon(Icons.arrow_downward),
         iconSize: 24,
-        elevation: 16,
         style: TextStyle(color: Colors.deepPurple),
         onChanged: (String newValue) {
           setState(() {
