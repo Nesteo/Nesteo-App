@@ -206,6 +206,33 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           ]),
         ),
       ),
+      Card(
+        child: ListTile(
+          title: Row(
+            children: <Widget>[
+              Icon(FontAwesomeIcons.comment),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  child: Text("Comment"))
+            ],
+          ),
+          subtitle: TextFormField(
+            maxLines: 3,
+            textAlign: TextAlign.left,
+          ),
+        ),
+      ),
+      RaisedButton(
+        color: Colors.blue,
+        onPressed: () {},
+        child: Text(
+          "Send",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+      ),
     ]);
   }
 
