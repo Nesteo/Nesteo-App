@@ -22,7 +22,7 @@ void main() {
     AuthenticationBloc authBloc;
     setUp(() {
       authBloc = AuthenticationBloc();
-      authBloc.auth = "Basic QWRtaW46QWRtaW4xMjM=";
+      authBloc.auth = Dev.auth;
       authBloc.domain = Dev.host;
     });
     group('Owners API tests', () {
