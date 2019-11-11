@@ -62,3 +62,10 @@ class InspectionListScreenState extends PageControlState {
   @override
   List<Object> get props => [];
 }
+
+class NewBoxConfirmationScreenState extends PageControlState {
+  NewBoxConfirmationScreenState() : super(false);
+
+  @override
+  List<Object> get props => [];
+}

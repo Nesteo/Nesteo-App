@@ -57,6 +57,7 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       // print(nestingBoxes.length);
       yield BoxReadyState();
     }
+    if (event is NewBoxConfirmationEvent) {}
     if (event is SortBoxEvent) {
       if (this.state is! InitialBoxDataState) {
         yield BoxChangingState();
