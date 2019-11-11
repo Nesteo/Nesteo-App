@@ -174,7 +174,7 @@ void main() {
           List<Inspection> inspections =
               await inspectionsRepo.getInspectionsByNestingBoxId(nestingBoxId);
           expect(inspections[0] != null, true);
-          expect(inspections[0].isPreview, false);
+          expect(inspections[0].containsEggs == null, false);
         }
       });
 
@@ -183,7 +183,7 @@ void main() {
           List<Inspection> inspections = await inspectionsRepo
               .getInspectionPreviewsByNestingBoxId(nestingBoxId);
           expect(inspections[0] != null, true);
-          expect(inspections[0].isPreview, true);
+          expect(inspections[0].containsEggs == null, true);
         }
       });
     });
@@ -200,7 +200,7 @@ void main() {
 
         if (inspections[0] != null) {
           inspectionId = inspections[0].id;
-          expect(inspections[0].isPreview, false);
+          expect(inspections[0].containsEggs == null, false);
         }
         expect(inspections.length > 0, true);
       });
@@ -209,7 +209,7 @@ void main() {
         Inspection inspection =
             await inspectionRepo.getInspectionById(inspectionId);
         expect(inspection != null, true);
-        expect(inspection.isPreview, false);
+        expect(inspection.containsEggs == null, false);
       });
 
       test('Test /inspections/previews', () async {
@@ -220,14 +220,14 @@ void main() {
           inspectionId = inspections[0].id;
         }
         expect(inspections.length > 0, true);
-        expect(inspections[0].isPreview, true);
+        expect(inspections[0].containsEggs == null, true);
       });
 
       test('Test /inspections/previews/{id}', () async {
         Inspection inspection =
             await inspectionRepo.getInspectionPreviewById(inspectionId);
         expect(inspection != null, true);
-        expect(inspection.isPreview, true);
+        expect(inspection.containsEggs == null, true);
       });
     });
   });

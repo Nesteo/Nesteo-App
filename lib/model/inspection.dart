@@ -1,8 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/model/species.dart';
 import 'package:nesteo_app/model/user.dart';
 
+part 'inspection.g.dart';
+
+@JsonSerializable(nullable: true)
 class Inspection extends Equatable {
   final int id;
   final NestingBox nestingBox;
@@ -24,7 +28,6 @@ class Inspection extends Equatable {
   final String comment;
   final String lastUpdated;
   final String nestingBoxId;
-  final bool isPreview;
 
   Inspection({
     this.id,
@@ -47,7 +50,6 @@ class Inspection extends Equatable {
     this.comment,
     this.lastUpdated,
     this.nestingBoxId,
-    this.isPreview,
   });
 
   @override
@@ -72,9 +74,13 @@ class Inspection extends Equatable {
         comment,
         lastUpdated,
         nestingBoxId,
-        isPreview,
       ];
 
+  factory Inspection.fromJson(Map<String, dynamic> json) =>
+      _$InspectionFromJson(json);
+  Map<String, dynamic> toJson() => _$InspectionToJson(this);
+
+  /*
   @override
   String toString() {
     return 'Inspection: $id, $nestingBox, $inspectedByUser';
@@ -120,4 +126,5 @@ class Inspection extends Equatable {
       isPreview: true,
     );
   }
+  */
 }
