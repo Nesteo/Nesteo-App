@@ -1,5 +1,4 @@
 import 'package:chopper/chopper.dart';
-import 'package:nesteo_app/development/dev.dart';
 
 part 'owners_api_service.chopper.dart';
 
@@ -8,15 +7,20 @@ part 'owners_api_service.chopper.dart';
 /// *Author: Simon Oyen*
 @ChopperApi(baseUrl: '/owners')
 abstract class OwnersApiService extends ChopperService {
-  @Get(headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
-  Future<Response> getAllOwners();
+  @Get()
+  Future<Response> getAllOwners([
+    @Header('Authorization') String authHeader,
+  ]);
 
-  @Get(path: '/{id}', headers: {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='})
-  Future<Response> getOwnerById(@Path('id') int id);
+  @Get(path: '/{id}')
+  Future<Response> getOwnerById([
+    @Path('id') int id,
+    @Header('Authorization') String authHeader,
+  ]);
 
-  static OwnersApiService create() {
+  static OwnersApiService create(String url) {
     final client = ChopperClient(
-      baseUrl: 'http://${Dev.host}/api/v1',
+      baseUrl: 'https://$url/api/v1',
       services: [
         _$OwnersApiService(),
       ],

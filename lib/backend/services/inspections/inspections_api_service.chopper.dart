@@ -14,30 +14,30 @@ class _$InspectionsApiService extends InspectionsApiService {
 
   final definitionType = InspectionsApiService;
 
-  Future<Response> getAllInspections() {
+  Future<Response> getAllInspections([String authHeader]) {
     final $url = '/inspections';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getInspectionById(int id) {
-    final $url = '/inspections/${id}';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+  Future<Response> getInspectionById([int id, String authHeader]) {
+    final $url = '/inspections/$id';
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getAllInspectionPreviews() {
+  Future<Response> getAllInspectionPreviews([String authHeader]) {
     final $url = '/inspections/previews';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getInspectionPreviewById(int id) {
-    final $url = '/inspections/previews/${id}';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+  Future<Response> getInspectionPreviewById([int id, String authHeader]) {
+    final $url = '/inspections/previews/$id';
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }

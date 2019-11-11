@@ -14,9 +14,9 @@ class _$AuthApiService extends AuthApiService {
 
   final definitionType = AuthApiService;
 
-  Future<Response> getAuth() {
+  Future<Response> getAuth([String authHeader]) {
     final $url = '/auth';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }

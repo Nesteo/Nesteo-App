@@ -14,16 +14,16 @@ class _$SpeciesApiService extends SpeciesApiService {
 
   final definitionType = SpeciesApiService;
 
-  Future<Response> getAllSpecies() {
+  Future<Response> getAllSpecies([String authHeader]) {
     final $url = '/species';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getSpeciesById(int id) {
-    final $url = '/species/${id}';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+  Future<Response> getSpeciesById([int id, String authHeader]) {
+    final $url = '/species/$id';
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }

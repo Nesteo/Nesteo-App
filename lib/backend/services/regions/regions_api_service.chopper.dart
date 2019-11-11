@@ -14,16 +14,16 @@ class _$RegionsApiService extends RegionsApiService {
 
   final definitionType = RegionsApiService;
 
-  Future<Response> getAllRegions() {
+  Future<Response> getAllRegions([String authHeader]) {
     final $url = '/regions';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> getRegionById(int id) {
-    final $url = '/regions/${id}';
-    final $headers = {'Authorization': 'Basic QWRtaW46QWRtaW4xMjM='};
+  Future<Response> getRegionById([int id, String authHeader]) {
+    final $url = '/regions/$id';
+    final $headers = {'Authorization': authHeader};
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
