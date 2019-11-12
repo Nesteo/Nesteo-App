@@ -47,7 +47,7 @@ class InspectionListScreen extends NesteoFullScreen {
   Widget build(BuildContext context) {
     InspectionDataBloc inspectionDataBloc =
         BlocProvider.of<InspectionDataBloc>(context);
-
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return BlocBuilder<InspectionDataBloc, InspectionDataState>(
       builder: (context, state) {
         if (state is InitialInspectionDataState) {
@@ -85,7 +85,7 @@ class InspectionListScreen extends NesteoFullScreen {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "Inspektion $id ",
+                                "${loc.inspectionList.inspection} $id ",
                                 style: TextStyle(fontSize: 18),
                               ),
                               Icon(Icons.open_in_new)
@@ -101,7 +101,7 @@ class InspectionListScreen extends NesteoFullScreen {
                                   children: [
                                     TableCell(
                                       child: ListTile(
-                                          title: Text("Datum:"),
+                                          title: Text(loc.inspectionList.date),
                                           leading: Icon(Icons.date_range)),
                                     ),
                                     TableCell(
@@ -120,7 +120,8 @@ class InspectionListScreen extends NesteoFullScreen {
                                   children: [
                                     TableCell(
                                       child: ListTile(
-                                          title: Text("Condition:"),
+                                          title: Text(
+                                              loc.inspectionList.condition),
                                           leading:
                                               Icon(FontAwesomeIcons.tools)),
                                     ),
@@ -136,7 +137,8 @@ class InspectionListScreen extends NesteoFullScreen {
                                   children: [
                                     TableCell(
                                       child: ListTile(
-                                          title: Text("Ringed Chicks:"),
+                                          title: Text(
+                                              loc.inspectionList.ringedChicks),
                                           leading:
                                               Icon(FontAwesomeIcons.kiwiBird)),
                                     ),
@@ -154,7 +156,8 @@ class InspectionListScreen extends NesteoFullScreen {
                                   children: [
                                     TableCell(
                                       child: ListTile(
-                                          title: Text("Parent Bird Female :"),
+                                          title:
+                                              Text(loc.inspectionList.pBirdF),
                                           leading:
                                               Icon(FontAwesomeIcons.venus)),
                                     ),
@@ -170,7 +173,7 @@ class InspectionListScreen extends NesteoFullScreen {
                                 TableRow(children: <Widget>[
                                   TableCell(
                                     child: ListTile(
-                                      title: Text("Parent Bird Male:"),
+                                      title: Text(loc.inspectionList.pBirdM),
                                       leading: Icon(FontAwesomeIcons.mars),
                                     ),
                                   ),
