@@ -1,8 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:nesteo_app/model/owner.dart';
 import 'package:nesteo_app/model/region.dart';
 import 'package:nesteo_app/model/user.dart';
 
+part 'nestingbox.g.dart';
+
+@JsonSerializable(nullable: true)
 class NestingBox extends Equatable {
   final String id;
   final Region region;
@@ -20,7 +24,6 @@ class NestingBox extends Equatable {
   final String lastUpdated;
   final int inspectionsCount;
   final DateTime lastInspected;
-  final bool isPreview;
 
   NestingBox({
     this.id,
@@ -39,7 +42,6 @@ class NestingBox extends Equatable {
     this.lastUpdated,
     this.inspectionsCount,
     this.lastInspected,
-    this.isPreview,
   });
 
   @override
@@ -60,7 +62,6 @@ class NestingBox extends Equatable {
         lastUpdated,
         inspectionsCount,
         lastInspected,
-        isPreview,
       ];
 
   @override
@@ -68,43 +69,7 @@ class NestingBox extends Equatable {
     return 'NestingBox: $id, $coordinateLongitude, $coordinateLatitude, $hangUpDate, $hangUpUser, $owner, $material, $holeSize';
   }
 
-  factory NestingBox.fromJson(Map<String, dynamic> json) {
-    return new NestingBox(
-      id: json['id'],
-      region: Region.fromJson(json['region']),
-      oldId: json['oldId'],
-      foreignId: json['foreignId'],
-      coordinateLongitude: json['coordinateLongitude'],
-      coordinateLatitude: json['coordinateLatitude'],
-      hangUpDate: DateTime.parse(json['hangUpDate']),
-      hangUpUser: (json['hangUpUser'] != null)
-          ? User.fromJson(json['hangUpUser'])
-          : null,
-      owner: Owner.fromJson(json['owner']),
-      material: json['material'],
-      holeSize: json['holeSize'],
-      imageFileName: json['imageFileName'],
-      comment: json['comment'],
-      lastUpdated: json['lastUpdated'],
-      inspectionsCount: json['inspectionsCount'],
-      lastInspected: DateTime.parse(json['lastInspected']),
-      isPreview: false,
-    );
-  }
-
-  factory NestingBox.previewFromJson(Map<String, dynamic> json) {
-    return new NestingBox(
-      id: json['id'],
-      region: Region.fromJson(json['region']),
-      oldId: json['oldId'],
-      foreignId: json['foreignId'],
-      coordinateLongitude: json['coordinateLongitude'],
-      coordinateLatitude: json['coordinateLatitude'],
-      inspectionsCount: json['inspectionsCount'],
-      lastInspected: DateTime.parse(json['lastInspected']),
-      isPreview: true,
-    );
-  }
+  factory NestingBox.fromJson(Map<String, dynamic> json) =>
+      _$NestingBoxFromJson(json);
+  Map<String, dynamic> toJson() => _$NestingBoxToJson(this);
 }
-
-//2019-10-21T16:25:10.533Z

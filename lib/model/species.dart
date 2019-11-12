@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'species.g.dart';
+
+@JsonSerializable(nullable: false)
 class Species extends Equatable {
   final int id;
   final String name;
@@ -14,10 +18,7 @@ class Species extends Equatable {
     return 'Species: $id, $name';
   }
 
-  factory Species.fromJson(Map<String, dynamic> json) {
-    return new Species(
-      id: json['id'],
-      name: json['name'],
-    );
-  }
+  factory Species.fromJson(Map<String, dynamic> json) =>
+      _$SpeciesFromJson(json);
+  Map<String, dynamic> toJson() => _$SpeciesToJson(this);
 }

@@ -77,7 +77,7 @@ class InspectionsRepository {
         await _inspectionsApi.getInspectionPreviewById(id, _authBloc.auth);
     if (response.statusCode == 200) {
       final Map result = json.decode(response.body);
-      return Inspection.previewFromJson(result);
+      return Inspection.fromJson(result);
     } else {
       print('Request failed');
       return null;
@@ -96,11 +96,12 @@ class InspectionsRepository {
   Future<List<Inspection>> getAllInspectionPreviews() async {
     InspectionsApiService _inspectionsApi =
         InspectionsApiService.create(_authBloc.domain);
-    final response = await _inspectionsApi.getAllInspections(_authBloc.auth);
+    final response =
+        await _inspectionsApi.getAllInspectionPreviews(_authBloc.auth);
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
-          .map((inspection) => Inspection.previewFromJson(inspection))
+          .map((inspection) => Inspection.fromJson(inspection))
           .toList();
     } else {
       print('Request failed');
@@ -126,7 +127,7 @@ class InspectionsRepository {
     if (response.statusCode == 200) {
       final List results = json.decode(response.body);
       return results
-          .map((inspection) => Inspection.previewFromJson(inspection))
+          .map((inspection) => Inspection.fromJson(inspection))
           .toList();
     } else {
       print('Request failed');
