@@ -82,18 +82,39 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   }
 
   int sortByLastInspectedAsc(a, b) {
+    if (b.lastInspected == null) {
+      print("b.last inspected is null");
+      return -1;
+    }
+    if (a.lastInspected == null) {
+      print("b.last inspected is null");
+      return 1;
+    }
     return a.lastInspected.compareTo(b.lastInspected);
   }
 
   int sortByIdAsc(a, b) {
+    if (a.id == null || b.id == null) {
+      print("id is null");
+      return 0;
+    }
     return a.id.compareTo(b.id);
   }
 
   int sortByLastInspectedDesc(a, b) {
+    if (a.lastInspected == null) {
+      return -1;
+    }
+    if (b.lastInspected == null) {
+      return 1;
+    }
     return b.lastInspected.compareTo(a.lastInspected);
   }
 
   int sortByIdDesc(a, b) {
+    if (a.id == null || b.id == null) {
+      return 0;
+    }
     return b.id.compareTo(a.id);
   }
 }
