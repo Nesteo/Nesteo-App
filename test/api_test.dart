@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nesteo_app/backend/repositories/auth_repository.dart';
 import 'package:nesteo_app/backend/repositories/inspections_repository.dart';
@@ -20,7 +22,7 @@ void main() {
     AuthenticationBloc authBloc;
     setUp(() {
       authBloc = AuthenticationBloc();
-      authBloc.auth = "Basic QWRtaW46QWRtaW4xMjM=";
+      authBloc.auth = Dev.auth;
       authBloc.domain = Dev.host;
     });
     group('Owners API tests', () {
@@ -135,7 +137,7 @@ void main() {
           nestingBoxId = nestingBoxes[0].id;
         }
         expect(nestingBoxes.length > 0, true);
-        expect(nestingBoxes[0].isPreview, false);
+        expect(nestingBoxes[0].material == null, false);
       });
 
       test('Test /nesting-boxes/{id}', () async {
@@ -143,7 +145,7 @@ void main() {
           NestingBox nestingBox =
               await nestingBoxRepo.getNestingBoxById(nestingBoxId);
           expect(nestingBox != null, true);
-          expect(nestingBox.isPreview, false);
+          expect(nestingBox.material == null, false);
         }
       });
 
@@ -154,7 +156,7 @@ void main() {
         if (nestingBoxes[0] != null) {
           nestingBoxId = nestingBoxes[0].id;
           expect(nestingBoxes.length > 0, true);
-          expect(nestingBoxes[0].isPreview, true);
+          expect(nestingBoxes[0].material == null, true);
         }
       });
 
@@ -163,7 +165,7 @@ void main() {
           NestingBox nestingBox =
               await nestingBoxRepo.getNestingBoxPreviewById(nestingBoxId);
           expect(nestingBox != null, true);
-          expect(nestingBox.isPreview, true);
+          expect(nestingBox.material == null, true);
         }
       });
 
@@ -172,7 +174,7 @@ void main() {
           List<Inspection> inspections =
               await inspectionsRepo.getInspectionsByNestingBoxId(nestingBoxId);
           expect(inspections[0] != null, true);
-          expect(inspections[0].isPreview, false);
+          expect(inspections[0].containsEggs == null, false);
         }
       });
 
@@ -181,7 +183,7 @@ void main() {
           List<Inspection> inspections = await inspectionsRepo
               .getInspectionPreviewsByNestingBoxId(nestingBoxId);
           expect(inspections[0] != null, true);
-          expect(inspections[0].isPreview, true);
+          expect(inspections[0].containsEggs == null, true);
         }
       });
     });
@@ -198,7 +200,7 @@ void main() {
 
         if (inspections[0] != null) {
           inspectionId = inspections[0].id;
-          expect(inspections[0].isPreview, false);
+          expect(inspections[0].containsEggs == null, false);
         }
         expect(inspections.length > 0, true);
       });
@@ -207,7 +209,7 @@ void main() {
         Inspection inspection =
             await inspectionRepo.getInspectionById(inspectionId);
         expect(inspection != null, true);
-        expect(inspection.isPreview, false);
+        expect(inspection.containsEggs == null, false);
       });
 
       test('Test /inspections/previews', () async {
@@ -218,14 +220,14 @@ void main() {
           inspectionId = inspections[0].id;
         }
         expect(inspections.length > 0, true);
-        expect(inspections[0].isPreview, true);
+        expect(inspections[0].containsEggs == null, true);
       });
 
       test('Test /inspections/previews/{id}', () async {
         Inspection inspection =
             await inspectionRepo.getInspectionPreviewById(inspectionId);
         expect(inspection != null, true);
-        expect(inspection.isPreview, true);
+        expect(inspection.containsEggs == null, true);
       });
     });
   });
