@@ -175,6 +175,17 @@ class _NewBoxDataState extends State<NewBoxData> {
                         fillColor: Colors.white,
                       ),
                     ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                            child: (Text("Add GPS Data"))),
+                        IconButton(
+                          icon: Icon(Icons.gps_fixed),
+                          onPressed: () {},
+                        )
+                      ],
+                    )
                   ])),
             ),
             Card(
