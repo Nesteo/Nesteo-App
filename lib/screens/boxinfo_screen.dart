@@ -37,9 +37,14 @@ class BoxInfoScreen extends NesteoFullScreen {
           }
           if (state is BoxReadyState) {
             NestingBox nestingBox = boxDataBloc.nestingBox;
-            int daysSinceLastInspection =
-                DateTime.now().difference(nestingBox.lastInspected).inDays;
-
+            int daysSinceLastInspection = 1;
+            if (nestingBox.lastInspected == null) {
+              daysSinceLastInspection =
+                  DateTime.now().difference(nestingBox.hangUpDate).inDays;
+            } else {
+              daysSinceLastInspection =
+                  DateTime.now().difference(nestingBox.lastInspected).inDays;
+            }
             Row _inspectionButtons = Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
