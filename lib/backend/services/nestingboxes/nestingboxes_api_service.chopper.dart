@@ -57,4 +57,16 @@ class _$NestingBoxesApiService extends NestingBoxesApiService {
     final $request = Request('GET', $url, client.baseUrl, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  Future<Response> postNewNestingBox(String nestingBox, String authHeader) {
+    final $url = '/nesting-boxes';
+    final $headers = {
+      'Authorization': authHeader,
+      'Content-Type': 'application/json'
+    };
+    final $body = nestingBox;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

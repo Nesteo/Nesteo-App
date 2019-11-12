@@ -6,7 +6,7 @@ import 'package:nesteo_app/model/user.dart';
 
 part 'nestingbox.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable(nullable: true, explicitToJson: true)
 class NestingBox extends Equatable {
   final String id;
   final Region region;

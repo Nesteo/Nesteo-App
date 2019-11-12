@@ -107,4 +107,16 @@ class NestingBoxesRepository {
       return null;
     }
   }
+
+  Future<int> addNewNestingBox(NestingBox nestingBox) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
+    var nestingBoxString = json.encode(nestingBox);
+    print(nestingBoxString);
+    final response = await _nestingBoxesApi.postNewNestingBox(
+        nestingBoxString, _authBloc.auth);
+    print(response.statusCode);
+    print(response.body);
+    return response.statusCode;
+  }
 }

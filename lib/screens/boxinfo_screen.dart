@@ -143,7 +143,9 @@ class BoxInfoScreen extends NesteoFullScreen {
             Table _informationTable = Table(
               children: [
                 _hangUpUserRow,
-                _hangUpDateRow,
+                boxDataBloc.nestingBox.hangUpDate != null
+                    ? _hangUpDateRow
+                    : null,
                 _inspectionCountRow,
                 _materialRow,
                 _commentRow,

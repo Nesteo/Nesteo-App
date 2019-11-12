@@ -40,14 +40,14 @@ NestingBox _$NestingBoxFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$NestingBoxToJson(NestingBox instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'region': instance.region,
+      'region': instance.region?.toJson(),
       'oldId': instance.oldId,
       'foreignId': instance.foreignId,
       'coordinateLongitude': instance.coordinateLongitude,
       'coordinateLatitude': instance.coordinateLatitude,
       'hangUpDate': instance.hangUpDate?.toIso8601String(),
-      'hangUpUser': instance.hangUpUser,
-      'owner': instance.owner,
+      'hangUpUser': instance.hangUpUser?.toJson(),
+      'owner': instance.owner?.toJson(),
       'material': instance.material,
       'holeSize': instance.holeSize,
       'imageFileName': instance.imageFileName,
