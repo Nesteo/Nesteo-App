@@ -1,11 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_bloc.dart';
 import 'package:nesteo_app/blocs/inspectiondata_bloc/inspectiondata.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
-import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
+
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:intl/intl.dart';
