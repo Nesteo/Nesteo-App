@@ -1,9 +1,6 @@
 import 'dart:math';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
@@ -78,9 +75,13 @@ class BoxListScreen extends NesteoFramedScreen {
             child: ListView.builder(
               itemCount: boxDataBloc.nestingBoxList.length,
               itemBuilder: (context, index) {
-                int daysSinceLastInspection = DateTime.now()
-                    .difference(boxDataBloc.nestingBoxList[index].lastInspected)
-                    .inDays;
+                int daysSinceLastInspection = 1;
+                if (boxDataBloc.nestingBoxList[index].lastInspected != null) {
+                  daysSinceLastInspection = DateTime.now()
+                      .difference(
+                          boxDataBloc.nestingBoxList[index].lastInspected)
+                      .inDays;
+                }
                 return Container(
                   child: Card(
                     color: Color.lerp(
