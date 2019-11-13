@@ -108,7 +108,7 @@ class NestingBoxesRepository {
     }
   }
 
-  Future<int> addNewNestingBox(NestingBox nestingBox) async {
+  Future<NestingBox> addNewNestingBox(NestingBox nestingBox) async {
     NestingBoxesApiService _nestingBoxesApi =
         NestingBoxesApiService.create(_authBloc.domain);
     var nestingBoxString = json.encode(nestingBox);
@@ -117,6 +117,11 @@ class NestingBoxesRepository {
         nestingBoxString, _authBloc.auth);
     print(response.statusCode);
     print(response.body);
-    return response.statusCode;
+    if (response.statusCode == 201) {
+      final Map result = json.decode(response.body);
+      return NestingBox.fromJson(result);
+    } else {
+      return null;
+    }
   }
 }

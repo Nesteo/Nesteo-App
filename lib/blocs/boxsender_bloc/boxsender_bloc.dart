@@ -9,6 +9,7 @@ import 'package:nesteo_app/model/user.dart';
 import './boxsender.dart';
 
 class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
+  NestingBox lastNewBox;
   @override
   BoxSenderState get initialState => WaitingForSend();
 
@@ -22,7 +23,7 @@ class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
       var authRepo = AuthRepository(event.authBloc);
       User user = await authRepo.getAuth();
 
-      int response = await boxRepo.addNewNestingBox(
+      NestingBox response = await boxRepo.addNewNestingBox(
         NestingBox(
           hangUpUser: user,
           coordinateLatitude: event.coordinates.latitude,
@@ -44,12 +45,15 @@ class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
         ),
       );
 
-      if (response == 201) {
+      if (response != null) {
+        lastNewBox = response;
         yield BoxSentState();
-        yield WaitingForSend();
       } else {
         yield SendErrorState();
       }
+    }
+    if (event is NewBoxDoneEvent) {
+      yield WaitingForSend();
     }
   }
 }

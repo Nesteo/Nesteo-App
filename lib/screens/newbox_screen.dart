@@ -11,6 +11,7 @@ import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:nesteo_app/screens/newboxconfirmation_screen.dart';
 
 class NewBoxScreen extends NesteoFullScreen {
   NewBoxScreen(BuildContext context)
@@ -42,12 +43,11 @@ class NewBoxData extends StatefulWidget {
 }
 
 class _NewBoxDataState extends State<NewBoxData> {
-  DateTime hangUpDate;
   LatLng position;
   String _id;
   String _oldId;
   String _foreignId;
-  DateTime _hangDate;
+  DateTime _hangUpDate;
   String _regionIdPrefix;
   String _regionName;
   String _owner;
@@ -59,347 +59,346 @@ class _NewBoxDataState extends State<NewBoxData> {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
 
     return GestureDetector(
-      child: BlocProvider<BoxSenderBloc>(
-        builder: (BuildContext context) => BoxSenderBloc(),
-        child: BlocBuilder<BoxSenderBloc, BoxSenderState>(
-          builder: (context, state) {
-            if (state is WaitingForSend) {
-              return Container(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Card(
-                        child: ListTile(
-                          title: Row(
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.hashtag),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: Text("IDs"))
-                            ],
-                          ),
-                          subtitle: Column(
-                            children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.all(7),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: TextFormField(
-                                    textAlign: TextAlign.left,
-                                    decoration: InputDecoration(
-                                      labelText: "ID - optional",
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                    ),
-                                    onChanged: (String value) {
-                                      setState(() {
-                                        _id = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(7),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: TextFormField(
-                                    textAlign: TextAlign.left,
-                                    decoration: InputDecoration(
-                                      labelText: "old ID - optional",
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                    ),
-                                    onChanged: (String value) {
-                                      setState(() {
-                                        _oldId = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(7),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: TextFormField(
-                                    textAlign: TextAlign.left,
-                                    decoration: InputDecoration(
-                                      labelText: "foreign ID - optional",
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                    ),
-                                    onChanged: (String value) {
-                                      setState(() {
-                                        _foreignId = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+      child: BlocBuilder<BoxSenderBloc, BoxSenderState>(
+        builder: (context, state) {
+          if (state is WaitingForSend) {
+            return Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Card(
+                      child: ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.hashtag),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                child: Text("IDs"))
+                          ],
                         ),
-                      ),
-                      Card(
-                          child: ListTile(
-                              title: Row(children: <Widget>[
-                                Icon(FontAwesomeIcons.calendarAlt),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(0, 20, 10, 10)),
-                                Text("Date"),
-                              ]),
-                              subtitle: Padding(
-                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                child: DateTimePickerFormField(
+                        subtitle: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(7),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: TextFormField(
+                                  textAlign: TextAlign.left,
                                   decoration: InputDecoration(
-                                    labelText: "select Day",
+                                    labelText: "ID - optional",
                                     filled: true,
                                     fillColor: Colors.white,
                                   ),
-                                  inputType: InputType.date,
-                                  format: DateFormat("yyyy-MM-dd"),
-                                  initialDate: DateTime.now(),
-                                  editable: false,
-                                  onChanged: (dt) {
-                                    setState(() => hangUpDate = dt);
+                                  onChanged: (String value) {
+                                    setState(() {
+                                      _id = value;
+                                    });
                                   },
                                 ),
-                              ))),
-                      Card(
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(7),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: TextFormField(
+                                  textAlign: TextAlign.left,
+                                  decoration: InputDecoration(
+                                    labelText: "old ID - optional",
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                  ),
+                                  onChanged: (String value) {
+                                    setState(() {
+                                      _oldId = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(7),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: TextFormField(
+                                  textAlign: TextAlign.left,
+                                  decoration: InputDecoration(
+                                    labelText: "foreign ID - optional",
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                  ),
+                                  onChanged: (String value) {
+                                    setState(() {
+                                      _foreignId = value;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Card(
                         child: ListTile(
+                            title: Row(children: <Widget>[
+                              Icon(FontAwesomeIcons.calendarAlt),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 20, 10, 10)),
+                              Text("Date"),
+                            ]),
+                            subtitle: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: DateTimePickerFormField(
+                                decoration: InputDecoration(
+                                  labelText: "select Day",
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                inputType: InputType.date,
+                                format: DateFormat("yyyy-MM-dd"),
+                                initialDate: DateTime.now(),
+                                editable: false,
+                                onChanged: (dt) {
+                                  setState(() => _hangUpDate = dt);
+                                },
+                              ),
+                            ))),
+                    Card(
+                      child: ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.box),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                child: Text("Box"))
+                          ],
+                        ),
+                        subtitle: Column(children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(child: Text("Material:")),
+                                  _createMaterialSelection(context),
+                                ],
+                              )),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Text("Hole size:"),
+                              ),
+                              _createHoleSizeSlider()
+                            ],
+                          )
+                        ]),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
                           title: Row(
                             children: <Widget>[
-                              Icon(FontAwesomeIcons.box),
+                              Icon(FontAwesomeIcons.globe),
                               Padding(
                                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: Text("Box"))
+                                  child: Text("Region")),
                             ],
                           ),
                           subtitle: Column(children: <Widget>[
+                            TextFormField(
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                labelText: "Region ID Prefix",
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              onChanged: (String value) {
+                                setState(() {
+                                  _regionIdPrefix = value;
+                                });
+                              },
+                            ),
+                            TextFormField(
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                labelText: "Region Name",
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              onChanged: (String value) {
+                                setState(() {
+                                  _regionName = value;
+                                });
+                              },
+                            ),
+                          ])),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.globeAmericas),
                             Padding(
-                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                child: Row(
-                                  children: <Widget>[
-                                    Expanded(child: Text("Material:")),
-                                    _createMaterialSelection(context),
-                                  ],
-                                )),
-                            Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text("Hole size:"),
-                                ),
-                                _createHoleSizeSlider()
-                              ],
-                            )
-                          ]),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                            title: Row(
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.globe),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                    child: Text("Region")),
-                              ],
-                            ),
-                            subtitle: Column(children: <Widget>[
-                              TextFormField(
-                                maxLines: 1,
-                                textAlign: TextAlign.left,
-                                decoration: InputDecoration(
-                                  labelText: "Region ID Prefix",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _regionIdPrefix = value;
-                                  });
-                                },
-                              ),
-                              TextFormField(
-                                maxLines: 1,
-                                textAlign: TextAlign.left,
-                                decoration: InputDecoration(
-                                  labelText: "Region Name",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                ),
-                                onChanged: (String value) {
-                                  setState(() {
-                                    _regionName = value;
-                                  });
-                                },
-                              ),
-                            ])),
-                      ),
-                      Card(
-                        child: ListTile(
-                          title: Row(
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.globeAmericas),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: Text("Position")),
-                            ],
-                          ),
-                          subtitle: Column(
-                            children: <Widget>[
-                              TextFormField(
-                                keyboardType: TextInputType.number,
-                                maxLines: 1,
-                                textAlign: TextAlign.left,
-                                readOnly: true,
-                                decoration: InputDecoration(
-                                  labelText:
-                                      "Latitude ${(position == null) ? "" : position.latitude}",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                ),
-                              ),
-                              TextFormField(
-                                keyboardType: TextInputType.number,
-                                readOnly: true,
-                                maxLines: 1,
-                                textAlign: TextAlign.left,
-                                decoration: InputDecoration(
-                                  labelText:
-                                      "Longitude ${(position == null) ? "" : position.longitude}",
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                ),
-                              ),
-                              Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Row(
-                                  children: <Widget>[
-                                    Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                        child: (Text("Add GPS Data"))),
-                                    IconButton(
-                                      icon: Icon(Icons.gps_fixed),
-                                      onPressed: () async {
-                                        if (await Geolocator()
-                                            .isLocationServiceEnabled()) {
-                                          Position currentPosition =
-                                              await Geolocator()
-                                                  .getCurrentPosition(
-                                                      desiredAccuracy:
-                                                          LocationAccuracy
-                                                              .high);
-
-                                          setState(() {
-                                            position = LatLng(
-                                                currentPosition.latitude,
-                                                currentPosition.longitude);
-                                          });
-                                        }
-                                      },
-                                    )
-                                  ],
-                                ),
+                                child: Text("Position")),
+                          ],
+                        ),
+                        subtitle: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              readOnly: true,
+                              decoration: InputDecoration(
+                                labelText:
+                                    "Latitude ${(position == null) ? "" : position.latitude}",
+                                filled: true,
+                                fillColor: Colors.white,
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          title: Row(
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.userAlt),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: Text("Owner")),
-                            ],
-                          ),
-                          subtitle: TextFormField(
-                            maxLines: 1,
-                            textAlign: TextAlign.left,
-                            decoration: InputDecoration(
-                              labelText: "Owner",
-                              filled: true,
-                              fillColor: Colors.white,
                             ),
-                            onChanged: (String value) {
-                              setState(() {
-                                _owner = value;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          title: Row(
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.comment),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: Text("Comment"))
-                            ],
-                          ),
-                          subtitle: TextFormField(
-                            maxLines: 3,
-                            textAlign: TextAlign.left,
-                            onChanged: (String value) {
-                              setState(() {
-                                _comment = value;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      RaisedButton(
-                        color: Colors.blue,
-                        onPressed: () {
-                          BlocProvider.of<BoxSenderBloc>(context).add(
-                            SendBoxEvent(
-                              authBloc:
-                                  BlocProvider.of<AuthenticationBloc>(context),
-                              material: _dropDownMaterial,
-                              hangUpDate: (hangUpDate != null)
-                                  ? hangUpDate
-                                  : DateTime.now(),
-                              oldId: _oldId,
-                              holeSize: getSliderLabel(_slideHoleSize),
-                              comment: _comment,
-                              coordinates: position,
-                              foreignId: _foreignId,
-                              ownerString: _owner,
-                              regionIdPrefixString: _regionIdPrefix,
-                              regionString: _regionName,
+                            TextFormField(
+                              keyboardType: TextInputType.number,
+                              readOnly: true,
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                labelText:
+                                    "Longitude ${(position == null) ? "" : position.longitude}",
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
                             ),
-                          );
-                        },
-                        child: Text(
-                          "Create new Nesting Box",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                          ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              child: Row(
+                                children: <Widget>[
+                                  Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                      child: (Text("Add GPS Data"))),
+                                  IconButton(
+                                    icon: Icon(Icons.gps_fixed),
+                                    onPressed: () async {
+                                      if (await Geolocator()
+                                          .isLocationServiceEnabled()) {
+                                        Position currentPosition =
+                                            await Geolocator()
+                                                .getCurrentPosition(
+                                                    desiredAccuracy:
+                                                        LocationAccuracy.high);
+
+                                        setState(() {
+                                          position = LatLng(
+                                              currentPosition.latitude,
+                                              currentPosition.longitude);
+                                        });
+                                      }
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.userAlt),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                child: Text("Owner")),
+                          ],
+                        ),
+                        subtitle: TextFormField(
+                          maxLines: 1,
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "Owner",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                          onChanged: (String value) {
+                            setState(() {
+                              _owner = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Card(
+                      child: ListTile(
+                        title: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.comment),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                child: Text("Comment"))
+                          ],
+                        ),
+                        subtitle: TextFormField(
+                          maxLines: 3,
+                          textAlign: TextAlign.left,
+                          onChanged: (String value) {
+                            setState(() {
+                              _comment = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    RaisedButton(
+                      color: Colors.blue,
+                      onPressed: () {
+                        BlocProvider.of<BoxSenderBloc>(context).add(
+                          SendBoxEvent(
+                            authBloc:
+                                BlocProvider.of<AuthenticationBloc>(context),
+                            material: "WoodConcrete",
+                            hangUpDate: (_hangUpDate != null)
+                                ? _hangUpDate
+                                : DateTime.now(),
+                            oldId: _oldId,
+                            holeSize: "Other",
+                            comment: _comment,
+                            coordinates: position,
+                            foreignId: _foreignId,
+                            ownerString: _owner,
+                            regionIdPrefixString: _regionIdPrefix,
+                            regionString: _regionName,
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Create new Nesting Box",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            }
-            if (state is BoxSentState) {
-              BlocProvider.of<PageControlBloc>(context)
-                  .add(GoToNewBoxConfirmationEvent());
-              BlocProvider.of<BoxDataBloc>(context)
-                  .add(GetAllBoxPreviewEvent());
-            }
-          },
-        ),
+              ),
+            );
+          }
+          if (state is BoxSentState) {
+            BlocProvider.of<BoxDataBloc>(context).add(GetAllBoxPreviewEvent());
+            BlocProvider.of<PageControlBloc>(context)
+                .add(GoToNewBoxConfirmationEvent());
+            return LinearProgressIndicator();
+          }
+          if (state is SendingBoxState) {
+            return LinearProgressIndicator(
+              backgroundColor: Colors.green,
+            );
+          }
+        },
       ),
     );
   }

@@ -6,6 +6,11 @@ abstract class BoxSenderEvent extends Equatable {
   const BoxSenderEvent();
 }
 
+class NewBoxDoneEvent extends BoxSenderEvent {
+  @override
+  List<Object> get props => null;
+}
+
 class SendBoxEvent extends BoxSenderEvent {
   final AuthenticationBloc authBloc;
   final LatLng coordinates;
