@@ -72,6 +72,8 @@ class LocaleboxList {
 
   String get sortByID => _data["sortByID"];
   String get sortByLastInspection => _data["sortByLastInspection"];
+  String get lastInspection => _data["lastInspection"];
+  String get daysAgo => _data["daysAgo"];
 }
 class LocaleboxNew {
   final Map<String, String> _data;
