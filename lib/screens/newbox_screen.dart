@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -283,7 +286,10 @@ class _NewBoxDataState extends State<NewBoxData> {
             ),
             RaisedButton(
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () {
+                BlocProvider.of<PageControlBloc>(context)
+                    .add(GoToNewBoxConfirmationEvent());
+              },
               child: Text(
                 "Send",
                 style: TextStyle(

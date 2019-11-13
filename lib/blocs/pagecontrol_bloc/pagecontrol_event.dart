@@ -46,6 +46,11 @@ class GoToNewInspectionEvent extends PageControlEvent {
   List<Object> get props => [];
 }
 
+class GoToNewBoxConfirmationEvent extends PageControlEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class BackButtonEvent extends PageControlEvent {
   @override
   List<Object> get props => [];

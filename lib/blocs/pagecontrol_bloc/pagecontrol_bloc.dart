@@ -17,6 +17,7 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
     GoToNewInspectionEvent: NewInspectionScreenState(),
     GoToNewBoxEvent: NewBoxScreenState(),
     GoToInspectionListEvent: InspectionListScreenState(),
+    GoToNewBoxConfirmationEvent: NewBoxConfirmationScreenState(),
   };
 
   PageControlBloc() : super() {

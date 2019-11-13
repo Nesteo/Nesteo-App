@@ -42,6 +42,14 @@
     "addImage": "add image",
     "getPosition": "get GPS for new Box"
   },
+  "inspectionList": {
+    "date": "date:",
+    "condition": "condition",
+    "pBirdF": "parent bird female ",
+    "ringedChicks": "number of ringed Chicks",
+    "pBirdM": "parent bird male",
+    "inspection": "inspection"
+  },
   "login": {
     "domain": "domain text box",
     "username": "username text box",

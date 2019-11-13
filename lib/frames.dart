@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
+import 'package:nesteo_app/screens/newboxconfirmation_screen.dart';
 import 'package:nesteo_app/screens/screens.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 
@@ -40,6 +41,8 @@ class FullScreen extends StatelessWidget {
                   screen = InspectionListScreen(context);
                 } else if (state is NewInspectionScreenState) {
                   screen = NewInspectionScreen(context);
+                } else if (state is NewBoxConfirmationScreenState) {
+                  screen = NewBoxConfirmationScreen(context);
                 } else {
                   screen = TransitionFullScreen(context);
                 }
