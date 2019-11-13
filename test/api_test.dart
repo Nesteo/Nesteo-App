@@ -192,21 +192,15 @@ void main() {
       test('Test POST /nesting-boxes', () async {
         String regionWord = WordPair.random().asPascalCase;
         String ownerWord = WordPair.random().asPascalCase;
+        User user = await authBloc.authRepository.getAuth();
         final newNestingBox = NestingBox(
-          hangUpUser: User(
-            id: "f80d95df-9e94-4646-9cbb-b4c7be679ce1",
-            userName: "Admin",
-            lastName: "Admin",
-            firstName: "Default",
-            email: null,
-            phoneNumber: null,
-          ),
+          hangUpUser: user,
           coordinateLatitude: 42.963710 + Random().nextDouble(),
+          coordinateLongitude: -85.888412 + Random().nextDouble(),
           hangUpDate: DateTime.now(),
           region: Region(
               id: null, name: regionWord, nestingBoxIdPrefix: regionWord[0]),
           owner: Owner(id: null, name: ownerWord),
-          coordinateLongitude: -85.888412 + Random().nextDouble(),
           material: "TreatedWood",
           holeSize: "Small",
           comment: "Prost!",

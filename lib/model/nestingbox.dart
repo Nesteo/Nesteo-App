@@ -19,7 +19,7 @@ class NestingBox extends Equatable {
   final Owner owner;
   final String material;
   final String holeSize;
-  final String imageFileName;
+  final bool hasImage;
   final String comment;
   final String lastUpdated;
   final int inspectionsCount;
@@ -37,7 +37,7 @@ class NestingBox extends Equatable {
     this.owner,
     this.material,
     this.holeSize,
-    this.imageFileName,
+    this.hasImage,
     this.comment,
     this.lastUpdated,
     this.inspectionsCount,
@@ -57,7 +57,7 @@ class NestingBox extends Equatable {
         owner,
         material,
         holeSize,
-        imageFileName,
+        hasImage,
         comment,
         lastUpdated,
         inspectionsCount,

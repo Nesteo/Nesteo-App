@@ -37,7 +37,7 @@ class NewBoxData extends StatefulWidget {
 class _NewBoxDataState extends State<NewBoxData> {
   String id;
   String oldId;
-  DateTime hangDate;
+  DateTime hangUpDate;
   String material;
 
   String _dropDownMaterial;
@@ -112,7 +112,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                         initialDate: DateTime.now(),
                         editable: false,
                         onChanged: (dt) {
-                          setState(() => hangDate = dt);
+                          setState(() => hangUpDate = dt);
                         },
                       ),
                     ))),
