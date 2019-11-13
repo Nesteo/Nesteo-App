@@ -192,18 +192,57 @@ class _NewBoxDataState extends State<NewBoxData> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                            child: (Text("Add GPS Data"))),
-                        IconButton(
-                          icon: Icon(Icons.gps_fixed),
-                          onPressed: () {},
-                        )
-                      ],
-                    )
                   ])),
+            ),
+            Card(
+              child: ListTile(
+                title: Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.globeAmericas),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text("Position")),
+                  ],
+                ),
+                subtitle: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        labelText: "Latitude",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        labelText: "Longitude",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              child: (Text("Add GPS Data"))),
+                          IconButton(
+                            icon: Icon(Icons.gps_fixed),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Card(
               child: ListTile(
