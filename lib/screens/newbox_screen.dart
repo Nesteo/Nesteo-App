@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -63,35 +64,51 @@ class _NewBoxDataState extends State<NewBoxData> {
                         child: Text("IDs"))
                   ],
                 ),
-                subtitle: ListTile(
-                  title: Container(
-                    padding: EdgeInsets.all(7),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextFormField(
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          labelText: "ID - optional",
-                          filled: true,
-                          fillColor: Colors.white,
+                subtitle: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "ID - optional",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  subtitle: Container(
-                    padding: EdgeInsets.all(7),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextFormField(
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          labelText: "old ID - optional",
-                          filled: true,
-                          fillColor: Colors.white,
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "old ID - optional",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "foreign ID - optional",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -178,18 +195,57 @@ class _NewBoxDataState extends State<NewBoxData> {
                         fillColor: Colors.white,
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                            child: (Text("Add GPS Data"))),
-                        IconButton(
-                          icon: Icon(Icons.gps_fixed),
-                          onPressed: () {},
-                        )
-                      ],
-                    )
                   ])),
+            ),
+            Card(
+              child: ListTile(
+                title: Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.globeAmericas),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text("Position")),
+                  ],
+                ),
+                subtitle: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        labelText: "Latitude",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        labelText: "Longitude",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              child: (Text("Add GPS Data"))),
+                          IconButton(
+                            icon: Icon(Icons.gps_fixed),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Card(
               child: ListTile(

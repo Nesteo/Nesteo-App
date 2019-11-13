@@ -29,6 +29,7 @@ dependencies:
   datetime_picker_formfield: ^0.1.8
   flutter_secure_storage: ^3.3.1+1
   json_annotation: ^3.0.0
+  flutter_typeahead: ^1.7.0
 dev_dependencies:
   mockito: ^4.1.1
   flutter_launcher_icons: ^0.7.3
