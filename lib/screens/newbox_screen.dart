@@ -69,7 +69,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: TextFormField(
-                        textAlign: TextAlign.right,
+                        textAlign: TextAlign.left,
                         decoration: InputDecoration(
                           labelText: "ID - optional",
                           filled: true,
@@ -83,7 +83,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: TextFormField(
-                        textAlign: TextAlign.right,
+                        textAlign: TextAlign.left,
                         decoration: InputDecoration(
                           labelText: "old ID - optional",
                           filled: true,
@@ -151,6 +151,69 @@ class _NewBoxDataState extends State<NewBoxData> {
             ),
             Card(
               child: ListTile(
+                  title: Row(
+                    children: <Widget>[
+                      Icon(FontAwesomeIcons.globe),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Text("Region")),
+                    ],
+                  ),
+                  subtitle: Column(children: <Widget>[
+                    TextFormField(
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        labelText: "Region ID",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    TextFormField(
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        labelText: "Region Name",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                            child: (Text("Add GPS Data"))),
+                        IconButton(
+                          icon: Icon(Icons.gps_fixed),
+                          onPressed: () {},
+                        )
+                      ],
+                    )
+                  ])),
+            ),
+            Card(
+              child: ListTile(
+                title: Row(
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.userAlt),
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        child: Text("Owner")),
+                  ],
+                ),
+                subtitle: TextFormField(
+                  maxLines: 1,
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    labelText: "Owner",
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Card(
+              child: ListTile(
                 title: Row(
                   children: <Widget>[
                     Icon(FontAwesomeIcons.comment),
@@ -186,6 +249,35 @@ class _NewBoxDataState extends State<NewBoxData> {
   }
 
   Widget _createMaterialSelection(BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    return Container(
+      child: DropdownButton<String>(
+        value: (_dropDownMaterial != null)
+            ? _dropDownMaterial
+            : loc.boxNew.untreatedWood,
+        icon: Icon(Icons.arrow_downward),
+        iconSize: 24,
+        style: TextStyle(color: Colors.deepPurple),
+        onChanged: (String newValue) {
+          setState(() {
+            _dropDownMaterial = newValue;
+          });
+        },
+        items: <String>[
+          loc.boxNew.untreatedWood,
+          loc.boxNew.treatedWood,
+          loc.boxNew.concrete
+        ].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _createRegionIdSlection(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return Container(
       child: DropdownButton<String>(
