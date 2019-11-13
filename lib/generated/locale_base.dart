@@ -23,6 +23,8 @@ class LocaleBase {
   LocaleboxList get boxList => _boxList;
   LocaleboxNew _boxNew;
   LocaleboxNew get boxNew => _boxNew;
+  LocaleinspectionList _inspectionList;
+  LocaleinspectionList get inspectionList => _inspectionList;
   Localelogin _login;
   Localelogin get login => _login;
   LocalescreenName _screenName;
@@ -32,6 +34,7 @@ class LocaleBase {
     _boxInfo = LocaleboxInfo(Map<String, String>.from(_data['boxInfo']));
     _boxList = LocaleboxList(Map<String, String>.from(_data['boxList']));
     _boxNew = LocaleboxNew(Map<String, String>.from(_data['boxNew']));
+    _inspectionList = LocaleinspectionList(Map<String, String>.from(_data['inspectionList']));
     _login = Localelogin(Map<String, String>.from(_data['login']));
     _screenName = LocalescreenName(Map<String, String>.from(_data['screenName']));
   }
@@ -88,6 +91,17 @@ class LocaleboxNew {
   String get concrete => _data["concrete"];
   String get addImage => _data["addImage"];
   String get getPosition => _data["getPosition"];
+}
+class LocaleinspectionList {
+  final Map<String, String> _data;
+  LocaleinspectionList(this._data);
+
+  String get date => _data["date"];
+  String get condition => _data["condition"];
+  String get pBirdF => _data["pBirdF"];
+  String get ringedChicks => _data["ringedChicks"];
+  String get pBirdM => _data["pBirdM"];
+  String get inspection => _data["inspection"];
 }
 class Localelogin {
   final Map<String, String> _data;
