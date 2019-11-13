@@ -38,10 +38,11 @@ class BoxInfoScreen extends NesteoFullScreen {
           if (state is BoxReadyState) {
             NestingBox nestingBox = boxDataBloc.nestingBox;
             int daysSinceLastInspection = 1;
-            if (nestingBox.lastInspected == null) {
+            if (nestingBox.lastInspected == null &&
+                nestingBox.hangUpDate != null) {
               daysSinceLastInspection =
                   DateTime.now().difference(nestingBox.hangUpDate).inDays;
-            } else {
+            } else if (nestingBox.lastInspected != null) {
               daysSinceLastInspection =
                   DateTime.now().difference(nestingBox.lastInspected).inDays;
             }
@@ -78,7 +79,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 TableCell(
                   child: ListTile(
                     title: Text(
-                        "${nestingBox.hangUpUser.firstName} ${nestingBox.hangUpUser.lastName}"),
+                        "${nestingBox?.hangUpUser?.firstName} ${nestingBox?.hangUpUser?.lastName}"),
                   ),
                 ),
               ],
@@ -95,7 +96,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 TableCell(
                   child: ListTile(
                     title: Text(
-                        "${nestingBox.hangUpDate.month}/${nestingBox.hangUpDate.day}/${nestingBox.hangUpDate.year}"),
+                        "${nestingBox?.hangUpDate?.month}/${nestingBox?.hangUpDate?.day}/${nestingBox?.hangUpDate?.year}"),
                   ),
                 ),
               ],
@@ -131,7 +132,50 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
               ],
             );
-
+            TableRow _holeSizeRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                      title: Text("Hole size:"),
+                      leading: Icon(FontAwesomeIcons.ruler)),
+                ),
+                TableCell(
+                  child: ListTile(
+                    title: Text("${nestingBox.material}"),
+                  ),
+                ),
+              ],
+            );
+            TableRow _regionRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                    title: Text("Region:"),
+                    leading: Icon(FontAwesomeIcons.globe),
+                  ),
+                ),
+                TableCell(
+                  child: ListTile(
+                    title: Text(nestingBox.region.name),
+                  ),
+                ),
+              ],
+            );
+            TableRow _ownerRow = TableRow(
+              children: [
+                TableCell(
+                  child: ListTile(
+                    title: Text("Owner:"),
+                    leading: Icon(FontAwesomeIcons.userAlt),
+                  ),
+                ),
+                TableCell(
+                  child: ListTile(
+                    title: Text(nestingBox.owner.name),
+                  ),
+                ),
+              ],
+            );
             TableRow _commentRow = TableRow(
               children: [
                 TableCell(
@@ -142,7 +186,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    subtitle: Text(nestingBox.comment),
+                    title: Text(nestingBox.comment),
                   ),
                 ),
               ],
@@ -154,6 +198,9 @@ class BoxInfoScreen extends NesteoFullScreen {
                 _hangUpDateRow,
                 _inspectionCountRow,
                 _materialRow,
+                _holeSizeRow,
+                _regionRow,
+                _ownerRow,
                 _commentRow,
               ],
             );
