@@ -39,13 +39,3 @@ class ChangeSortTypeEvent extends BoxDataEvent {
   @override
   List<Object> get props => [];
 }
-
-class NewBoxEvent extends BoxDataEvent {
-  @override
-  List<Object> get props => [];
-}
-
-class NewBoxConfirmationEvent extends BoxDataEvent {
-  @override
-  List<Object> get props => [];
-}

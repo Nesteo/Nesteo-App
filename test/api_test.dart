@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:english_words/english_words.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nesteo_app/backend/repositories/auth_repository.dart';
 import 'package:nesteo_app/backend/repositories/inspections_repository.dart';
@@ -185,6 +187,28 @@ void main() {
           expect(inspections[0] != null, true);
           expect(inspections[0].containsEggs == null, true);
         }
+      });
+
+      test('Test POST /nesting-boxes', () async {
+        String regionWord = WordPair.random().asPascalCase;
+        String ownerWord = WordPair.random().asPascalCase;
+        User user = await authBloc.authRepository.getAuth();
+        final newNestingBox = NestingBox(
+          hangUpUser: user,
+          coordinateLatitude: 42.963710 + Random().nextDouble(),
+          coordinateLongitude: -85.888412 + Random().nextDouble(),
+          hangUpDate: DateTime.now(),
+          region: Region(
+              id: null, name: regionWord, nestingBoxIdPrefix: regionWord[0]),
+          owner: Owner(id: null, name: ownerWord),
+          material: "TreatedWood",
+          holeSize: "Small",
+          comment: "Prost!",
+        );
+
+        NestingBox response =
+            await nestingBoxRepo.addNewNestingBox(newNestingBox);
+        expect(response != null, true);
       });
     });
     group('Inspection API tests', () {

@@ -38,10 +38,11 @@ class BoxInfoScreen extends NesteoFullScreen {
           if (state is BoxReadyState) {
             NestingBox nestingBox = boxDataBloc.nestingBox;
             int daysSinceLastInspection = 1;
-            if (nestingBox.lastInspected == null) {
+            if (nestingBox.lastInspected == null &&
+                nestingBox.hangUpDate != null) {
               daysSinceLastInspection =
                   DateTime.now().difference(nestingBox.hangUpDate).inDays;
-            } else {
+            } else if (nestingBox.lastInspected != null) {
               daysSinceLastInspection =
                   DateTime.now().difference(nestingBox.lastInspected).inDays;
             }
@@ -76,7 +77,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 TableCell(
                   child: ListTile(
                     title: Text(
-                        "${nestingBox.hangUpUser.firstName} ${nestingBox.hangUpUser.lastName}"),
+                        "${nestingBox?.hangUpUser?.firstName} ${nestingBox?.hangUpUser?.lastName}"),
                   ),
                 ),
               ],
@@ -93,7 +94,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 TableCell(
                   child: ListTile(
                     title: Text(
-                        "${nestingBox.hangUpDate.month}/${nestingBox.hangUpDate.day}/${nestingBox.hangUpDate.year}"),
+                        "${nestingBox?.hangUpDate?.month}/${nestingBox?.hangUpDate?.day}/${nestingBox?.hangUpDate?.year}"),
                   ),
                 ),
               ],

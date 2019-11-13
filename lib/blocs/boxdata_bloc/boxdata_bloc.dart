@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/backend/repositories/nestingboxes_repository.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 
 import 'package:nesteo_app/model/nestingbox.dart';
 import './boxdata.dart';
@@ -57,7 +56,6 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       // print(nestingBoxes.length);
       yield BoxReadyState();
     }
-    if (event is NewBoxConfirmationEvent) {}
     if (event is SortBoxEvent) {
       if (this.state is! InitialBoxDataState) {
         yield BoxChangingState();

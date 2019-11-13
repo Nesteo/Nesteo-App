@@ -24,7 +24,7 @@ class Inspection extends Equatable {
   final String femaleParentBirdDiscovery;
   final String maleParentBirdDiscovery;
   final Species species;
-  final String imageFileName;
+  final bool hasImage;
   final String comment;
   final String lastUpdated;
   final String nestingBoxId;
@@ -46,7 +46,7 @@ class Inspection extends Equatable {
     this.femaleParentBirdDiscovery,
     this.maleParentBirdDiscovery,
     this.species,
-    this.imageFileName,
+    this.hasImage,
     this.comment,
     this.lastUpdated,
     this.nestingBoxId,
@@ -70,7 +70,7 @@ class Inspection extends Equatable {
         femaleParentBirdDiscovery,
         maleParentBirdDiscovery,
         species,
-        imageFileName,
+        hasImage,
         comment,
         lastUpdated,
         nestingBoxId,

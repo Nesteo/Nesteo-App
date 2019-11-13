@@ -41,6 +41,12 @@ abstract class NestingBoxesApiService extends ChopperService {
     @Header('Authorization') String authHeader,
   ]);
 
+  @Post(headers: {'Content-Type': 'application/json'})
+  Future<Response> postNewNestingBox(
+    @Body() String nestingBox,
+    @Header('Authorization') String authHeader,
+  );
+
   static NestingBoxesApiService create(String url) {
     final client = ChopperClient(
       baseUrl: 'https://$url/api/v1',

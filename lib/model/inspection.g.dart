@@ -32,7 +32,7 @@ Inspection _$InspectionFromJson(Map<String, dynamic> json) {
     species: json['species'] == null
         ? null
         : Species.fromJson(json['species'] as Map<String, dynamic>),
-    imageFileName: json['imageFileName'] as String,
+    hasImage: json['hasImage'] as bool,
     comment: json['comment'] as String,
     lastUpdated: json['lastUpdated'] as String,
     nestingBoxId: json['nestingBoxId'] as String,
@@ -57,7 +57,7 @@ Map<String, dynamic> _$InspectionToJson(Inspection instance) =>
       'femaleParentBirdDiscovery': instance.femaleParentBirdDiscovery,
       'maleParentBirdDiscovery': instance.maleParentBirdDiscovery,
       'species': instance.species,
-      'imageFileName': instance.imageFileName,
+      'hasImage': instance.hasImage,
       'comment': instance.comment,
       'lastUpdated': instance.lastUpdated,
       'nestingBoxId': instance.nestingBoxId,
