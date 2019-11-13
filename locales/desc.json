@@ -20,7 +20,18 @@
     "addPhoto": "add photo",
     "boxConditionReplace": "replace box condition",
     "boxConditionRepair": "repair",
-    "boxConditionFixed": "fixed"
+    "boxConditionFixed": "fixed",
+    "newInspection": "new Inspection",
+    "showInspections": "show inspections",
+    "hangedUpBy": "hanged up by",
+    "hangupDate": "hangup date",
+    "inspected": "inspected",
+    "times": "times box was inspected",
+    "material": "material",
+    "lastInspection": "last inspection",
+    "information": "information",
+    "boxId": "Box id",
+    "daysAgo": "days ago"
   },
   "boxList": {
     "sortByID": "sort boxlist by ID",

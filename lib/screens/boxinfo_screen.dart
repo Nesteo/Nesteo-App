@@ -23,7 +23,7 @@ class BoxInfoScreen extends NesteoFullScreen {
   Widget build(BuildContext context) {
     PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
     BoxDataBloc boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
-
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return Container(
       color: Colors.lightGreen,
       child: BlocBuilder<BoxDataBloc, BoxDataState>(
@@ -51,14 +51,16 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 FlatButton.icon(
                   icon: Icon(Icons.add),
-                  label: Text("New Inspection", style: TextStyle(fontSize: 16)),
+                  label: Text(loc.boxInfo.newInspection,
+                      style: TextStyle(fontSize: 16)),
                   onPressed: () {
                     pageControlBloc.add(GoToNewInspectionEvent());
                   },
                 ),
                 FlatButton.icon(
                   icon: Icon(Icons.list),
-                  label: Text("Show Inspections"),
+                  label: Text(loc.boxInfo.showInspections,
+                      style: TextStyle(fontSize: 16)),
                   onPressed: () {
                     pageControlBloc.add(GoToInspectionListEvent());
                   },
@@ -70,7 +72,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                    title: Text("Hanged-up by:"),
+                    title: Text(loc.boxInfo.hangedUpBy),
                     leading: Icon(FontAwesomeIcons.tools),
                   ),
                 ),
@@ -87,7 +89,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                    title: Text("Hangup-Date:"),
+                    title: Text(loc.boxInfo.hangupDate),
                     leading: Icon(FontAwesomeIcons.calendarAlt),
                   ),
                 ),
@@ -104,12 +106,13 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                      title: Text("Inspected:"),
+                      title: Text(loc.boxInfo.inspected),
                       leading: Icon(FontAwesomeIcons.search)),
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text("${nestingBox.inspectionsCount} times"),
+                    title: Text(
+                        "${nestingBox.inspectionsCount} ${loc.boxInfo.times}"),
                   ),
                 ),
               ],
@@ -119,7 +122,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                      title: Text("Material:"),
+                      title: Text(loc.boxInfo.material),
                       leading: Icon(FontAwesomeIcons.box)),
                 ),
                 TableCell(
@@ -177,7 +180,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                    title: Text("Comment:"),
+                    title: Text(loc.boxInfo.comment),
                     leading: Icon(FontAwesomeIcons.pen),
                   ),
                 ),
@@ -212,9 +215,9 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 Card(
                   child: ListTile(
-                    title: Text("Box ID: ${nestingBox.id}"),
+                    title: Text("${loc.boxInfo.boxId} ${nestingBox.id}"),
                     subtitle: Text(
-                        "Last Inspection: $daysSinceLastInspection days ago"),
+                        "${loc.boxInfo.lastInspection}: $daysSinceLastInspection ${loc.boxInfo.daysAgo}"),
                     trailing: IconButton(
                       icon: Icon(Icons.gps_fixed),
                       onPressed: () {
@@ -236,8 +239,8 @@ class BoxInfoScreen extends NesteoFullScreen {
                   child: Column(
                     children: [
                       ListTile(
-                        title:
-                            Text("Information", style: TextStyle(fontSize: 18)),
+                        title: Text(loc.boxInfo.information,
+                            style: TextStyle(fontSize: 18)),
                       ),
                       Container(
                         child: DefaultTextStyle(

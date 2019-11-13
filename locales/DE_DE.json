@@ -20,7 +20,18 @@
     "addPhoto": "Foto hinzufügen",
     "boxConditionReplace": "Ersetzen",
     "boxConditionRepair": "Reparieren",
-    "boxConditionFixed": "Heile"
+    "boxConditionFixed": "Heile",
+    "newInspection": "Neue Inspektion",
+    "showInspections": "Zeige Inspektionen",
+    "hangedUpBy": "Aufgehängt von:",
+    "hangupDate": "Aufhängdatum:",
+    "inspected": "Inspiziert:",
+    "times": "mal",
+    "material": "Marerial:",
+    "lastInspection": "Letzte Inspektion",
+    "information": "Information",
+    "boxId": "Box ID:",
+    "daysAgo": "Tage her"
   },
   "boxList": {
     "sortByID": "Sortieren nach ID",
