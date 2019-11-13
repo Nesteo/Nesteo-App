@@ -206,8 +206,9 @@ void main() {
           comment: "Prost!",
         );
 
-        int response = await nestingBoxRepo.addNewNestingBox(newNestingBox);
-        expect(response == 201, true);
+        NestingBox response =
+            await nestingBoxRepo.addNewNestingBox(newNestingBox);
+        expect(response != null, true);
       });
     });
     group('Inspection API tests', () {
