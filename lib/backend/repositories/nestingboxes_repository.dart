@@ -107,4 +107,21 @@ class NestingBoxesRepository {
       return null;
     }
   }
+
+  Future<NestingBox> addNewNestingBox(NestingBox nestingBox) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
+    var nestingBoxString = json.encode(nestingBox);
+    print(nestingBoxString);
+    final response = await _nestingBoxesApi.postNewNestingBox(
+        nestingBoxString, _authBloc.auth);
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode == 201) {
+      final Map result = json.decode(response.body);
+      return NestingBox.fromJson(result);
+    } else {
+      return null;
+    }
+  }
 }
