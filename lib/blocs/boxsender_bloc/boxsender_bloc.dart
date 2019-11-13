@@ -44,6 +44,7 @@ class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
 
       if (response == 201) {
         yield BoxSentState();
+        yield WaitingForSend();
       } else {
         yield SendErrorState();
       }
