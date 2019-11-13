@@ -210,7 +210,6 @@ void main() {
           material: "TreatedWood",
           holeSize: "Small",
           comment: "Prost!",
-          lastUpdated: "2017-12-15T11:58:53.326536",
         );
 
         int response = await nestingBoxRepo.addNewNestingBox(newNestingBox);
