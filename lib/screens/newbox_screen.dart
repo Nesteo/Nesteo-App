@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
@@ -60,35 +61,51 @@ class _NewBoxDataState extends State<NewBoxData> {
                         child: Text("IDs"))
                   ],
                 ),
-                subtitle: ListTile(
-                  title: Container(
-                    padding: EdgeInsets.all(7),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextFormField(
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          labelText: "ID - optional",
-                          filled: true,
-                          fillColor: Colors.white,
+                subtitle: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "ID - optional",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  subtitle: Container(
-                    padding: EdgeInsets.all(7),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextFormField(
-                        textAlign: TextAlign.left,
-                        decoration: InputDecoration(
-                          labelText: "old ID - optional",
-                          filled: true,
-                          fillColor: Colors.white,
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "old ID - optional",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                    Container(
+                      padding: EdgeInsets.all(7),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: TextFormField(
+                          textAlign: TextAlign.left,
+                          decoration: InputDecoration(
+                            labelText: "foreign ID - optional",
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
