@@ -38,11 +38,14 @@ class NewBoxData extends StatefulWidget {
 }
 
 class _NewBoxDataState extends State<NewBoxData> {
-  String id;
-  String oldId;
-  DateTime hangDate;
-  String material;
-
+  String _id;
+  String _oldId;
+  String _foreignId;
+  DateTime _hangDate;
+  String _regionId;
+  String _regionName;
+  String _owner;
+  String _comment;
   String _dropDownMaterial;
   double _slideHoleSize = 1;
 
@@ -70,6 +73,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: TextFormField(
+                          onChanged: (String value) {
+                            setState(() {
+                              _id = value;
+                            });
+                          },
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             labelText: "ID - optional",
@@ -84,6 +92,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: TextFormField(
+                          onChanged: (String value) {
+                            setState(() {
+                              _oldId = value;
+                            });
+                          },
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             labelText: "old ID - optional",
@@ -98,6 +111,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: TextFormField(
+                          onChanged: (String value) {
+                            setState(() {
+                              _foreignId = value;
+                            });
+                          },
                           textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             labelText: "foreign ID - optional",
@@ -131,7 +149,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                         initialDate: DateTime.now(),
                         editable: false,
                         onChanged: (dt) {
-                          setState(() => hangDate = dt);
+                          setState(() => _hangDate = dt);
                         },
                       ),
                     ))),
@@ -177,6 +195,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                   ),
                   subtitle: Column(children: <Widget>[
                     TextFormField(
+                      onChanged: (String value) {
+                        setState(() {
+                          _regionId = value;
+                        });
+                      },
                       maxLines: 1,
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -186,6 +209,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                       ),
                     ),
                     TextFormField(
+                      onChanged: (String value) {
+                        setState(() {
+                          _regionName = value;
+                        });
+                      },
                       maxLines: 1,
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
@@ -257,6 +285,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                   ],
                 ),
                 subtitle: TextFormField(
+                  onChanged: (String value) {
+                    setState(() {
+                      _owner = value;
+                    });
+                  },
                   maxLines: 1,
                   textAlign: TextAlign.left,
                   decoration: InputDecoration(
@@ -278,6 +311,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                   ],
                 ),
                 subtitle: TextFormField(
+                  onChanged: (String value) {
+                    setState(() {
+                      _comment = value;
+                    });
+                  },
                   maxLines: 3,
                   textAlign: TextAlign.left,
                 ),
