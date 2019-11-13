@@ -24,7 +24,9 @@
   },
   "boxList": {
     "sortByID": "sort by ID",
-    "sortByLastInspection": "sort by last inspection"
+    "sortByLastInspection": "sort by last inspection",
+    "lastInspection": "Last inspection",
+    "daysAgo": "days ago"
   },
   "boxNew": {
     "id": "ID",

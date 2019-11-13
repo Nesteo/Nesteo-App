@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/number_symbols_data.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/boxsender_bloc/boxsender.dart';
@@ -44,12 +42,16 @@ class NewBoxData extends StatefulWidget {
 }
 
 class _NewBoxDataState extends State<NewBoxData> {
-  String id;
-  String oldId;
   DateTime hangUpDate;
-
   LatLng position;
-
+  String _id;
+  String _oldId;
+  String _foreignId;
+  DateTime _hangDate;
+  String _regionIdPrefix;
+  String _regionName;
+  String _owner;
+  String _comment;
   String _dropDownMaterial;
   double _slideHoleSize = 1;
 
@@ -89,6 +91,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                                       filled: true,
                                       fillColor: Colors.white,
                                     ),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        _id = value;
+                                      });
+                                    },
                                   ),
                                 ),
                               ),
@@ -103,6 +110,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                                       filled: true,
                                       fillColor: Colors.white,
                                     ),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        _oldId = value;
+                                      });
+                                    },
                                   ),
                                 ),
                               ),
@@ -117,6 +129,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                                       filled: true,
                                       fillColor: Colors.white,
                                     ),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        _foreignId = value;
+                                      });
+                                    },
                                   ),
                                 ),
                               ),
@@ -196,10 +213,15 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 maxLines: 1,
                                 textAlign: TextAlign.left,
                                 decoration: InputDecoration(
-                                  labelText: "Region ID",
+                                  labelText: "Region ID Prefix",
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
+                                onChanged: (String value) {
+                                  setState(() {
+                                    _regionIdPrefix = value;
+                                  });
+                                },
                               ),
                               TextFormField(
                                 maxLines: 1,
@@ -209,6 +231,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
+                                onChanged: (String value) {
+                                  setState(() {
+                                    _regionName = value;
+                                  });
+                                },
                               ),
                             ])),
                       ),
@@ -301,6 +328,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                               filled: true,
                               fillColor: Colors.white,
                             ),
+                            onChanged: (String value) {
+                              setState(() {
+                                _owner = value;
+                              });
+                            },
                           ),
                         ),
                       ),
@@ -317,6 +349,11 @@ class _NewBoxDataState extends State<NewBoxData> {
                           subtitle: TextFormField(
                             maxLines: 3,
                             textAlign: TextAlign.left,
+                            onChanged: (String value) {
+                              setState(() {
+                                _comment = value;
+                              });
+                            },
                           ),
                         ),
                       ),
@@ -331,14 +368,14 @@ class _NewBoxDataState extends State<NewBoxData> {
                               hangUpDate: (hangUpDate != null)
                                   ? hangUpDate
                                   : DateTime.now(),
-                              oldId: oldId,
+                              oldId: _oldId,
                               holeSize: getSliderLabel(_slideHoleSize),
-                              comment: null,
+                              comment: _comment,
                               coordinates: position,
-                              foreignId: null,
-                              ownerString: null,
-                              regionIdPrefixString: null,
-                              regionString: null,
+                              foreignId: _foreignId,
+                              ownerString: _owner,
+                              regionIdPrefixString: _regionIdPrefix,
+                              regionString: _regionName,
                             ),
                           );
                         },

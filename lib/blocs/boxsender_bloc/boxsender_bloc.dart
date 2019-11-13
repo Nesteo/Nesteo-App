@@ -30,10 +30,12 @@ class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
           hangUpDate: event.hangUpDate,
           region: Region(
             id: null,
-            name: event.regionString,
-            nestingBoxIdPrefix: event.regionIdPrefixString,
+            name: "${event?.regionString}",
+            nestingBoxIdPrefix: (event.regionIdPrefixString == null)
+                ? "X"
+                : event.regionIdPrefixString,
           ),
-          owner: Owner(id: null, name: event.ownerString),
+          owner: Owner(id: null, name: "${event.ownerString}"),
           material: event.material,
           holeSize: event.holeSize,
           comment: event.comment,
