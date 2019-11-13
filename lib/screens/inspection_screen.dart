@@ -43,49 +43,11 @@ class InspectionScreen extends NesteoFullScreen {
                     width: 600, height: 240, fit: BoxFit.cover),
               ),
               Card(
-                child: Container(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Row(children: [
-                          Icon(FontAwesomeIcons.clipboardList),
-                          Text(""),
-                        ]),
-                      ),
-                      Container(
-                        child: Table(
-                          children: [
-                            TableRow(children: [
-                              TableCell(
-                                child: ListTile(
-                                  title: Text("Inspection ID:"),
-                                ),
-                              ),
-                              TableCell(
-                                child: ListTile(
-                                  title: Text(inspectionDataBloc.inspection.id
-                                      .toString()),
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: [
-                              TableCell(
-                                child: ListTile(
-                                  title: Text("Inspection date:"),
-                                ),
-                              ),
-                              TableCell(
-                                child: ListTile(
-                                  title: Text(
-                                      "${inspectionDataBloc.inspection.inspectionDate.month}/${inspectionDataBloc.inspection.inspectionDate.day}/${inspectionDataBloc.inspection.inspectionDate.year}"),
-                                ),
-                              ),
-                            ])
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                child: ListTile(
+                  title: Text(
+                      "Inspection ID: ${inspectionDataBloc.inspection.id.toString()}"),
+                  subtitle: Text(
+                      "Last Inspection: ${inspectionDataBloc.inspection.inspectionDate.month}/${inspectionDataBloc.inspection.inspectionDate.day}/${inspectionDataBloc.inspection.inspectionDate.year}"),
                 ),
               ),
               Card(

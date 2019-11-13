@@ -42,6 +42,14 @@
     "addImage": "add image",
     "getPosition": "save position"
   },
+  "inspectionList": {
+    "date": "Date:",
+    "condition": "Condition:",
+    "pBirdF": "Parent Bird Female:",
+    "ringedChicks": "Ringed Chicks:",
+    "pBirdM": "Parent Bird Male:",
+    "inspection": "Inspection"
+  },
   "login": {
     "domain": "Domain",
     "username": "Username",

@@ -42,6 +42,14 @@
     "addImage": "Bild hinzufügen",
     "getPosition": "Position erfassen"
   },
+  "inspectionList": {
+    "date": "Datum:",
+    "condition": "Zustand:",
+    "pBirdF": "Elternvogel weiblich:",
+    "ringedChicks": "Beringte Jungvögel:",
+    "pBirdM": "Elternvogel männlich:",
+    "inspection": "Inspektion"
+  },
   "login": {
     "domain": "Domain",
     "username": "Nutzername",
