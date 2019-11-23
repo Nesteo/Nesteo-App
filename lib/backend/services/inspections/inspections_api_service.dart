@@ -29,6 +29,12 @@ abstract class InspectionsApiService extends ChopperService {
     @Header('Authorization') String authHeader,
   ]);
 
+  @Post(headers: {'Content-Type': 'application/json'})
+  Future<Response> postNewInspection(
+    @Body() String inspection,
+    @Header('Authorization') String authHeader,
+  );
+
   static InspectionsApiService create(String url) {
     final client = ChopperClient(
       baseUrl: 'https://$url/api/v1',

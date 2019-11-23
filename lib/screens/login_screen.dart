@@ -124,9 +124,11 @@ class _LoginScreenDataState extends State<LoginScreenData> {
                             : state is NotAuthenticatedState
                                 ? Colors.red
                                 : Colors.green,
-                        onPressed: () {
-                          authBloc.add(CheckNewAuthenticationEvent());
-                        },
+                        onPressed: (state is AuthenticatingState)
+                            ? null
+                            : () {
+                                authBloc.add(CheckNewAuthenticationEvent());
+                              },
                         child: Text(
                           loc.login.logInButton,
                           style: TextStyle(
