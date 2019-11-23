@@ -29,14 +29,20 @@ class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
           coordinateLatitude: event.coordinates.latitude,
           coordinateLongitude: event.coordinates.longitude,
           hangUpDate: event.hangUpDate,
-          region: Region(
-            id: null,
-            name: "${event?.regionString}",
-            nestingBoxIdPrefix: (event.regionIdPrefixString == null)
-                ? "X"
-                : event.regionIdPrefixString,
-          ),
-          owner: Owner(id: null, name: "${event.ownerString}"),
+          region:
+              (event.regionIdPrefixString == null || event.regionString == null)
+                  ? event.region
+                  : Region(
+                      id: null,
+                      name: "${event?.regionString}",
+                      nestingBoxIdPrefix: event.regionIdPrefixString,
+                    ),
+          owner: (event.ownerString == null)
+              ? event.owner
+              : Owner(
+                  id: null,
+                  name: "${event?.ownerString}",
+                ),
           material: event.material,
           holeSize: event.holeSize,
           comment: event.comment,

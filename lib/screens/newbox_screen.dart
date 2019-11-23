@@ -7,11 +7,15 @@ import 'package:intl/intl.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/boxsender_bloc/boxsender.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown_bloc.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown_event.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown_state.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
+import 'package:nesteo_app/model/owner.dart';
+import 'package:nesteo_app/model/region.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:nesteo_app/screens/newboxconfirmation_screen.dart';
 
 class NewBoxScreen extends NesteoFullScreen {
   NewBoxScreen(BuildContext context)
@@ -54,9 +58,12 @@ class _NewBoxDataState extends State<NewBoxData> {
   String _comment;
   String _dropDownMaterial;
   double _slideHoleSize = 1;
+  Region _dropDownRegion;
+  Owner _dropDownOwner;
 
   Widget build(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    final dropdownBloc = BlocProvider.of<DropdownBloc>(context);
 
     return GestureDetector(
       child: BlocBuilder<BoxSenderBloc, BoxSenderState>(
@@ -174,42 +181,82 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 child: Text("Box"))
                           ],
                         ),
-                        subtitle: Column(children: <Widget>[
-                          Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(child: Text("Material:")),
-                                  _createMaterialSelection(context),
-                                ],
-                              )),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Text("Hole size:"),
-                              ),
-                              _createHoleSizeSlider()
-                            ],
-                          )
-                        ]),
+                        subtitle: Column(
+                          children: <Widget>[
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(child: Text("Material:")),
+                                    _createMaterialSelection(context),
+                                  ],
+                                )),
+                            Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text("Hole size:"),
+                                ),
+                                _createHoleSizeSlider()
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Card(
                       child: ListTile(
-                          title: Row(
-                            children: <Widget>[
-                              Icon(FontAwesomeIcons.globe),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: Text("Region")),
-                            ],
-                          ),
-                          subtitle: Column(children: <Widget>[
+                        title: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.globe),
+                            Padding(
+                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                child: Text("Region")),
+                          ],
+                        ),
+                        subtitle: Column(
+                          children: <Widget>[
+                            BlocBuilder<DropdownBloc, DropdownState>(
+                              builder: (context, state) {
+                                if (state is ReadyDropdownState) {
+                                  return DropdownButton<String>(
+                                    isExpanded: true,
+                                    value: (_dropDownRegion != null)
+                                        ? dropdownBloc.regions
+                                            .indexOf(_dropDownRegion)
+                                            .toString()
+                                        : "0",
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    iconSize: 24,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        print(newValue);
+                                        _dropDownRegion = dropdownBloc
+                                            .regions[int.parse(newValue)];
+                                      });
+                                    },
+                                    items: dropdownBloc.regions
+                                        .map<DropdownMenuItem<String>>(
+                                      (Region value) {
+                                        return DropdownMenuItem<String>(
+                                          value: dropdownBloc.regions
+                                              .indexOf(value)
+                                              .toString(),
+                                          child: Text(
+                                              "${value.nestingBoxIdPrefix} - ${value.name}"),
+                                        );
+                                      },
+                                    ).toList(),
+                                  );
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
+                            ),
                             TextFormField(
                               maxLines: 1,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
-                                labelText: "Region ID Prefix",
+                                labelText: "New Region ID Prefix",
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -223,7 +270,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               maxLines: 1,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
-                                labelText: "Region Name",
+                                labelText: "New Region Name",
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -233,7 +280,9 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 });
                               },
                             ),
-                          ])),
+                          ],
+                        ),
+                      ),
                     ),
                     Card(
                       child: ListTile(
@@ -297,7 +346,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                                         });
                                       }
                                     },
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -315,19 +364,59 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 child: Text("Owner")),
                           ],
                         ),
-                        subtitle: TextFormField(
-                          maxLines: 1,
-                          textAlign: TextAlign.left,
-                          decoration: InputDecoration(
-                            labelText: "Owner",
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                          onChanged: (String value) {
-                            setState(() {
-                              _owner = value;
-                            });
-                          },
+                        subtitle: Column(
+                          children: [
+                            BlocBuilder<DropdownBloc, DropdownState>(
+                              builder: (context, state) {
+                                if (state is ReadyDropdownState) {
+                                  return DropdownButton<String>(
+                                    isExpanded: true,
+                                    value: (_dropDownOwner != null)
+                                        ? dropdownBloc.owners
+                                            .indexOf(_dropDownOwner)
+                                            .toString()
+                                        : "0",
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    iconSize: 24,
+                                    onChanged: (String newValue) {
+                                      setState(() {
+                                        print(newValue);
+                                        _dropDownOwner = dropdownBloc
+                                            .owners[int.parse(newValue)];
+                                      });
+                                    },
+                                    items: dropdownBloc.owners
+                                        .map<DropdownMenuItem<String>>(
+                                      (Owner value) {
+                                        return DropdownMenuItem<String>(
+                                          value: dropdownBloc.owners
+                                              .indexOf(value)
+                                              .toString(),
+                                          child: Text("${value.name}"),
+                                        );
+                                      },
+                                    ).toList(),
+                                  );
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                              },
+                            ),
+                            TextFormField(
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              decoration: InputDecoration(
+                                labelText: "New Owner Name",
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              onChanged: (String value) {
+                                setState(() {
+                                  _owner = value;
+                                });
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -359,18 +448,21 @@ class _NewBoxDataState extends State<NewBoxData> {
                           SendBoxEvent(
                             authBloc:
                                 BlocProvider.of<AuthenticationBloc>(context),
-                            material: "WoodConcrete",
+                            id: _id,
+                            material: _dropDownMaterial,
                             hangUpDate: (_hangUpDate != null)
                                 ? _hangUpDate
                                 : DateTime.now(),
                             oldId: _oldId,
-                            holeSize: "Other",
+                            holeSize: getSliderLabel(_slideHoleSize),
                             comment: _comment,
                             coordinates: position,
                             foreignId: _foreignId,
                             ownerString: _owner,
                             regionIdPrefixString: _regionIdPrefix,
                             regionString: _regionName,
+                            region: _dropDownRegion,
+                            owner: _dropDownOwner,
                           ),
                         );
                       },
@@ -407,50 +499,20 @@ class _NewBoxDataState extends State<NewBoxData> {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return Container(
       child: DropdownButton<String>(
-        value: (_dropDownMaterial != null)
-            ? _dropDownMaterial
-            : loc.boxNew.untreatedWood,
+        value:
+            (_dropDownMaterial != null) ? _dropDownMaterial : "UntreatedWood",
         icon: Icon(Icons.arrow_downward),
         iconSize: 24,
-        style: TextStyle(color: Colors.deepPurple),
         onChanged: (String newValue) {
           setState(() {
             _dropDownMaterial = newValue;
           });
         },
         items: <String>[
-          loc.boxNew.untreatedWood,
-          loc.boxNew.treatedWood,
-          loc.boxNew.concrete
-        ].map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget _createRegionIdSelection(BuildContext context) {
-    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
-    return Container(
-      child: DropdownButton<String>(
-        value: (_dropDownMaterial != null)
-            ? _dropDownMaterial
-            : loc.boxNew.untreatedWood,
-        icon: Icon(Icons.arrow_downward),
-        iconSize: 24,
-        style: TextStyle(color: Colors.deepPurple),
-        onChanged: (String newValue) {
-          setState(() {
-            _dropDownMaterial = newValue;
-          });
-        },
-        items: <String>[
-          loc.boxNew.untreatedWood,
-          loc.boxNew.treatedWood,
-          loc.boxNew.concrete
+          "UntreatedWood",
+          "TreatedWood",
+          "WoodConcrete",
+          "Other",
         ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -466,8 +528,8 @@ class _NewBoxDataState extends State<NewBoxData> {
       child: Slider(
         value: _slideHoleSize,
         min: 0,
-        max: 2,
-        divisions: 2,
+        max: 5,
+        divisions: 5,
         label: getSliderLabel(_slideHoleSize),
         onChanged: (double newValue) {
           setState(() {
@@ -480,12 +542,14 @@ class _NewBoxDataState extends State<NewBoxData> {
 
   String getSliderLabel(double value) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
-    if (value == 0) {
-      return loc.boxNew.small;
-    } else if (value == 1) {
-      return loc.boxNew.medium;
-    } else {
-      return loc.boxNew.big;
-    }
+    var sizeMap = {
+      0: "Small",
+      1: "Medium",
+      2: "Large",
+      3: "VeryLarge",
+      4: "Oval",
+      5: "OpenFronted",
+    };
+    return sizeMap[value];
   }
 }

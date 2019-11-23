@@ -37,12 +37,17 @@
     "material": "box material",
     "treatedWood": "box material treated wood",
     "holeSize": "holeSize in Box",
-    "big": "hole size big",
+    "large": "hole size large",
     "medium": "hole size medium",
     "small": "hole size small",
     "concrete": "box material concrete",
     "addImage": "add image",
-    "getPosition": "get GPS for new Box"
+    "getPosition": "get GPS for new Box",
+    "otherSize": "other size",
+    "otherMaterial": "other material",
+    "veryLarge": "very large size",
+    "oval": "oval hole size",
+    "openFronted": "open fronted hole size"
   },
   "inspectionList": {
     "date": "date:",
