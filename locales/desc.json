@@ -84,7 +84,13 @@
     "none": "none",
     "notRinged": "not ringed",
     "alreadyRinged": "already Ringed",
-    "newlyRinged": "newly Ringed"
+    "newlyRinged": "newly Ringed",
+    "trueId": "true",
+    "cleaned": "cleaned",
+    "containsEggs": "contains Eggs",
+    "numberOfEggs": "number of eggs",
+    "repaired": "repaired",
+    "numberOfChicks": "number of chicks"
   },
   "login": {
     "domain": "domain text box",

@@ -84,7 +84,13 @@
     "none": "Keine",
     "notRinged": "Nicht Beringt",
     "alreadyRinged": "Bereits Beringt",
-    "newlyRinged": "Neu Beringt"
+    "newlyRinged": "Neu Beringt",
+    "trueId": "Ja",
+    "cleaned": "Gereinigt:",
+    "containsEggs": "Enthält Eier:",
+    "numberOfEggs": "Anzahl der Eier:",
+    "repaired": "Repariert:",
+    "numberOfChicks": "Anzahl Jungvögel"
   },
   "login": {
     "domain": "Domain",
