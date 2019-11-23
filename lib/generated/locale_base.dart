@@ -120,6 +120,7 @@ class LocaleinspectionList {
   String get ringedChicks => _data["ringedChicks"];
   String get pBirdM => _data["pBirdM"];
   String get inspection => _data["inspection"];
+  String get neverInspected => _data["neverInspected"];
 }
 class Localelogin {
   final Map<String, String> _data;

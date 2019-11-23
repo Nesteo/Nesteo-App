@@ -29,14 +29,6 @@ class BoxListScreen extends NesteoFramedScreen {
               onPressed: () {
                 BlocProvider.of<BoxDataBloc>(context)
                     .add(ChangeSortTypeEvent());
-                BlocProvider.of<SnackbarBloc>(context).add(
-                  ShowSnackbarEvent(
-                    color: Colors.lightGreen,
-                    text:
-                        BlocProvider.of<BoxDataBloc>(context).currentSortOption,
-                    scaffoldContext: context,
-                  ),
-                );
               },
             ),
             IconButton(
@@ -44,13 +36,6 @@ class BoxListScreen extends NesteoFramedScreen {
               onPressed: () {
                 BlocProvider.of<BoxDataBloc>(context)
                     .add(ChangeSortDirectionEvent());
-                BlocProvider.of<SnackbarBloc>(context).add(
-                  ShowSnackbarEvent(
-                    color: Colors.lightGreen,
-                    text: "auf/absteigend",
-                    scaffoldContext: context,
-                  ),
-                );
               },
             ),
           ],
@@ -112,7 +97,7 @@ class BoxListScreen extends NesteoFramedScreen {
                       subtitle:
                           (boxDataBloc.nestingBoxList[index].inspectionsCount ==
                                   0)
-                              ? Text("Has not been inspected")
+                              ? Text(loc.inspectionList.neverInspected)
                               : Text("${loc.boxList.lastInspection}"
                                   " $daysSinceLastInspection "
                                   "${loc.boxList.daysAgo}"),
