@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
+import 'package:nesteo_app/blocs/inspectiondata_bloc/inspectiondata.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +63,12 @@ class BoxInfoScreen extends NesteoFullScreen {
                   label: Text(loc.boxInfo.showInspections,
                       style: TextStyle(fontSize: 16)),
                   onPressed: () {
+                    var inspectionDataBloc =
+                        BlocProvider.of<InspectionDataBloc>(context);
+                    inspectionDataBloc.boxId =
+                        BlocProvider.of<BoxDataBloc>(context).boxId;
+                    inspectionDataBloc
+                        .add(GetInspectionPreviewsByNestingBoxEvent());
                     pageControlBloc.add(GoToInspectionListEvent());
                   },
                 ),
@@ -186,7 +193,8 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text(nestingBox.comment),
+                    title: Text(
+                        (nestingBox.comment != null) ? nestingBox.comment : ""),
                   ),
                 ),
               ],

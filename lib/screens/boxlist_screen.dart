@@ -109,9 +109,13 @@ class BoxListScreen extends NesteoFramedScreen {
                         BlocProvider.of<PageControlBloc>(context)
                             .add(GoToNewInspectionEvent());
                       },
-                      subtitle: Text("${loc.boxList.lastInspection}"
-                          " $daysSinceLastInspection "
-                          "${loc.boxList.daysAgo}"),
+                      subtitle:
+                          (boxDataBloc.nestingBoxList[index].inspectionsCount ==
+                                  0)
+                              ? Text("Has not been inspected")
+                              : Text("${loc.boxList.lastInspection}"
+                                  " $daysSinceLastInspection "
+                                  "${loc.boxList.daysAgo}"),
                       onTap: () {
                         // Set the box Id to this selection and add get box for the info page
                         boxDataBloc.boxId =
