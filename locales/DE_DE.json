@@ -51,7 +51,7 @@
     "large": "Groß",
     "medium": "Mittel",
     "small": "Klein",
-    "concrete": "Holz-Beton",
+    "concrete": "Holzbeton",
     "addImage": "Bild hinzufügen",
     "getPosition": "Position erfassen",
     "otherSize": "Andere",
@@ -76,7 +76,15 @@
     "ringedChicks": "Beringte Jungvögel:",
     "pBirdM": "Elternvogel männlich:",
     "inspection": "Inspektion",
-    "neverInspected": "Wurde noch nie inspiziert"
+    "neverInspected": "Wurde noch nie inspiziert",
+    "falseId": "Nein",
+    "good": "Gut",
+    "needsRepair": "braucht Reperatur",
+    "needsReplacement": "Muss ersetzt Werden",
+    "none": "Keine",
+    "notRinged": "Nicht Beringt",
+    "alreadyRinged": "Bereits Beringt",
+    "newlyRinged": "Neu Beringt"
   },
   "login": {
     "domain": "Domain",

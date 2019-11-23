@@ -136,6 +136,14 @@ class LocaleinspectionList {
   String get pBirdM => _data["pBirdM"];
   String get inspection => _data["inspection"];
   String get neverInspected => _data["neverInspected"];
+  String get falseId => _data["falseId"];
+  String get good => _data["good"];
+  String get needsRepair => _data["needsRepair"];
+  String get needsReplacement => _data["needsReplacement"];
+  String get none => _data["none"];
+  String get notRinged => _data["notRinged"];
+  String get alreadyRinged => _data["alreadyRinged"];
+  String get newlyRinged => _data["newlyRinged"];
 }
 class Localelogin {
   final Map<String, String> _data;

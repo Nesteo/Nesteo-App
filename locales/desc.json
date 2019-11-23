@@ -76,7 +76,15 @@
     "ringedChicks": "number of ringed Chicks",
     "pBirdM": "parent bird male",
     "inspection": "inspection",
-    "neverInspected": "never inspected box"
+    "neverInspected": "never inspected box",
+    "falseId": "false",
+    "good": "good condition",
+    "needsRepair": "needs repair",
+    "needsReplacement": "needs replacement",
+    "none": "none",
+    "notRinged": "not ringed",
+    "alreadyRinged": "already Ringed",
+    "newlyRinged": "newly Ringed"
   },
   "login": {
     "domain": "domain text box",
