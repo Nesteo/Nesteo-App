@@ -7,6 +7,8 @@ import 'package:nesteo_app/blocs/inspectiondata_bloc/inspectiondata.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
@@ -55,6 +57,10 @@ class BoxInfoScreen extends NesteoFullScreen {
                   label: Text(loc.boxInfo.newInspection,
                       style: TextStyle(fontSize: 16)),
                   onPressed: () {
+                    BlocProvider.of<DropdownBloc>(context).add(
+                        UpdateSpeciesEvent(
+                            authBloc:
+                                BlocProvider.of<AuthenticationBloc>(context)));
                     pageControlBloc.add(GoToNewInspectionEvent());
                   },
                 ),

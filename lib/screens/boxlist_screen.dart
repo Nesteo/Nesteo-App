@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
-import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 
@@ -18,6 +19,8 @@ class BoxListScreen extends NesteoFramedScreen {
           appBarLeading: null,
           floatingActionButton: FloatingActionButton(
             onPressed: () {
+              BlocProvider.of<DropdownBloc>(context).add(UpdateAllEvent(
+                  authBloc: BlocProvider.of<AuthenticationBloc>(context)));
               BlocProvider.of<PageControlBloc>(context).add(GoToNewBoxEvent());
             },
             child: Icon(Icons.add),
@@ -73,7 +76,7 @@ class BoxListScreen extends NesteoFramedScreen {
                     color: Color.lerp(
                       Colors.white,
                       Colors.red,
-                      log(daysSinceLastInspection / 330),
+                      log((daysSinceLastInspection + 1) / 330),
                     ),
                     child: ListTile(
                       leading: (daysSinceLastInspection > 300)
