@@ -159,4 +159,21 @@ class InspectionsRepository {
       return null;
     }
   }
+
+  Future<Inspection> addNewInspection(Inspection inspection) async {
+    InspectionsApiService _inspectionsApi =
+        InspectionsApiService.create(_authBloc.domain);
+    var inspectionString = json.encode(inspection);
+    print(inspectionString);
+    final response = await _inspectionsApi.postNewInspection(
+        inspectionString, _authBloc.auth);
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode == 201) {
+      final Map result = json.decode(response.body);
+      return Inspection.fromJson(result);
+    } else {
+      return null;
+    }
+  }
 }
