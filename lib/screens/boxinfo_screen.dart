@@ -134,7 +134,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text("${nestingBox.material}"),
+                    title: Text(getMaterialName("${nestingBox.material}")),
                   ),
                 ),
               ],
@@ -148,7 +148,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text("${nestingBox.holeSize}"),
+                    title: Text(getHoleSizeName("${nestingBox.holeSize}")),
                   ),
                 ),
               ],
@@ -265,5 +265,28 @@ class BoxInfoScreen extends NesteoFullScreen {
         },
       ),
     );
+  }
+
+  String getMaterialName(String value) {
+    var map = {
+      "Other": "Other",
+      "TreatedWood": "Treated Wood",
+      "UntreatedWood": "Untreated Wood",
+      "WoodConcrete": "Wood Concrete",
+    };
+    return map[value];
+  }
+
+  String getHoleSizeName(String value) {
+    var map = {
+      "Other": "Other",
+      "Small": "Small",
+      "Medium": "Medium",
+      "Large": "Large",
+      "VeryLarge": "Very Large",
+      "Oval": "Oval",
+      "OpenFrontend": "Open Frontend",
+    };
+    return map[value];
   }
 }
