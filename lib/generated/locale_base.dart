@@ -65,6 +65,17 @@ class LocaleboxInfo {
   String get boxConditionReplace => _data["boxConditionReplace"];
   String get boxConditionRepair => _data["boxConditionRepair"];
   String get boxConditionFixed => _data["boxConditionFixed"];
+  String get newInspection => _data["newInspection"];
+  String get showInspections => _data["showInspections"];
+  String get hangedUpBy => _data["hangedUpBy"];
+  String get hangupDate => _data["hangupDate"];
+  String get inspected => _data["inspected"];
+  String get times => _data["times"];
+  String get material => _data["material"];
+  String get lastInspection => _data["lastInspection"];
+  String get information => _data["information"];
+  String get boxId => _data["boxId"];
+  String get daysAgo => _data["daysAgo"];
 }
 class LocaleboxList {
   final Map<String, String> _data;
