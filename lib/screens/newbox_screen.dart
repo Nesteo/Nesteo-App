@@ -47,7 +47,7 @@ class NewBoxData extends StatefulWidget {
 }
 
 class _NewBoxDataState extends State<NewBoxData> {
-  LatLng position;
+  LatLng _position;
   String _id;
   String _oldId;
   String _foreignId;
@@ -56,7 +56,7 @@ class _NewBoxDataState extends State<NewBoxData> {
   String _regionName;
   String _owner;
   String _comment;
-  String _dropDownMaterial;
+  String _dropDownMaterial = "Other";
   double _slideHoleSize = 1;
   Region _dropDownRegion;
   Owner _dropDownOwner;
@@ -254,6 +254,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             ),
                             TextFormField(
                               maxLines: 1,
+                              maxLength: 1,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 labelText: "New Region ID Prefix",
@@ -303,7 +304,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               readOnly: true,
                               decoration: InputDecoration(
                                 labelText:
-                                    "Latitude ${(position == null) ? "" : position.latitude}",
+                                    "Latitude ${(_position == null) ? "" : _position.latitude}",
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -315,7 +316,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 labelText:
-                                    "Longitude ${(position == null) ? "" : position.longitude}",
+                                    "Longitude ${(_position == null) ? "" : _position.longitude}",
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -340,7 +341,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                                                         LocationAccuracy.high);
 
                                         setState(() {
-                                          position = LatLng(
+                                          _position = LatLng(
                                               currentPosition.latitude,
                                               currentPosition.longitude);
                                         });
@@ -456,10 +457,10 @@ class _NewBoxDataState extends State<NewBoxData> {
                             oldId: _oldId,
                             holeSize: getSliderLabel(_slideHoleSize),
                             comment: _comment,
-                            coordinates: position,
+                            coordinates: _position,
                             foreignId: _foreignId,
                             ownerString: _owner,
-                            regionIdPrefixString: _regionIdPrefix,
+                            regionIdPrefixString: _regionIdPrefix.toUpperCase(),
                             regionString: _regionName,
                             region: _dropDownRegion,
                             owner: _dropDownOwner,
