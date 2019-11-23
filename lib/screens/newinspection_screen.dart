@@ -33,7 +33,7 @@ class NewInspectionData extends StatefulWidget {
 }
 
 class _NewInspectionDataState extends State<NewInspectionData> {
-  DateTime _hangUpDate;
+  DateTime _inspectionDate;
   bool _hasBeenCleaned = false;
   bool _justRepaired = false;
   String _condition;
@@ -73,7 +73,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
               initialDate: DateTime.now(),
               editable: false,
               onChanged: (dt) {
-                setState(() => _hangUpDate = dt);
+                setState(() => _inspectionDate = dt);
               },
             ),
           ),
