@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
-import 'package:nesteo_app/blocs/boxdata_bloc/boxdata_bloc.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 
@@ -58,6 +59,8 @@ class MapScreen extends NesteoFramedScreen {
           ],
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
+              BlocProvider.of<DropdownBloc>(context).add(UpdateAllEvent(
+                  authBloc: BlocProvider.of<AuthenticationBloc>(context)));
               BlocProvider.of<PageControlBloc>(context).add(GoToNewBoxEvent());
             },
             icon: Icon(Icons.add),

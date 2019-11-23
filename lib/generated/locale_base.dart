@@ -98,12 +98,17 @@ class LocaleboxNew {
   String get material => _data["material"];
   String get treatedWood => _data["treatedWood"];
   String get holeSize => _data["holeSize"];
-  String get big => _data["big"];
+  String get large => _data["large"];
   String get medium => _data["medium"];
   String get small => _data["small"];
   String get concrete => _data["concrete"];
   String get addImage => _data["addImage"];
   String get getPosition => _data["getPosition"];
+  String get otherSize => _data["otherSize"];
+  String get otherMaterial => _data["otherMaterial"];
+  String get veryLarge => _data["veryLarge"];
+  String get oval => _data["oval"];
+  String get openFronted => _data["openFronted"];
 }
 class LocaleinspectionList {
   final Map<String, String> _data;

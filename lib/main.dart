@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_event.dart';
 import 'package:nesteo_app/blocs/boxsender_bloc/boxsender.dart';
+import 'package:nesteo_app/blocs/dropdown_bloc/dropdown_bloc.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
@@ -53,7 +54,10 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<BoxSenderBloc>(
             builder: (BuildContext context) => BoxSenderBloc(),
-          )
+          ),
+          BlocProvider<DropdownBloc>(
+            builder: (BuildContext context) => DropdownBloc(),
+          ),
         ],
         child: BlocBuilder<PageControlBloc, PageControlState>(
           condition: (previousState, state) =>

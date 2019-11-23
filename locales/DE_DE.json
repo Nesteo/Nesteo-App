@@ -48,12 +48,17 @@
     "material": "Material",
     "treatedWood": "Behandeltes Holz",
     "holeSize": "Lochgröße",
-    "big": "Groß",
+    "large": "Groß",
     "medium": "Mittel",
     "small": "Klein",
     "concrete": "Beton",
     "addImage": "Bild hinzufügen",
-    "getPosition": "Position erfassen"
+    "getPosition": "Position erfassen",
+    "otherSize": "Anderes",
+    "otherMaterial": "Anderes",
+    "veryLarge": "Sehr Groß",
+    "oval": "Oval",
+    "openFronted": "Öffnung vorne"
   },
   "inspectionList": {
     "date": "Datum:",

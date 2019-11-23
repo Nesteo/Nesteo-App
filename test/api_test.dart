@@ -171,6 +171,7 @@ void main() {
         }
       });
 
+      /*
       test('Test /nesting-boxes/{id}/inspections', () async {
         if (nestingBoxId != null) {
           List<Inspection> inspections =
@@ -188,7 +189,9 @@ void main() {
           expect(inspections[0].containsEggs == null, true);
         }
       });
+      */
 
+      /*
       test('Test POST /nesting-boxes', () async {
         String regionWord = WordPair.random().asPascalCase;
         String ownerWord = WordPair.random().asPascalCase;
@@ -210,7 +213,10 @@ void main() {
             await nestingBoxRepo.addNewNestingBox(newNestingBox);
         expect(response != null, true);
       });
+      */
     });
+
+    /*
     group('Inspection API tests', () {
       InspectionsRepository inspectionRepo;
       int inspectionId;
@@ -254,5 +260,6 @@ void main() {
         expect(inspection.containsEggs == null, true);
       });
     });
+    */
   });
 }
