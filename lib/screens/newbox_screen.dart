@@ -80,7 +80,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             Icon(FontAwesomeIcons.hashtag),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text("IDs"))
+                                child: Text(loc.boxNew.ids))
                           ],
                         ),
                         subtitle: Column(
@@ -92,7 +92,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 child: TextFormField(
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
-                                    labelText: "ID - optional",
+                                    labelText: loc.boxNew.idOptional,
                                     filled: true,
                                     fillColor: Colors.white,
                                   ),
@@ -111,7 +111,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 child: TextFormField(
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
-                                    labelText: "old ID - optional",
+                                    labelText: loc.boxNew.oldIdOptional,
                                     filled: true,
                                     fillColor: Colors.white,
                                   ),
@@ -130,7 +130,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 child: TextFormField(
                                   textAlign: TextAlign.left,
                                   decoration: InputDecoration(
-                                    labelText: "foreign ID - optional",
+                                    labelText: loc.boxNew.foreignIdOptional,
                                     filled: true,
                                     fillColor: Colors.white,
                                   ),
@@ -152,13 +152,13 @@ class _NewBoxDataState extends State<NewBoxData> {
                               Icon(FontAwesomeIcons.calendarAlt),
                               Padding(
                                   padding: EdgeInsets.fromLTRB(0, 20, 10, 10)),
-                              Text("Date"),
+                              Text(loc.boxNew.date),
                             ]),
                             subtitle: Padding(
                               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                               child: DateTimePickerFormField(
                                 decoration: InputDecoration(
-                                  labelText: "select Day",
+                                  labelText: loc.boxNew.selectDate,
                                   filled: true,
                                   fillColor: Colors.white,
                                 ),
@@ -178,7 +178,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             Icon(FontAwesomeIcons.box),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text("Box"))
+                                child: Text(loc.boxNew.box))
                           ],
                         ),
                         subtitle: Column(
@@ -187,14 +187,14 @@ class _NewBoxDataState extends State<NewBoxData> {
                                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                                 child: Row(
                                   children: <Widget>[
-                                    Expanded(child: Text("Material:")),
+                                    Expanded(child: Text(loc.boxNew.material)),
                                     _createMaterialSelection(context),
                                   ],
                                 )),
                             Row(
                               children: <Widget>[
                                 Expanded(
-                                  child: Text("Hole size:"),
+                                  child: Text(loc.boxNew.holeSize),
                                 ),
                                 _createHoleSizeSlider()
                               ],
@@ -210,7 +210,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             Icon(FontAwesomeIcons.globe),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text("Region")),
+                                child: Text(loc.boxNew.region)),
                           ],
                         ),
                         subtitle: Column(
@@ -259,7 +259,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               maxLength: 1,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
-                                labelText: "New Region ID Prefix",
+                                labelText: loc.boxNew.newRegionIdPrefix,
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -273,7 +273,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               maxLines: 1,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
-                                labelText: "New Region Name",
+                                labelText: loc.boxNew.newRegionName,
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -294,7 +294,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             Icon(FontAwesomeIcons.globeAmericas),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text("Position")),
+                                child: Text(loc.boxNew.position)),
                           ],
                         ),
                         subtitle: Column(
@@ -306,7 +306,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               readOnly: true,
                               decoration: InputDecoration(
                                 labelText:
-                                    "Latitude ${(_position == null) ? "" : _position.latitude}",
+                                    "${loc.boxNew.latitude} ${(_position == null) ? "" : _position.latitude}",
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -318,7 +318,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
                                 labelText:
-                                    "Longitude ${(_position == null) ? "" : _position.longitude}",
+                                    "${loc.boxNew.longitude} ${(_position == null) ? "" : _position.longitude}",
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -330,7 +330,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                                   Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                      child: (Text("Add GPS Data"))),
+                                      child: (Text(loc.boxNew.addGpsData))),
                                   IconButton(
                                     icon: Icon(Icons.gps_fixed),
                                     onPressed: () async {
@@ -364,7 +364,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             Icon(FontAwesomeIcons.userAlt),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text("Owner")),
+                                child: Text(loc.boxNew.owner)),
                           ],
                         ),
                         subtitle: Column(
@@ -411,7 +411,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                               maxLines: 1,
                               textAlign: TextAlign.left,
                               decoration: InputDecoration(
-                                labelText: "New Owner Name",
+                                labelText: loc.boxNew.newOwnerName,
                                 filled: true,
                                 fillColor: Colors.white,
                               ),
@@ -432,7 +432,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                             Icon(FontAwesomeIcons.comment),
                             Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text("Comment"))
+                                child: Text(loc.boxNew.comment))
                           ],
                         ),
                         subtitle: TextFormField(
@@ -473,7 +473,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                         );
                       },
                       child: Text(
-                        "Create new Nesting Box",
+                        loc.boxNew.addBox,
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
@@ -507,7 +507,7 @@ class _NewBoxDataState extends State<NewBoxData> {
       child: DropdownButton<String>(
         value:
             (_dropDownMaterial != null) ? _dropDownMaterial : "UntreatedWood",
-        icon: Icon(Icons.arrow_downward),
+        icon: Icon(Icons.arrow_drop_down),
         iconSize: 24,
         onChanged: (String newValue) {
           setState(() {

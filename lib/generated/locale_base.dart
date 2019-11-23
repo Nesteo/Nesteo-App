@@ -93,7 +93,7 @@ class LocaleboxNew {
   final Map<String, String> _data;
   LocaleboxNew(this._data);
 
-  String get id => _data["id"];
+  String get ids => _data["ids"];
   String get oldid => _data["oldid"];
   String get addBox => _data["addBox"];
   String get hangDate => _data["hangDate"];
@@ -112,6 +112,22 @@ class LocaleboxNew {
   String get veryLarge => _data["veryLarge"];
   String get oval => _data["oval"];
   String get openFronted => _data["openFronted"];
+  String get idOptional => _data["idOptional"];
+  String get oldIdOptional => _data["oldIdOptional"];
+  String get foreignIdOptional => _data["foreignIdOptional"];
+  String get date => _data["date"];
+  String get selectDate => _data["selectDate"];
+  String get box => _data["box"];
+  String get region => _data["region"];
+  String get newRegionIdPrefix => _data["newRegionIdPrefix"];
+  String get newRegionName => _data["newRegionName"];
+  String get position => _data["position"];
+  String get longitude => _data["longitude"];
+  String get latitude => _data["latitude"];
+  String get addGpsData => _data["addGpsData"];
+  String get owner => _data["owner"];
+  String get newOwnerName => _data["newOwnerName"];
+  String get comment => _data["comment"];
 }
 class LocaleholeSizeMapping {
   final Map<String, String> _data;
