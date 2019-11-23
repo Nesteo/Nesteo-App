@@ -1,5 +1,7 @@
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
 
@@ -31,22 +33,52 @@ class NewInspectionData extends StatefulWidget {
 }
 
 class _NewInspectionDataState extends State<NewInspectionData> {
+  DateTime _inspectionDate;
   bool _hasBeenCleaned = false;
   bool _justRepaired = false;
+  String _condition;
   bool _occupied = false;
   bool _containsEggs = false;
-  bool _femaleParent = false;
-  bool _maleParent = false;
+  String _femaleParent = "None";
+  String _maleParent = "None";
   int _eggCount = 0;
   int _chickCount = 0;
   int _ringedChickCount = 0;
   int _ageInDays = 0;
-  double _sliderCondition = 0;
+  String _comment;
+  double _sliderCondition = 2;
   Color sliderColor;
 
   Widget build(BuildContext context) {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+
     return ListView(children: <Widget>[
+      Card(
+        child: ListTile(
+          title: Row(children: <Widget>[
+            Icon(FontAwesomeIcons.calendarAlt),
+            Padding(padding: EdgeInsets.fromLTRB(0, 20, 10, 10)),
+            Text("Date"),
+          ]),
+          subtitle: Padding(
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: DateTimePickerFormField(
+              decoration: InputDecoration(
+                labelText: "select Day",
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              inputType: InputType.date,
+              format: DateFormat("yyyy-MM-dd"),
+              initialDate: DateTime.now(),
+              editable: false,
+              onChanged: (dt) {
+                setState(() => _inspectionDate = dt);
+              },
+            ),
+          ),
+        ),
+      ),
       Card(
         child: Container(
           child: Column(
@@ -61,7 +93,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
               ),
               CheckboxListTile(
                   title: Text(loc.boxInfo.cleaned),
-                  value: _justRepaired,
+                  value: _hasBeenCleaned,
                   onChanged: (bool newValue) {
                     setState(() {
                       _hasBeenCleaned = newValue;
@@ -89,6 +121,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                     onChanged: (double newValue) {
                       setState(() {
                         _sliderCondition = newValue;
+                        _condition = getSliderLabel(_sliderCondition);
                       });
                     },
                   ),
@@ -132,7 +165,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                               ? () => setState(() => _eggCount--)
                               : null,
                         ),
-                        Text(_chickCount.toString()),
+                        Text(_eggCount.toString()),
                         IconButton(
                             icon: new Icon(Icons.add),
                             onPressed: () => setState(() => _eggCount++))
@@ -187,22 +220,87 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                 ],
               ),
             ),
-            CheckboxListTile(
-                title: Text(loc.boxInfo.femaleInBox),
-                value: _femaleParent,
-                onChanged: (bool newValue) {
-                  setState(() {
-                    _femaleParent = newValue;
-                  });
-                }),
-            CheckboxListTile(
-                title: Text(loc.boxInfo.maleInBox),
-                value: _maleParent,
-                onChanged: (bool newValue) {
-                  setState(() {
-                    _maleParent = newValue;
-                  });
-                }),
+            ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(loc.boxInfo.ringed),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: new Icon(Icons.remove),
+                        onPressed: (_ringedChickCount > 0)
+                            ? () => setState(() => _ringedChickCount--)
+                            : null,
+                      ),
+                      Text(_ringedChickCount.toString()),
+                      IconButton(
+                          icon: new Icon(Icons.add),
+                          onPressed: () => setState(() => _ringedChickCount++))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(loc.boxInfo.chickAge),
+                  Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: new Icon(Icons.remove),
+                        onPressed: (_ageInDays > 0)
+                            ? () => setState(() => _ageInDays--)
+                            : null,
+                      ),
+                      Text(_ageInDays.toString()),
+                      IconButton(
+                          icon: new Icon(Icons.add),
+                          onPressed: () => setState(() => _ageInDays++))
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(loc.boxInfo.femaleInBox),
+                  ),
+                  _createFemaleParentBirdSelection(context)
+                ],
+              ),
+            ),
+            ListTile(
+              title: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(loc.boxInfo.femaleInBox),
+                  ),
+                  _createMaleParentBirdSelection(context)
+                ],
+              ),
+            ),
+            ListTile(
+              title: Text(loc.boxInfo.specie),
+              subtitle: Column(
+                children: <Widget>[
+                  TextFormField(
+                    maxLines: 1,
+                    maxLength: 1,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      labelText: "New Species",
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ]),
         ),
       ),
@@ -219,17 +317,25 @@ class _NewInspectionDataState extends State<NewInspectionData> {
           subtitle: TextFormField(
             maxLines: 3,
             textAlign: TextAlign.left,
+            onChanged: (String value) {
+              setState(() {
+                _comment = value;
+              });
+            },
           ),
         ),
       ),
-      RaisedButton(
-        color: Colors.blue,
-        onPressed: () {},
-        child: Text(
-          "Send",
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
+      Padding(
+        padding: EdgeInsets.fromLTRB(60, 0, 60, 0),
+        child: RaisedButton(
+          color: Colors.blue,
+          onPressed: () {},
+          child: Text(
+            "Send",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
@@ -240,13 +346,67 @@ class _NewInspectionDataState extends State<NewInspectionData> {
     final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     if (value == 0) {
       sliderColor = Colors.red;
-      return loc.boxInfo.boxConditionReplace;
+      return "NeedsReplacement";
     } else if (value == 1) {
       sliderColor = Colors.yellow;
-      return loc.boxInfo.boxConditionRepair;
+      return "NeedsRepair";
     } else {
       sliderColor = Colors.green;
-      return loc.boxInfo.boxConditionFixed;
+      return "Good";
     }
+  }
+
+  Widget _createFemaleParentBirdSelection(BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    return Container(
+      child: DropdownButton<String>(
+        value: (_femaleParent != null) ? _femaleParent : "None",
+        icon: Icon(Icons.arrow_downward),
+        iconSize: 24,
+        onChanged: (String newValue) {
+          setState(() {
+            _femaleParent = newValue;
+          });
+        },
+        items: <String>[
+          "None",
+          "NotRinged",
+          "AlreadyRinged",
+          "NewlyRinged",
+        ].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _createMaleParentBirdSelection(BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    return Container(
+      child: DropdownButton<String>(
+        value: (_maleParent != null) ? _maleParent : "None",
+        icon: Icon(Icons.arrow_downward),
+        iconSize: 24,
+        onChanged: (String newValue) {
+          setState(() {
+            _maleParent = newValue;
+          });
+        },
+        items: <String>[
+          "None",
+          "NotRinged",
+          "AlreadyRinged",
+          "NewlyRinged",
+        ].map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+      ),
+    );
   }
 }
