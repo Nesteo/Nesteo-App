@@ -218,6 +218,8 @@ class _NewBoxDataState extends State<NewBoxData> {
                             BlocBuilder<DropdownBloc, DropdownState>(
                               builder: (context, state) {
                                 if (state is ReadyDropdownState) {
+                                  if (_dropDownRegion == null)
+                                    _dropDownRegion = dropdownBloc.regions[0];
                                   return DropdownButton<String>(
                                     isExpanded: true,
                                     value: (_dropDownRegion != null)
@@ -370,6 +372,8 @@ class _NewBoxDataState extends State<NewBoxData> {
                             BlocBuilder<DropdownBloc, DropdownState>(
                               builder: (context, state) {
                                 if (state is ReadyDropdownState) {
+                                  if (_dropDownOwner == null)
+                                    _dropDownOwner = dropdownBloc.owners[0];
                                   return DropdownButton<String>(
                                     isExpanded: true,
                                     value: (_dropDownOwner != null)
@@ -460,7 +464,8 @@ class _NewBoxDataState extends State<NewBoxData> {
                             coordinates: _position,
                             foreignId: _foreignId,
                             ownerString: _owner,
-                            regionIdPrefixString: _regionIdPrefix.toUpperCase(),
+                            regionIdPrefixString:
+                                _regionIdPrefix?.toUpperCase(),
                             regionString: _regionName,
                             region: _dropDownRegion,
                             owner: _dropDownOwner,

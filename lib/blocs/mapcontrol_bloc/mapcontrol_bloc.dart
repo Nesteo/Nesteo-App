@@ -138,18 +138,22 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
               (bounds.northeast.longitude - bounds.southwest.longitude) / 2);
 
       for (NestingBox box in this.nestingBoxList) {
-        LatLng boxLoc = LatLng(box.coordinateLatitude, box.coordinateLongitude);
-        if (bounds.contains(boxLoc)) {
-          boxMarkers.add(
-            Marker(
-              markerId: MarkerId(box.id),
-              position: LatLng(box.coordinateLatitude, box.coordinateLongitude),
-              infoWindow: InfoWindow(title: box.id),
-              onTap: () {},
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  BitmapDescriptor.hueGreen),
-            ),
-          );
+        if (box.coordinateLatitude != null && box.coordinateLongitude != null) {
+          LatLng boxLoc =
+              LatLng(box.coordinateLatitude, box.coordinateLongitude);
+          if (bounds.contains(boxLoc)) {
+            boxMarkers.add(
+              Marker(
+                markerId: MarkerId(box.id),
+                position:
+                    LatLng(box.coordinateLatitude, box.coordinateLongitude),
+                infoWindow: InfoWindow(title: box.id),
+                onTap: () {},
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueGreen),
+              ),
+            );
+          }
         }
       }
 
