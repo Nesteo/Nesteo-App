@@ -140,7 +140,8 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text("${nestingBox.material}"),
+                    title: Text(
+                        getMaterialName("${nestingBox.material}", context)),
                   ),
                 ),
               ],
@@ -154,7 +155,8 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text("${nestingBox.holeSize}"),
+                    title: Text(
+                        getHoleSizeName("${nestingBox.holeSize}", context)),
                   ),
                 ),
               ],
@@ -271,5 +273,30 @@ class BoxInfoScreen extends NesteoFullScreen {
         },
       ),
     );
+  }
+
+  String getMaterialName(String value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "Other": loc.boxNew.otherMaterial,
+      "TreatedWood": loc.boxNew.treatedWood,
+      "UntreatedWood": loc.boxNew.untreatedWood,
+      "WoodConcrete": loc.boxNew.concrete,
+    };
+    return map[value];
+  }
+
+  String getHoleSizeName(String value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "Other": loc.holeSizeMapping.other,
+      "Small": loc.holeSizeMapping.small,
+      "Medium": loc.holeSizeMapping.medium,
+      "Large": loc.holeSizeMapping.large,
+      "VeryLarge": loc.holeSizeMapping.veryLarge,
+      "Oval": loc.holeSizeMapping.oval,
+      "OpenFrontend": loc.holeSizeMapping.openFrontend,
+    };
+    return map[value];
   }
 }

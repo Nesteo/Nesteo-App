@@ -73,8 +73,6 @@ class InspectionListScreen extends NesteoFullScreen {
 
                           BlocProvider.of<InspectionDataBloc>(context)
                               .add(GetInspectionEvent());
-                          // BlocProvider.of<InspectionDataBloc>(context)
-                          //      .add(GetInspectionPreviewsByNestingBoxEvent());
                           BlocProvider.of<PageControlBloc>(context)
                               .add(GoToInspectionEvent());
                         },
@@ -127,8 +125,11 @@ class InspectionListScreen extends NesteoFullScreen {
                                     ),
                                     TableCell(
                                       child: ListTile(
-                                        title: Text(inspectionDataBloc
-                                            .inspectionList[index].condition),
+                                        title: Text(getConditionValueName(
+                                            inspectionDataBloc
+                                                .inspectionList[index]
+                                                .condition,
+                                            context)),
                                       ),
                                     ),
                                   ],
@@ -163,9 +164,12 @@ class InspectionListScreen extends NesteoFullScreen {
                                     ),
                                     TableCell(
                                       child: ListTile(
-                                        title: Text(inspectionDataBloc
-                                            .inspectionList[index]
-                                            .femaleParentBirdDiscovery),
+                                        title: Text(
+                                            getParentBirdDiscoveryValueName(
+                                                inspectionDataBloc
+                                                    .inspectionList[index]
+                                                    .femaleParentBirdDiscovery,
+                                                context)),
                                       ),
                                     ),
                                   ],
@@ -179,9 +183,12 @@ class InspectionListScreen extends NesteoFullScreen {
                                   ),
                                   TableCell(
                                     child: ListTile(
-                                      title: Text(inspectionDataBloc
-                                          .inspectionList[index]
-                                          .femaleParentBirdDiscovery),
+                                      title: Text(
+                                          getParentBirdDiscoveryValueName(
+                                              inspectionDataBloc
+                                                  .inspectionList[index]
+                                                  .maleParentBirdDiscovery,
+                                              context)),
                                     ),
                                   ),
                                 ])
@@ -200,5 +207,26 @@ class InspectionListScreen extends NesteoFullScreen {
         );
       },
     );
+  }
+
+  String getConditionValueName(String value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "Good": loc.inspectionList.good,
+      "NeedsRepair": loc.inspectionList.needsRepair,
+      "NeedsReplacement": loc.inspectionList.needsReplacement,
+    };
+    return map[value];
+  }
+
+  String getParentBirdDiscoveryValueName(String value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "None": loc.inspectionList.none,
+      "NotRinged": loc.inspectionList.notRinged,
+      "AlreadyRinged": loc.inspectionList.alreadyRinged,
+      "NewlyRinged": loc.inspectionList.newlyRinged,
+    };
+    return map[value];
   }
 }
