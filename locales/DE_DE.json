@@ -51,14 +51,23 @@
     "large": "Groß",
     "medium": "Mittel",
     "small": "Klein",
-    "concrete": "Beton",
+    "concrete": "Holzbeton",
     "addImage": "Bild hinzufügen",
     "getPosition": "Position erfassen",
-    "otherSize": "Anderes",
+    "otherSize": "Andere",
     "otherMaterial": "Anderes",
     "veryLarge": "Sehr Groß",
     "oval": "Oval",
     "openFronted": "Öffnung vorne"
+  },
+  "holeSizeMapping": {
+    "other": "Andere",
+    "small": "Klein",
+    "medium": "Mittel",
+    "large": "Groß",
+    "oval": "Oval",
+    "openFrontend": "Offene Front",
+    "veryLarge": "Sehr Groß"
   },
   "inspectionList": {
     "date": "Datum:",
@@ -67,7 +76,21 @@
     "ringedChicks": "Beringte Jungvögel:",
     "pBirdM": "Elternvogel männlich:",
     "inspection": "Inspektion",
-    "neverInspected": "Wurde noch nie inspiziert"
+    "neverInspected": "Wurde noch nie inspiziert",
+    "falseId": "Nein",
+    "good": "Gut",
+    "needsRepair": "braucht Reperatur",
+    "needsReplacement": "Muss ersetzt Werden",
+    "none": "Keine",
+    "notRinged": "Nicht Beringt",
+    "alreadyRinged": "Bereits Beringt",
+    "newlyRinged": "Neu Beringt",
+    "trueId": "Ja",
+    "cleaned": "Gereinigt:",
+    "containsEggs": "Enthält Eier:",
+    "numberOfEggs": "Anzahl der Eier:",
+    "repaired": "Repariert:",
+    "numberOfChicks": "Anzahl Jungvögel"
   },
   "login": {
     "domain": "Domain",

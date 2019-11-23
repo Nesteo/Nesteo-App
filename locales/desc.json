@@ -60,6 +60,15 @@
     "oval": "oval hole size",
     "openFronted": "open fronted hole size"
   },
+  "holeSizeMapping": {
+    "other": "other hole size",
+    "small": "small",
+    "medium": "medium",
+    "large": "large",
+    "oval": "oval",
+    "openFrontend": "open Frontend",
+    "veryLarge": "very Large"
+  },
   "inspectionList": {
     "date": "date:",
     "condition": "condition",
@@ -67,7 +76,21 @@
     "ringedChicks": "number of ringed Chicks",
     "pBirdM": "parent bird male",
     "inspection": "inspection",
-    "neverInspected": "never inspected box"
+    "neverInspected": "never inspected box",
+    "falseId": "false",
+    "good": "good condition",
+    "needsRepair": "needs repair",
+    "needsReplacement": "needs replacement",
+    "none": "none",
+    "notRinged": "not ringed",
+    "alreadyRinged": "already Ringed",
+    "newlyRinged": "newly Ringed",
+    "trueId": "true",
+    "cleaned": "cleaned",
+    "containsEggs": "contains Eggs",
+    "numberOfEggs": "number of eggs",
+    "repaired": "repaired",
+    "numberOfChicks": "number of chicks"
   },
   "login": {
     "domain": "domain text box",

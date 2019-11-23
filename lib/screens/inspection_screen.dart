@@ -25,6 +25,7 @@ class InspectionScreen extends NesteoFullScreen {
     PageControlBloc pageControlBloc = BlocProvider.of<PageControlBloc>(context);
     InspectionDataBloc inspectionDataBloc =
         BlocProvider.of<InspectionDataBloc>(context);
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
     return Container(
       color: Colors.lightGreen,
       child: BlocBuilder<InspectionDataBloc, InspectionDataState>(
@@ -66,41 +67,47 @@ class InspectionScreen extends NesteoFullScreen {
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Cleaned:"),
+                                  title: Text(loc.inspectionList.cleaned),
+                                ),
+                              ),
+                              TableCell(
+                                  child: ListTile(
+                                title: Text(
+                                  getTrueFalseValueNames(
+                                      inspectionDataBloc
+                                          .inspection.hasBeenCleaned,
+                                      context),
+                                ),
+                              )),
+                            ]),
+                            TableRow(children: [
+                              TableCell(
+                                child: ListTile(
+                                  title: Text(loc.inspectionList.condition),
                                 ),
                               ),
                               TableCell(
                                 child: ListTile(
-                                  title: Text(inspectionDataBloc
-                                      .inspection.hasBeenCleaned
-                                      .toString()),
+                                  title: Text(getConditionValueName(
+                                      inspectionDataBloc.inspection.condition,
+                                      context)),
                                 ),
                               ),
                             ]),
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Condition:"),
+                                  title: Text(loc.inspectionList.repaired),
                                 ),
                               ),
                               TableCell(
                                 child: ListTile(
                                   title: Text(
-                                      inspectionDataBloc.inspection.condition),
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: [
-                              TableCell(
-                                child: ListTile(
-                                  title: Text("Repaired:"),
-                                ),
-                              ),
-                              TableCell(
-                                child: ListTile(
-                                  title: Text(inspectionDataBloc
-                                      .inspection.justRepaired
-                                      .toString()),
+                                    getTrueFalseValueNames(
+                                        inspectionDataBloc
+                                            .inspection.justRepaired,
+                                        context),
+                                  ),
                                 ),
                               ),
                             ])
@@ -127,21 +134,22 @@ class InspectionScreen extends NesteoFullScreen {
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Contains eggs::"),
+                                  title: Text(loc.inspectionList.containsEggs),
                                 ),
                               ),
                               TableCell(
                                 child: ListTile(
-                                  title: Text(inspectionDataBloc
-                                      .inspection.containsEggs
-                                      .toString()),
+                                  title: Text(getTrueFalseValueNames(
+                                      inspectionDataBloc
+                                          .inspection.containsEggs,
+                                      context)),
                                 ),
                               ),
                             ]),
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Number of eggs:"),
+                                  title: Text(loc.inspectionList.numberOfEggs),
                                 ),
                               ),
                               TableCell(
@@ -175,7 +183,7 @@ class InspectionScreen extends NesteoFullScreen {
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Banded Chicks:"),
+                                  title: Text(loc.inspectionList.ringedChicks),
                                 ),
                               ),
                               TableCell(
@@ -189,7 +197,8 @@ class InspectionScreen extends NesteoFullScreen {
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Number of chicks:"),
+                                  title:
+                                      Text(loc.inspectionList.numberOfChicks),
                                 ),
                               ),
                               TableCell(
@@ -203,33 +212,37 @@ class InspectionScreen extends NesteoFullScreen {
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Male parent"),
+                                  title: Text(loc.inspectionList.pBirdM),
                                 ),
                               ),
                               TableCell(
                                 child: ListTile(
-                                  title: Text(inspectionDataBloc
-                                      .inspection.maleParentBirdDiscovery),
-                                ),
-                              ),
-                            ]),
-                            TableRow(children: [
-                              TableCell(
-                                child: ListTile(
-                                  title: Text("Female parent:"),
-                                ),
-                              ),
-                              TableCell(
-                                child: ListTile(
-                                  title: Text(inspectionDataBloc
-                                      .inspection.femaleParentBirdDiscovery),
+                                  title: Text(getParentBirdDiscoveryValueName(
+                                      inspectionDataBloc
+                                          .inspection.maleParentBirdDiscovery,
+                                      context)),
                                 ),
                               ),
                             ]),
                             TableRow(children: [
                               TableCell(
                                 child: ListTile(
-                                  title: Text("Species"),
+                                  title: Text(loc.inspectionList.pBirdF),
+                                ),
+                              ),
+                              TableCell(
+                                child: ListTile(
+                                  title: Text(getParentBirdDiscoveryValueName(
+                                      inspectionDataBloc
+                                          .inspection.femaleParentBirdDiscovery,
+                                      context)),
+                                ),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              TableCell(
+                                child: ListTile(
+                                  title: Text(loc.boxInfo.specie),
                                 ),
                               ),
                               TableCell(
@@ -252,5 +265,35 @@ class InspectionScreen extends NesteoFullScreen {
         },
       ),
     );
+  }
+
+  String getTrueFalseValueNames(bool value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      false: loc.inspectionList.falseId,
+      true: loc.inspectionList.trueId,
+    };
+    return map[value];
+  }
+
+  String getConditionValueName(String value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "Good": loc.inspectionList.good,
+      "NeedsRepair": loc.inspectionList.needsRepair,
+      "NeedsReplacement": loc.inspectionList.needsReplacement,
+    };
+    return map[value];
+  }
+
+  String getParentBirdDiscoveryValueName(String value, BuildContext context) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "None": loc.inspectionList.none,
+      "NotRinged": loc.inspectionList.notRinged,
+      "AlreadyRinged": loc.inspectionList.alreadyRinged,
+      "NewlyRinged": loc.inspectionList.newlyRinged,
+    };
+    return map[value];
   }
 }
