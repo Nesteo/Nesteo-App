@@ -141,7 +141,7 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text("${nestingBox.material}"),
+                    title: Text("${nestingBox.holeSize}"),
                   ),
                 ),
               ],
