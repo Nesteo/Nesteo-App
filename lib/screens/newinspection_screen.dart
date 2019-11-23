@@ -361,7 +361,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
     return Container(
       child: DropdownButton<String>(
         value: (_femaleParent != null) ? _femaleParent : "None",
-        icon: Icon(Icons.arrow_downward),
+        icon: Icon(Icons.arrow_drop_down),
         iconSize: 24,
         onChanged: (String newValue) {
           setState(() {
@@ -388,7 +388,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
     return Container(
       child: DropdownButton<String>(
         value: (_maleParent != null) ? _maleParent : "None",
-        icon: Icon(Icons.arrow_downward),
+        icon: Icon(Icons.arrow_drop_down),
         iconSize: 24,
         onChanged: (String newValue) {
           setState(() {
