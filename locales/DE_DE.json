@@ -51,14 +51,23 @@
     "large": "Groß",
     "medium": "Mittel",
     "small": "Klein",
-    "concrete": "Beton",
+    "concrete": "Holz-Beton",
     "addImage": "Bild hinzufügen",
     "getPosition": "Position erfassen",
-    "otherSize": "Anderes",
+    "otherSize": "Andere",
     "otherMaterial": "Anderes",
     "veryLarge": "Sehr Groß",
     "oval": "Oval",
     "openFronted": "Öffnung vorne"
+  },
+  "holeSizeMapping": {
+    "other": "Andere",
+    "small": "Klein",
+    "medium": "Mittel",
+    "large": "Groß",
+    "oval": "Oval",
+    "openFrontend": "Offene Front",
+    "veryLarge": "Sehr Groß"
   },
   "inspectionList": {
     "date": "Datum:",

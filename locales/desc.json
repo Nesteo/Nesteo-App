@@ -60,6 +60,15 @@
     "oval": "oval hole size",
     "openFronted": "open fronted hole size"
   },
+  "holeSizeMapping": {
+    "other": "other hole size",
+    "small": "small",
+    "medium": "medium",
+    "large": "large",
+    "oval": "oval",
+    "openFrontend": "open Frontend",
+    "veryLarge": "very Large"
+  },
   "inspectionList": {
     "date": "date:",
     "condition": "condition",

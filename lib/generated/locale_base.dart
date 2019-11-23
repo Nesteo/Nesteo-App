@@ -23,6 +23,8 @@ class LocaleBase {
   LocaleboxList get boxList => _boxList;
   LocaleboxNew _boxNew;
   LocaleboxNew get boxNew => _boxNew;
+  LocaleholeSizeMapping _holeSizeMapping;
+  LocaleholeSizeMapping get holeSizeMapping => _holeSizeMapping;
   LocaleinspectionList _inspectionList;
   LocaleinspectionList get inspectionList => _inspectionList;
   Localelogin _login;
@@ -34,6 +36,7 @@ class LocaleBase {
     _boxInfo = LocaleboxInfo(Map<String, String>.from(_data['boxInfo']));
     _boxList = LocaleboxList(Map<String, String>.from(_data['boxList']));
     _boxNew = LocaleboxNew(Map<String, String>.from(_data['boxNew']));
+    _holeSizeMapping = LocaleholeSizeMapping(Map<String, String>.from(_data['holeSizeMapping']));
     _inspectionList = LocaleinspectionList(Map<String, String>.from(_data['inspectionList']));
     _login = Localelogin(Map<String, String>.from(_data['login']));
     _screenName = LocalescreenName(Map<String, String>.from(_data['screenName']));
@@ -109,6 +112,18 @@ class LocaleboxNew {
   String get veryLarge => _data["veryLarge"];
   String get oval => _data["oval"];
   String get openFronted => _data["openFronted"];
+}
+class LocaleholeSizeMapping {
+  final Map<String, String> _data;
+  LocaleholeSizeMapping(this._data);
+
+  String get other => _data["other"];
+  String get small => _data["small"];
+  String get medium => _data["medium"];
+  String get large => _data["large"];
+  String get oval => _data["oval"];
+  String get openFrontend => _data["openFrontend"];
+  String get veryLarge => _data["veryLarge"];
 }
 class LocaleinspectionList {
   final Map<String, String> _data;
