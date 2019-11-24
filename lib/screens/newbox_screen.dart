@@ -512,6 +512,7 @@ class _NewBoxDataState extends State<NewBoxData> {
         onChanged: (String newValue) {
           setState(() {
             _dropDownMaterial = newValue;
+            print(_dropDownMaterial);
           });
         },
         items: <String>[
@@ -522,7 +523,7 @@ class _NewBoxDataState extends State<NewBoxData> {
         ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text(value),
+            child: Text(getDropDownTexts(value)),
           );
         }).toList(),
       ),
@@ -544,6 +545,17 @@ class _NewBoxDataState extends State<NewBoxData> {
         },
       ),
     );
+  }
+
+  String getDropDownTexts(String value) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "UntreatedWood": loc.boxNew.untreatedWood,
+      "TreatedWood": loc.boxNew.treatedWood,
+      "WoodConcrete": loc.boxNew.concrete,
+      "Other": loc.boxNew.otherMaterial,
+    };
+    return map[value];
   }
 
   String getSliderLabel(double value) {
