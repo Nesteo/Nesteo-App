@@ -40,9 +40,9 @@
     "daysAgo": "days ago"
   },
   "boxNew": {
-    "id": "ID",
+    "ids": "IDs",
     "oldid": "Old ID",
-    "addBox": "create nestingbox",
+    "addBox": "Create new Nesting Box",
     "hangDate": "hang date",
     "untreatedWood": "Untreated Wood",
     "material": "material",
@@ -58,7 +58,23 @@
     "otherMaterial": "Other",
     "veryLarge": "Very Large",
     "oval": "Oval",
-    "openFronted": "Open Fronted"
+    "openFronted": "Open Fronted",
+    "idOptional": "ID - optional",
+    "oldIdOptional": "Old ID - optional",
+    "foreignIdOptional": "Foreign ID - optional",
+    "date": "Date",
+    "selectDate": "Select Day",
+    "box": "Box",
+    "region": "Region",
+    "newRegionIdPrefix": "New Region ID Prefix",
+    "newRegionName": "New Region Name",
+    "position": "Position",
+    "longitude": "Longitude",
+    "latitude": "Latitude",
+    "addGpsData": "Add GPS Data",
+    "owner": "Owner",
+    "newOwnerName": "New Owner Name",
+    "comment": "Comment"
   },
   "holeSizeMapping": {
     "other": "Other",
@@ -90,7 +106,11 @@
     "containsEggs": "Contains Eggs:",
     "numberOfEggs": "Number of Eggs:",
     "repaired": "Repaired:",
-    "numberOfChicks": "Number of Chicks"
+    "numberOfChicks": "Number of Chicks",
+    "eggs": "Eggs",
+    "birds": "Birds",
+    "newSpecies": "New Species",
+    "addInspection": "Create new Inspection"
   },
   "login": {
     "domain": "Domain",

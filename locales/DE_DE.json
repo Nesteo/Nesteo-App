@@ -40,9 +40,9 @@
     "daysAgo": "Tage her"
   },
   "boxNew": {
-    "id": "ID",
+    "ids": "IDs",
     "oldid": "Alte ID",
-    "addBox": "Nistkasten erstellen",
+    "addBox": "Neuen Nistkasten erstellen",
     "hangDate": "Aufhängedatum",
     "untreatedWood": "Unbehandeltes Holz",
     "material": "Material",
@@ -58,7 +58,23 @@
     "otherMaterial": "Anderes",
     "veryLarge": "Sehr Groß",
     "oval": "Oval",
-    "openFronted": "Öffnung vorne"
+    "openFronted": "Öffnung vorne",
+    "idOptional": "ID - optional",
+    "oldIdOptional": "Alte ID - optional",
+    "foreignIdOptional": "Fremd-ID - optional",
+    "date": "Datum",
+    "selectDate": "Datum auswählen",
+    "box": "Kasten",
+    "region": "Region",
+    "newRegionIdPrefix": "Neuer Regions-ID-Präfix",
+    "newRegionName": "Neuer Regionsname",
+    "position": "Position",
+    "longitude": "Längengrad",
+    "latitude": "Breitengrad",
+    "addGpsData": "GPS-Daten hinzufügen",
+    "owner": "Eigentümer",
+    "newOwnerName": "Neuer Eigentümer",
+    "comment": "Kommentar"
   },
   "holeSizeMapping": {
     "other": "Andere",
@@ -81,7 +97,7 @@
     "good": "Gut",
     "needsRepair": "braucht Reperatur",
     "needsReplacement": "Muss ersetzt Werden",
-    "none": "Keine",
+    "none": "Keiner",
     "notRinged": "Nicht Beringt",
     "alreadyRinged": "Bereits Beringt",
     "newlyRinged": "Neu Beringt",
@@ -90,7 +106,11 @@
     "containsEggs": "Enthält Eier:",
     "numberOfEggs": "Anzahl der Eier:",
     "repaired": "Repariert:",
-    "numberOfChicks": "Anzahl Jungvögel"
+    "numberOfChicks": "Anzahl Jungvögel",
+    "eggs": "Eier",
+    "birds": "Vögel",
+    "newSpecies": "Neue Art",
+    "addInspection": "Neue Inspektion erstellen"
   },
   "login": {
     "domain": "Domain",

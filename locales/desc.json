@@ -40,7 +40,7 @@
     "daysAgo": "days ago"
   },
   "boxNew": {
-    "id": "id",
+    "ids": "ids",
     "oldid": "old id",
     "addBox": "add box button",
     "hangDate": "Date of Box creation",
@@ -58,7 +58,23 @@
     "otherMaterial": "other material",
     "veryLarge": "very large size",
     "oval": "oval hole size",
-    "openFronted": "open fronted hole size"
+    "openFronted": "open fronted hole size",
+    "idOptional": "ID optional",
+    "oldIdOptional": "old ID optional",
+    "foreignIdOptional": "foreign ID optional",
+    "date": "date",
+    "selectDate": "select Date",
+    "box": "box",
+    "region": "region",
+    "newRegionIdPrefix": "new Region ID prefix",
+    "newRegionName": "new region name",
+    "position": "position",
+    "longitude": "longitude",
+    "latitude": "latitude",
+    "addGpsData": "add  GPS data",
+    "owner": "Owner",
+    "newOwnerName": "new Owner Name",
+    "comment": "comment"
   },
   "holeSizeMapping": {
     "other": "other hole size",
@@ -90,7 +106,11 @@
     "containsEggs": "contains Eggs",
     "numberOfEggs": "number of eggs",
     "repaired": "repaired",
-    "numberOfChicks": "number of chicks"
+    "numberOfChicks": "number of chicks",
+    "eggs": "eggs",
+    "birds": "birds",
+    "newSpecies": "new species",
+    "addInspection": "add new inspection "
   },
   "login": {
     "domain": "domain text box",
