@@ -97,7 +97,7 @@
     "good": "Gut",
     "needsRepair": "braucht Reperatur",
     "needsReplacement": "Muss ersetzt Werden",
-    "none": "Keine",
+    "none": "Keiner",
     "notRinged": "Nicht Beringt",
     "alreadyRinged": "Bereits Beringt",
     "newlyRinged": "Neu Beringt",
@@ -106,7 +106,11 @@
     "containsEggs": "Enthält Eier:",
     "numberOfEggs": "Anzahl der Eier:",
     "repaired": "Repariert:",
-    "numberOfChicks": "Anzahl Jungvögel"
+    "numberOfChicks": "Anzahl Jungvögel",
+    "eggs": "Eier",
+    "birds": "Vögel",
+    "newSpecies": "Neue Art",
+    "addInspection": "Neue Inspektion erstellen"
   },
   "login": {
     "domain": "Domain",

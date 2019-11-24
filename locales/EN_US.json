@@ -106,7 +106,11 @@
     "containsEggs": "Contains Eggs:",
     "numberOfEggs": "Number of Eggs:",
     "repaired": "Repaired:",
-    "numberOfChicks": "Number of Chicks"
+    "numberOfChicks": "Number of Chicks",
+    "eggs": "Eggs",
+    "birds": "Birds",
+    "newSpecies": "New Species",
+    "addInspection": "Create new Inspection"
   },
   "login": {
     "domain": "Domain",

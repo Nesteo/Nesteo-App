@@ -58,7 +58,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
   int _ageInDays = 0;
   String _comment;
   double _sliderCondition = 2;
-  Color sliderColor;
+  Color sliderColor = Colors.green;
   String _speciesString;
   Species _species;
 
@@ -73,13 +73,13 @@ class _NewInspectionDataState extends State<NewInspectionData> {
             title: Row(children: <Widget>[
               Icon(FontAwesomeIcons.calendarAlt),
               Padding(padding: EdgeInsets.fromLTRB(0, 20, 10, 10)),
-              Text("Date"),
+              Text(loc.boxNew.date),
             ]),
             subtitle: Padding(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
               child: DateTimePickerFormField(
                 decoration: InputDecoration(
-                  labelText: "select Day",
+                  labelText: loc.boxNew.selectDate,
                   filled: true,
                   fillColor: Colors.white,
                 ),
@@ -103,7 +103,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                     Icon(FontAwesomeIcons.tools),
                     Padding(
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                        child: Text("Box")),
+                        child: Text(loc.boxNew.box)),
                   ]),
                 ),
                 CheckboxListTile(
@@ -128,7 +128,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                     Expanded(child: Text(loc.boxInfo.boxCondition)),
                     Slider(
                       value: _sliderCondition,
-                      label: getSliderLabel(_sliderCondition),
+                      label: getLocalizedSliderLabel(_sliderCondition),
                       activeColor: sliderColor,
                       min: 0,
                       max: 2,
@@ -155,7 +155,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                     Icon(FontAwesomeIcons.egg),
                     Padding(
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child: Text("Eggs"),
+                      child: Text(loc.inspectionList.eggs),
                     )
                   ]),
                 ),
@@ -201,7 +201,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                   Icon(FontAwesomeIcons.kiwiBird),
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    child: Text("Birds"),
+                    child: Text(loc.inspectionList.birds),
                   )
                 ]),
               ),
@@ -294,7 +294,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                 title: Row(
                   children: <Widget>[
                     Expanded(
-                      child: Text(loc.boxInfo.femaleInBox),
+                      child: Text(loc.boxInfo.maleInBox),
                     ),
                     _createMaleParentBirdSelection(context)
                   ],
@@ -346,7 +346,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                       maxLength: 1,
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
-                        labelText: "New Species",
+                        labelText: loc.inspectionList.newSpecies,
                         filled: true,
                         fillColor: Colors.white,
                       ),
@@ -364,7 +364,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                 Icon(FontAwesomeIcons.comment),
                 Padding(
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    child: Text("Comment"))
+                    child: Text(loc.boxNew.comment))
               ],
             ),
             subtitle: TextFormField(
@@ -413,7 +413,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                     );
                   },
                   child: Text(
-                    "Create new Inspection",
+                    loc.inspectionList.addInspection,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -446,12 +446,22 @@ class _NewInspectionDataState extends State<NewInspectionData> {
       sliderColor = Colors.red;
       return "NeedsReplacement";
     } else if (value == 1) {
-      sliderColor = Colors.yellow;
+      sliderColor = Colors.orange;
       return "NeedsRepair";
     } else {
       sliderColor = Colors.green;
       return "Good";
     }
+  }
+
+  String getLocalizedSliderLabel(double value) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      0: loc.inspectionList.needsReplacement,
+      1: loc.inspectionList.needsRepair,
+      2: loc.inspectionList.good,
+    };
+    return map[value];
   }
 
   Widget _createFemaleParentBirdSelection(BuildContext context) {
@@ -474,7 +484,7 @@ class _NewInspectionDataState extends State<NewInspectionData> {
         ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text(value),
+            child: Text(getParentBirdDropDownNames(value)),
           );
         }).toList(),
       ),
@@ -501,10 +511,21 @@ class _NewInspectionDataState extends State<NewInspectionData> {
         ].map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text(value),
+            child: Text(getParentBirdDropDownNames(value)),
           );
         }).toList(),
       ),
     );
+  }
+
+  String getParentBirdDropDownNames(String value) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var map = {
+      "None": loc.inspectionList.none,
+      "NotRinged": loc.inspectionList.notRinged,
+      "AlreadyRinged": loc.inspectionList.alreadyRinged,
+      "NewlyRinged": loc.inspectionList.newlyRinged,
+    };
+    return map[value];
   }
 }

@@ -166,6 +166,10 @@ class LocaleinspectionList {
   String get numberOfEggs => _data["numberOfEggs"];
   String get repaired => _data["repaired"];
   String get numberOfChicks => _data["numberOfChicks"];
+  String get eggs => _data["eggs"];
+  String get birds => _data["birds"];
+  String get newSpecies => _data["newSpecies"];
+  String get addInspection => _data["addInspection"];
 }
 class Localelogin {
   final Map<String, String> _data;
