@@ -512,7 +512,6 @@ class _NewBoxDataState extends State<NewBoxData> {
         onChanged: (String newValue) {
           setState(() {
             _dropDownMaterial = newValue;
-            print(_dropDownMaterial);
           });
         },
         items: <String>[
@@ -537,7 +536,7 @@ class _NewBoxDataState extends State<NewBoxData> {
         min: 0,
         max: 5,
         divisions: 5,
-        label: getSliderLabel(_slideHoleSize),
+        label: getLocalizedSliderLabel(_slideHoleSize),
         onChanged: (double newValue) {
           setState(() {
             _slideHoleSize = newValue;
@@ -567,6 +566,19 @@ class _NewBoxDataState extends State<NewBoxData> {
       3: "VeryLarge",
       4: "Oval",
       5: "OpenFronted",
+    };
+    return sizeMap[value];
+  }
+
+  String getLocalizedSliderLabel(double value) {
+    final loc = Localizations.of<LocaleBase>(context, LocaleBase);
+    var sizeMap = {
+      0: loc.boxNew.small,
+      1: loc.boxNew.medium,
+      2: loc.boxNew.large,
+      3: loc.boxNew.veryLarge,
+      4: loc.boxNew.oval,
+      5: loc.boxNew.openFronted,
     };
     return sizeMap[value];
   }
