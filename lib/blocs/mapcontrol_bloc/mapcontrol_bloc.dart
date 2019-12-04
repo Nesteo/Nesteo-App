@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
+import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
 import './mapcontrol.dart';
 
@@ -18,6 +22,12 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
   List<NestingBox> nestingBoxList;
   LatLngBounds bounds;
   bool created = false;
+  BoxDataBloc boxDataBloc;
+  PageControlBloc pageControlBloc;
+  BuildContext context;
+
+  MapControlBloc(this.boxDataBloc, this.pageControlBloc, this.context)
+      : super();
 
   @override
   MapControlState get initialState => InitialMapControlState();
@@ -148,7 +158,46 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
                 position:
                     LatLng(box.coordinateLatitude, box.coordinateLongitude),
                 infoWindow: InfoWindow(title: box.id),
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: Colors.lightGreen,
+                        title: new Text(
+                          "Information",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        content: new Text(
+                          "ID ${box.id}",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        actions: <Widget>[
+                          new FlatButton(
+                              child: new Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }),
+                          new FlatButton(
+                            child: new Text(
+                              "Details",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              boxDataBloc.boxId = box.id;
+                              boxDataBloc.add(GetBoxEvent());
+                              pageControlBloc.add(GoToBoxInfoEvent());
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueGreen),
               ),

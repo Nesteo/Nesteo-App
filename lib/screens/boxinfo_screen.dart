@@ -295,7 +295,7 @@ class BoxInfoScreen extends NesteoFullScreen {
       "Large": loc.holeSizeMapping.large,
       "VeryLarge": loc.holeSizeMapping.veryLarge,
       "Oval": loc.holeSizeMapping.oval,
-      "OpenFrontend": loc.holeSizeMapping.openFrontend,
+      "OpenFronted": loc.holeSizeMapping.openFrontend,
     };
     return map[value];
   }
