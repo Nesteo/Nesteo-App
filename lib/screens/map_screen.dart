@@ -25,7 +25,7 @@ class MapScreen extends NesteoFramedScreen {
                 MapControlBloc mapControlBloc =
                     BlocProvider.of<MapControlBloc>(context);
                 if (await Geolocator().isLocationServiceEnabled()) {
-                  mapControlBloc.add(CenterMapEvent());
+                  mapControlBloc.add(CenterMapEvent(user: true));
                   //mapControlBloc.add(RebuildMapEvent());
                 } else {
                   BlocProvider.of<SnackbarBloc>(context).add(
