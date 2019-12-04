@@ -150,7 +150,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                      title: Text("Hole size:"),
+                      title: Text("${loc.boxNew.holeSize}:"),
                       leading: Icon(FontAwesomeIcons.ruler)),
                 ),
                 TableCell(
@@ -165,7 +165,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                    title: Text("Region:"),
+                    title: Text("${loc.boxNew.region}:"),
                     leading: Icon(FontAwesomeIcons.globe),
                   ),
                 ),
@@ -180,7 +180,7 @@ class BoxInfoScreen extends NesteoFullScreen {
               children: [
                 TableCell(
                   child: ListTile(
-                    title: Text("Owner:"),
+                    title: Text("${loc.boxNew.owner}:"),
                     leading: Icon(FontAwesomeIcons.userAlt),
                   ),
                 ),
