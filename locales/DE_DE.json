@@ -110,7 +110,8 @@
     "eggs": "Eier",
     "birds": "Vögel",
     "newSpecies": "Neue Art",
-    "addInspection": "Neue Inspektion erstellen"
+    "addInspection": "Neue Inspektion erstellen",
+    "inspectionId": "Inspektions-ID:"
   },
   "login": {
     "domain": "Domain",

@@ -46,9 +46,9 @@ class InspectionScreen extends NesteoFullScreen {
               Card(
                 child: ListTile(
                   title: Text(
-                      "Inspection ID: ${inspectionDataBloc.inspection.id.toString()}"),
+                      "${loc.inspectionList.inspectionId}: ${inspectionDataBloc.inspection.id.toString()}"),
                   subtitle: Text(
-                      "Last Inspection: ${inspectionDataBloc.inspection.inspectionDate.month}/${inspectionDataBloc.inspection.inspectionDate.day}/${inspectionDataBloc.inspection.inspectionDate.year}"),
+                      "${loc.boxInfo.lastInspection}: ${inspectionDataBloc.inspection.inspectionDate.month}/${inspectionDataBloc.inspection.inspectionDate.day}/${inspectionDataBloc.inspection.inspectionDate.year}"),
                 ),
               ),
               Card(

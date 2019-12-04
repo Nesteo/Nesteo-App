@@ -110,7 +110,8 @@
     "eggs": "Eggs",
     "birds": "Birds",
     "newSpecies": "New Species",
-    "addInspection": "Create new Inspection"
+    "addInspection": "Create new Inspection",
+    "inspectionId": "Inspection ID:"
   },
   "login": {
     "domain": "Domain",
