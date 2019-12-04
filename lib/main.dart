@@ -33,18 +33,21 @@ class MyApp extends StatelessWidget {
       // This MultiBlocProvider provides the PageControlBloc to the Widget tree
       home: MultiBlocProvider(
         providers: [
-          BlocProvider<PageControlBloc>(
-            builder: (BuildContext context) => PageControlBloc(),
-          ),
           BlocProvider<AuthenticationBloc>(
             builder: (BuildContext context) => AuthenticationBloc(),
-          ),
-          BlocProvider<MapControlBloc>(
-            builder: (BuildContext context) => MapControlBloc(),
           ),
           BlocProvider<BoxDataBloc>(
             builder: (BuildContext context) =>
                 BoxDataBloc(BlocProvider.of<AuthenticationBloc>(context)),
+          ),
+          BlocProvider<PageControlBloc>(
+            builder: (BuildContext context) => PageControlBloc(),
+          ),
+          BlocProvider<MapControlBloc>(
+            builder: (BuildContext context) => MapControlBloc(
+                BlocProvider.of<BoxDataBloc>(context),
+                BlocProvider.of<PageControlBloc>(context),
+                context),
           ),
           BlocProvider<SnackbarBloc>(
             builder: (BuildContext context) => SnackbarBloc(),
