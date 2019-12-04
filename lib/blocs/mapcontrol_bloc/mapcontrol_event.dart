@@ -8,6 +8,9 @@ abstract class MapControlEvent extends Equatable {
 }
 
 class CenterMapEvent extends MapControlEvent {
+  final bool user;
+
+  CenterMapEvent({this.user});
   @override
   List<Object> get props => null;
 }

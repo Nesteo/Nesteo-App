@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
@@ -88,7 +89,19 @@ class BoxListScreen extends NesteoFramedScreen {
                           : Icon(Icons.check, size: 40, color: Colors.green),
                       trailing: IconButton(
                         icon: Icon(Icons.gps_fixed),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<MapControlBloc>(context).location =
+                              LatLng(
+                            boxDataBloc
+                                .nestingBoxList[index].coordinateLatitude,
+                            boxDataBloc
+                                .nestingBoxList[index].coordinateLongitude,
+                          );
+                          BlocProvider.of<PageControlBloc>(context)
+                              .add(GoToMapEvent());
+                          BlocProvider.of<MapControlBloc>(context)
+                              .add(CenterMapEvent(user: false));
+                        },
                       ),
                       title: Text(boxDataBloc.nestingBoxList[index]
                           .id), //create testdata for listview

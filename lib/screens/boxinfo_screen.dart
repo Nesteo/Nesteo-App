@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/blocs/inspectiondata_bloc/inspectiondata.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
@@ -11,7 +12,7 @@ import 'package:nesteo_app/blocs/dropdown_bloc/dropdown.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol.dart';
 import 'package:nesteo_app/generated/locale_base.dart';
-import 'package:nesteo_app/blocs/snackbar_bloc/snackbar.dart';
+import 'package:nesteo_app/blocs/mapcontrol_bloc/mapcontrol.dart';
 
 class BoxInfoScreen extends NesteoFullScreen {
   BoxInfoScreen(BuildContext context)
@@ -237,13 +238,15 @@ class BoxInfoScreen extends NesteoFullScreen {
                     trailing: IconButton(
                       icon: Icon(Icons.gps_fixed),
                       onPressed: () {
-                        BlocProvider.of<SnackbarBloc>(context).add(
-                          ShowSnackbarEvent(
-                            color: Colors.lightGreen,
-                            text: "Currently in development",
-                            scaffoldContext: context,
-                          ),
+                        BlocProvider.of<MapControlBloc>(context).location =
+                            LatLng(
+                          boxDataBloc.nestingBox.coordinateLatitude,
+                          boxDataBloc.nestingBox.coordinateLongitude,
                         );
+                        BlocProvider.of<PageControlBloc>(context)
+                            .add(GoToMapEvent());
+                        BlocProvider.of<MapControlBloc>(context)
+                            .add(CenterMapEvent(user: false));
                       },
                     ),
                   ),

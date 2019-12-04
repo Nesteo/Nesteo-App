@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
@@ -96,23 +95,25 @@ class MapControlBloc extends Bloc<MapControlEvent, MapControlState> {
     }
 
     if (event is CenterMapEvent) {
-      Position position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      if (event.user) {
+        Position position = await Geolocator()
+            .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
-      this.location = LatLng(position.latitude, position.longitude);
+        this.location = LatLng(position.latitude, position.longitude);
 
-      this.add(
-        AddMarkerEvent(
-            location: this.location,
-            infoWindowText: "You are here!",
-            markerId: "user"),
-      );
-
-      controller.animateCamera(
+        this.add(
+          AddMarkerEvent(
+              location: this.location,
+              infoWindowText: "You are here!",
+              markerId: "user"),
+        );
+      }
+      await new Future.delayed(new Duration(seconds: 1));
+      await controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: this.location,
-            zoom: this.zoom,
+            zoom: event.user ? this.zoom : this.zoom * 2,
             tilt: this.tilt,
           ),
         ),
