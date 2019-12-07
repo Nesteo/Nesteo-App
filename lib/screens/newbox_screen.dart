@@ -293,12 +293,41 @@ class _NewBoxDataState extends State<NewBoxData> {
                           children: <Widget>[
                             Icon(FontAwesomeIcons.globeAmericas),
                             Padding(
-                                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                child: Text(loc.boxNew.position)),
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              child: Text(loc.boxNew.position),
+                            )
                           ],
                         ),
                         subtitle: Column(
                           children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Padding(
+                                  child: Text(loc.boxNew.addGpsData,
+                                      style: TextStyle(fontSize: 16)),
+                                  padding: EdgeInsets.only(left: 10),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.gps_fixed),
+                                  onPressed: () async {
+                                    if (await Geolocator()
+                                        .isLocationServiceEnabled()) {
+                                      Position currentPosition =
+                                          await Geolocator().getCurrentPosition(
+                                              desiredAccuracy:
+                                                  LocationAccuracy.high);
+
+                                      setState(() {
+                                        _position = LatLng(
+                                            currentPosition.latitude,
+                                            currentPosition.longitude);
+                                      });
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
                             TextFormField(
                               keyboardType: TextInputType.number,
                               maxLines: 1,
@@ -321,36 +350,6 @@ class _NewBoxDataState extends State<NewBoxData> {
                                     "${loc.boxNew.longitude} ${(_position == null) ? "" : _position.longitude}",
                                 filled: true,
                                 fillColor: Colors.white,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                      child: (Text(loc.boxNew.addGpsData))),
-                                  IconButton(
-                                    icon: Icon(Icons.gps_fixed),
-                                    onPressed: () async {
-                                      if (await Geolocator()
-                                          .isLocationServiceEnabled()) {
-                                        Position currentPosition =
-                                            await Geolocator()
-                                                .getCurrentPosition(
-                                                    desiredAccuracy:
-                                                        LocationAccuracy.high);
-
-                                        setState(() {
-                                          _position = LatLng(
-                                              currentPosition.latitude,
-                                              currentPosition.longitude);
-                                        });
-                                      }
-                                    },
-                                  ),
-                                ],
                               ),
                             ),
                           ],
