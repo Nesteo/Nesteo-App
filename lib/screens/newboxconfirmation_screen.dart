@@ -21,8 +21,8 @@ class NewBoxConfirmationScreen extends NesteoFullScreen {
             label: Text("Add Photo"),
             icon: Icon(Icons.photo_camera),
             onPressed: () async {
-              var image =
-                  await ImagePicker.pickImage(source: ImageSource.camera);
+              var image = await ImagePicker.pickImage(
+                  source: ImageSource.camera, imageQuality: 50);
               showDialog(
                 context: context,
                 builder: (BuildContext context) {

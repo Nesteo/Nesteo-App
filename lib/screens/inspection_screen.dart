@@ -52,7 +52,8 @@ class InspectionScreen extends NesteoFullScreen {
                         width: 600,
                         height: 240,
                         headers: {"Authorization": authBloc.auth},
-                        fit: BoxFit.cover)
+                        fit: BoxFit.cover,
+                      )
                     : Image.network(
                         "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbs.cyty.com%2Fmenschen%2Fe-etzold%2Farchiv%2FTV%2Ftest%2Fimg%2FFuBK-Testbild16.jpg&f=1&nofb=1",
                         width: 600,
@@ -68,7 +69,7 @@ class InspectionScreen extends NesteoFullScreen {
                             !inspectionDataBloc.inspection.hasImage)
                         ? () async {
                             var image = await ImagePicker.pickImage(
-                                source: ImageSource.camera);
+                                source: ImageSource.camera, imageQuality: 50);
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
