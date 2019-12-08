@@ -14,6 +14,7 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
   int _sortOptionCounter = 0;
   int _ascDescCounter = 0;
   NestingBoxesRepository _nestingBoxRepo;
+  int _lastImageResponse = 0;
 
   List<NestingBox> nestingBoxList = new List<NestingBox>();
   NestingBox nestingBox = new NestingBox();
@@ -47,6 +48,14 @@ class BoxDataBloc extends Bloc<BoxDataEvent, BoxDataState> {
       nestingBox = await _nestingBoxRepo.getNestingBoxById(boxId);
       yield BoxReadyState();
     }
+    if (event is AddImageEvent) {
+      yield BoxChangingState();
+      _lastImageResponse = 0;
+      _lastImageResponse =
+          await _nestingBoxRepo.addImage(event.image, event.id);
+      yield BoxReadyState();
+    }
+
     if (event is GetAllBoxPreviewEvent) {
       if (this.state is! InitialBoxDataState) {
         yield BoxChangingState();

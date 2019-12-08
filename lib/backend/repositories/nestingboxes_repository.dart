@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:path/path.dart';
 import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication.dart';
 import 'package:nesteo_app/model/nestingbox.dart';
@@ -123,5 +125,19 @@ class NestingBoxesRepository {
     } else {
       return null;
     }
+  }
+
+  Future<int> addImage(File image, String id) async {
+    NestingBoxesApiService _nestingBoxesApi =
+        NestingBoxesApiService.create(_authBloc.domain);
+    print("LESE BILD EIN");
+    var filename = basename(image.path);
+    filename = "form-data; name=\"image\"; filename=\"$filename\"";
+    print("Sende Bild an /nesting-boxes/$id/upload-image");
+    final response = await _nestingBoxesApi.postNestingBoxImage(
+        id, _authBloc.auth, image.path, filename);
+    print(response.statusCode);
+    print(response.bodyString);
+    return response.statusCode;
   }
 }

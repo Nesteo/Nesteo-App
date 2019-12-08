@@ -42,7 +42,8 @@ class FullScreen extends StatelessWidget {
                 } else if (state is NewInspectionScreenState) {
                   screen = NewInspectionScreen(context);
                 } else if (state is NewBoxConfirmationScreenState) {
-                  screen = NewBoxConfirmationScreen(context);
+                  screen =
+                      NewBoxConfirmationScreen(context, pageBloc.boxDataBloc);
                 } else {
                   screen = TransitionFullScreen(context);
                 }

@@ -35,6 +35,17 @@ abstract class InspectionsApiService extends ChopperService {
     @Header('Authorization') String authHeader,
   );
 
+  @Post(
+      headers: {'Content-Type': 'multipart/form-data'},
+      path: '/{id}/upload-image')
+  @multipart
+  Future<Response> postInspectionImage(
+    @Path('id') int id,
+    @Header('Authorization') String authHeader,
+    @PartFile('image') String image,
+    @Header('Content-Disposition') String filename,
+  );
+
   static InspectionsApiService create(String url) {
     final client = ChopperClient(
       baseUrl: 'https://$url/api/v1',

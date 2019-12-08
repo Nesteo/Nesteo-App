@@ -452,6 +452,7 @@ class _NewBoxDataState extends State<NewBoxData> {
                           SendBoxEvent(
                             authBloc:
                                 BlocProvider.of<AuthenticationBloc>(context),
+                            boxDataBloc: BlocProvider.of<BoxDataBloc>(context),
                             id: _id,
                             material: _dropDownMaterial,
                             hangUpDate: (_hangUpDate != null)
@@ -460,7 +461,8 @@ class _NewBoxDataState extends State<NewBoxData> {
                             oldId: _oldId,
                             holeSize: getSliderLabel(_slideHoleSize),
                             comment: _comment,
-                            coordinates: _position,
+                            coordinates:
+                                (_position != null) ? _position : LatLng(0, 0),
                             foreignId: _foreignId,
                             ownerString: _owner,
                             regionIdPrefixString:
@@ -485,9 +487,10 @@ class _NewBoxDataState extends State<NewBoxData> {
             );
           }
           if (state is BoxSentState) {
-            BlocProvider.of<BoxDataBloc>(context).add(GetAllBoxPreviewEvent());
+            var boxDataBloc = BlocProvider.of<BoxDataBloc>(context);
+            boxDataBloc.add(GetAllBoxPreviewEvent());
             BlocProvider.of<PageControlBloc>(context)
-                .add(GoToNewBoxConfirmationEvent());
+                .add(GoToNewBoxConfirmationEvent(boxDataBloc));
             return LinearProgressIndicator();
           }
           if (state is SendingBoxState) {

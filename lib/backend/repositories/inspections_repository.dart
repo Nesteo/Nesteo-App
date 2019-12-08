@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:nesteo_app/backend/services/inspections/inspections_api_service.dart';
 import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/model/inspection.dart';
+import 'package:path/path.dart';
 
 /// Wrapper that generates and returns [Inspection] objects from json returned by a [InspectionsApiService].
 ///
@@ -175,5 +177,19 @@ class InspectionsRepository {
     } else {
       return null;
     }
+  }
+
+  Future<int> addImage(File image, int id) async {
+    InspectionsApiService _inspectionsApi =
+        InspectionsApiService.create(_authBloc.domain);
+    print("LESE BILD EIN");
+    var filename = basename(image.path);
+    filename = "form-data; name=\"image\"; filename=\"$filename\"";
+    print("Sende Bild an /inspections/$id/upload-image");
+    final response = await _inspectionsApi.postInspectionImage(
+        id, _authBloc.auth, image.path, filename);
+    print(response.statusCode);
+    print(response.bodyString);
+    return response.statusCode;
   }
 }

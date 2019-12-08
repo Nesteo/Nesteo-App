@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:bloc/bloc.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import './pagecontrol.dart';
 
 /// BLoC that handles page control and transitioning.
@@ -9,6 +10,7 @@ import './pagecontrol.dart';
 class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
   bool navigationBarEnabled = false;
   List<PageControlState> history = new List();
+  BoxDataBloc boxDataBloc = null;
   final Map<Type, PageControlState> eventStateMap = {
     GoToMapEvent: MapScreenState(),
     GoToBoxListEvent: BoxListScreenState(),
@@ -41,6 +43,9 @@ class PageControlBloc extends Bloc<PageControlEvent, PageControlState> {
   Stream<PageControlState> mapEventToState(
     PageControlEvent event,
   ) async* {
+    if (event is GoToNewBoxConfirmationEvent) {
+      this.boxDataBloc = event.boxDataBloc;
+    }
     if (event is! BackButtonEvent) {
       if (state != LoginScreenState()) {
         history.add(state);

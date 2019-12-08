@@ -15,16 +15,14 @@ class InspectionDataBloc
   InspectionDataState get initialState => InitialInspectionDataState();
   int _sortOptionCounter = 0;
   int _ascDescCounter = 0;
+  int _lastImageResponse = 0;
   InspectionsRepository _inspectionRepo;
-  List<Inspection> inspectionList = new List<Inspection>();
+  List<Inspection> inspectionList = List<Inspection>();
 
   String boxId = "";
-  Inspection inspection = new Inspection();
+  Inspection inspection = Inspection();
   int inspectionId = 0;
-  List<String> sortOptionNames = [
-    "sortbyidasc",
-    "sortbydatenasc"
-  ]; //todo put output text for snackbar in screen
+  List<String> sortOptionNames = ["sortbyidasc", "sortbydatenasc"];
   String currentSortOption = "";
 
   InspectionDataBloc(AuthenticationBloc authBloc) : super() {
@@ -34,11 +32,17 @@ class InspectionDataBloc
   @override
   Stream<InspectionDataState> mapEventToState(
       InspectionDataEvent event) async* {
+    print(event.runtimeType);
     var sortOptions = [
       [sortByIdAsc, sortByIdDesc],
       [sortByDateAsc, sortByDateDesc]
     ];
-
+    if (event is AddImageEvent) {
+      _lastImageResponse = 0;
+      _lastImageResponse =
+          await _inspectionRepo.addImage(event.image, event.id);
+      print("Bild kram fertig");
+    }
     if (event is GetInspectionEvent) {
       if (this.state is! InitialInspectionDataState) {
         yield InspectionChangingState();
@@ -65,10 +69,11 @@ class InspectionDataBloc
     }
 
     if (event is GetInspectionPreviewsByNestingBoxEvent) {
+      print("WAS IST DA KAPPUT");
       if (this.state is! InitialInspectionDataState) {
         yield InspectionChangingState();
       }
-
+      print("ICH HOLE DEN SCHEISS JA SCHON");
       inspectionList =
           await _inspectionRepo.getInspectionPreviewsByNestingBoxId(boxId);
       print(inspectionList.length);
@@ -96,6 +101,7 @@ class InspectionDataBloc
       _sortOptionCounter++;
       add(SortInspectionEvent());
     }
+    print("Durchgelaufen");
   }
 
   int sortByIdAsc(a, b) {

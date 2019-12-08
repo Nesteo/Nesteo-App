@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
 import 'package:nesteo_app/blocs/inspectiondata_bloc/inspectiondata.dart';
 import 'package:nesteo_app/blocs/pagecontrol_bloc/pagecontrol_bloc.dart';
 import 'package:nesteo_app/screens/nesteo_screen.dart';
@@ -38,13 +40,79 @@ class InspectionScreen extends NesteoFullScreen {
             return LinearProgressIndicator();
           }
           if (state is InspectionReadyState) {
+            InspectionDataBloc inspectionDataBloc =
+                BlocProvider.of<InspectionDataBloc>(context);
+            AuthenticationBloc authBloc =
+                BlocProvider.of<AuthenticationBloc>(context);
             return ListView(children: <Widget>[
               Card(
-                child: Image.asset('images/vogelhaus${Random().nextInt(4)}.jpg',
-                    width: 600, height: 240, fit: BoxFit.cover),
+                child: inspectionDataBloc.inspection.hasImage
+                    ? Image.network(
+                        "https://${authBloc.domain}/api/v1/inspections/${inspectionDataBloc.inspection.id}/image",
+                        width: 600,
+                        height: 240,
+                        headers: {"Authorization": authBloc.auth},
+                        fit: BoxFit.cover)
+                    : Image.network(
+                        "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbs.cyty.com%2Fmenschen%2Fe-etzold%2Farchiv%2FTV%2Ftest%2Fimg%2FFuBK-Testbild16.jpg&f=1&nofb=1",
+                        width: 600,
+                        height: 240,
+                        fit: BoxFit.cover,
+                      ),
               ),
               Card(
                 child: ListTile(
+                  trailing: IconButton(
+                    icon: Icon(Icons.add_a_photo),
+                    onPressed: (inspectionDataBloc.inspection != null &&
+                            !inspectionDataBloc.inspection.hasImage)
+                        ? () async {
+                            var image = await ImagePicker.pickImage(
+                                source: ImageSource.camera);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: Colors.lightGreen,
+                                  title: new Text(
+                                    "Foto",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  content: (image != null)
+                                      ? Image.file(image)
+                                      : Text("Error"),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                        child: new Text(
+                                          "Cancel",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        }),
+                                    new FlatButton(
+                                      child: new Text(
+                                        "Okay",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      onPressed: () async {
+                                        if (image != null) {
+                                          inspectionDataBloc.add(AddImageEvent(
+                                              inspectionDataBloc.inspection.id,
+                                              image));
+                                          inspectionDataBloc
+                                              .add(GetInspectionEvent());
+                                          Navigator.of(context).pop();
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        : null,
+                  ),
                   title: Text(
                       "${loc.inspectionList.inspectionId}: ${inspectionDataBloc.inspection.id.toString()}"),
                   subtitle: Text(
