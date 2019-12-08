@@ -74,8 +74,11 @@ class BoxInfoScreen extends NesteoFullScreen {
                         BlocProvider.of<InspectionDataBloc>(context);
                     inspectionDataBloc.boxId =
                         BlocProvider.of<BoxDataBloc>(context).boxId;
+                    print(inspectionDataBloc.state);
                     inspectionDataBloc
                         .add(GetInspectionPreviewsByNestingBoxEvent());
+                    print(inspectionDataBloc.boxId);
+                    print(inspectionDataBloc.inspectionList[0].id);
                     pageControlBloc.add(GoToInspectionListEvent());
                   },
                 ),
@@ -92,8 +95,10 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text(
-                        "${nestingBox?.hangUpUser?.firstName} ${nestingBox?.hangUpUser?.lastName}"),
+                    title: (nestingBox.hangUpUser != null)
+                        ? Text(
+                            "${nestingBox?.hangUpUser?.firstName} ${nestingBox?.hangUpUser?.lastName}")
+                        : Text("-"),
                   ),
                 ),
               ],
@@ -109,8 +114,10 @@ class BoxInfoScreen extends NesteoFullScreen {
                 ),
                 TableCell(
                   child: ListTile(
-                    title: Text(
-                        "${nestingBox?.hangUpDate?.month}/${nestingBox?.hangUpDate?.day}/${nestingBox?.hangUpDate?.year}"),
+                    title: (nestingBox.hangUpDate != null)
+                        ? Text(
+                            "${nestingBox?.hangUpDate?.month}/${nestingBox?.hangUpDate?.day}/${nestingBox?.hangUpDate?.year}")
+                        : Text("-"),
                   ),
                 ),
               ],
@@ -221,14 +228,24 @@ class BoxInfoScreen extends NesteoFullScreen {
                 _commentRow,
               ],
             );
+            AuthenticationBloc authBloc =
+                BlocProvider.of<AuthenticationBloc>(context);
             return ListView(
               children: <Widget>[
                 Card(
-                  child: Image.asset(
-                      'images/vogelhaus${Random().nextInt(4)}.jpg',
-                      width: 600,
-                      height: 240,
-                      fit: BoxFit.cover),
+                  child: boxDataBloc.nestingBox.hasImage
+                      ? Image.network(
+                          "https://${authBloc.domain}/api/v1/nesting-boxes/${boxDataBloc.nestingBox.id}/image",
+                          width: 600,
+                          height: 240,
+                          headers: {"Authorization": authBloc.auth},
+                          fit: BoxFit.cover)
+                      : Image.network(
+                          "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbs.cyty.com%2Fmenschen%2Fe-etzold%2Farchiv%2FTV%2Ftest%2Fimg%2FFuBK-Testbild16.jpg&f=1&nofb=1",
+                          width: 600,
+                          height: 240,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 Card(
                   child: ListTile(

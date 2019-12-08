@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
 import 'package:chopper/chopper.dart';
 
 part 'nestingboxes_api_service.chopper.dart';
@@ -45,6 +48,17 @@ abstract class NestingBoxesApiService extends ChopperService {
   Future<Response> postNewNestingBox(
     @Body() String nestingBox,
     @Header('Authorization') String authHeader,
+  );
+
+  @Post(
+      headers: {'Content-Type': 'multipart/form-data'},
+      path: '/{id}/upload-image')
+  @multipart
+  Future<Response> postNestingBoxImage(
+    @Path('id') String id,
+    @Header('Authorization') String authHeader,
+    @PartFile('image') String image,
+    @Header('Content-Disposition') String filename,
   );
 
   static NestingBoxesApiService create(String url) {

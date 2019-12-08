@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:nesteo_app/backend/services/inspections/inspections_api_service.dart';
@@ -12,6 +14,16 @@ class GetInspectionEvent extends InspectionDataEvent {
 }
 
 class GetAllInspectionEvent extends InspectionDataEvent {
+  @override
+  List<Object> get props => null;
+}
+
+class AddImageEvent extends InspectionDataEvent {
+  final File image;
+  final int id;
+
+  AddImageEvent(this.id, this.image) : super();
+
   @override
   List<Object> get props => null;
 }

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 
 @immutable
 abstract class PageControlEvent extends Equatable {
@@ -47,6 +48,10 @@ class GoToNewInspectionEvent extends PageControlEvent {
 }
 
 class GoToNewBoxConfirmationEvent extends PageControlEvent {
+  final BoxDataBloc boxDataBloc;
+
+  GoToNewBoxConfirmationEvent(this.boxDataBloc) : super();
+
   @override
   List<Object> get props => [];
 }

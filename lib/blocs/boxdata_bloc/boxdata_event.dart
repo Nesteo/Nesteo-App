@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:nesteo_app/backend/services/nestingboxes/nestingboxes_api_service.dart';
@@ -12,6 +14,16 @@ class GetBoxEvent extends BoxDataEvent {
 }
 
 class GetAllBoxPreviewEvent extends BoxDataEvent {
+  @override
+  List<Object> get props => null;
+}
+
+class AddImageEvent extends BoxDataEvent {
+  final File image;
+  final String id;
+
+  AddImageEvent(this.id, this.image) : super();
+
   @override
   List<Object> get props => null;
 }

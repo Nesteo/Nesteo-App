@@ -53,6 +53,7 @@ class BoxSenderBloc extends Bloc<BoxSenderEvent, BoxSenderState> {
 
       if (response != null) {
         lastNewBox = response;
+        event.boxDataBloc.nestingBox = lastNewBox;
         yield BoxSentState();
       } else {
         yield SendErrorState();

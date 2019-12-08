@@ -53,4 +53,18 @@ class _$InspectionsApiService extends InspectionsApiService {
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client.send<dynamic, dynamic>($request);
   }
+
+  Future<Response> postInspectionImage(
+      int id, String authHeader, String image, String filename) {
+    final $url = '/inspections/$id/upload-image';
+    final $headers = {
+      'Authorization': authHeader,
+      'Content-Disposition': filename,
+      'Content-Type': 'multipart/form-data'
+    };
+    final $parts = <PartValue>[PartValueFile<String>('image', image)];
+    final $request = Request('POST', $url, client.baseUrl,
+        parts: $parts, multipart: true, headers: $headers);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

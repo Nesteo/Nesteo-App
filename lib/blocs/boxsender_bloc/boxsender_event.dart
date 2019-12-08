@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nesteo_app/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:nesteo_app/blocs/boxdata_bloc/boxdata.dart';
 import 'package:nesteo_app/model/owner.dart';
 import 'package:nesteo_app/model/region.dart';
 
@@ -15,6 +16,7 @@ class NewBoxDoneEvent extends BoxSenderEvent {
 
 class SendBoxEvent extends BoxSenderEvent {
   final AuthenticationBloc authBloc;
+  final BoxDataBloc boxDataBloc;
   final String id;
   final LatLng coordinates;
   final DateTime hangUpDate;
@@ -31,6 +33,7 @@ class SendBoxEvent extends BoxSenderEvent {
 
   SendBoxEvent({
     this.id,
+    this.boxDataBloc,
     this.authBloc,
     this.coordinates,
     this.region,

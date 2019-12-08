@@ -422,6 +422,8 @@ class _NewInspectionDataState extends State<NewInspectionData> {
                 );
               }
               if (state is InspectionSentState) {
+                BlocProvider.of<InspectionDataBloc>(context).boxId =
+                    BlocProvider.of<BoxDataBloc>(context).boxId;
                 BlocProvider.of<InspectionDataBloc>(context)
                     .add(GetInspectionPreviewsByNestingBoxEvent());
                 BlocProvider.of<BoxDataBloc>(context).add(GetBoxEvent());
