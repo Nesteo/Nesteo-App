@@ -15,9 +15,9 @@ jobs:
       - run: touch sign
       - run: ls
       - run: flutter doctor
-      - run: flutter build appbundle
+      - run: flutter build apk
       - run: mkdir -p /tmp/artifacts
-      - run: mv build/app/outputs/bundle/release/app.aab /tmp/artifacts/nesteo-app.aab
+      - run: mv build/app/outputs/bundle/release/app.apk /tmp/artifacts/nesteo-app.apk
       - store_artifacts:
           path: /tmp/artifacts
 workflows:
